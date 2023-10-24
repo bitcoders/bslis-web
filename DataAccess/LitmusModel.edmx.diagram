@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="86f488a6a9b346bd82b8f046c50f4f97" Name="Diagram1" ZoomLevel="35">
+        <EntityTypeShape EntityType="SugarLabModel.AndroidMenue" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SugarLabModel.ExceptionLog" Width="1.5" PointX="5.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SugarLabModel.KeySampleAnalys" Width="1.5" PointX="8.25" PointY="57.875" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterCompany" Width="1.5" PointX="0.75" PointY="53.625" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterDepartment" Width="1.5" PointX="0.75" PointY="6" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterDesignation" Width="1.5" PointX="3" PointY="4.875" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterMenu" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterParameterCategory" Width="1.5" PointX="3.75" PointY="71.625" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterParameterSubCategory" Width="1.5" PointX="6" PointY="71.125" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterSeason" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterStoppageType" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterSubMenu" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterUnitAuthority" Width="1.5" PointX="10.25" PointY="87.875" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterVehicle" Width="1.5" PointX="5.25" PointY="56.75" />
+        <EntityTypeShape EntityType="SugarLabModel.MeltingAnalys" Width="1.5" PointX="8.25" PointY="52.75" />
+        <EntityTypeShape EntityType="SugarLabModel.MolassesAnalys" Width="1.5" PointX="8.25" PointY="62.75" />
+        <EntityTypeShape EntityType="SugarLabModel.TwoHourlyAnalys" Width="1.5" PointX="11.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SugarLabModel.UserRight" Width="1.5" PointX="10.25" PointY="81.625" />
+        <EntityTypeShape EntityType="SugarLabModel.UserVerification" Width="1.5" PointX="4.75" PointY="12.75" />
+        <AssociationConnector Association="SugarLabModel.fk_KeySampleAnalyses_SugarStage_ParametersSubCateg_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_MasterVehicles_CompCode_MasterCompanies_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_DepartmentCode_MasterDepartments_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_MasterSubMenus_MasterMenuCode_MasterMenus_code" />
+        <AssociationConnector Association="SugarLabModel.fk_MasterParameterSubCategories_MasterCategory_MasterParameterCategories_Code" />
+        <AssociationConnector Association="SugarLabModel.FK_analysisMelting_mCode_MasterParameterSubCategory" />
+        <AssociationConnector Association="SugarLabModel.FK_MolassesAnalyses_MasterParameterSubCategories_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterDeviceType" Width="1.5" PointX="16.375" PointY="10.25" />
+        <EntityTypeShape EntityType="SugarLabModel.MobileDevice" Width="1.5" PointX="3.375" PointY="16.75" />
+        <EntityTypeShape EntityType="SugarLabModel.RegisteredDevice" Width="1.5" PointX="18.625" PointY="9" />
+        <AssociationConnector Association="SugarLabModel.fk_RegisteredDevices_DeviceTypeCode_MasterDeviceTypes_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterRole" Width="1.5" PointX="16.375" PointY="14.75" />
+        <EntityTypeShape EntityType="SugarLabModel.NotificationsTicker" Width="1.5" PointX="5.375" PointY="17.75" />
+        <AssociationConnector Association="SugarLabModel.fk_RegisteredDevicesDepartmentCode_MasterDepartments_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.FirebaseNotificationType" Width="1.875" PointX="16.375" PointY="17.75" />
+        <EntityTypeShape EntityType="SugarLabModel.FirebaseNotificationRight" Width="1.875" PointX="18.375" PointY="0.75" />
+        <AssociationConnector Association="SugarLabModel.fk_FireBNotificationRights_NotificationCode_FbNotificationTypes_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterUnit" Width="1.5" PointX="3" PointY="51.5" />
+        <AssociationConnector Association="SugarLabModel.FK_KeySampleAnalyses_UnitCode_MasterUnits_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_UnitMaster_CompanyCode_CompanyMaster_Code" />
+        <AssociationConnector Association="SugarLabModel.unitMaster_uCompCode_fk_CompanyMaster_compCode" />
+        <AssociationConnector Association="SugarLabModel.unitMasterAuthcompCode" />
+        <AssociationConnector Association="SugarLabModel.fk_MasterVehicles_UnitCode_MasterUnits_Code" />
+        <AssociationConnector Association="SugarLabModel.FK_MeltingAnalyses_UnitCode_MasterUnits_Code" />
+        <AssociationConnector Association="SugarLabModel.FK_MolassesAnalyses_UnitCode_MasterUnits_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_UserRights_UnitCode_MasterUnits_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.ExcelReportDataType" Width="1.5" PointX="19.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SugarLabModel.ExcelReportTemplate" Width="1.5" PointX="21.625" PointY="20" />
+        <AssociationConnector Association="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ExcelReportTemplate_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.ReportSchemaColumn" Width="1.5" PointX="23.625" PointY="1.125" />
+        <EntityTypeShape EntityType="SugarLabModel.ReportSchema" Width="1.5" PointX="21.375" PointY="1" />
+        <AssociationConnector Association="SugarLabModel.fk_ReportSchemaColumns_SchemaCode_ReportSchema_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.MassecuiteAnalys" Width="1.5" PointX="8.25" PointY="70.5" />
+        <AssociationConnector Association="SugarLabModel.FK_Massecuite_mParamTypeCode_MasterParameterSubCategories_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.UnitSeason" Width="1.5" PointX="5.25" PointY="33.125" />
+        <EntityTypeShape EntityType="SugarLabModel.ValidationParameter" Width="1.5" PointX="5.25" PointY="45.125" />
+        <EntityTypeShape EntityType="SugarLabModel.ValidationType" Width="1.5" PointX="21.375" PointY="5.75" />
+        <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Season" />
+        <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_ValidationParametersUnitCode_MasterUnitsCode" />
+        <EntityTypeShape EntityType="SugarLabModel.AuditTable" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="SugarLabModel.Stoppage" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SugarLabModel.PeriodicalStock" Width="1.5" PointX="8.25" PointY="19.5" />
+        <AssociationConnector Association="SugarLabModel.PeriodicalStocks_SeasonCode" />
+        <AssociationConnector Association="SugarLabModel.PeriodicalStocks_UnitCode_Fk" />
+        <EntityTypeShape EntityType="SugarLabModel.ReportDetail" Width="1.5" PointX="23.625" PointY="6.375" />
+        <AssociationConnector Association="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.ProcessedAdditionalData" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SugarLabModel.LedgerLog" Width="1.5" PointX="16.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SugarLabModel.StoppageType" Width="1.5" PointX="0.75" PointY="18" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterStoppageSubType" Width="1.5" PointX="14" PointY="9.125" />
+        <AssociationConnector Association="SugarLabModel.fk_MasterStoppageSubType_MasterStoppageCode_MasterStoppageTypes_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_masterStoppageSubType_stoppageType_StoppageTypes_code" />
+        <EntityTypeShape EntityType="SugarLabModel.WeatherRecord" Width="1.5" PointX="3" PointY="22" />
+        <EntityTypeShape EntityType="SugarLabModel.WeatherType" Width="1.5" PointX="0.75" PointY="22.625" />
+        <AssociationConnector Association="SugarLabModel.fk_WeatherRecords_WeatherType_WeatherTypes_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.CaneType" Width="1.5" PointX="18.375" PointY="4.75" />
+        <EntityTypeShape EntityType="SugarLabModel.CaneVariety" Width="1.5" PointX="21.625" PointY="16" />
+        <EntityTypeShape EntityType="SugarLabModel.CaneVarietyGroup" Width="1.5" PointX="19.375" PointY="16" />
+        <EntityTypeShape EntityType="SugarLabModel.Grower" Width="1.5" PointX="5.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SugarLabModel.Village" Width="1.5" PointX="5.25" PointY="38.375" />
+        <EntityTypeShape EntityType="SugarLabModel.Zone" Width="1.5" PointX="5.25" PointY="41.375" />
+        <AssociationConnector Association="SugarLabModel.fk_CaneVariety_Code_CaneVarietyGroup_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_village_unitCode_MasterUnits_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_zones_unitCode_MasterUnits_code" />
+        <EntityTypeShape EntityType="SugarLabModel.FlexMaster" Width="1.5" PointX="21.375" PointY="12.25" />
+        <EntityTypeShape EntityType="SugarLabModel.FlexSubMaster" Width="1.5" PointX="23.625" PointY="12" />
+        <AssociationConnector Association="SugarLabModel.fk_flexSubMaster_flexMasterCode_flexMaster_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.CaneAnalys" Width="1.5" PointX="16.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SugarLabModel.ledger_data" Width="1.5" PointX="10.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SugarLabModel.OtherRecovery" Width="1.5" PointX="12.375" PointY="21.75" />
+        <EntityTypeShape EntityType="SugarLabModel.PasswordReset" Width="1.5" PointX="18.375" PointY="23.75" />
+        <EntityTypeShape EntityType="SugarLabModel.EmailConfiguration" Width="1.5" PointX="24.375" PointY="15.75" />
+        <EntityTypeShape EntityType="SugarLabModel.DataAdjustment" Width="1.5" PointX="5.25" PointY="61.375" />
+        <AssociationConnector Association="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_UnitCode_MasterUnits_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterUser" Width="1.5" PointX="13.25" PointY="52.75" />
+        <AssociationConnector Association="SugarLabModel.fk_userMaster_compCode_CompanyMaster_compCode" />
+        <AssociationConnector Association="SugarLabModel.fk_userMaster_unitCode_unitMaster_uCode" />
+        <EntityTypeShape EntityType="SugarLabModel.HourlyAnalys" Width="1.5" PointX="8.375" PointY="8.75" />
+        <EntityTypeShape EntityType="SugarLabModel.DailyAnalys" Width="1.5" PointX="5.25" PointY="75.375" />
+        <AssociationConnector Association="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

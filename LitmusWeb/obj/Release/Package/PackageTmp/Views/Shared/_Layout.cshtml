@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+@using System.Web.Optimization;
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="A web application for Sugar Lab Management Information System. Developed by Technorator LLP. New Delhi.
+            Sugar Lab Analysis Reports. Live View of Sugar factories key factors like Crushing, Juice Brix, Pol & Purity as well as stoppages occured." />
+    <meta name="keywords" content="Sugar Lab, Sugar Lab Analysis, Live Monitoring of Sugar Factories production, Crushing status
+           , stoppages occured during crushing season, Hourly based analysis entry system, Sugar, Sugar Factories, Molasses, Sugar Recovery, Sugar Bagging
+           , Birla Sugar and Industries
+           , Technorator LLP, Techonrator
+           , BSLIS
+           , Birla Sugar Lab Information System
+           " />
+    <meta http-equiv='cache-control' content='no-store'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <title>@ViewBag.Title- BSLIS</title>
+
+    <!-- plugins:css -->
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/mdi/css/materialdesignicons.min.css">*@
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/css/vendor.bundle.base.css">*@
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/dropzone/dropzone.css">*@
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/font-awesome/css/font-awesome.min.css">
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bars-1to10.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bars-horizontal.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bars-movie.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bars-pill.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bars-reversed.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bars-square.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/bootstrap-stars.css">
+            <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/css-stars.css">
+        <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/examples.css">*@
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/fontawesome-stars-o.css">
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-bar-rating/fontawesome-stars.css">
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-asColorPicker/css/asColorPicker.min.css">*@
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/x-editable/bootstrap-editable.css">
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/dropify/dropify.min.css">
+        <link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-file-upload/uploadfile.css">*@
+    @*<link rel="stylesheet" href="~/Content/mainContent/vendors/jquery-tags-input/jquery.tagsinput.min.css">*@
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Content/MainContent/css/vertical-layout-light/style.min.css">
+    <link rel="stylesheet" href="~/Content/MainContent/css/TechnoratorStyle.css" />
+    <link rel="stylesheet" href="~/Content/MainContent/css/bitcodes.css" type="text/css"/>
+    <!-- endinject -->
+    @*<link rel="shortcut icon" href="~/Content/mainContent/images/favicon.png" />*@
+
+
+    <!-- jQuery -->
+    <!-- plugins:css -->
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/base/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="~/Content/mainContent/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    @*<link rel="stylesheet" href="~/Content/mainContent/css/style.css">*@
+    <!-- endinject -->
+    @*<link rel="shortcut icon" href="~/Content/mainContent/images/birla-favicon.ico" />*@
+    <style>
+        input[type="text"], input[type="password"], input[type="number"], input[type="Time"] {
+            border: 1px solid #8e44ad;
+        }
+        select {
+            border: 1px solid #8e44ad;
+        }
+    </style>
+
+    <!--datetime picker-->
+    <link href="~/Content/jquery.datetimepicker.css" type="text/css" rel="stylesheet" />
+    @RenderSection("styles", false);
+</head>
+@*<body oncontextmenu="return false;">*@
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        @Html.Partial("_PartialPageNavBar")
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:page setings show a gear sign at right-side footer of page
+            using wich user can change the page color.-->
+            @*@Html.Partial("_PartialSettings")*@
+            <!-- partial:partials/_sidebar.html -->
+            @Html.Partial("_PartialPageLeftMenu")
+            <!-- partial -->
+            <!-- main-panel ends -->
+            @RenderBody()
+            @Html.Partial("_PartialPageFooter")
+        </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+    </div> <!-- since this is a partial page so here it could show some warning for closing tags-->
+    @Scripts.Render("~/Bundles/scriptBundle_initialScripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

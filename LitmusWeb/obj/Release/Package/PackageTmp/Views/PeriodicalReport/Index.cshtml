@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LitmusWeb.Models.ReportDetailsModel>
+@{
+    ViewBag.Title = Session["UnitName"].ToString() + "- Daily Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+     
+        @using(Html.BeginForm("Index","PeriodicalReport",FormMethod.Post))
+        { 
+            @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Periodical Reports
+                        </h4>
+                        <p class="card-description">
+                            Download reports for the selected period.
+                        </p>
+                        <div class="input-group  d-flex align-items-center">
+                            <input type="text" class="form-control datepicker" id="txtReportFromDate" name="txtReportFromDate" autocomplete="off" placeholder="YYYY-MM-DD">
+                            <div class="input-group-addon mx-4">to</div>
+                            <input type="text" class="form-control datepicker"  id="txtReportToDate" name="txtReportToDate" autocomplete="off" placeholder="YYYY-MM-DD">
+                            <div class="input-group-addon mx-4">Report</div>
+                            <select id="report_name" name="report_name" class="form-control">
+                                <option value="0">---Select a Report---</option>
+                                @foreach (var x in Model)
+                                {
+                                    <option value="@x.Code">@x.Name</option>
+                                }
+                            </select>
+                            <div class="input-group-addon mx-4">
+                                <button type="submit" class="btn btn-primary">Execute</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        }
+    </div>

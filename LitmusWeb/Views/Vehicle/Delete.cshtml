@@ -1,0 +1,92 @@
+﻿@model LitmusWeb.Models.MasterVehicleModel
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <span class="badge badge-info">Delete -<code>@Model.Name</code>? </span>
+                        </h4>
+                        <hr />
+                        <span>@Html.ActionLink("Back to List", "Index", new { }, new { @class = " badge badge-pill badge-success mdi mdi-step-backward-2 float-left" })</span>
+                        <div class="table-responsive pt-3">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.CompanyCode)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.CompanyCode)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.UnitCode)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.UnitCode)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Code)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.Code)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.Name)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.MinimumWeight)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.MinimumWeight)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.MaximumWeight)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.MaximumWeight)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.AverageWeight)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.AverageWeight)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.IsActive)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.IsActive)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.CreatedDate)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.CreatedDate)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.CreatedBy)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => model.CreatedBy)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        @using (Html.BeginForm("Delete", "Vehicle", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken();
+                            <div class="form-check-danger">
+                                <button type="submit" class="btn btn-danger btn-rounded">Delete</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,684 @@
+/*----------  Car Booking  ----------*/
+
+.atn-backto-listing
+{
+	padding-top: 10px;
+
+	a
+	{
+		display: block;
+		position: relative;
+		z-index: 5;
+		padding: 0px 20px;
+		padding-bottom: 0;
+		// text-transform: uppercase;
+
+		@include font-14($brand-primary, $weight-semibold);
+
+		&:before
+		{
+			content: "\f100";
+			position: absolute;
+			top: -4px;
+			left: 0;
+			z-index: 5;
+
+			@include transition;
+			@include font-22($brand-primary, $weight-regular, 1, $font-fontawesome);
+		}
+
+		&:hover, &:active, &:focus
+		{
+			color: $brand-info;
+
+			&:before
+			{
+				color: $brand-info;
+			}
+		}
+	}
+}
+
+.car-booking-container
+{
+	.container
+	{
+		@include media-breakpoint-down(sm)
+		{
+			padding: 0;
+		}
+	}
+
+	.booking-inner
+	{
+		padding: 10px 0;
+		background: $white-color;
+	}
+
+	.booking-sidebar-container
+	{
+		margin-bottom: 20px;
+		background: $brand-gray-lightest;
+
+		.booking-car-info-container
+		{
+			.car-info-block
+			{
+				.block-inner
+				{
+				}
+			}
+
+			.block-reserve-title
+			{
+				margin-bottom: 20px;
+			}
+
+			.block-media
+			{
+			}
+
+			.block-meta
+			{
+				text-align: center;
+			}
+
+			.block-content
+			{
+				padding-top: 15px;
+			}
+
+			.block-title
+			{
+				margin-bottom: 10px;
+			}
+
+			.block-features-locations
+			{
+				.block-features
+				{
+					margin-bottom: 10px;
+					padding-bottom: 15px;
+					border-bottom: 1px solid darken($white-color, 10%);
+				}
+			}
+		}
+	}
+
+	.booking-content-container
+	{
+		.content-card
+		{
+			margin-bottom: 20px;
+			background: $brand-gray-lightest;
+			
+			.card-inner
+			{
+				padding: 20px;
+			}
+
+			.card-head
+			{
+				position: relative;
+				z-index: 5;
+				margin-bottom: 25px;
+			}
+
+			.card-title
+			{
+				position: relative;
+				z-index: 5;
+				margin-bottom: 0;
+
+				.title-inner
+				{
+					position: relative;
+					z-index: 5;
+					padding-left: 30px;
+				}
+
+				h4
+				{
+					text-transform: uppercase;
+					
+					@include font-18($color-01, $weight-bold, 1.2, $font-secondary);
+
+					@include media-breakpoint-down(md)
+					{
+						font-size: $font-base;
+					}
+				}
+
+				.fa
+				{
+					position: absolute;
+					top: 0;
+					left: 0;
+					z-index: 5;
+
+					@include font-20($color-01, $weight-regular, 1, $font-fontawesome);
+
+					@include media-breakpoint-down(md)
+					{
+						font-size: $font-md;
+					}
+				}
+
+				&:not(:only-child)
+				{
+					padding-right: 160px;
+
+					@include media-breakpoint-down(sm)
+					{
+						padding-right: 120px;
+					}
+
+					@include media-breakpoint-down(xs)
+					{
+						padding-right: 0;
+					}
+				}
+			}
+
+			.card-action
+			{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				z-index: 5;
+
+				p, a
+				{
+					@include font-14($brand-gray-dark);
+
+					@include media-breakpoint-down(md)
+					{
+						font-size: $font-xs;
+					}
+
+					@include media-breakpoint-down(md)
+					{
+						font-size: rem-calc(11);
+					}
+				}
+
+				a
+				{
+					padding-bottom: 3px;
+					color: $brand-primary;
+					font-weight: $weight-semibold;
+					border-bottom: 1px solid transparent;
+
+					&:hover, &:active, &:focus
+					{
+						border-bottom-color: $brand-primary;
+					}
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					top: -15px;
+					bottom: auto;
+					right: -10px;
+				}
+			}
+
+			.card-instructions
+			{
+				ul
+				{
+					li
+					{
+						position: relative;
+						z-index: 5;
+						padding-left: 15px;
+						margin-bottom: 10px;
+
+						@include font-14($color-01, $weight-semibold, 1.4);
+
+						&:before
+						{
+							content: "\f054";
+							position: absolute;
+							top: 5px;
+							left: 0;
+							z-index: 5;
+
+							@include font-12($color-01, $weight-regular, 1, $font-fontawesome);
+						}
+
+						&:last-child
+						{
+							margin: 0;
+						}
+					}
+				}
+			}
+
+			.card-cashback-info-list
+			{
+				ul
+				{
+					li
+					{
+						position: relative;
+						z-index: 5;
+						padding-left: 20px;
+						margin-bottom: 10px;
+
+						@include font-16($brand-gray-dark, $weight-semibold, 1.4);
+
+						.cshbk-highlight
+						{
+							color: $color-01;
+							text-transform: uppercase;
+							font-weight: $weight-bold;
+							font-family: $font-secondary;
+							border-bottom: 2px solid $color-01;
+						}
+
+						.cshbk-txt
+						{
+							font-style: italic;
+							font-weight: $weight-bold;
+						}
+
+						.cshbk-amt
+						{
+							color: $color-01;
+							font-weight: $weight-bold;
+						}
+
+						&:before
+						{
+							content: "\f00c";
+							position: absolute;
+							top: 3px;
+							left: 0;
+							z-index: 5;
+
+							@include font-16($color-01, $weight-regular, 1, $font-fontawesome);
+						}
+
+						&:last-child
+						{
+							margin: 0;
+						}
+					}
+				}
+			}
+
+			&:last-child
+			{
+				margin: 0;
+			}
+		}
+
+		.booking-details
+		{
+			.card-total
+			{
+				position: relative;
+				z-index: 5;
+				margin-top: -10px;
+				padding-left: 12px;
+				margin-bottom: 10px;
+
+				.fa
+				{
+					position: absolute;
+					top: 5px;
+					left: 0;
+					z-index: 5;
+
+					@include font-16($color-01, $weight-regular, 1, $font-fontawesome);
+				}
+
+				p
+				{
+					@include font-18;
+
+					span
+					{
+						@include font-28($color-01, $weight-bold);
+					}
+				}
+			}
+
+			.card-list
+			{
+				margin: 0 -10px;
+
+				ul
+				{
+					li
+					{
+						padding: 5px 10px;
+
+						@include clearfix;
+						@include font-18($brand-gray);
+
+						.list-entity
+						{
+							width: 70%;
+							float: left;
+						}
+
+						.list-value
+						{
+							width: 30%;
+							float: right;
+							text-align: right;
+							font-weight: $weight-bold;
+						}
+
+						&.item-total
+						{
+							color: $brand-gray-dark;
+						}
+
+						&:last-child
+						{
+							margin: 0;
+						}
+
+						&:hover, &:active, &:focus
+						{
+							background: darken($brand-gray-lightest, 5%);
+						}
+
+						@include media-breakpoint-down(md)
+						{
+							font-size: $font-base;
+						}
+					}
+				}
+			}
+		}
+
+		.driver-details
+		{
+			.card-inner
+			{
+				padding-bottom: 5px;
+			}
+		}
+
+		.booking-confirmation-details
+		{
+			.card-inner
+			{
+				padding-bottom: 5px;
+			}
+
+			ul
+			{
+				li
+				{
+					margin-bottom: 15px;
+
+					h5
+					{
+						text-transform: uppercase;
+						
+						@include font-14($color-01, $weight-bold, 1.3);
+					}
+
+					p
+					{
+						@include font-16($color-01, $weight-regular, 1.3);
+					}
+
+					.block-info
+					{
+						position: relative;
+						z-index: 5;
+
+						.block-title
+						{
+							margin-bottom: 5px;
+
+							&:last-child
+							{
+								margin-bottom: 0;
+							}
+
+							@include media-breakpoint-down(md)
+							{
+								position: absolute;
+								top: 2px;
+								left: 0;
+								z-index: 5;
+								margin: 0;
+							}
+						}
+						
+						@include media-breakpoint-down(md)
+						{
+							padding-left: 80px;
+						}
+					}
+				}
+			}
+
+			.details-inline
+			{
+				.block-info
+				{
+					padding-left: 180px;
+
+					.block-title
+					{
+						position: absolute;
+						top: 2px;
+						left: 0;
+						z-index: 5;
+
+						@include media-breakpoint-down(xs)
+						{
+							margin-bottom: 5px;
+
+							@include reset-position;
+						}
+					}
+
+					@include media-breakpoint-down(xs)
+					{
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+/*----------  Booking Confirmation Details  ----------*/
+
+.booking-confirmation-container
+{
+	padding-top: 20px;
+
+	.booking-confirmation-inner
+	{
+		position: relative;
+		z-index: 5;
+		padding: 25px 20px;
+		padding-top: 35px;
+		background: $brand-success-01;
+		border: 2px solid $brand-success-03;
+
+		@include media-breakpoint-down(sm)
+		{
+			padding-bottom: 20px;
+		}
+	}
+
+	.head
+	{
+		margin-bottom: 15px;
+
+		.head-inner
+		{
+			position: relative;
+			z-index: 5;
+			padding-left: 40px;
+
+			@include media-breakpoint-down(sm)
+			{
+				padding-left: 0;
+			}
+		}
+
+		.fa
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 5;
+
+			@include font-30($brand-success-02, $weight-regular, 1, $font-fontawesome);
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-bottom: 5px;
+				font-size: $font-xxl;
+
+				@include reset-position;
+
+				&:before
+				{
+					content: "\f058";
+				}
+			}
+		}
+
+		h2
+		{
+			@include heading-h4($brand-success-02);
+
+			@include media-breakpoint-down(sm)
+			{
+				font-size: $font-lg;
+			}
+		}
+	}
+
+	.body
+	{
+		position: relative;
+		z-index: 5;
+	}
+
+	.confirmation-actions
+	{
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		z-index: 11;
+
+		ul
+		{
+			li
+			{
+				margin-right: 10px;
+
+				a
+				{
+					@include font-14($brand-gray);
+
+					.atn-text
+					{
+						@include media-breakpoint-down(sm)
+						{
+							display: none;
+						}
+					}
+
+					&:hover, &:active, &:focus
+					{
+						color: $color-01;
+					}
+				}
+
+				&:last-child
+				{
+					margin: 0;
+				}
+			}
+		}
+
+		@include media-breakpoint-down(sm)
+		{
+			top: 5px;
+		}
+	}
+
+	.confirmation-text
+	{
+		margin-bottom: 15px;
+
+		p
+		{
+			@include font-14($brand-gray-dark);
+		}
+	}
+
+	.confirmation-code
+	{
+		p
+		{
+			@include font-20($brand-gray-dark, $weight-semibold);
+
+			span
+			{
+				padding: 5px 7px;
+				color: $color-01;
+				text-transform: uppercase;
+				font-weight: $weight-bold;
+				font-family: $font-secondary;
+				background: darken($brand-success-01, 10%);
+			}
+		}
+
+		@include media-breakpoint-down(sm)
+		{
+			margin-bottom: 7px;
+		}
+	}
+
+	.query-contact
+	{
+		position: absolute;
+		bottom: -10px;
+		right: -10px;
+		z-index: 5;
+
+		p, a
+		{
+			@include font-12($brand-gray-dark);
+
+			@include media-breakpoint-down(sm)
+			{
+				font-size: rem-calc(10);
+			}
+		}
+
+		a
+		{
+			color: $brand-primary;
+		}
+
+		@include media-breakpoint-down(sm)
+		{
+			margin-top: 10px;
+			text-align: center;
+			
+			@include reset-position;
+		}
+	}
+
+	@include media-breakpoint-down(sm)
+	{
+		text-align: center;
+	}
+}

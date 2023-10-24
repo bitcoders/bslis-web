@@ -1,0 +1,67 @@
+/*----------  User Modals  ----------*/
+
+.user-action-modal
+{
+	.modal-dialog
+	{
+		max-width: 400px;
+
+		.modal-content
+		{
+			.modal-body
+			{
+				.user-actions-container
+				{
+					background: $brand-gray-lightest;
+
+					.actions-toggler-container
+					{
+						.nav-tabs
+						{
+							border: 0;
+
+							.nav-item
+							{
+								width: 50%;
+								margin: 0 !important;
+
+								.nav-link
+								{
+									display: block;
+									border: 0;
+									text-align: center;
+									padding: 15px 10px;
+									text-transform: uppercase;
+									background: $brand-gray-lightest;
+
+									@include font-20($color-01, $weight-bold, 1.2, $font-secondary);
+
+									&.active
+									{
+										color: $color-01;
+										background: $white-color;
+									}
+
+									&:hover, &:active, &:focus
+									{
+										color: $color-01;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				.user-form-container
+				{
+					background: $white-color;
+
+					.form-inner
+					{
+						padding: 30px 20px;
+					}
+				}
+			}
+		}
+	}
+}

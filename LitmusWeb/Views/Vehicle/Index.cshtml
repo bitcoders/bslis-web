@@ -1,0 +1,77 @@
+﻿@model IEnumerable<LitmusWeb.Models.MasterVehicleModel>
+@{
+    ViewBag.Title = "Index Vehicle Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Transportion Mode
+                            @Html.ActionLink("Add New", "Create", "Vehicle", new { }, new { @class = "btn btn-success btn-rounded float-right" })
+                        </h4>
+                        <p class="card-description">
+                            Vehicles <small>(List of Sugar cane transportation modes)</small>
+                        </p>
+                        <div class="table-responsive pt-3">
+                            <table class="table table-bordered table-striped text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th nowrap>
+                                            @Html.DisplayNameFor(model => model.CompanyCode)
+                                        </th>
+                                        <th nowrap>
+                                            @Html.DisplayNameFor(model => model.UnitCode)
+                                        </th>
+                                        <th nowrap>
+                                            @Html.DisplayNameFor(model => model.Code)
+                                        </th>
+                                        <th nowrap>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th nowrap>
+                                            @Html.DisplayNameFor(model => model.IsActive)
+                                        </th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CompanyCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UnitCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Code)
+                                        </td>
+                                        <td nowrap>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsActive)
+                                        </td>
+                                        <td colspan="2">
+                                            <span>
+                                                @Html.ActionLink("Details", "Details", new { id = item.Code }, new { @class = "btn btn-light mdi mdi-eye text-primary" })
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Code }, new { @class = "btn btn-light mdi mdi-lead-pencil text-warning " })
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.Code }, new { @class = "btn btn-light mdi mdi-close text-danger", id = "btnDelete" })
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

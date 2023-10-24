@@ -1,0 +1,42 @@
+﻿@model LitmusWeb.Models.CustomModels.ReportParamUnitSeasonDate
+@{
+    ViewBag.Title = "GetExcelReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="col-12 grid-margin">
+            
+                <div class="card">
+                    <div class="card-body">
+                        @Html.ActionLink("<< Back", "Index", new { }, new { @class = "btn btn-sm btn-rounded btn-primary float-right" })
+                        <h4 class="card-title">Pre-Season Cane Analysis Report</h4>
+                        <p class="card-description">
+                            Sample Date
+                        </p>
+                        @using (Html.BeginForm("GetExcelReport", "CaneAnalysis", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            @Html.EditorFor(@x => x.reportate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                        </div>
+                                        <input type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                
+            
+        </div>
+        
+
+
+

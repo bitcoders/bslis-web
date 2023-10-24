@@ -1,0 +1,92 @@
+﻿@model IEnumerable<LitmusWeb.Models.DataAdjustmentsModel>
+@{
+    ViewBag.Title = Session["UnitName"].ToString() + " - Data Adjustment List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Data Adjustment List</h4>
+                        <p class="card-description">
+                            List of data adjustment done in earlier days!
+                            @Html.ActionLink("Add New", "Add", new { }, new { @class = "btn btn-success btn-xs float-right" })
+                        </p>
+
+                        <div class=" table-responsive">
+                            <table class="table table-responsive table-bordered ">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th nowrap>Action</th>
+                                        <th nowrap>
+                                            @Html.DisplayNameFor(x => x.a_entry_date)
+                                        </th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_sulpher)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_lime)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_phosphoric_acid)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_color_reducer)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_megnafloe)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_lub_oil)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_viscosity_reducer)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_biocide)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_lub_greace)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_boiler_chemical)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_estimated_sugar)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_estimated_molasses)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_washing_soda)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_hydrolic_soda)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_de_scaling_chemical)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_seed_slurry)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_anti_fomer)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_chemical_for_brs_cleaning)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.a_is_active)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.crtd_dt)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x => x.crtd_by)</th>
+                                        <th nowrap>@Html.DisplayNameFor(x=>x.EstimatedCaneForSyrupDiversion)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-warning btn-xs" })</td>
+                                            <td nowrap>@Html.DisplayFor(x => item.a_entry_date)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_sulpher)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_lime)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_phosphoric_acid)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_color_reducer)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_megnafloe)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_lub_oil)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_viscosity_reducer)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_biocide)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_lub_greace)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_boiler_chemical)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_estimated_sugar)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_estimated_molasses)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_washing_soda)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_hydrolic_soda)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_de_scaling_chemical)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_seed_slurry)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_anti_fomer)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_chemical_for_brs_cleaning)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.a_is_active)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.crtd_dt)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x => item.crtd_by)</td>
+                                            <td nowrap class="text-right">@Html.DisplayFor(x=>item.EstimatedCaneForSyrupDiversion)</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LitmusWeb.Models.ReportDetailsModel>
+@{
+    ViewBag.Title = "Excel Template Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Excel Reports List.
+                                @Html.ActionLink("Add", "Create", new { }, new { @class = "btn btn-sm btn-inverse-success float-right", title = "Add new custom data type." })
+                            </h4>
+                            <div class="d-flex justify-content-center">
+                                @*<div id="js-grid-sortable"></div>*@
+                                <table class="table table-bordered table-hover display nowrap">
+                                    <thead class="text-lg-center thead-dark">
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Format</th>
+                                            <th>Is Active</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            var id = item.Code;
+                                            <tr>
+                                                <td class="text-center">@Html.DisplayFor(x => @item.Code)</td>
+                                                <td>@Html.DisplayFor(x => @item.Name)</td>
+                                                <td>@Html.DisplayFor(x => @item.Description)</td>
+                                                <td>@Html.DisplayFor(x => @item.Formats)</td>
+                                                <td>@Html.DisplayFor(x => @item.IsActive)</td>
+                                                <td class="text-center">
+
+                                                    <button type="button" class="btn btn-outline-primary btn-sm mr-2 btnEdit" data-toggle="modal" data-target="#exampleModal-2" onclick="reportDetailsByCode(@item.Code);">Edit</button>
+                                                    @Html.ActionLink("Edit Template", "ExcelTemplate", "ExcelReportTemplate", new {id= id }, new { @class = "btn btn-sm btn-outline-warning" })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form class="EditReportDetails" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel-2">Edit Report Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="Code">Code</label>
+                                        <input type="text" class="form-control disabled" id="Code" name="Code" placeholder="Code" readonly="readonly" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="Name">Name</label>
+                                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Name" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="Description">Description</label>
+                                        <input type="text" class="form-control" id="Description" name="Description" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="ReportSchemaCode">Report Schema Code</label>
+                                        <input type="text" class="form-control" id="ReportSchemaCode" name="ReportSchemaCode" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                @*<input type="submit" value="Confirm!" class="btn btn-outline-danger" onclick="updateReoirtDetails();" />*@
+                                <button type="button" class="btn btn-outline-danger" onclick="updateReoirtDetails();">Save Changes</button>
+                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="~/Scripts/js/modal-demo.js"></script>
+        <script src="~/Scripts/Ajax/ReportSchemaAjax-1.1.js"></script>
+        <script src="~/Scripts/Ajax/ReportDetailsAjax.js"></script>

@@ -1,0 +1,11 @@
+/*----------  Navbars  ----------*/
+
+.navbar-brand
+{
+	display: block;
+
+	> img, .img-responsive
+	{
+		display: inline-block;
+	}
+}

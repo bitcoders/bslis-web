@@ -1,0 +1,99 @@
+﻿
+@model LitmusWeb.Models.DailyAnalysisModel
+<div class="tab-pane fade show" id="Tab6" role="tabpanel" aria-labelledby="Tab6-tab">
+    <div class="col-md-12 grid-margin stretch-card ">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.live_steam_generation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.live_steam_generation)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.live_steam_consumption, new { htmlAttributes = new { @class = "form-control steam-data" } })
+                            @Html.LabelFor(model => model.live_steam_consumption)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_turbines, new { htmlAttributes = new { @class = "form-control power" } })
+                            @Html.LabelFor(model => model.power_turbines)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.bleeding_in_process, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(model => model.bleeding_in_process)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.bleeding_acf, new { htmlAttributes = new { @class = "form-control steam-data", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.bleeding_acf)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.ata3_cogen, new { htmlAttributes = new { @class = "form-control steam-data", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.ata3_cogen)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.d_sulpher_heating, new { htmlAttributes = new { @class = "form-control steam-data", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.d_sulpher_heating)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.drain_pipe_loss, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gate" } })
+                            @Html.LabelFor(model => model.drain_pipe_loss)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.exhaust_steam_generation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early", @readonly = "true" } })
+                            @Html.LabelFor(model => model.exhaust_steam_generation)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.exhaust_steam_consumption, new { htmlAttributes = new { @class = "form-control", @placeholder = "General", @readonly = "true" } })
+                            @Html.LabelFor(model => model.exhaust_steam_consumption)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.steam_percent_cane, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                            @Html.LabelFor(model => model.steam_percent_cane)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.steam_per_ton_cane, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                            @Html.LabelFor(model => model.steam_per_ton_cane)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.steam_per_qtl_sugar, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                            @Html.LabelFor(model => model.steam_per_qtl_sugar)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

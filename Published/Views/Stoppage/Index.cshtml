@@ -1,0 +1,97 @@
+﻿@model IEnumerable<LitmusWeb.Models.StoppageUpdateModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @Html.Partial("_PartialAnalysisDefaultValues")
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Stoppages <small>(Entries for the day)</small>
+                            @Html.ActionLink("Add New", "Create", new { }, new { @class = "btn btn-sm btn-inverse-success float-right", title = "Add a new Stoppage" })
+                        </h4>
+                        <div id="js-grid-sortable"></div>
+                        <table class="table table-bordered display nowrap" id="AnalysisDataTable-Scrollable">
+                            <thead class="text-lg-center">
+                                <tr>
+                                    <td>Action</td>
+                                    <td>Id</td>
+                                    <th>Date</th>
+                                    <th>Mill</th>
+                                    <th>Master Head</th>
+                                    <th>Sub Head</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Gross Duration</th>
+                                    <th>Net Duration</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in Model)
+                                {
+                                <tr>
+
+                                    <td>
+                                        @if (i.s_end_time == null)
+                                        {
+                                            @Html.ActionLink("Close!", "Edit", new { id = i.id }, new { @class = "btn btn-sm btn-inverse-warning" })
+                                        }
+                                        else
+                                        {
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="ddlStoppageModification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Modify Stoppage
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="ddlStoppageModification">
+                                                    <h6 class="dropdown-header">Modify</h6>
+                                                    @Html.ActionLink("Reason", "ChangeReason", new { id = i.id }, new { @class = "dropdown-item" })
+                                                    @Html.ActionLink("Re-define", "ChangeStoppageTime", new { id = i.id }, new { @class = "dropdown-item" })
+                                                    @Html.ActionLink("Delete", "DeleteStoppage", new { id = i.id }, new { @class = "dropdown-item text-danger" })
+                                                </div>
+                                            </div>
+                                            @*@Html.ActionLink("Change Reason", "ChangeReason", new { id = i.id }, new { @class = "btn btn-sm btn-inverse-danger" })
+                                            @Html.ActionLink("Change Time", "ChangeStoppageTime", new { id = i.id }, new { @class = "btn btn-sm btn-inverse-danger" })*@
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(x => i.id)
+                                        
+                                    </td>
+                                    <td>@Html.DisplayFor(x => i.s_date)</td>
+                                    @if (i.s_mill_code == 0)
+                                    {
+                                        <td>New Mill</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Old Mill</td>
+                                    }
+
+                                    <td>@Html.DisplayFor(x => i.s_head_name)</td>
+                                    <td>@Html.DisplayFor(x => i.s_sub_head_name)</td>
+                                    <td>@Html.DisplayFor(x => i.s_start_time)</td>
+                                    <td>@Html.DisplayFor(x => i.s_end_time)</td>
+                                    <td>@Html.DisplayFor(x => i.s_duration)</td>
+                                    <td>@Html.DisplayFor(x => i.s_net_duration)</td>
+                                    <td>@Html.DisplayFor(x => i.s_comment)</td>
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+

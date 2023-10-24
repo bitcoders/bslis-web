@@ -1,0 +1,109 @@
+﻿@model LitmusWeb.Models.DailyAnalysisModel
+<div class="tab-pane fade show" id="Tab7" role="tabpanel" aria-labelledby="Tab7-tab" title="Power Data">
+    <div class="col-md-12 grid-margin stretch-card ">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_from_sugar, new { htmlAttributes = new { @class = "form-control power-data", @placeholder = "Power From Sugar" } })
+                            @Html.LabelFor(model => model.power_from_sugar)
+                            @Html.ValidationMessageFor(x => x.power_from_sugar, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_dg_set, new { htmlAttributes = new { @class = "form-control  power-data", @placeholder = "Power DG Set" } })
+                            @Html.LabelFor(model => model.power_dg_set)
+                            @Html.ValidationMessageFor(x => x.power_dg_set, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_import_cogen, new { htmlAttributes = new { @class = "form-control  power-data", @placeholder = "Power Import Co-gen" } })
+                            @Html.LabelFor(model => model.power_import_cogen)
+                            @Html.ValidationMessageFor(x => x.power_import_cogen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_from_grid, new { htmlAttributes = new { @class = "form-control  power-data", @placeholder = "Power From Grid" } })
+                            @Html.LabelFor(model => model.power_from_grid)
+                            @Html.ValidationMessageFor(x => x.power_from_grid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_generation_from_coGen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Power From Co-Gen" } })
+                            @Html.LabelFor(model => model.power_generation_from_coGen)
+                            @Html.ValidationMessageFor(x => x.power_generation_from_coGen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.home_consumption, new { htmlAttributes = new { @class = "form-control", @placeholder = "Home Consumption" } })
+                            @Html.LabelFor(model => model.home_consumption)
+                            @Html.ValidationMessageFor(x => x.home_consumption, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.total_power, new { htmlAttributes = new { @class = "form-control total-power-consumption", @readonly = "true", @placeholder = "Total Power" } })
+                            @Html.LabelFor(model => model.total_power)
+                            @Html.ValidationMessageFor(x => x.total_power, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_per_ton_cane, new { htmlAttributes = new { @class = "form-control power-per-ton-cane", @readonly = "true", @placeholder = "Power per ton Cane" } })
+                            @Html.LabelFor(model => model.power_per_ton_cane)
+                            @Html.ValidationMessageFor(x => x.power_per_ton_cane, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_per_qtl_sugar, new { htmlAttributes = new { @class = "form-control power_per_qtl-sugar", @readonly = "true", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.power_per_qtl_sugar)
+                            @Html.ValidationMessageFor(x => x.power_per_qtl_sugar, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">Power Export Details</p><hr />
+                <div class="form-group row">
+
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.PowerExportFromCogen, new { htmlattributes = new { @class = "form-control" } })
+                            @Html.LabelFor(model => model.PowerExportFromCogen)
+                            @Html.ValidationMessageFor(Model => Model.PowerExportFromCogen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.PowerExportFromDistillery, new { htmlattributes = new { @class = "form-control" } })
+                            @Html.LabelFor(model => model.PowerExportFromDistillery)
+                            @Html.ValidationMessageFor(Model => Model.PowerExportFromDistillery, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.power_export_grid, new { htmlAttributes = new { @class = "form-control  power-data", @placeholder = "Export to Grid", @readonly = "true" } })
+                            @Html.LabelFor(model => model.power_export_grid)
+                            @Html.ValidationMessageFor(x => x.power_export_grid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

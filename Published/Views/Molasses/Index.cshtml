@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<LitmusWeb.Models.MolassesAnalysModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @Html.Partial("_PartialAnalysisDefaultValues")
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Molasses Analysis <small>(Entries for the day)</small>
+                            @Html.ActionLink("Add New", "Create", new { }, new { @class = "btn btn-sm btn-inverse-success float-right", title = "Add a new Molasses Analysis" })
+                        </h4>
+                        <div id="js-grid-sortable"></div>
+                        <table class="table table-bordered display nowrap" id="AnalysisDataTable-Scrollable">
+                            <thead class="text-lg-center">
+                                <tr>
+                                    <td>Action</td>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Molasses Name</th>
+                                    <th>Brix</th>
+                                    <th>Pol</th>
+                                    <th>Purity</th>
+                                    <th>Icumsa Unit</th>
+                                    <th>Created Date</th>
+                                    <th>Created By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var i in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = i.id }, new { @class = "btn btn-sm btn-inverse-warning" })
+                                    </td>
+                                    <td>@Html.DisplayFor(x => i.mo_entry_date)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_entry_time)</td>
+
+                                    <td>@Html.DisplayFor(x => i.molasses_name)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_brix)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_pol)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_purity)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_icumsa_unit)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_crtd_date)</td>
+                                    <td>@Html.DisplayFor(x => i.mo_crtd_by)</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

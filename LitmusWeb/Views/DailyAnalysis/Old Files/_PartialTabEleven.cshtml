@@ -1,0 +1,26 @@
+﻿
+@model LitmusWeb.Models.DailyAnalysisModel
+<div class="tab-pane fade show" id="Finish" role="tabpanel" aria-labelledby="finish">
+    <div class="col-md-12 grid-margin stretch-card ">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <h3>Finish</h3>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="checkbox" type="checkbox">
+                                I have checked all the values and are correct in my knowledge.
+                            </label>
+                            @*<button type="submit" id="btnSave" class="btn btn-success">Save</button>*@
+                            <input type="submit" id="btnSubmit" value="Save" class="btn btn-inverse-success" />
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

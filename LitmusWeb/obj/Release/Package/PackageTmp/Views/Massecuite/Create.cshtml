@@ -1,0 +1,130 @@
+﻿@model  LitmusWeb.Models.MassecuiteAnalysModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @Html.Partial("_PartialAnalysisDefaultValues")
+        </div>
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Massecuite Analysis
+                        @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right", @name = "Create" })
+                    </h4>
+                    @using (Html.BeginForm("Create", "Massecuite", FormMethod.Post))
+                    {
+                       <p class="card-description text-primary">Analysis performed on Massecuite</p>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("FormMode", "Create")
+                       <div class="row">
+                           <div class="col-md-12">
+                               <div class="form-group row">
+                                   <div class="col-sm-4">
+                                       @*@Html.DropDownList("Select",new SelectList(ViewBag.MassecuteList,"Code","Name"),new { @class="form-control"})*@
+                                       <select id="m_param_type_code" name="m_param_type_code" class="form-control">
+                                           <option value="0">--Select--</option>
+                                           @foreach (var i in ViewBag.MassecuteList)
+                                           {
+                                               <option value="@i.Code" class="item-content">@i.Name</option>
+                                           }
+
+                                       </select>
+                                       @Html.ValidationMessageFor(@x => x.m_param_type_code, "", new { @class = "text-danger" })
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_entry_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "Entry Time", @type = "Time" } })
+                                           @Html.LabelFor(@x => x.m_entry_time)
+                                           @Html.ValidationMessageFor(@x => x.m_entry_time, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_hl, new { htmlAttributes = new { @class = "form-control", @placeholder = "H.L." } })
+                                           @Html.LabelFor(@x => x.m_hl)
+                                           @Html.ValidationMessageFor(@x => x.m_hl, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md-12">
+                               <div class="form-group row">
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_pan_no, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pan No" } })
+                                           @Html.LabelFor(@x => x.m_pan_no)
+                                           @Html.ValidationMessageFor(@x => x.m_pan_no, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_start_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "Entry Time", @type = "Time" } })
+                                           @Html.LabelFor(@x => x.m_start_time)
+                                           @Html.ValidationMessageFor(@x => x.m_start_time, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_drop_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "Entry Time", @type = "Time" } })
+                                           @Html.LabelFor(@x => x.m_drop_time)
+                                           @Html.ValidationMessageFor(@x => x.m_drop_time, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_crystal_no, new { htmlAttributes = new { @class = "form-control", @placeholder = "Crystal No" } })
+                                           @Html.LabelFor(@x => x.m_crystal_no)
+                                           @Html.ValidationMessageFor(@x => x.m_crystal_no, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="col-md-12">
+                               <div class="form-group row">
+
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_brix, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Brix" } })
+                                           @Html.LabelFor(@x => x.m_brix)
+                                           @Html.ValidationMessageFor(@x => x.m_brix, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group">
+                                           @Html.EditorFor(@x => x.m_pol, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Pol" } })
+                                           @Html.LabelFor(@x => x.m_pol)
+                                           @Html.ValidationMessageFor(@x => x.m_pol, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group col">
+                                           @Html.EditorFor(@x => x.m_purity, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Purity", @readonly = "true" } })
+                                           @Html.LabelFor(@x => x.m_purity)
+                                           @Html.ValidationMessageFor(@x => x.m_purity, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-3">
+                                       <div class=" form-label-group col">
+                                           @Html.EditorFor(@x => x.m_icumsa_unit, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Icumsa Unit" } })
+                                           @Html.LabelFor(@x => x.m_icumsa_unit)
+                                           @Html.ValidationMessageFor(@x => x.m_icumsa_unit, "", new { @class = "text-danger" })
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                            @Html.ValidationSummary()
+                           <button type="submit" class="btn btn-success">Submit</button>
+                       </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+<link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+<script src="~/Scripts/SugarAnalysisJs/MassecuiteAnalysis-1.1.min.js"></script>

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "ProcessForDateRange";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Process calculation for the date range
+                        </h4>
+                        @using (Html.BeginForm("ProcessForDateRange", "ProcessCalculation", FormMethod.Post))
+                        {
+                            @Html.Hidden("_hiddenUnitCode", Session["BaseUnitCode"]);
+                            @Html.Hidden("_hiddenSeasonCode", Session["CrushingSeason"]);
+                            @Html.Hidden("_hiddenUserCode", Session["UserCode"]);
+                            @Html.AntiForgeryToken()
+                    <div class="form-group row">
+                        <div class="col-sm-3 dropdown">
+                            <select id="unit_code" name="unit_code" class="form-control" style="border: 1px solid #999">
+                                <option value="0">--select unit--</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3 dropdown">
+                            <select id="season_code" name="season_code" class="form-control" style="border: 1px solid #999">
+                            </select>
+                        </div>
+                        <div class="col-sm-3 dropdown">
+                            <input type="text" id="txtFromDate" name="txtFromDate" class="form-control datepicker" autocomplete="off" />
+                        </div>
+                        <div class="col-sm-3 dropdown">
+                            <input type="text" id="txtToDate" name="txtToDate" class="form-control datepicker" autocomplete="off" />
+                        </div>
+                    </div>
+                            <div class="text-center">
+                                <button type="button" id="btnProcess" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal-2">Click to Process<i class="mdi mdi-play-circle ml-1"></i></button>
+                            </div>
+                            <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel-2">Confirm Process calculation for the <b>@ViewBag.ProcessDate!</b></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Before processing data kindly check process date in 'Sugar Unit Master'</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" value="Confirm!" class="btn btn-outline-danger" />
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/js/modal-demo.js"></script>
+
+    <script src="~/Content/MainContent/vendors/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Scripts/js/alerts.js"></script>
+    <script src="~/Scripts/SugarAnalysisJs/ProcessCalculationForDateRange.js"></script>
+

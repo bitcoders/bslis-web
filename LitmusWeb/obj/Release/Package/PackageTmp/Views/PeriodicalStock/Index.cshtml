@@ -1,0 +1,403 @@
+﻿@model IEnumerable<LitmusWeb.Models.PeriodicalStockModel>
+@{
+    ViewBag.Title = Session["UnitName"].ToString() + "| Stocks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Periodical stocks</h4>
+                        <p class="card-description">
+                            List of Periodical Stocks!
+                            @Html.ActionLink("Add New", "AddPeriodicalStock", new { }, new { @class = "btn btn-success btn-xs float-right" })
+                        </p>
+
+                        <div class="card mt-2">
+                            <h4 class="card-header">
+                                Juice & Syrup
+                            </h4>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                    <table class="table table-responsive table-bordered ">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th nowrap>Action</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.EntryDate)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MixedJuiceJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MixedJuiceJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MixedJuiceJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MixedJuiceJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MixedJuiceJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MixedJuiceJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.ClearJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.ClearJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.ClearJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.ClearJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.ClearJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.ClearJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SyrupJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SyrupJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SyrupJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SyrupJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SyrupJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SyrupJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SeedJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SeedJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SeedJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SeedJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SeedJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SeedJuiceAvailableMolasses)</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })</td>
+                                                    <td nowrap>@Html.DisplayFor(x => item.EntryDate)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MixedJuiceJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MixedJuiceJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MixedJuiceJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MixedJuiceJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MixedJuiceJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MixedJuiceJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.ClearJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.ClearJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.ClearJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.ClearJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.ClearJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.ClearJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SyrupJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SyrupJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SyrupJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SyrupJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SyrupJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SyrupJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SeedJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SeedJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SeedJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SeedJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SeedJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SeedJuiceAvailableMolasses)</td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                
+                            </div>
+                        </div>
+
+                        <div class="card mt-2">
+                            <h4 class="card-header">
+                                Massecuite Data
+                            </h4>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <div class=" table-responsive">
+                                    <table class="table table-responsive table-bordered">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th nowrap>Action</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.EntryDate)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteAJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteAJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteAJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteAJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteAJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteAJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCOneJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCOneJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCOneJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCOneJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCOneJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteCOneJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteROneJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteROneJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteROneJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteROneJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteROneJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteROneJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteBJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteBJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteBJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteBJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteBJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteBJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRTwoJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRTwoJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRTwoJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRTwoJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRTwoJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRTwoJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRThreeJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRThreeJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRThreeJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRThreeJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRThreeJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MassecuiteRThreeJuiceAvailableMolasses)</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })</td>
+                                                    <td nowrap>@Html.DisplayFor(x => item.EntryDate)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteAJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteAJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteAJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteAJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteAJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteAJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCOneJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCOneJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCOneJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCOneJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCOneJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteCOneJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteROneJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteROneJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteROneJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteROneJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteROneJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteROneJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteBJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteBJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteBJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteBJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteBJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteBJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRTwoJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRTwoJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRTwoJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRTwoJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRTwoJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRTwoJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRThreeJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRThreeJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRThreeJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRThreeJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRThreeJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MassecuiteRThreeJuiceAvailableMolasses)</td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-2">
+                            <h4 class="card-header">
+                                Molasses Data
+                            </h4>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                    <table class="table table-responsive table-bordered ">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th nowrap>Action</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.EntryDate)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesAHeavyJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesAHeavyJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesAHeavyJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesAHeavyJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesAHeavyJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesAHeavyJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesALightJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesALightJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesALightJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesALightJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesALightJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesALightJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesBHeavyJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesBHeavyJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesBHeavyJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesBHeavyJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesBHeavyJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesBHeavyJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCLightJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCLightJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCLightJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCLightJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCLightJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCLightJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCOneJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCOneJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCOneJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCOneJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCOneJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesCOneJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesROneHeavyJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesROneHeavyJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesROneHeavyJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesROneHeavyJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesROneHeavyJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesROneHeavyJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRTwoJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRTwoJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRTwoJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRTwoJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRTwoJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRTwoJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRThreeHeavyJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRThreeHeavyJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRThreeHeavyJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRThreeHeavyJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRThreeHeavyJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.MolassesRThreeHeavyJuiceAvailableMolasses)</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })</td>
+                                                    <td nowrap>@Html.DisplayFor(x => item.EntryDate)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesAHeavyJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesAHeavyJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesAHeavyJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesAHeavyJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesAHeavyJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesAHeavyJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesALightJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesALightJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesALightJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesALightJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesALightJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesALightJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesBHeavyJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesBHeavyJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesBHeavyJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesBHeavyJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesBHeavyJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesBHeavyJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCLightJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCLightJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCLightJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCLightJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCLightJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCLightJuiceAvailableMolasses)</td>
+
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCOneJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCOneJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCOneJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCOneJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCOneJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesCOneJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesROneHeavyJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesROneHeavyJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesROneHeavyJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesROneHeavyJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesROneHeavyJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesROneHeavyJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRTwoJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRTwoJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRTwoJuicePol)</td>
+
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRTwoJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRTwoJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRTwoJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRThreeHeavyJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRThreeHeavyJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRThreeHeavyJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRThreeHeavyJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRThreeHeavyJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.MolassesRThreeHeavyJuiceAvailableMolasses)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+
+                        <div class="card mt-2">
+                            <h4 class="card-header">
+                                Other Data
+                            </h4>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                    <table class="table table-responsive table-bordered ">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th nowrap>Action</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.EntryDate)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SugarUnweightedJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SugarUnweightedJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SugarUnweightedJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SugarUnweightedJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SugarUnweightedJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.SugarUnweightedJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.FineLiqorJuiceHl)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.FineLiqorJuiceBrix)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.FineLiqorJuicePol)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.FineLiqorJuicePurity)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.FineLiqorJuiceAvailableSugar)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.FineLiqorJuiceAvailableMolasses)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.BagasseSaved)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.BagasseToDistillery)</th>
+                                                <th nowrap>@Html.DisplayNameFor(x => x.BagassePurchased)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-xs" })</td>
+                                                    <td nowrap>@Html.DisplayFor(x => item.EntryDate)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SugarUnweightedJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SugarUnweightedJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SugarUnweightedJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SugarUnweightedJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SugarUnweightedJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.SugarUnweightedJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.FineLiqorJuiceHl)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.FineLiqorJuiceBrix)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.FineLiqorJuicePol)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.FineLiqorJuicePurity)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.FineLiqorJuiceAvailableSugar)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.FineLiqorJuiceAvailableMolasses)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.BagasseSaved)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.BagasseToDistillery)</td>
+                                                    <td nowrap class="text-right">@Html.DisplayFor(x => item.BagassePurchased)</td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

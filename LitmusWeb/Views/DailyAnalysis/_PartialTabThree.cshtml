@@ -1,0 +1,140 @@
+﻿
+@model LitmusWeb.Models.DailyAnalysisModel
+
+<div class="tab-pane fade show" id="Tab3" role="tabpanel" aria-labelledby="Tab3-tab">
+    <div class="col-md-12 grid-margin stretch-card ">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description">Calcium, Phosphate Content and Losses</p><hr />
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.calcium_mixed_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.calcium_mixed_juice)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.calcium_clear_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.calcium_clear_juice)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.phosphate_mixed_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.phosphate_mixed_juice)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.phosphate_clear_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.phosphate_clear_juice)
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.rs_primary_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.rs_primary_juice)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.rs_mixed_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.rs_mixed_juice)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.rs_clear_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.rs_clear_juice)
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.b_heavy_final_molasses_trs, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.b_heavy_final_molasses_trs)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.b_heavy_final_molasses_rs, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.b_heavy_final_molasses_rs)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.c_heavy_final_molasses_trs, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.c_heavy_final_molasses_trs)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.c_heavy_final_molasses_rs, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.c_heavy_final_molasses_rs)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.syrup_trs, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.syrup_trs)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.syrup_rs, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.syrup_rs)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.dextran_primary_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.dextran_primary_juice)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.dextran_mixed_juice, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.dextran_mixed_juice)
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <p class="card-description">Tubewell and Pan</p><hr />
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.total_operating_tube_well, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.total_operating_tube_well)
+                            @Html.ValidationMessageFor(x => x.total_operating_tube_well, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.exhaust_condensate_recovery, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.exhaust_condensate_recovery)
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.T_c_massecuite_pan, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.T_c_massecuite_pan)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

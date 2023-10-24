@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "downloadReportData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Download processed data for report
+                            <small>(All values used in reports can be download from here.)</small>
+                            @*@Html.ActionLink("Add", "Create", new { }, new { @class = "btn btn-sm btn-inverse-success float-right", title = "Add new custom data type." })*@
+                        </h4>
+                        @using(Html.BeginForm("DownloadReportData","ExcelReportTemplate",FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label"  for="ReportType">Report Type</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="selectReportType" id="selectReportType">
+                                            <option value="0">Select</option>
+                                            <option value="periodical">Periodical</option>
+                                            <option value="daily">Daily Report</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">From</label>
+                                    <div class="col-sm-4" id="divDateFrom">
+                                        <input type="text" class="form-control datepicker" name="txtDateFrom" id="txtDateFrom" />
+                                    </div>
+                                    <label class="col-sm-2 col-form-label txtDateTo ">To</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control datepicker txtDateTo" name="txtDateTo" id="txtDateTo" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-outline-primary btn-icon-text float-right">
+                                            <i class="mdi mdi-download btn-icon-prepend"></i>
+                                            Download
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/SugarAnalysisJs/ExcelReportTemplates.js"></script>

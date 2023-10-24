@@ -1,0 +1,842 @@
+﻿@model LitmusWeb.Models.PeriodicalStockModel
+@{
+    ViewBag.Title = Session["UnitName"].ToString() + "| Add Periodical Stocks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            @using (Html.BeginForm("AddPeriodicalStock", "PeriodicalStock", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                Periodical Stock Data
+                                <div class="float-right">
+                                    @*@Html.LabelFor(x=>x.EntryDate, new { htmlAttributes = new { @class="label"} })
+                                    @Html.EditorFor(x => x.EntryDate, new { htmlAttributes = new { @class = "datepicker text-center", @type = "text" } })
+                                    @Html.ValidationMessageFor(x=>x.EntryDate,"",new { @class="text-danger"})*@
+                                    <label class="ct-label">Entry Date</label>
+                                    <input type="text" class="datepicker text-center" id="EntryDate" name="EntryDate" autocomplete="off" autofocus />
+                                    @Html.ValidationMessageFor(x => x.EntryDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="card mt-2">
+                                        <h5 class="card-header">
+                                            Juice & Syrup
+                                        </h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title"></h5>
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MixedJuiceJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MixedJuiceJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MixedJuiceJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MixedJuiceJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MixedJuiceJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MixedJuiceJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MixedJuiceJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MixedJuiceJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MixedJuiceJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MixedJuiceJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MixedJuiceJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MixedJuiceJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.ClearJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.ClearJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.ClearJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.ClearJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.ClearJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.ClearJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.ClearJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.ClearJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.ClearJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.ClearJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.ClearJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.ClearJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SyrupJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SyrupJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SyrupJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SyrupJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SyrupJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SyrupJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SyrupJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SyrupJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SyrupJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SyrupJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SyrupJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SyrupJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SeedJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SeedJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SeedJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SeedJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SeedJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SeedJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SeedJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SeedJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SeedJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SeedJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SeedJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SeedJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card  mt-2">
+                                        <h5 class="card-header">
+                                            Massecuite
+                                        </h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title"></h5>
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteAJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteAJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteAJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteAJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteAJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteAJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteAJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteAJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteAJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteAJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteAJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteAJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteBJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteBJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteBJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteBJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteBJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteBJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteBJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteBJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteBJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteBJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteBJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteBJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCOneJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCOneJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCOneJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCOneJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCOneJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCOneJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCOneJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCOneJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCOneJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCOneJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteCOneJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteCOneJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteROneJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteROneJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteROneJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteROneJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteROneJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteROneJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteROneJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteROneJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteROneJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteROneJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteROneJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteROneJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRTwoJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRTwoJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRTwoJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRTwoJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRTwoJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRTwoJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRTwoJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRTwoJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRTwoJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRTwoJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRTwoJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRTwoJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRThreeJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRThreeJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRThreeJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRThreeJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRThreeJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRThreeJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRThreeJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRThreeJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRThreeJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRThreeJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MassecuiteRThreeJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MassecuiteRThreeJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mt-2">
+                                        <h5 class="card-header">
+                                            Molasses
+                                        </h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title"></h5>
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesAHeavyJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesAHeavyJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesAHeavyJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesAHeavyJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesAHeavyJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesAHeavyJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesAHeavyJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesAHeavyJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesAHeavyJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesAHeavyJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesAHeavyJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesAHeavyJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesALightJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesALightJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesALightJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesALightJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesALightJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesALightJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesALightJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesALightJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesALightJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesALightJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesALightJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesALightJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesBHeavyJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesBHeavyJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesBHeavyJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesBHeavyJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesBHeavyJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesBHeavyJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesBHeavyJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesBHeavyJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesBHeavyJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesBHeavyJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesBHeavyJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesBHeavyJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesCLightJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesCLightJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesCLightJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesCLightJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesCLightJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesCLightJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesCLightJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesCLightJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesCLightJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesCLightJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesCLightJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesCLightJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesROneHeavyJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesROneHeavyJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesROneHeavyJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesROneHeavyJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesROneHeavyJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesROneHeavyJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesROneHeavyJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesROneHeavyJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesROneHeavyJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesROneHeavyJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesROneHeavyJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesROneHeavyJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesRThreeHeavyJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesRThreeHeavyJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesRThreeHeavyJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesRThreeHeavyJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesRThreeHeavyJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesRThreeHeavyJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesRThreeHeavyJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesRThreeHeavyJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesRThreeHeavyJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesRThreeHeavyJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.MolassesRThreeHeavyJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.MolassesRThreeHeavyJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mt-2">
+                                        <h5 class="card-header">
+                                            Others
+                                        </h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title"></h5>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SugarUnweightedJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SugarUnweightedJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SugarUnweightedJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SugarUnweightedJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SugarUnweightedJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SugarUnweightedJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SugarUnweightedJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SugarUnweightedJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SugarUnweightedJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SugarUnweightedJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.SugarUnweightedJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.SugarUnweightedJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.FineLiqorJuiceHl, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.FineLiqorJuiceHl)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.FineLiqorJuiceBrix, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.FineLiqorJuiceBrix)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.FineLiqorJuicePol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.FineLiqorJuicePol)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.FineLiqorJuicePurity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.FineLiqorJuicePurity)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.FineLiqorJuiceAvailableSugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.FineLiqorJuiceAvailableSugar)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.FineLiqorJuiceAvailableMolasses, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.FineLiqorJuiceAvailableMolasses)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.BagasseSaved, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.BagasseSaved)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.BagasseToDistillery, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.BagasseToDistillery)
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-label-group">
+                                                        @Html.EditorFor(m => m.BagassePurchased, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mixed Juice HL" } })
+                                                        @Html.LabelFor(m => m.BagassePurchased)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <input type="reset" class="btn btn-light float-right mr-2" />
+                                <input type="submit" class="btn btn-success float-right mr-2" />
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            }
+            </div>
+    </div>
+    @*<script src="~/Content/MainContent/vendors/jquery-steps/jquery.steps.min.js" type="text/javascript"></script>*@
+
+    @*<script src="~/Scripts/js/wizard.js" type="text/javascript"></script>*@

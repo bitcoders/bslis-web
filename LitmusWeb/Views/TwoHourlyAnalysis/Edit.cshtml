@@ -1,0 +1,539 @@
+﻿@model LitmusWeb.Models.TwoHourlyAnalysisModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        @using (Html.BeginForm("Edit", "TwoHourlyAnalysis", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            @Html.Hidden("FormMode", "Edit");
+
+            <!-- <New Mill Juices> -->
+            <!--
+            Id of the div is DivNewMill using which we can show or hide this portion of
+            input in case New mill is not installed at sugar plant.
+        -->
+            <div class="row" id="DivNewMill">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                New Mill
+                            </h4>
+                            <div class="row">
+                                <div class="col-lg-4 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title d-flex">
+                                                Primary Juice
+                                            </h4>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.NM_Primary_Juice_Brix)
+                                                @Html.EditorFor(x => x.NM_Primary_Juice_Brix, new { htmlAttributes = new { @class = "form-control NmPjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.NM_Primary_Juice_Brix, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.NM_Primary_juice_pol)
+                                                @Html.EditorFor(x => x.NM_Primary_juice_pol, new { htmlAttributes = new { @class = "form-control NmPjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.NM_Primary_juice_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_primary_juice_ph)
+                                                @Html.EditorFor(x => x.nm_primary_juice_ph, new { htmlAttributes = new { @class = "form-control NmPjPurity" } })
+                                                @Html.ValidationMessageFor(x => x.nm_primary_juice_ph, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_primary_juice_purity)
+                                                @Html.EditorFor(x => x.nm_primary_juice_purity, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.ValidationMessageFor(x => x.nm_primary_juice_purity, "", new { @class = "text-danger" })
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Mixed Juice</h4>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_mixed_juice_brix)
+                                                @Html.EditorFor(x => x.nm_mixed_juice_brix, new { htmlAttributes = new { @class = "form-control NmMjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.nm_mixed_juice_brix, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_mixed_juice_pol)
+                                                @Html.EditorFor(x => x.nm_mixed_juice_pol, new { htmlAttributes = new { @class = "form-control NmMjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.nm_mixed_juice_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_mixed_juice_ph)
+                                                @Html.EditorFor(x => x.nm_mixed_juice_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(x => x.nm_mixed_juice_ph, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_mixed_juice_purity)
+                                                @Html.EditorFor(x => x.nm_mixed_juice_purity, new { htmlAttributes = new { @class = "form-control NmMjPurity", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.ValidationMessageFor(x => x.nm_mixed_juice_purity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Last Juice</h4>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_last_juice_brix)
+                                                @Html.EditorFor(x => x.nm_last_juice_brix, new { htmlAttributes = new { @class = "form-control NmLjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.nm_last_juice_brix, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_last_juice_pol)
+                                                @Html.EditorFor(x => x.nm_last_juice_pol, new { htmlAttributes = new { @class = "form-control NmLjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.nm_last_juice_pol, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.nm_last_juice_purity)
+                                                @Html.EditorFor(x => x.nm_last_juice_purity, new { htmlAttributes = new { @class = "form-control NmLjPurity", @tabindex = "-1", @readonly = "true" } })
+                                                @Html.ValidationMessageFor(x => x.nm_last_juice_purity, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <\New Mill Juices>-->
+
+            <!-- <Old Mill Juices> -->
+            <!--
+            Id of the div is DivOldMill using which we can show or hide this portion of
+            input in case New mill is not installed at sugar plant.
+        -->
+            <div class="row DivOldMill">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Old Mill
+                            </h4>
+                            <div class="row">
+                                <div class="col-lg-4 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title d-flex">
+                                                Primary Juice
+                                            </h4>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_primary_juice_brix)
+                                                @Html.EditorFor(x => x.om_primary_juice_brix, new { htmlAttributes = new { @class = "form-control OmPjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.om_primary_juice_brix, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_primary_juice_pol)
+                                                @Html.EditorFor(x => x.om_primary_juice_pol, new { htmlAttributes = new { @class = "form-control OmPjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.om_primary_juice_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_primary_juice_ph)
+                                                @Html.EditorFor(x => x.om_primary_juice_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(x => x.om_primary_juice_ph, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_primary_juice_purity)
+                                                @Html.EditorFor(x => x.om_primary_juice_purity, new { htmlAttributes = new { @class = "form-control OmPjPurity", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.ValidationMessageFor(x => x.om_primary_juice_purity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Mixed Juice</h4>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_mixed_juice_brix)
+                                                @Html.EditorFor(x => x.om_mixed_juice_brix, new { htmlAttributes = new { @class = "form-control OmMjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.om_mixed_juice_brix, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_mixed_juice_pol)
+                                                @Html.EditorFor(x => x.om_mixed_juice_pol, new { htmlAttributes = new { @class = "form-control OmMjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.om_mixed_juice_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_mixed_juice_ph)
+                                                @Html.EditorFor(x => x.om_mixed_juice_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(x => x.om_mixed_juice_ph, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_mixed_juice_purity)
+                                                @Html.EditorFor(x => x.om_mixed_juice_purity, new { htmlAttributes = new { @class = "form-control OmMjPurity", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.ValidationMessageFor(x => x.om_mixed_juice_purity, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Last Juice</h4>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_last_juice_brix)
+                                                @Html.EditorFor(x => x.om_last_juice_brix, new { htmlAttributes = new { @class = "form-control OmLjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.om_last_juice_brix, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_last_juice_pol)
+                                                @Html.EditorFor(x => x.om_last_juice_pol, new { htmlAttributes = new { @class = "form-control OmLjLiquid" } })
+                                                @Html.ValidationMessageFor(x => x.om_last_juice_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="row">
+                                                @Html.LabelFor(x => x.om_last_juice_purity)
+                                                @Html.EditorFor(x => x.om_last_juice_purity, new { htmlAttributes = new { @class = "form-control OmLjPurity", @tabindex = "-1", @readonly = "true" } })
+                                                @Html.ValidationMessageFor(x => x.om_last_juice_purity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <\Old Mill Juices>-->
+
+
+
+            <!-- <Oliver Filter Juice  and Clear Juice>-->
+            <div class="row">
+                <div class="col-lg-4 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Oliver Filter Juice
+                            </h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.oliver_juice_brix)
+                                @Html.EditorFor(x => x.oliver_juice_brix, new { htmlAttributes = new { @class = "form-control oliverLiquid" } })
+                                @Html.ValidationMessageFor(x => x.oliver_juice_brix, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.oliver_juice_pol)
+                                @Html.EditorFor(x => x.oliver_juice_pol, new { htmlAttributes = new { @class = "form-control oliverLiquid" } })
+                                @Html.ValidationMessageFor(x => x.oliver_juice_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.oliver_juice_ph)
+                                @Html.EditorFor(x => x.oliver_juice_ph, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(x => x.oliver_juice_ph, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.oliver_juice_purity)
+                                @Html.EditorFor(x => x.oliver_juice_purity, new { htmlAttributes = new { @class = "form-control oliverPurity", @readonly = "true", @tabindex = "-1" } })
+                                @Html.ValidationMessageFor(x => x.oliver_juice_purity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                FCS Juice
+                            </h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.fcs_juice_brix)
+                                @Html.EditorFor(x => x.fcs_juice_brix, new { htmlAttributes = new { @class = "form-control fcsLiquid" } })
+                                @Html.ValidationMessageFor(x => x.fcs_juice_brix, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.fcs_juice_pol)
+                                @Html.EditorFor(x => x.fcs_juice_pol, new { htmlAttributes = new { @class = "form-control fcsLiquid" } })
+                                @Html.ValidationMessageFor(x => x.fcs_juice_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.fcs_juice_ph)
+                                @Html.EditorFor(x => x.fcs_juice_ph, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(x => x.fcs_juice_ph, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.fcs_juice_purity)
+                                @Html.EditorFor(x => x.fcs_juice_purity, new { htmlAttributes = new { @class = "form-control fcsPurity", @readonly = "true", @tabindex = "-1" } })
+                                @Html.ValidationMessageFor(x => x.fcs_juice_purity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Clear Juice
+                            </h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.clear_juice_brix)
+                                @Html.EditorFor(x => x.clear_juice_brix, new { htmlAttributes = new { @class = "form-control CjLiquid" } })
+                                @Html.ValidationMessageFor(x => x.clear_juice_brix, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.clear_juice_pol)
+                                @Html.EditorFor(x => x.clear_juice_pol, new { htmlAttributes = new { @class = "form-control CjLiquid" } })
+                                @Html.ValidationMessageFor(x => x.clear_juice_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.clear_juice_ph)
+                                @Html.EditorFor(x => x.clear_juice_ph, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(x => x.clear_juice_ph, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.clear_juice_purity)
+                                @Html.EditorFor(x => x.clear_juice_purity, new { htmlAttributes = new { @class = "form-control CjPurity", @readonly = "true", @tabindex = "-1" } })
+                                @Html.ValidationMessageFor(x => x.clear_juice_purity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </Oliver Filter Juice  and Clear Juice>-->
+
+            <!-- <Unsulphured and Sulphured Syrup>-->
+            <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Un-sulphured Syrup
+                            </h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.unsulphured_syrup_brix)
+                                @Html.EditorFor(x => x.unsulphured_syrup_brix, new { htmlAttributes = new { @class = "form-control UnsulphuredLiquid" } })
+                                @Html.ValidationMessageFor(x => x.unsulphured_syrup_brix, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.unsulphured_syrup_pol)
+                                @Html.EditorFor(x => x.unsulphured_syrup_pol, new { htmlAttributes = new { @class = "form-control UnsulphuredLiquid" } })
+                                @Html.ValidationMessageFor(x => x.unsulphured_syrup_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.unsulphured_syrup_ph)
+                                @Html.EditorFor(x => x.unsulphured_syrup_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.unsulphured_syrup_ph, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.unsulphured_syrup_purity)
+                                @Html.EditorFor(x => x.unsulphured_syrup_purity, new { htmlAttributes = new { @class = "form-control UnsulphuredPurity", @readonly = "true", @tabindex = "-1" } })
+                                @Html.ValidationMessageFor(x => x.unsulphured_syrup_purity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Sulphured Syrup
+                            </h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.sulphured_syrup_brix)
+                                @Html.EditorFor(x => x.sulphured_syrup_brix, new { htmlAttributes = new { @class = "form-control SulphuredLiquid" } })
+                                @Html.ValidationMessageFor(x => x.sulphured_syrup_brix, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.sulphured_syrup_pol)
+                                @Html.EditorFor(x => x.sulphured_syrup_pol, new { htmlAttributes = new { @class = "form-control SulphuredLiquid" } })
+                                @Html.ValidationMessageFor(x => x.sulphured_syrup_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.sulphured_syrup_ph)
+                                @Html.EditorFor(x => x.sulphured_syrup_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.sulphured_syrup_ph, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.sulphured_syrup_purity)
+                                @Html.EditorFor(x => x.sulphured_syrup_purity, new { htmlAttributes = new { @class = "form-control SulphuredPurity", @readonly = "true", @tabindex = "-1" } })
+                                @Html.ValidationMessageFor(x => x.sulphured_syrup_purity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </Unsulphured and Sulphured Syrup>-->
+
+            <!-- <Final Molasses>-->
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Final Molasses
+                            </h4>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.LabelFor(x => x.final_molasses_brix)
+                                    @Html.EditorFor(x => x.final_molasses_brix, new { htmlAttributes = new { @class = "form-control MolassesLiquid" } })
+                                    @Html.ValidationMessageFor(x => x.final_molasses_brix, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.final_molasses_pol)
+                                    @Html.EditorFor(x => x.final_molasses_pol, new { htmlAttributes = new { @class = "form-control MolassesLiquid" } })
+                                    @Html.ValidationMessageFor(x => x.final_molasses_pol, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.final_molasses_purity)
+                                    @Html.EditorFor(x => x.final_molasses_purity, new { htmlAttributes = new { @class = "form-control MolassesPurity", @readonly = "true", @tabindex = "-1" } })
+                                    @Html.ValidationMessageFor(x => x.final_molasses_purity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.LabelFor(x => x.final_molasses_temp)
+                                    @Html.EditorFor(x => x.final_molasses_temp, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(x => x.final_molasses_temp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.final_molasses_tanks)
+                                    @Html.EditorFor(x => x.final_molasses_tanks, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(x => x.final_molasses_tanks, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </Final Molasses>-->
+            <!-- <New Mill Bagasse> -->
+            <!--
+            Id of the div is DivNewMill using which we can show or hide this portion of
+            input in case New mill is not installed at sugar plant.
+        -   -->
+            <div class="row">
+                <div class="col-lg-6 grid-margin stretch-card" id="DivNewMill">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                New Mill Bagasses
+                            </h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.nm_bagasse_pol)
+                                @Html.EditorFor(x => x.nm_bagasse_pol, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.nm_bagasse_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.nm_bagasse_moisture)
+                                @Html.EditorFor(x => x.nm_bagasse_moisture, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.nm_bagasse_moisture, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--
+            Id of the div is DivNewMill using which we can show or hide this portion of
+            input in case New mill is not installed at sugar plant.
+            -->
+                <div class="col-lg-6 grid-margin stretch-card DivOldMill">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Old Mill Bagasse</h4>
+                            <div class="row">
+                                @Html.LabelFor(x => x.om_bagasse_pol)
+                                @Html.EditorFor(x => x.om_bagasse_pol, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.om_bagasse_pol, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(x => x.om_bagasse_moisture)
+                                @Html.EditorFor(x => x.om_bagasse_moisture, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(x => x.om_bagasse_moisture, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </ Mill Bagasse>-->
+            <!-- <OLiver Filtered-Mud>-->
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title d-flex">
+                                Pol % Press Cake
+                            </h4>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_sample1)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_sample1, new { htmlAttributes = new { @class = "form-control PressCakeSample" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_sample1, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_sample2)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_sample2, new { htmlAttributes = new { @class = "form-control PressCakeSample" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_sample2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_sample3)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_sample3, new { htmlAttributes = new { @class = "form-control PressCakeSample" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_sample3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_sample4)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_sample4, new { htmlAttributes = new { @class = "form-control PressCakeSample" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_sample4, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_sample5)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_sample5, new { htmlAttributes = new { @class = "form-control PressCakeSample" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_sample5, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_sample6)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_sample6, new { htmlAttributes = new { @class = "form-control PressCakeSample" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_sample6, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_average)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_average, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_average, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_moisture)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_moisture, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_moisture, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(x => x.pol_pressure_cake_composite)
+                                    @Html.EditorFor(x => x.pol_pressure_cake_composite, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(x => x.pol_pressure_cake_composite, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="btnSubmit" type="submit" class="btn btn-sm btn-success">Save</button>
+            <!-- </OLiver Filtered-Mud>-->
+        }
+    </div>
+    <script src="~/Scripts/SugarAnalysisJs/TwoHourlyAnalysis.js"></script>
+    @if(ViewBag.OldMillCapacity <= 0)
+    {
+        <script>
+            $(".DivOldMill").hide();
+        </script>
+    }

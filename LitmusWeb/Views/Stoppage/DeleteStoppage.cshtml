@@ -1,0 +1,72 @@
+﻿@model LitmusWeb.Models.StoppageUpdateModel
+@{
+    ViewBag.Title = "DeleteStoppage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <span class="badge badge-info">Details of -<strong>Stoppage</strong> </span>
+                            </h4>
+                            <hr />
+                            <span>@Html.ActionLink("Back to List", "Index", new { }, new { @class = " badge badge-pill badge-success mdi mdi-step-backward-2 float-left" })</span>
+                            <div class="table-responsive pt-3">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.id)</td>
+                                        <td>@Html.DisplayFor(s => s.id)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.unit_code)</td>
+                                        <td>@Html.DisplayFor(s => s.unit_code)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.season_code)</td>
+                                        <td>@Html.DisplayFor(s => s.season_code)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_head_name)</td>
+                                        <td>@Html.DisplayFor(s => s.s_head_name)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_sub_head_name)</td>
+                                        <td>@Html.DisplayFor(s => s.s_sub_head_name)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_start_time)</td>
+                                        <td>@Html.DisplayFor(s => s.s_start_time)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_end_time)</td>
+                                        <td>@Html.DisplayFor(s => s.s_end_time)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_duration)</td>
+                                        <td>@Html.DisplayFor(s => s.s_duration)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_comment)</td>
+                                        <td>@Html.DisplayFor(s => s.s_comment)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(s => s.s_crtd_by)</td>
+                                        <td>@Html.DisplayFor(s => s.s_crtd_by)</td>
+                                    </tr>
+                                </table>
+                            </div>
+                                @using (Html.BeginForm("DeleteStoppage", "Stoppage", FormMethod.Post))
+                                {
+                                    <div class="form-check-danger">
+                                        <button type="submit" class="btn btn-danger btn-rounded">Delete</button>
+                                    </div>
+
+                                }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

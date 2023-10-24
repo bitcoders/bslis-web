@@ -1,0 +1,86 @@
+/*----------  Font Variables  ----------*/
+
+$font-primary				: 'Open Sans', sans-serif;
+$font-secondary				: 'Montserrat', serif;
+// $sub-font-01				: sans-serif;
+// $sub-font-02				: sans-serif;
+
+/*----------  Icon Fonts  ----------*/
+$font-fontawesome			: 'FontAwesome';
+
+/*----------  Color Variables  ----------*/
+
+/*----------  Bootstrap's Defaults Overiding  ----------*/
+
+// Use $brand-primary for 	=> #1e88e5;
+// Use $brand-info for 		=> #29b6f6;
+// Use $brand-success for 	=> #4caf50;
+// Use $brand-warning for 	=> #ffc107;
+// Use $brand-danger for 	=> #f44336;
+
+/*-----  Default Variables  -----*/
+
+$white-color				: #fff !default;
+$black-color				: #000 !default;
+
+/*-----  Unsorted Variables  -----*/
+
+$color-01					: #263238;
+// $color-02					: #;
+
+/*-----  Brands Variables  -----*/
+
+/* Brand Primary */
+// $brand-primary-01			: #;
+// $brand-primary-02			: #;
+
+/* Brand Info */
+$brand-info-01				: #e1f5fe;
+$brand-info-02				: #4fc3f7;
+
+/* Brand Warning */
+// $brand-warning-01			: #;
+// $brand-warning-02			: #;
+
+/* Brand Success */
+$brand-success-01			: #e0f2f1;
+$brand-success-02			: #4db6ac;
+$brand-success-03			: #80CBC4;
+
+/* Brand Danger */
+// $brand-danger-01				: #;
+// $brand-danger-02				: #;
+
+/* Brand Gray */
+$brand-gray-dark			: $gray-dark;
+$brand-gray					: $gray;
+$brand-gray-light			: $gray-light;
+$brand-gray-lighter			: $gray-lighter;
+$brand-gray-lightest		: $gray-lightest;
+// $brand-gray-01				: #;
+// $brand-gray-02				: #;
+
+/*----------  Font Weight Variables  ----------*/
+
+$weight-hairline 			: 100;
+$weight-light	 			: 300;
+$weight-regular 			: 400;
+$weight-medium				: 500;
+$weight-semibold 			: 600;
+$weight-bold	 			: 700;
+$weight-extrabold	 		: 900;
+
+/*----------  Font Size Variables  ----------*/
+
+$font-base					: rem-calc(16);					// 16px
+$font-xs					: $font-base - rem-calc(4);		// 12px
+$font-sm					: $font-base - rem-calc(2);		// 14px
+$font-md					: $font-base + rem-calc(2);		// 18px
+$font-lg					: $font-base + rem-calc(4);		// 20px
+$font-xl					: $font-base + rem-calc(24);	// 40px
+$font-xxl					: $font-base + rem-calc(44);	// 60px
+
+/*----------  Misc Variables  ----------*/
+
+$base-border-radius			: 2px;
+$screen-xxs-max				: em-calc(420);

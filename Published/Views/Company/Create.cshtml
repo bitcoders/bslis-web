@@ -1,0 +1,95 @@
+﻿@using System.Web.Optimization;
+@model LitmusWeb.Models.MasterCompanyModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <p class="card-description">
+                            <span class="mdi mdi-database-plus menu-icon badge badge-info badge-pill">New Company Details</span>
+                            @Html.ActionLink("Back to List", "Index",new { },new { @class = " badge badge-pill badge-success mdi mdi-step-backward-2 float-right" })
+                        </p>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="forms-sample">
+                                <div class="form-group">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", placeholder = "Code" } })
+                                        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control ", placeholder = "Name" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control", placeholder = "Icon Path" } })
+                                            @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.RegisteredAddress, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+                                            @Html.ValidationMessageFor(model => model.RegisteredAddress, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.PANNO, new { htmlAttributes = new { @class = "form-control", placeholder = "PAN No." } })
+                                            @Html.ValidationMessageFor(model => model.PANNO, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.TANNO, new { htmlAttributes = new { @class = "form-control", placeholder = "TAN No." } })
+                                            @Html.ValidationMessageFor(model => model.TANNO, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control", placeholder = "Is Active" } })
+                                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control", placeholder = "Created Date", name = "finish", id = "finish" } })
+                                            @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control", placeholder = "Created By" } })
+                                            @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" value="Create" class="btn btn-success btn-rounded" />
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

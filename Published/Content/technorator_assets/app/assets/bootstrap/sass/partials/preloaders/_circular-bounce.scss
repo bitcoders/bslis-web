@@ -1,0 +1,60 @@
+/*----------  Circular Preloader  ----------*/
+
+/**
+ * Copy and paste below line into your html and call the mixin in body.
+ *
+ * <div class="preloader-wrapper" id="cnt_preloader"><div class="circle-preloader" id="preloader"><div class="circle-preloader-inner"><div class="preloader-lvl-1"></div><div class="preloader-lvl-2"></div></div></div></div>
+ *
+ * @include circular-preloader();
+ *
+ * Arguments:
+ * 	-> $background: Define background of preloader.
+ * 	-> $preloader_color: Define color of preloader.
+ * 	-> $opacity: Define opacity of preloader between 0.1 to 0.9.
+ */
+
+@mixin circular-preloader($background: $gray-lighter, $preloader_color: $gray, $opacity: 0.5)
+{
+	.circle-preloader
+	{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 110%;
+		height: 110%;
+		z-index: 1000000;
+		background: $background;
+
+		@include transform(translate(-50%, -50%));
+
+		.circle-preloader-inner
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 50px;
+			height: 50px;
+
+			@include transform(translate(-50%, -50%));
+		}
+
+		.preloader-lvl-1, .preloader-lvl-2
+		{
+			width: 100%;
+			height: 100%;
+			background-color: $preloader_color;
+			opacity: $opacity;
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			@include border-radius(99999px);
+			@include animation(circular-bounce 2.0s infinite ease-in-out);
+		}
+
+		.preloader-lvl-2
+		{
+			@include animation-delay(-1.0s);
+		}
+	}
+}

@@ -1,0 +1,109 @@
+﻿@model LitmusWeb.Models.DailyAnalysisModel
+
+<div class="tab-pane fade show" id="Tab9" role="tabpanel" aria-labelledby="Tab-9">
+    <div class="col-md-12 grid-margin stretch-card ">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row">
+                    <p class="card-description">Distillery</p><hr />
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.PowerToDitillery, new { htmlAttributes = new { @class = "form-control", @placeholder = "Power To  Distillery" } })
+                                    @Html.LabelFor(model => model.PowerToDitillery)
+                                    @Html.ValidationMessageFor(model => model.PowerToDitillery, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.RectifiedSpirit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rectified Spirit" } })
+                                    @Html.LabelFor(model => model.RectifiedSpirit)
+                                    @Html.ValidationMessageFor(model => model.RectifiedSpirit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.AbsoluteAlcohol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Absolute Alcohol" } })
+                                    @Html.LabelFor(model => model.AbsoluteAlcohol)
+                                    @Html.ValidationMessageFor(model => model.AbsoluteAlcohol, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.Ethanol, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ethanol" } })
+                                    @Html.LabelFor(model => model.Ethanol)
+                                    @Html.ValidationMessageFor(model => model.Ethanol, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.RectifiedSpiritDayRecover, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.RectifiedSpiritDayRecover)
+                                    @Html.ValidationMessageFor(model => model.RectifiedSpiritDayRecover, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.RectifiedSpiritToDateRecovery, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.RectifiedSpiritToDateRecovery)
+                                    @Html.ValidationMessageFor(model => model.RectifiedSpiritToDateRecovery, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.AbsoluteAlcoholDayRecovery, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.AbsoluteAlcoholDayRecovery)
+                                    @Html.ValidationMessageFor(model => model.AbsoluteAlcoholDayRecovery, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.AbsoluteAlcoholToDateRecovery, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.AbsoluteAlcoholToDateRecovery)
+                                    @Html.ValidationMessageFor(model => model.AbsoluteAlcoholToDateRecovery, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.EthanolDayRecovery, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.EthanolDayRecovery)
+                                    @Html.ValidationMessageFor(model => model.EthanolDayRecovery, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.EthanolToDateRecovery, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.EthanolToDateRecovery)
+                                    @Html.ValidationMessageFor(model => model.EthanolToDateRecovery, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.AlcoholFromCaneSyrup, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.AlcoholFromCaneSyrup)
+                                    @Html.ValidationMessageFor(model => model.AlcoholFromCaneSyrup, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

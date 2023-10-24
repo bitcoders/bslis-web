@@ -1,0 +1,72 @@
+/*----------  Body  ----------*/
+
+body
+{
+	@include font-p($font-sm, $weight-regular, $font-md, $black-color);
+}
+
+/*----------  UI Elements  ----------*/
+
+a, .btn
+{
+	@include transition;
+
+	&:hover, &:active, &:focus
+	{
+		text-decoration: none;
+	}
+}
+
+/*----------  Form Elements  ----------*/
+
+label
+{
+	display: block;
+	cursor: pointer;
+
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+
+	&.error
+	{
+		margin: 0;
+		font-weight: $weight-regular;
+	}
+}
+
+.form-control
+{
+	border-color: $brand-gray-01;
+
+	@include border-radius(0);
+	@include box-shadow(none);
+
+	&.error
+	{
+		border-color: $brand-danger !important;
+
+		@include placeholder($brand-danger !important);
+	}
+
+	&:focus
+	{
+		@include placeholder(transparent !important);
+	}
+}
+
+textarea.form-control
+{
+	min-height: 200px;
+}
+
+/*----------  Admin Defaults Reset  ----------*/
+
+@media(min-width: $screen-xs-min)
+{
+	.sidebar-mini.sidebar-collapse .sidebar-menu>li:hover>.treeview-menu
+	{
+		top: 100%;
+	}
+}

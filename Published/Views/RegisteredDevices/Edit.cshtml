@@ -1,0 +1,150 @@
+﻿@model LitmusWeb.Models.RegisteredDevicesUpdateModel
+@{
+    ViewBag.Title = "Edit Mobile App User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-description">
+                                <span class="mdi mdi-database-edit menu-icon badge badge-info badge-pill">Edit Exiting App User/Device</span>
+                                @Html.ActionLink("Back to List", "Index", new { }, new { @class = " badge badge-pill badge-success mdi mdi-step-backward-2 float-right" })
+                            </p>
+                            @using (Html.BeginForm("Edit", "RegisteredDevices", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.Code, new { htmlAttributes = new { @class = "form-control", placeholder = "Code", @readonly = "true" } })
+                                            @Html.LabelFor(x => x.Code)
+                                            @Html.ValidationMessageFor(x => x.Code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @*@Html.EditorFor(x => x.Gender, new { htmlAttributes = new { @class = "form-control", placeholder = "Initials" } }) *@
+
+                                            @Html.DropDownList("Gender", new SelectList(ViewBag.NameInitials), "Select Initials", new { @class = "form-control", title = " Name Initials" })
+                                            @*@Html.LabelFor(x => x.Gender)*@
+                                            @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                                            @Html.LabelFor(x => x.FirstName)
+                                            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                                            @Html.LabelFor(x => x.LastName)
+                                            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.UnitRights, new { htmlAttributes = new { @class = "form-control", placeholder = "Unit Rights" } })
+                                            @Html.LabelFor(x => x.UnitRights)
+                                            @Html.ValidationMessageFor(x => x.UnitRights, "", new { @class = "text-danger" })
+                                            <small id="unitHelp" class="form-text text-muted">Comma saperated unit codes, e.g. 1,2,3,4</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.MenuRights, new { htmlAttributes = new { @class = "form-control", placeholder = "Menu Rights" } })
+                                            @Html.LabelFor(x => x.MenuRights)
+                                            @Html.ValidationMessageFor(x => x.MenuRights, "", new { @class = "text-danger" })
+                                            <small id="menuRightHelp" class="form-text text-muted">Comma saperated menue codes, e.g. 1,2,3,4,5,6,7,8,9</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.DeviceTypeCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Device Type" } })
+                                            @Html.LabelFor(x => x.DeviceTypeCode)
+                                            @Html.ValidationMessageFor(x => x.DeviceTypeCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group checkbox">
+                                            @Html.EditorFor(x => x.IsActive, new { htmlAttributes = new { @class = "form-control", placeholder = "Is Active" } })
+                                            @Html.LabelFor(x => x.IsActive)
+                                            @Html.ValidationMessageFor(x => x.IsActive, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            <input class="form-control datetimepicker" data-val="true" data-val-date="The field Valid From must be a date." data-val-required="The Valid From field is required." id="ValidFrom" name="ValidFrom" placeholder="Valid From" type="text" value="@Model.ValidFrom" />
+                                            <label for="ValidFrom">Valid From</label>
+                                            @Html.ValidationMessageFor(x => x.ValidFrom, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @*@Html.EditorFor(x => x.ValidTill, new { htmlAttributes = new { @class = "form-control datetimepicker", placeholder = "Valid Till" } })
+                                        @Html.LabelFor(x => x.ValidTill)*@
+
+                                            <input class="form-control datetimepicker" data-val="true" data-val-date="The field Valid Till must be a date." data-val-required="The Valid Till field is required." id="ValidTill" name="ValidTill" placeholder="Valid Till" type="text" value="@Model.ValidTill"/>
+                                            <label for="ValidTill">Valid Till</label>
+                                            @Html.ValidationMessageFor(x => x.ValidTill, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Valid From" } })
+                                            @Html.LabelFor(x => x.Email)
+                                            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label-group">
+                                            @Html.DropDownList("DepartmentCode", new SelectList(ViewBag.DepartmentList, "Code", "Name"), "Select Department", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="form-label-group">
+                                            @Html.EditorFor(x => x.ImageUrl, new { htmlAttributes = new { @class = "form-control", placeholder = "Image Url" } })
+                                            @Html.LabelFor(x => x.ImageUrl)
+                                            @Html.ValidationMessageFor(x => x.ImageUrl, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <input type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-inverse-success" />
+                                    </div>
+                                    @Html.ValidationSummary("", new {@class = "text-danger" })
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+

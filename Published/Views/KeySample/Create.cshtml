@@ -1,0 +1,99 @@
+﻿@model LitmusWeb.Models.KeySampleAnalysisModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @Html.Partial("_PartialAnalysisDefaultValues")
+        </div>
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Key Sample Analysis
+                        @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right", @name = "Create" })
+                    </h4>
+                    @using (Html.BeginForm("Create", "KeySample", FormMethod.Post))
+                    {
+                        <p class="card-description text-primary">Analysis performed on Key Samples</p>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("FormMode","Create")
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.Hidden("unit_code", (Int16)ViewBag.BaseUnit)
+                                @Html.Hidden("season_code", (Int16)ViewBag.CrushingSeason)
+                                @Html.Hidden("entry_date", (string)ViewBag.EntryDate)
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        @*@Html.DropDownList("Select",new SelectList(ViewBag.MassecuteList,"Code","Name"),new { @class="form-control"})*@
+                                        <select id="sugar_stage" name="sugar_stage" class="form-control">
+                                            <option value="0">--Select--</option>
+                                            @foreach (var i in ViewBag.KeySampleList)
+                                            {
+                                                <option value="@i.Code" class="item-content">@i.Name</option>
+                                            }
+
+                                        </select>
+                                        @Html.ValidationMessageFor(@x => x.sugar_stage, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(@x => x.entry_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "Entry Time", @type = "Time" } })
+                                            @Html.LabelFor(@x => x.entry_time)
+                                            @Html.ValidationMessageFor(@x => x.entry_time, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(@x => x.pan_number, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pan Number" } })
+                                            @Html.LabelFor(@x => x.pan_number)
+                                            @Html.ValidationMessageFor(@x => x.pan_number, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(@x => x.brix, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Brix" } })
+                                            @Html.LabelFor(@x => x.brix)
+                                            @Html.ValidationMessageFor(@x => x.brix, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(@x => x.pol, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Pol" } })
+                                            @Html.LabelFor(@x => x.pol)
+                                            @Html.ValidationMessageFor(@x => x.pol, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class=" form-label-group col">
+                                            @Html.EditorFor(@x => x.purity, new { htmlAttributes = new { @class = "form-control JuiceInput", @placeholder = "Purity", @readonly = "true" } })
+                                            @Html.LabelFor(@x => x.purity)
+                                            @Html.ValidationMessageFor(@x => x.purity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+    <script src="~/Scripts/SugarAnalysisJs/KeySampleAnalysis-1.1.js"></script>
+
+
+
+
+

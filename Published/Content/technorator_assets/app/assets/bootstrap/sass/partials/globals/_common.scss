@@ -1,0 +1,1461 @@
+/*----------  Body  ----------*/
+
+body
+{
+	position: relative;
+	z-index: 1;
+
+	@include rotate-plane($brand-info-01, $brand-info-02);
+	@include font-p($font-base, $weight-regular, $font-lg + rem-calc(2), $black-color);
+}
+
+/*----------  Containers  ----------*/
+
+.container
+{
+	@include extend-container(1160px, 40px);
+}
+
+/*----------  Grid Spacing  ----------*/
+
+$row_spaces: 10, 20, 30;
+
+%row, .row
+{
+	@include row-spacing(40);
+
+	@each $space in $row_spaces
+	{
+		&.row-#{$space}
+		{
+			@include row-spacing($space);
+		}
+
+		&.row-md-#{$space}
+		{
+			@include media-breakpoint-down(md)
+			{
+				@include row-spacing($space);
+			}
+		}
+
+		&.row-sm-#{$space}
+		{
+			@include media-breakpoint-down(sm)
+			{
+				@include row-spacing($space);
+			}
+		}
+	}
+
+	&.row-650
+	{
+		@media (max-width: 650px)
+		{
+			@include row-spacing(0);
+
+			> .col, .column, .columns
+			{
+				display: block;
+				width: 100%;
+				float: none;
+				clear: both;
+			}
+		}
+	}
+
+	&.row-nopad
+	{
+		@include row-spacing(0);
+	}
+
+	&.row-sm-nopad
+	{
+		@include media-breakpoint-down(sm)
+		{
+			@include row-spacing(0);
+		}
+	}
+
+	&.row-md
+	{
+		@include media-breakpoint-down(md)
+		{
+			@include row-spacing(0);
+
+			> .col, .column, .columns
+			{
+				display: block;
+				width: 100%;
+				float: none;
+				clear: both;
+			}
+		}
+	}
+
+	&.row-xs
+	{
+		@include media-breakpoint-down(xs)
+		{
+			@include row-spacing(0);
+
+			> .col, .column, .columns
+			{
+				display: block;
+				width: 100%;
+				float: none;
+				clear: both;
+			}
+		}
+	}
+
+	&.row-xxs
+	{
+		@media (max-width: $screen-xxs-max)
+		{
+			@include row-spacing(0);
+
+			> .col, .column, .columns
+			{
+				display: block;
+				width: 100%;
+				float: none;
+				clear: both;
+			}
+		}
+	}
+}
+
+/*----------  Typography  ----------*/
+
+h1, %heading_h1, .heading-h1
+{
+	@include heading-h1;
+}
+
+h2, %heading_h2, .heading-h2
+{
+	@include heading-h2;
+}
+
+h3, %heading_h3, .heading-h3
+{
+	@include heading-h3;
+}
+
+h4, %heading_h4, .heading-h4
+{
+	@include heading-h4;
+}
+
+h5, %heading_h5, .heading-h5
+{
+	@include heading-h5;
+}
+
+h6, %heading_h6, .heading-h6
+{
+	@include heading-h6;
+}
+
+a, .link
+{
+	@include link;
+}
+
+.reset-position
+{
+	@include reset-position(true);
+}
+
+/*----------  Contextual Classes (Helpers)  ----------*/
+
+$contextual_themes:
+(
+	('default', $brand-gray-dark),
+	('primary', $brand-primary),
+	('danger', $brand-danger),
+	('success', $brand-success),
+	('warning', $brand-warning),
+	('info', $brand-info),
+);
+
+@each $class, $brand in $contextual_themes
+{
+	%text_#{$class}, .text-#{$class}
+	{
+		@include text-color($brand);
+	}
+
+	%link_#{$class}, .link-#{$class}
+	{
+		font-weight: $weight-bold !important;
+
+		@include text-color($brand, true);
+	}
+
+	%bg_#{$class}, .bg-#{$class}
+	{
+		@include force-bgcolor($brand);
+	}
+}
+
+.text-light
+{
+	font-weight: $weight-light !important;
+}
+
+.text-regular
+{
+	font-weight: $weight-regular !important;
+}
+
+.text-bold
+{
+	font-weight: $weight-bold !important;
+}
+
+.text-italic
+{
+	font-style: italic !important;
+}
+
+.text-normal
+{
+	font-style: normal !important;
+}
+
+/*----------  Margins and Paddings  ----------*/
+
+@for $i from 1 through 6
+{
+	$space: $i * 5;
+	$unit: 'px';
+	
+	// Margin
+
+	.m-t-#{$space}
+	{
+		margin-top: #{$space + $unit};
+	}
+
+	.m-b-#{$space}
+	{
+		margin-bottom: #{$space + $unit};
+	}
+
+	.m-l-#{$space}
+	{
+		margin-left: #{$space + $unit};
+	}
+
+	.m-r-#{$space}
+	{
+		margin-right: #{$space + $unit};
+	}
+
+	.m-v-#{$space}
+	{
+		margin: #{$space + $unit} 0;
+	}
+
+	.m-h-#{$space}
+	{
+		margin: 0 #{$space + $unit};
+	}
+
+	// Padding
+
+	.p-l-#{$space}
+	{
+		padding-left: #{$space + $unit};
+	}
+
+	.p-t-#{$space}
+	{
+		padding-top: #{$space + $unit};
+	}
+
+	.p-b-#{$space}
+	{
+		padding-bottom: #{$space + $unit};
+	}
+
+	.p-r-#{$space}
+	{
+		padding-right: #{$space + $unit};
+	}
+
+	.p-v-#{$space}
+	{
+		padding: #{$space + $unit} 0;
+	}
+
+	.p-h-#{$space}
+	{
+		padding: 0 #{$space + $unit};
+	}
+}
+
+.no-margin
+{
+	margin: 0 !important;
+}
+
+.no-padding
+{
+	padding: 0 !important;
+}
+
+/*----------  Buttons  ----------*/
+
+.btn
+{
+	position: relative;
+	z-index: 5;
+	border: 0;
+	padding: 11px 15px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+
+	@include default-scalehover;
+	@include border-radius($base-border-radius);
+	@include font-16($white-color, $weight-bold, 1.1, $font-primary);
+
+	&.btn-float
+	{
+		.btn-inner
+		{
+			display: inline-block;
+			margin-bottom: -3px;
+			
+			@include clearfix;
+			@include common-prefixed-class(btn)
+			{
+				display: block;
+				float: left;
+			}
+		}
+
+		.btn-icon
+		{
+			&:first-child
+			{
+				margin-right: 7px;
+			}
+
+			&:last-child
+			{
+				margin-left: 7px;
+			}
+		}
+	}
+
+	$button_themes:
+	(
+		('primary', $brand-primary),
+		('info', $brand-info),
+		('success', $brand-success),
+		('warning', $brand-warning),
+		('danger', $brand-danger),
+	);
+
+	@each $class, $brand in $button_themes
+	{
+		&.btn-#{$class}
+		{
+			@include button-theme($white-color, $brand, transparent);
+
+			&:hover, &:active, &:focus
+			{
+				@include button-theme($white-color, $brand, transparent);
+			}
+		}
+	}
+
+	&.btn-sm
+	{
+		padding: 8px 10px;
+		padding-bottom: 9px;
+		font-size: $font-xs;
+		font-weight: $weight-regular;
+	}
+
+	&:hover, &:active, &:focus
+	{
+		@include button-theme($white-color, $brand-primary, transparent);
+	}
+}
+
+/*----------  Form Elements  ----------*/
+
+.global-form
+{
+	label
+	{
+		display: block;
+		margin: 0;
+		cursor: pointer;
+		padding-bottom: 5px;
+		text-transform: uppercase;
+
+		@include font-14($color-01, $weight-bold);
+	}
+
+	.form-control, select.form-control
+	{
+		padding: 0 15px;
+		height: 40px !important;
+		background-color: $white-color;
+		border: 1px solid $brand-gray-lighter;
+
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		@include transition;
+		@include border-radius($base-border-radius !important);
+		@include font-14($color-01, $weight-regular, 1.5);
+		@include input-placeholder
+		{
+			color: $color-01;
+
+			@include opacity(1);
+			@include transition;
+		}
+
+		&:focus
+		{
+			border-color: $brand-gray;
+
+			@include input-placeholder
+			{
+				color: $brand-gray;
+			}
+		}
+	}
+
+	.form-control[readonly]
+	{
+		cursor: pointer;
+		background-color: $white-color;
+	}
+
+	select.form-control
+	{
+		cursor: pointer;
+		padding: 0 10px;
+
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+
+		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMTJweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIzcHgiIHZpZXdCb3g9IjAgMCA2IDMiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+);
+		background-position: 100% center;
+		background-repeat: no-repeat;
+	}
+
+	textarea.form-control
+	{
+		padding: 12px 15px;
+		height: 200px !important;
+	}
+
+	.form-group
+	{
+		margin-bottom: 15px;
+	}
+
+	.input-group
+	{
+		position: relative;
+		z-index: 5;
+		padding-left: 30px;
+
+		.form-control, select.form-control
+		{
+			display: block !important;
+			border-top-left-radius: 0 !important;
+			border-bottom-left-radius: 0 !important;
+		}
+
+		.group-addon
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 11;
+			width: 30px;
+			height: 100%;
+			background-color: $white-color;
+			
+			border: 1px solid $brand-gray-lighter;
+			border-right: 0;
+
+			@include transition;
+			@include font-14($color-01);
+
+			.fa
+			{
+				@include absolute-center;
+			}
+		}
+
+		.form-control:focus + .group-addon
+		{
+			color: $color-01;
+			border-color: $brand-gray;
+		}
+	}
+
+	.form-checkbox-label
+	{
+		display: inline-block;
+		position: relative;
+		z-index: 5;
+		margin: 0;
+		padding: 0;
+		margin-bottom: -3px;
+		text-transform: none;
+
+		@include link;
+		@include user-select(none);
+		@include font-14($brand-gray-dark);
+
+		> input
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -111;
+
+			@include opacity(0);
+		}
+
+		.btn-text
+		{
+			display: block;
+			position: relative;
+			z-index: 5;
+			padding-left: 20px;
+
+			&:before
+			{
+				content: "\f096";
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 5;
+
+				@include font-18($brand-gray-dark, $weight-regular, 1, $font-fontawesome);
+			}
+		}
+
+		input:checked + .btn-text
+		{
+			&:before
+			{
+				content: "\f046";
+			}
+		}
+	}
+
+	.btn-submit
+	{
+		position: relative;
+		z-index: 5;
+
+		.btn-inner
+		{
+			
+		}
+
+		.btn-wrapper
+		{
+			@include max-width(320px);
+		}
+
+		.btn
+		{
+			height: 40px;
+			padding: 0 10px;
+		}
+	}
+}
+
+/*----------  Search  ----------*/
+
+.search-container
+{
+	.search-wrapper
+	{
+		@include max-width(600px);
+
+		@include media-breakpoint-down(sm)
+		{
+			max-width: 100%;
+		}
+	}
+
+	.form-title
+	{
+		margin-bottom: 20px;
+
+		h3
+		{
+			@include font-16($brand-info);
+		}
+	}
+
+	.locations-container
+	{
+		position: relative;
+		z-index: 11;
+
+		.locations-inner
+		{
+			position: relative;
+			z-index: 5;
+		}
+
+		.locations-group
+		{
+			@include clearfix;
+		}
+
+		.form-group
+		{
+			.input-group
+			{
+				.form-control
+				{
+					padding-right: 35px;
+				}
+			}
+
+			.btn-clear
+			{
+				display: none;
+				position: absolute;
+				top: 0;
+				right: 0;
+				z-index: 5;
+				width: 30px;
+				height: 100%;
+
+				@include link;
+				@include font-12($brand-gray);
+
+				.fa
+				{
+					@include absolute-center;
+				}
+
+				&:hover, &:active, &:focus
+				{
+					color: $brand-gray-dark;
+				}
+			}
+		}
+
+		.dropoff-group
+		{
+			display: none;
+		}
+
+		&.dropoff-active
+		{
+			.dropoff-group
+			{
+				display: block;
+			}
+		}
+	}
+
+	.location-toggler
+	{
+		@include media-breakpoint-down(md)
+		{
+			
+		}
+	}
+}
+
+/*----------  Car Listing Block  ----------*/
+
+.car-listing-block
+{
+	.block-inner
+	{
+		position: relative;
+		z-index: 5;
+		padding: 20px;
+		background: $brand-gray-lightest;
+	}
+
+	h3
+	{
+		letter-spacing: -0.5px;
+
+		@include heading-h4($lh: 0.8);
+
+		small
+		{
+			font-size: $font-lg;
+
+			@include media-breakpoint-down(md)
+			{
+				font-size: $font-base;
+			}
+
+			@include media-breakpoint-down(xs)
+			{
+				font-size: $font-sm;
+			}
+		}
+
+		@include media-breakpoint-down(md)
+		{
+			font-size: $font-lg + rem-calc(4);
+		}
+
+		@include media-breakpoint-down(xs)
+		{
+			font-size: $font-lg;
+		}
+	}
+
+	h4
+	{
+		@include font-18($color-01, $weight-semibold);
+
+		@include media-breakpoint-down(md)
+		{
+			font-size: $font-base;
+		}
+	}
+
+	.block-media
+	{
+		
+	}
+
+	.block-logo
+	{
+		margin-bottom: 5px;
+	}
+
+	.block-image
+	{
+	}
+
+	.block-title-meta
+	{
+		
+	}
+
+	.block-meta
+	{
+		ul
+		{
+			margin-bottom: -10px;
+
+			li
+			{
+				margin-right: 10px;
+
+				@include clearfix;
+				@include font-18($brand-gray);
+				@include common-prefixed-class(meta)
+				{
+					float: left;
+				}
+
+				span
+				{
+					display: block;
+				}
+
+				.meta-text
+				{
+					position: relative;
+					z-index: 5;
+					margin-bottom: 5px;
+					font-size: $font-sm;
+
+					&:before
+					{
+						content: 'x';
+						margin: 0 5px;
+
+						@include font-14($brand-gray);
+					}
+				}
+
+				&.meta-sm
+				{
+					font-size: rem-calc(15);
+				}
+
+				&:last-child
+				{
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	.block-content
+	{
+		.content-inner
+		{
+			position: relative;
+			z-index: 5;
+			height: 100%;
+
+			@include media-breakpoint-down(xs)
+			{
+				position: static;
+			}
+		}
+	}
+
+	.block-features-locations
+	{
+		
+	}
+
+	.block-features
+	{
+		.features-inner
+		{
+		}
+
+		ul
+		{
+			li
+			{
+				position: relative;
+				z-index: 5;
+				margin-bottom: 7px;
+				padding-left: 30px;
+
+				@include font-16($color-01, $weight-semibold);
+
+				&:before
+				{
+					content: "\f00c";
+					position: absolute;
+					top: 0;
+					left: 0;
+					z-index: 5;
+					
+					@include font-18($brand-primary, $weight-regular, 1, $font-fontawesome);
+				}
+
+				&:last-child
+				{
+					margin: 0;
+				}
+
+				@include media-breakpoint-down(md)
+				{
+					font-size: $font-sm;
+
+					&:before
+					{
+						font-size: $font-base;
+					}
+				}
+			}
+		}
+
+		.features-title
+		{
+			margin-bottom: 10px;
+		}
+	}
+
+	.block-locations
+	{
+		.block-location
+		{
+			margin-bottom: 15px;
+
+			p, .fa
+			{
+				@include font-18;
+
+				@include media-breakpoint-down(md)
+				{
+					font-size: $font-sm;
+				}
+			}
+
+			.location-title
+			{
+				margin-bottom: 5px;
+			}
+
+			.location-address
+			{
+				position: relative;
+				z-index: 5;
+				padding-left: 23px;
+
+				@include media-breakpoint-down(md)
+				{
+					padding-left: 15px;
+				}
+			}
+
+			.location-icon
+			{
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 5;
+
+				@include media-breakpoint-down(md)
+				{
+					top: -4px;
+				}
+			}
+
+			&:last-child
+			{
+				margin: 0;
+			}
+		}
+	}
+
+	.block-trip-metas
+	{
+		.block-trip-meta
+		{
+			margin-bottom: 15px;
+
+			p, .fa
+			{
+				@include font-18;
+
+				@include media-breakpoint-down(md)
+				{
+					font-size: $font-sm;
+				}
+			}
+
+			.trip-title
+			{
+				margin-bottom: 5px;
+			}
+
+			.trip-meta
+			{
+				position: relative;
+				z-index: 5;
+				padding-left: 23px;
+				margin-bottom: 7px;
+
+				@include media-breakpoint-down(md)
+				{
+					padding-left: 18px;
+				}
+			}
+
+			.trip-meta-icon
+			{
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 5;
+
+				@include media-breakpoint-down(md)
+				{
+					top: -4px;
+				}
+			}
+
+			&:last-child
+			{
+				margin: 0;
+			}
+		}
+	}
+
+	// Layouts
+
+	&.block-vertical
+	{
+		.block-media
+		{
+			margin-bottom: 10px;
+		}
+	}
+
+	&.block-horizontal
+	{
+		.block-inner
+		{
+			@include media-breakpoint-down(sm)
+			{
+				padding: 13px 20px;
+			}
+		}
+
+		.block-media
+		{
+			
+		}
+
+		.block-logo
+		{
+			img
+			{
+				height: 25px;
+
+				@include media-breakpoint-down(sm)
+				{
+					height: 20px;
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					height: 15px;
+				}
+			}
+		}
+
+		.block-image
+		{
+			img
+			{
+				@include media-breakpoint-down(sm)
+				{
+					max-height: 120px;
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					max-height: 105px;
+				}
+			}
+		}
+
+		.block-title-meta
+		{
+			margin-bottom: 20px;
+
+			.title-meta-inner
+			{
+				position: relative;
+				z-index: 5;
+				padding-right: 170px;
+
+				@include media-breakpoint-down(xs)
+				{
+					padding-right: 110px;
+				}
+
+				@media (max-width: $screen-xxs-max)
+				{
+					padding: 0;
+				}
+			}
+
+			.block-title
+			{
+				@include media-breakpoint-down(xs)
+				{
+					margin-bottom: 10px;
+				}
+			}
+
+			.block-meta
+			{
+				position: absolute;
+				top: 50%;
+				right: 0;
+				z-index: 5;
+
+				@include transform(translateY(-50%));
+
+				ul
+				{
+					li
+					{
+						.meta-text
+						{
+							@include media-breakpoint-down(xs)
+							{
+								font-size: $font-xs;
+
+								&:before
+								{
+									font-size: $font-xs;
+								}
+							}
+						}
+
+						&.meta-sm
+						{
+							@include media-breakpoint-down(xs)
+							{
+								font-size: $font-xs;
+							}
+						}
+
+						@include media-breakpoint-down(xs)
+						{
+							font-size: $font-sm;
+						}
+					}
+				}
+
+				@media (max-width: $screen-xxs-max)
+				{
+					@include reset-position;
+				}
+			}
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-bottom: 10px;
+			}
+		}
+
+		.block-features-locations
+		{
+			.features-locations-inner
+			{
+				@include media-breakpoint-down(sm)
+				{
+					padding-right: 200px;
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					padding-right: 0;
+				}
+			}
+
+			@include media-breakpoint-down(xs)
+			{
+				margin-bottom: 20px;
+			}
+		}
+
+		.block-features
+		{
+			.features-inner
+			{
+			}
+
+			ul
+			{
+				li
+				{
+					@include media-breakpoint-down(md)
+					{
+						padding-left: 20px;
+						font-size: $font-xs;
+
+						&:before
+						{
+							font-size: $font-sm;
+						}
+					}
+				}
+			}
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-bottom: 15px;
+			}
+		}
+
+		.block-locations
+		{
+			p, .fa
+			{
+				@include font-18;
+
+				@include media-breakpoint-down(md)
+				{
+					font-size: $font-xs;
+				}
+
+				@include media-breakpoint-down(sm)
+				{
+					font-size: rem-calc(10);
+				}
+			}
+
+			.block-location
+			{
+				margin-bottom: 15px;
+
+				.location-title
+				{
+					margin-bottom: 5px;
+				}
+
+				.location-address
+				{
+					position: relative;
+					z-index: 5;
+					padding-left: 23px;
+
+					@include media-breakpoint-down(md)
+					{
+						padding-left: 15px;
+					}
+				}
+
+				.location-icon
+				{
+					position: absolute;
+					top: 0;
+					left: 0;
+					z-index: 5;
+
+					@include media-breakpoint-down(md)
+					{
+						top: -4px;
+					}
+				}
+
+				&:last-child
+				{
+					margin: 0;
+				}
+
+				@include media-breakpoint-down(sm)
+				{
+					margin-bottom: 7px;
+				}
+			}
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-top: 10px;
+			}
+		}
+
+		.block-booking-meta
+		{
+			background: $white-color;
+
+			.btn
+			{
+				padding: 8px 10px;
+				font-size: $font-sm;
+
+				@include media-breakpoint-down(sm)
+				{
+					font-size: $font-xs;
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					font-size: rem-calc(10);
+				}
+			}
+
+			.booking-meta-inner
+			{
+				padding: 15px;
+			}
+
+			.booking-discount
+			{
+				margin-bottom: 7px;
+				padding-bottom: 6px;
+				border-bottom: 1px solid $brand-gray-lighter;
+
+				@include clearfix;
+
+				p, .fa
+				{
+					display: inline-block;
+					
+					@include font-14($brand-info);
+				}
+
+				p
+				{
+					font-weight: $weight-semibold;
+				}
+
+				.discount-text
+				{
+					position: relative;
+					z-index: 5;
+					float: left;
+
+					.fa
+					{
+						margin-right: -3px;
+					}
+
+					&.discount-amt
+					{
+						padding-left: 17px;
+
+						&:after
+						{
+							content: "\f068";
+							margin-top: 2px;
+
+							@include font-8($brand-info, $weight-regular, 1, $font-fontawesome);
+							@include absolute-center(y)
+							{
+								left: 5px;
+							}
+						}
+					}
+
+					@include media-breakpoint-down(md)
+					{
+						float: none;
+						clear: both;
+						padding-left: 17px;
+					}
+
+					@media (max-width: $screen-xxs-max)
+					{
+						float: left;
+						clear: none;
+						padding-left: 0;
+					}
+				}
+			}
+
+			.booking-rate
+			{
+				position: relative;
+				z-index: 5;
+				padding-left: 13px;
+				margin-bottom: 10px;
+
+				p
+				{
+					@include font-18($lh: 1);
+
+					span
+					{
+						font-size: $font-lg + rem-calc(10);
+						font-weight: $weight-bold;
+
+						@include media-breakpoint-down(md)
+						{
+							font-size: $font-lg + rem-calc(10);
+						}
+
+						@include media-breakpoint-down(xs)
+						{
+							font-size: $font-md;
+						}
+					}
+
+					@include media-breakpoint-down(xs)
+					{
+						font-size: $font-xs;
+					}
+				}
+
+				&:before
+				{
+					content: "\f155";
+					position: absolute;
+					top: 5px;
+					left: 0;
+					z-index: 5;
+
+					@include font-16($family: $font-fontawesome);
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					margin-bottom: 5px;
+
+					&:before
+					{
+						font-size: $font-xs;
+					}
+				}
+			}
+
+			.booking-total
+			{
+				position: relative;
+				z-index: 5;
+				padding-left: 10px;
+				margin-bottom: 15px;
+
+				p
+				{
+					text-transform: uppercase;
+					
+					@include font-14($brand-gray-dark, $weight-bold);
+
+					@include media-breakpoint-down(xs)
+					{
+						font-size: $font-xs;
+					}
+				}
+
+				&:before
+				{
+					content: "\f155";
+					position: absolute;
+					top: 2px;
+					left: 0;
+					z-index: 5;
+
+					@include font-12($brand-gray-dark, $family: $font-fontawesome);
+				}
+
+				@include media-breakpoint-down(md)
+				{
+					margin-bottom: 10px;
+				}
+
+				@include media-breakpoint-down(xs)
+				{
+					margin-bottom: 5px;
+
+					&:before
+					{
+						font-size: rem-calc(10);
+					}
+				}
+			}
+
+			/* @include media-breakpoint-down(sm)
+			{
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				z-index: 11;
+				width: 180px;
+			}
+			
+			@include media-breakpoint-down(xs)
+			{
+				right: 20px;
+				bottom: 15px;
+			} */
+
+			@include media-breakpoint-down(sm)
+			{
+				margin-top: 20px;
+			}
+
+			@media (max-width: $screen-xxs-max)
+			{
+				margin-top: 15px;
+			}
+		}
+	}
+}

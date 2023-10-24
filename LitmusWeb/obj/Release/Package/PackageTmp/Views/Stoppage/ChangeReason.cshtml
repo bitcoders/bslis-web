@@ -1,0 +1,140 @@
+﻿@model LitmusWeb.Models.StoppageUpdateModel
+@{
+    ViewBag.Title = "Edit Stoppage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @Html.Partial("_PartialAnalysisDefaultValues")
+        </div>
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Stoppages For the date.
+                        @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right", @name = "Create" })
+                    </h4>
+                    @using (Html.BeginForm("ChangeReason", "Stoppage", FormMethod.Post, new { id = "frmChangeReason" }))
+                    {
+                        <p class="card-description text-primary">Stoppages</p>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("unit_code", TempData["BaseUnitCode"])
+                        @Html.HiddenFor(model => model.s_date);
+                        @Html.HiddenFor(Model => Model.id);
+                        @Html.HiddenFor(Model => Model.s_start_calendar_date);
+                        @Html.HiddenFor(Model => Model.s_end_calendar_date);
+                        @Html.HiddenFor(Model => Model.is_deleted);
+                        @Html.HiddenFor(Model => Model.s_net_duration);
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+
+                                        <select id="s_head_code" name="s_head_code" class="form-control">
+                                            <option value="0">--Select--</option>
+                                            @foreach (var i in ViewBag.MasterStoppageTypes)
+                                            {
+                                                if (i.Code == Model.s_head_code)
+                                                {
+                                                    <option value="@i.Code" class="item-content" selected>@i.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@i.Code" class="item-content">@i.Name</option>
+                                                }
+
+                                            }
+
+                                        </select>
+                                        @Html.ValidationMessageFor(@x => x.s_head_name, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(i => i.s_head_name)
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            <select name="s_sub_head_code" id="s_sub_head_code" class="form-control">
+                                                @if (Model.s_sub_head_code != 0)
+                                                {
+                                                    <option value=@Model.s_sub_head_code>@Model.s_sub_head_name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="0">N/A</option>
+                                                }
+
+                                            </select>
+                                            @Html.ValidationMessageFor(i => i.s_sub_head_code, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(i => i.s_sub_head_name)
+
+                                        </div>
+                                        @Html.ValidationMessageFor(i => i.s_sub_head_code, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(i => i.s_sub_head_name)
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(model => model.s_mill_code, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                            @Html.LabelFor(model => model.s_mill_code)
+                                            @Html.ValidationMessageFor(@x => x.s_mill_code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(temp => temp.s_start_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "Start Time", @type = "time", @readonly = "true" } })
+                                            @Html.LabelFor(temp => temp.s_start_time)
+                                            @Html.ValidationMessageFor(temp => temp.s_start_time, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(temp => temp.s_end_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "End Time", @type = "time", @readonly = "true" } })
+                                            @Html.LabelFor(temp => temp.s_end_time)
+                                            @Html.ValidationMessageFor(temp => temp.s_end_time, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(temp => temp.s_duration, new { htmlAttributes = new { @class = "form-control", @placeholder = "Total Duration", @readonly = "true" } })
+                                            @Html.LabelFor(temp => temp.s_duration)
+                                            @Html.ValidationMessageFor(temp => temp.s_duration, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            @Html.LabelFor(@model => model.s_comment)
+                                            @Html.TextAreaFor(@model => model.s_comment, new { @class = "form-control" })
+
+                                            @Html.ValidationMessageFor(@x => x.s_mill_code, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary()
+                                <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+    <script src="~/Scripts/SugarAnalysisJs/Stoppages-1.1.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+

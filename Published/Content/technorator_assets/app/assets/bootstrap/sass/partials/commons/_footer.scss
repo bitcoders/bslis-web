@@ -1,0 +1,83 @@
+/*----------  Footer Styling  ----------*/
+
+footer
+{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 777;
+	border-top: 2px solid $brand-gray-lightest;
+
+	.footer-inner
+	{
+		padding: 10px 0;
+
+		@include clearfix;
+	}
+
+	p, a
+	{
+		@include font-14($color-01);
+	}
+
+	.copyright-container
+	{
+		float: left;
+		margin-top: 7px;
+
+		@include media-breakpoint-down(xs)
+		{
+			margin: 0;
+			float: none;
+			clear: both;
+			text-align: center;
+			margin-bottom: 5px;
+		}
+	}
+
+	.footer-nav
+	{
+		float: right;
+
+		ul
+		{
+			li
+			{
+				margin-right: 15px;
+
+				a
+				{
+					display: block;
+					padding: 8px 0;
+					padding-bottom: 7px;
+					border-bottom: 1px solid transparent;
+
+					&:hover, &:active, &:focus
+					{
+						color: $color-01;
+						border-color: $color-01;
+					}
+				}
+
+				&:last-child
+				{
+					margin: 0;
+				}
+			}
+
+			@include media-breakpoint-down(xs)
+			{
+				display: inline-block;
+				margin-bottom: -4px;
+			}
+		}
+
+		@include media-breakpoint-down(xs)
+		{
+			float: none;
+			clear: both;
+			text-align: center;
+		}
+	}
+}

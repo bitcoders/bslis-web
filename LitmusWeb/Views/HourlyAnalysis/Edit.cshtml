@@ -1,0 +1,426 @@
+﻿@model LitmusWeb.Models.HourlyAnalysisModel
+@{
+    ViewBag.Title = "Edit - Hourly Analyses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @*@Html.Partial("_PartialAnalysisDefaultValues")*@
+
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Hourly Analysis
+                            @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right" })
+                        </h4>
+                        @using (Html.BeginForm("Edit", "HourlyAnalysis", FormMethod.Post, new { @name = "Edit" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("FormType", "Edit");
+                            @Html.Hidden("unit_code", Session["BaseUnitCode"]);
+                            @Html.Hidden("season_code", Session["CrushingSeason"]);
+                            @Html.Hidden("entry_date", Session["EntryDate"]);
+
+
+
+                            <p class="card-description text-primary">
+                                Juice Flow
+                            </p>
+                            <div class="row">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="col-md-4 newMill">
+                                    <div class="form-group row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group ">
+                                                @Html.EditorFor(temp => temp.new_mill_juice, new { htmlAttributes = new { @class = "form-control JuiceInput", @id = "txtNewMillJuice", @autofocus = "true" } })
+                                                @Html.LabelFor(temp => temp.new_mill_juice)
+                                                @Html.ValidationMessageFor(temp => temp.new_mill_juice, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 oldMill">
+                                    <div class="form-group row">
+                                        <div class="col-sm-9 ">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.old_mill_juice, new { htmlAttributes = new { @class = "form-control JuiceInput", @id = "txtOldMillJuice" } })
+                                                @Html.LabelFor(temp => temp.old_mill_juice, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.old_mill_juice, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.juice_total, new { htmlAttributes = new { @class = "form-control JuiceInput", @id = "txtTotalJuice", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.juice_total, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.juice_total, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr />
+                            <p class="card-description text-primary">
+                                Water
+                            </p>
+                            <div class="row">
+                                <div class="col-md-4 newMill">
+                                    <div class="form-group row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group ">
+                                                @Html.EditorFor(temp => temp.new_mill_water, new { htmlAttributes = new { @class = "form-control WaterInput", @id = "txtNewMillWater", @autofocus = "true" } })
+                                                @Html.LabelFor(temp => temp.new_mill_water, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.new_mill_water, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 oldMill">
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-9 ">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.old_mill_water, new { htmlAttributes = new { @class = "form-control WaterInput", @id = "txtOldMillWater" } })
+                                                @Html.LabelFor(temp => temp.old_mill_water, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.old_mill_water, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.water_total, new { htmlAttributes = new { @class = "form-control WaterInput", @id = "txtTotalWater", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.water_total, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.water_total, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- End of Water Analysis-->
+                            <hr />
+                            <p class="card-description text-primary">
+                                Sugar Bags Production
+                            </p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_L31, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagL31", @autofocus = "true" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_L31, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_L31, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_M31, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagM31" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_M31, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_M31, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_S31, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagS31" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_S31, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_S31, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_Biss, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagBiss" } })
+                                                @Html.LabelFor(temp => temp.sugar_Biss, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_Biss, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Sugar Analysis Row 1-->
+                            <!-- Start of Sugar Analysis Row 2-->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_L30, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagL30", @autofocus = "true" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_L30, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_L30, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_M30, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagM30" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_M30, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_M30, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_S30, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagS30" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_S30, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_S30, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_raw, new { htmlAttributes = new { @class = "form-control SugarBag" } })
+                                                @Html.LabelFor(temp => temp.sugar_raw, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_raw, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- End of sugar bags production row 3-->
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group-row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(x=>x.export_sugar, new { htmlAttributes = new {@class="form-control ExportSugar" } })
+                                                @Html.LabelFor(x => x.export_sugar, htmlAttributes: new { @class="col-from-label"})
+                                                @Html.ValidationMessageFor(x=>x.export_sugar,"",new { @class="text-danger"})
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_L_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagLTotal", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_L_total, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_L_total, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_M_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagMTotal", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_M_total, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_M_total, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_S_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagSTotal", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_S_total, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_S_total, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group-row">
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.sugar_bags_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagsTotal", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.sugar_bags_total, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.sugar_bags_total, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- End of Sugar BagAnalysis Row 3-->
+                            <!-- cooling tower traces-->
+                            <hr />
+                            <p class="card-description text-primary">
+                                Cooling Tower Traces
+                            </p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group-row">
+                                        @Html.LabelFor(temp => temp.cooling_trace, htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                                        <div class="col-sm-9">
+                                            <select class="dropdown-menu-left btn btn-primary btn-sm dropdown-toggle" id="cooling_trace" , name="cooling_trace">
+                                                <option value="No" class="dropdown-item" selected>No</option>
+                                                <option value="Yes" class="dropdown-item">Yes</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(temp => temp.sugar_bags_L_total, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.cooling_pol, new { htmlAttributes = new { @class = "form-control CoolingTraceInput", @id = "txtCoolingPol" } })
+                                                @Html.LabelFor(temp => temp.cooling_pol, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.cooling_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group-row">
+
+                                        <div class="col-sm-9">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.cooling_ph, new { htmlAttributes = new { @class = "form-control CoolingTraceInput", @id = "txtCoolingPh" } })
+                                                @Html.LabelFor(temp => temp.cooling_ph, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.cooling_ph, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Cooling Traces-->
+                            <!-- yard Positon Row One Start-->
+                            <hr />
+                            <p class=" card-description text-primary">Yard Position</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.standing_truck, new { htmlAttributes = new { @class = "form-control YardInput", @id = "txtStandingTrucks" } })
+                                                @Html.LabelFor(temp => temp.standing_truck, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.standing_truck, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.standing_trolley, new { htmlAttributes = new { @class = "form-control YardInput", @id = "txtStandingTrolley" } })
+                                                @Html.LabelFor(temp => temp.standing_trolley, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.standing_trolley, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.standing_trippler, new { htmlAttributes = new { @class = "form-control YardInput", @id = "txtStandingTrippler" } })
+                                                @Html.LabelFor(temp => temp.standing_trippler, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.standing_trippler, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.standing_cart, new { htmlAttributes = new { @class = "form-control YardInput", @id = "txtStandingCart" } })
+                                                @Html.LabelFor(temp => temp.standing_cart, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.standing_cart, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of yard position row own-->
+                            <!-- yard Positon Row two Start-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.un_crushed_cane, new { htmlAttributes = new { @class = "form-control YardInput", @id = "txtUnCrushedCane", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.LabelFor(temp => temp.un_crushed_cane, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.un_crushed_cane, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.crushed_cane, new { htmlAttributes = new { @class = "form-control YardInput", @id = "txtCrushedCane" } })
+                                                @Html.LabelFor(temp => temp.crushed_cane, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.crushed_cane, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.diverted_syrup_quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span id="cane_diversion_factor" class="factor_value"></span>
+                                                @Html.LabelFor(temp => temp.diverted_syrup_quantity, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.diverted_syrup_quantity, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-label-group">
+                                                @Html.EditorFor(temp => temp.cane_diverted_for_syrup, new { htmlAttributes = new { @class = "form-control display-none", @readonly = "readonly" } })
+                                                @Html.LabelFor(temp => temp.cane_diverted_for_syrup, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.ValidationMessageFor(temp => temp.cane_diverted_for_syrup, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end of yard position row two ends-->
+                            <button type="submit" name="btnSave" id="btnSave" class="btn btn-primary">Save</button>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+    <script src="~/Scripts/SugarAnalysisJs/HourlyAnalysis-1.4.min.js"></script>
+    @if (Convert.ToInt16(ViewBag.OldMillCapacity) <= 0)
+    {
+        <script>
+            $(".oldMill").hide();
+            $(".newMill").removeClass("col-md-4");
+            $(".newMill").addClass("col-md-9");
+        </script>
+        <script src="~/Scripts/Ajax/HourlyAnalysesAjax.js"></script>
+    }
