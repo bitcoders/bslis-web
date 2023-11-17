@@ -1,0 +1,105 @@
+﻿@model LitmusWeb.Models.StoppageModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @Html.Partial("_PartialAnalysisDefaultValues")
+        </div>
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Stoppages
+                        @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right", @name = "Create" })
+                    </h4>
+                    @using (Html.BeginForm("Create", "Stoppage", FormMethod.Post))
+                    {
+                        <p class="card-description text-primary">Stoppages occured on the day</p>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("unit_code", TempData["BaseUnitCode"])
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+
+                                        <select id="s_head_code" name="s_head_code" class="form-control">
+                                            <option value="0">--Select--</option>
+                                            @foreach (var i in ViewBag.MasterStoppageTypes)
+                                            {
+                                                <option value="@i.Code" class="item-content">@i.Name</option>
+                                            }
+
+                                        </select>
+                                        @Html.ValidationMessageFor(@x => x.s_head_code, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(i => i.s_head_name)
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class=" form-label-group">
+                                            <select name="s_sub_head_code" id="s_sub_head_code" class="form-control">
+                                                <option value="0">N/A</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(i => i.s_sub_head_code, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(i => i.s_sub_head_name)
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class=" form-label-group">
+
+                                            @if (ViewBag.MillCount == 2)
+                                            {
+                                                <select id="s_mill_code" name="s_mill_code" class="form-control" required>
+                                                    <option>--Select a Mill--</option>
+                                                    <option class="item" value="0">New Mill</option>
+                                                    <option class="item" value="1">Old Mill</option>
+                                                </select>
+                                            }
+                                            else
+                                            {
+                                                <input type="number" name="s_mill_code" id="s_mill_code" class="form-control" value="0" readonly="readonly" />
+                                                @Html.LabelFor(@x => x.s_mill_code)
+                                            }
+                                            @Html.ValidationMessageFor(@x => x.s_mill_code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class=" form-label-group">
+                                            @Html.EditorFor(@x => x.s_start_time, new { htmlAttributes = new { @class = "form-control", @placeholder = "Start Time", @type = "time" } })
+                                            @Html.LabelFor(@x => x.s_start_time)
+                                            @Html.ValidationMessageFor(@x => x.s_start_time, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <div class=" form-label-group">
+
+                                                @Html.EditorFor(@model => model.s_comment, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.LabelFor(@model => model.s_comment)
+                                                @Html.ValidationMessageFor(@x => x.s_comment, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-success" id="btnSubmit">Submit</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+        <script src="~/Scripts/SugarAnalysisJs/Stoppages-1.1.min.js"></script>
+        <script src="~/Scripts/FirebaseMessages/StoppageFirebaseNotification-1.3.min.js"></script>
+
+

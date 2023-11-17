@@ -1,0 +1,14 @@
+.btn
+{
+	white-space: normal;
+}
+
+/*----------  Button Borderless  ----------*/
+
+.btn
+{
+	&.btn-borderless
+	{
+		border: 0;
+	}
+}

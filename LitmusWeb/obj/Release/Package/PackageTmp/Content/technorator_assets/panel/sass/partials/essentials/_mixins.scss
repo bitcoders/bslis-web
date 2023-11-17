@@ -1,0 +1,313 @@
+/*----------  Clearfix  ----------*/
+
+@mixin clearfix()
+{
+	&:before, &:after
+	{
+		content: " "; // 1
+		display: table; // 2
+	}
+
+	&:after
+	{
+		clear: both;
+	}
+}
+
+/*----------  Placeholders  ----------*/
+
+@mixin placeholder($color: $black-color, $opacity: 1)
+{
+	&::-moz-placeholder
+	{
+		color: $color;
+		@include opacity($opacity);
+	}
+
+	&:-ms-input-placeholder
+	{
+		color: $color;
+		@include opacity($opacity);
+	}
+
+	&::-webkit-input-placeholder
+	{
+		color: $color;
+		@include opacity($opacity);
+	}
+}
+
+/*----------  Reset  ----------*/
+
+@mixin reset()
+{
+	margin: 0;
+	border: 0;
+	padding: 0;
+	line-height: 1.2;
+	border-radius: 0;
+	background: none;
+}
+
+@mixin reset-position()
+{
+	position: relative;
+	top: auto;
+	left: auto;
+	bottom: auto;
+	right: auto;
+}
+
+@mixin reset-list()
+{
+	list-style-type: none;
+
+	@include reset;
+}
+
+/*----------  Transition Mixins  ----------*/
+
+@mixin transition($trans: all 0.3s ease, $bfv: true)
+{
+	-webkit-transition: $trans;
+	-moz-transition: $trans;
+	-ms-transition: $trans;
+	-o-transition: $trans;
+	transition: $trans;
+
+	@if $bfv == true
+	{
+		@include backface-visibility(hidden);
+	}
+}
+
+/*----------  Fonts Mixins  ----------*/
+
+@mixin font($font-size, $font-weight, $line-height, $color)
+{
+	font-size: $font-size;
+	font-weight: $font-weight;
+	line-height: $line-height;
+	color: $color;
+}
+
+@mixin font-fa($font-size, $font-weight, $line-height, $color)
+{
+	font-family: $font-fontawesome;
+	@include font($font-size, $font-weight, $line-height, $color);
+}
+
+@mixin font-p($font-size, $font-weight, $line-height, $color)
+{
+	font-family: $font-primary;
+	@include font($font-size, $font-weight, $line-height, $color);
+}
+
+@mixin font-s($font-size, $font-weight, $line-height, $color)
+{
+	font-family: $font-secondary;
+	@include font($font-size, $font-weight, $line-height, $color);
+}
+
+@mixin sub-font-01($font-size, $font-weight, $line-height, $color)
+{
+	font-family: $sub-font-01;
+	@include font($font-size, $font-weight, $line-height, $color);
+}
+
+@mixin sub-font-02($font-size, $font-weight, $line-height, $color)
+{
+	font-family: $sub-font-02;
+	@include font($font-size, $font-weight, $line-height, $color);
+}
+
+/*----------  Pattern Bg  ----------*/
+
+@mixin pattern($name, $ext: 'png', $path: '../../patterns')
+{
+	background: url('#{$path}/#{$name}.#{$ext}') left top;
+}
+
+/*----------  Placeholder Bg  ----------*/
+
+@mixin placeholdit($size: '500x500', $bg_color: 'aaa', $txt_color: 'f5f5f5', $text: 'Placeholder')
+{
+	background: url('https://placehold.it/#{$size}/#{$bg_color}/#{$txt_color}?text=#{$text}') no-repeat center center;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+/*----------  Pointer Events  ----------*/
+
+@mixin pointer-events($event)
+{
+	-webkit-pointer-events: $event;
+	-moz-pointer-events: $event;
+	-ms-pointer-events: $event;
+	-o-pointer-events: $event;
+	pointer-events: $event;
+}
+
+/*----------  Text Colors  ----------*/
+
+@mixin text-color($color, $hover: false)
+{
+	color: $color !important;
+
+	@if $hover == true
+	{
+		@include transition;
+
+		&:hover, &:active, &:focus
+		{
+			color: darken($color, 10%) !important;
+		}
+	}
+}
+
+/*----------  Faded Background  ----------*/
+
+@mixin faded-background($color, $opacity)
+{
+	background: $color;
+	background: rgba($color, $opacity);
+}
+
+/*----------  Max Widths  ----------*/
+
+@mixin max-width($mwidth, $center: true)
+{
+	max-width: $mwidth;
+	width: 100%;
+
+	@if $center == true
+	{
+		margin: auto;
+	}
+}
+
+/*----------  Extender  ----------*/
+
+@mixin extends($extender)
+{
+	@extend #{$extender};
+}
+
+/*----------  Link  ----------*/
+
+@mixin link()
+{
+	cursor: pointer;
+	text-decoration: none;
+	
+	@include transition;
+
+	&:hover, &:active, &:focus
+	{
+		text-decoration: none;
+	}
+}
+
+/*----------  Background Defaults  ----------*/
+
+@mixin background-defaults()
+{
+	-webkit-background-size: cover;
+	background-size: cover;
+
+	-webkit-background-position: center center;
+	-moz-background-position: center center;
+	-ms-background-position: center center;
+	-o-background-position: center center;
+	background-position: center center;
+
+	-webkit-background-repeat: no-repeat;
+	-moz-background-repeat: no-repeat;
+	-ms-background-repeat: no-repeat;
+	-o-background-repeat: no-repeat;
+	background-repeat: no-repeat;
+}
+
+/*----------  Selection  ----------*/
+
+@mixin selection($background, $color)
+{
+	::selection 
+	{
+		color: $color;
+		background: $background;
+	}
+
+	::-moz-selection 
+	{
+		color: $color;
+		background: $background;
+	}
+}
+
+/*----------  Absolute Center  ----------*/
+
+@mixin absolute-center($axis: xy, $z-index: 5)
+{
+	position: absolute;
+	z-index: $z-index;
+
+	@if $axis == xy
+	{
+		top: 50%;
+		left: 50%;
+
+		@include transform(translate(-50%, -50%));
+	}
+	@else if $axis == x
+	{
+		top: 0;
+		left: 50%;
+
+		@include transform(translateX(-50%));
+	}
+	@else if $axis == y
+	{
+		left: 0;
+		top: 50%;
+
+		@include transform(translateY(-50%));
+	}
+
+	@content;
+}
+
+/*----------  Common Prefixed Class Selector  ----------*/
+
+@mixin common-prefixed-class($prefix)
+{
+	[class^="#{$prefix}"]
+	{
+		@content;
+	}
+}
+
+/*----------  Shadows  ----------*/
+
+@mixin box-shadow($shadow)
+{
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+@mixin text-shadow($shadow)
+{
+	-webkit-text-shadow: $shadow;
+	-moz-text-shadow: $shadow;
+	-ms-text-shadow: $shadow;
+	-o-text-shadow: $shadow;
+	text-shadow: $shadow;
+}
+
+/*----------  Force BG Color  ----------*/
+
+@mixin force-bgcolor($brand)
+{
+	background-color: $brand !important;
+}

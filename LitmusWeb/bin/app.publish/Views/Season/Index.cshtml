@@ -1,0 +1,69 @@
+﻿@model IEnumerable<LitmusWeb.Models.MasterSeasonModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Company Details @Html.ActionLink("Add new", "Create", "Season", new { }, new { @class = "btn btn-success btn-rounded float-right" })</h4>
+                        <p class="card-description">
+                            Company Details <small>(Details of all companies)</small>
+                        </p>
+                        <div class="table-responsive pt-3">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th data-field="id">@Html.DisplayNameFor(model => model.id)</th>
+                                        <th data-field="name">@Html.DisplayNameFor(model => model.SeasonCode)</th>
+                                        <th data-field="address">@Html.DisplayNameFor(model => model.SeasonYear)</th>
+                                        <th data-field="PAN">@Html.DisplayNameFor(model => model.IsActive)</th>
+                                        <th data-field="TAN">@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                                        <th data-field="state">@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                                        <th data-field="action" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelitem => item.id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelitem => item.SeasonCode)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelitem => item.SeasonYear)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelitem => item.IsActive)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelitem => item.CreatedDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelitem => item.CreatedBy)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.SeasonCode }, new { @class = "btn btn-success btn-xs" })
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.SeasonCode }, new { @class = "btn btn-danger btn-xs" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

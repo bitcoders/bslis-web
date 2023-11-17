@@ -1,0 +1,232 @@
+﻿
+@model LitmusWeb.Models.DailyAnalysisModel
+<div class="tab-pane fade show" id="icumsa" role="tabpanel" aria-labelledby="icumsa-tab">
+    <div class="col-md-12 grid-margin stretch-card ">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-description">ICUMSA</p><hr />
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_l31, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.icumsa_l31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_m31, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.icumsa_m31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_s31, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.icumsa_s31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_l30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gate" } })
+                            @Html.LabelFor(model => model.icumsa_l30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_m30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Centre" } })
+                            @Html.LabelFor(model => model.icumsa_m30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_s30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.icumsa_s30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.icumsa_raw_sugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Raw Sugar" } })
+                            @Html.LabelFor(model => model.icumsa_raw_sugar)
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">Foreign Matter, Retention & Moisturee </p><hr />
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_l31, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.foreign_matter_l31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_m31, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.foreign_matter_m31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_s31, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.foreign_matter_s31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_l30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gate" } })
+                            @Html.LabelFor(model => model.foreign_matter_l30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_m30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Centre" } })
+                            @Html.LabelFor(model => model.foreign_matter_m30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_s30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.foreign_matter_s30)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.foreign_matter_raw_sugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.foreign_matter_raw_sugar)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_l31, new { htmlAttributes = new { @class = "form-control", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.retention_l31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_m31, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.retention_m31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_s31, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.retention_s31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_l30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gate" } })
+                            @Html.LabelFor(model => model.retention_l30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_m30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Centre" } })
+                            @Html.LabelFor(model => model.retention_m30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_s30, new { htmlAttributes = new { @class = "form-control", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.retention_s30)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.retention_raw_sugar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.retention_raw_sugar)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_l31, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "Early", step = "0.001" } })
+                            @Html.LabelFor(model => model.moisture_l31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_m31, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.moisture_m31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_s31, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.moisture_s31)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_l30, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "Gate" } })
+                            @Html.LabelFor(model => model.moisture_l30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_m30, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "Centre" } })
+                            @Html.LabelFor(model => model.moisture_m30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_s30, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.moisture_s30)
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.moisture_raw_sugar, new { htmlAttributes = new { @class = "form-control decimalthreeplace", @placeholder = "Farm" } })
+                            @Html.LabelFor(model => model.moisture_raw_sugar)
+                        </div>
+                    </div>
+                </div>
+
+                <p class="card-description">ETP</p><hr />
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.etp_ph, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Early" } })
+                            @Html.LabelFor(model => model.etp_ph)
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.etp_tss, new { htmlAttributes = new { @class = "form-control", @placeholder = "General" } })
+                            @Html.LabelFor(model => model.etp_tss)
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.etp_cod, new { htmlAttributes = new { @class = "form-control", @placeholder = "Rejected" } })
+                            @Html.LabelFor(model => model.etp_cod)
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.etp_bod, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gate" } })
+                            @Html.LabelFor(model => model.etp_bod)
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.etp_water_flow, new { htmlAttributes = new { @class = "form-control", @placeholder = "Centre" } })
+                            @Html.LabelFor(model => model.etp_water_flow)
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.etp_water_consumption_at_plant, new { htmlAttributes = new { @class = "form-control", @placeholder = "Centre" } })
+                            @Html.LabelFor(model => model.etp_water_consumption_at_plant)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

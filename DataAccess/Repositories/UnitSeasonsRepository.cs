@@ -1,6 +1,7 @@
 ﻿using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -128,46 +129,75 @@ namespace DataAccess.Repositories
             {
                 return false;
             }
-            AuditRepository auditRepo = new AuditRepository();
-            UnitSeason unitSeason = new UnitSeason();
-            int resultCount = 0;
-            var oldData = new object();
-            var newData = new object();
-            using (SugarLabEntities Db = new SugarLabEntities())
-            {
-                try
-                {
-                    Db.Configuration.ProxyCreationEnabled = false;
-                    oldData = Db.UnitSeasons.Where(x => x.id == data.id).FirstOrDefault();
-                }
-                catch (Exception ex)
-                {
-                    new Exception(ex.Message);
-                }
+            #region Old Code
+            //AuditRepository auditRepo = new AuditRepository();
+            //UnitSeason unitSeason = new UnitSeason();
+            //int resultCount = 0;
+            //var oldData = new object();
+            //var newData = new object();
+            //using (SugarLabEntities Db = new SugarLabEntities())
+            //{
+            //    try
+            //    {
+            //        Db.Configuration.ProxyCreationEnabled = false;
+            //        oldData = Db.UnitSeasons.Where(x => x.id == data.id).FirstOrDefault();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        new Exception(ex.Message);
+            //    }
 
-            }
-            using (SugarLabEntities Db = new SugarLabEntities())
+            //}
+            //using (SugarLabEntities Db = new SugarLabEntities())
+            //{
+            //    try
+            //    {
+            //        Db.Entry(data).State = System.Data.Entity.EntityState.Modified;
+            //        resultCount = Db.SaveChanges();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        new Exception(ex.Message);
+            //    }
+            //}
+            //    if (resultCount == 1)
+            //    {
+            //        using (SugarLabEntities Db = new SugarLabEntities())
+            //        {
+            //            Db.Configuration.ProxyCreationEnabled = false;
+            //            newData = Db.UnitSeasons.Where(x => x.id == data.id).FirstOrDefault();
+            //            auditRepo.CreateAuditTrail(AuditActionType.Update, data.id.ToString(), oldData, newData);
+            //            return true;
+            //        }
+            //    }
+            #endregion
+
+            try
             {
-                try
+                using(SugarLabEntities _db = new SugarLabEntities())
                 {
-                    Db.Entry(data).State = System.Data.Entity.EntityState.Modified;
-                    resultCount = Db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    new Exception(ex.Message);
+                   var parameters = new List<SqlParameter>();
+                    parameters.Add(new SqlParameter("id", data.id));
+                    parameters.Add(new SqlParameter("unit_code", data.Code));
+                    parameters.Add(new SqlParameter("season_code",data.Season));
+                    parameters.Add(new SqlParameter("crushing_start_datetime",data.CrushingStartDateTime));
+                    parameters.Add(new SqlParameter("crushing_end_datetime", data.CrushingEndDateTime));
+                    parameters.Add(new SqlParameter("new_mill_capacity",data.NewMillCapacity));
+                    parameters.Add(new SqlParameter("old_mill_capacity",data.OldMillCapacity));
+                    parameters.Add(new SqlParameter("report_start_hourMinuete", data.ReportStartHourMinute));
+                    parameters.Add(new SqlParameter("disableDailyProcess",data.DisableDailyProcess));
+                    parameters.Add(new SqlParameter("disableAdd", data.DisableAdd));
+                    parameters.Add(new SqlParameter("disableUpdate", data.DisableUpdate));
+
+                    _db.Database.ExecuteSqlCommand("EXEC usp_update_unitSeasons @id, @unit_code, @season_code, @crushing_start_datetime, @crushing_end_datetime" +
+                        ", @new_mill_capacity, @old_mill_capacity, @report_start_hourMinuete, @disableDailyProcess, @disableAdd, @disableUpdate", parameters.ToArray());
+                    return true;
                 }
             }
-                if (resultCount == 1)
-                {
-                    using (SugarLabEntities Db = new SugarLabEntities())
-                    {
-                        Db.Configuration.ProxyCreationEnabled = false;
-                        newData = Db.UnitSeasons.Where(x => x.id == data.id).FirstOrDefault();
-                        auditRepo.CreateAuditTrail(AuditActionType.Update, data.id.ToString(), oldData, newData);
-                        return true;
-                    }
-                }
+            catch(Exception ex)
+            {
+              throw new Exception(ex.Message);
+            }
             return false;
         }
 

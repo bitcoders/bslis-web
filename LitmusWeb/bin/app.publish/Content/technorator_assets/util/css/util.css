@@ -1,0 +1,102 @@
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ui-widget-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+.overlay-container {
+  z-index: 1100;
+}
+.overlay-container .ui-dialog-titlebar {
+  display: none;
+}
+.overlay-container .overlay {
+  padding: 10px 30px;
+}
+.overlay-container .overlay .fa {
+  margin-right: 10px;
+}
+.overlay-container .overlay.iprocessing .fa {
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+.overlay-container .overlay.iprocessing .fa:before {
+  font-family: 'FontAwesome';
+  content: "\f021";
+  font-size: 12px;
+  font-weight: normal;
+  color: #000;
+}
+.overlay-container .overlay.isuccess .fa:before {
+  font-family: 'FontAwesome';
+  content: "\f00c";
+  font-size: 12px;
+  font-weight: normal;
+  color: #3DB879;
+}
+.overlay-container .overlay.ierror .fa:before {
+  font-family: 'FontAwesome';
+  content: "\f00d";
+  font-size: 12px;
+  font-weight: normal;
+  color: #FF7E7E;
+}
+.mar-v-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.mar-t-30 {
+  margin-top: 30px;
+}
+.m-r-10 {
+  margin-right: 10px !important;
+}
+.m-t-10 {
+  margin-top: 10px !important;
+}
+.m-b-0 {
+  margin-bottom: 0 !important;
+}
+.ui-datepicker {
+  z-index: 2000 !important;
+}
+.dom {
+  display: none;
+}
+
+.ui-dialog
+{
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  z-index: 1100 !important;
+
+  -webkit-transform: translate(-50%, -50%) !important;
+  -moz-transform: translate(-50%, -50%) !important;
+  -ms-transform: translate(-50%, -50%) !important;
+  -o-transform: translate(-50%, -50%) !important;
+  transform: translate(-50%, -50%) !important;
+}

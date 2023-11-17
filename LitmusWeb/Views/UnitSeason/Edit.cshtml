@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
+                            @*<div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-label-group">
                                         @Html.EditorFor(x => x.CreatedAt, new { htmlAttributes = new { @class = "form-control timepicker", placeholder = "Created At", @readonly="true" } })
@@ -89,6 +89,29 @@
                                         @Html.LabelFor(x => x.CreatedBy)
                                         @Html.ValidationMessageFor(x => x.CreatedBy, "", new { @class = "text-danger" })
                                     </div>
+                                </div>
+                            </div>*@
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group">
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(x => x.DisableDailyProcess, new { @class = "form-check-input" })
+                                            @Html.LabelFor(x => x.DisableDailyProcess, new { @class = "form-check-label" })
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(x => x.DisableAdd, new { @class = "form-check-input" })
+                                            @Html.LabelFor(x => x.DisableAdd, new { @class = "form-check-label" })
+                                        </div>
+
+
+                                        <div class="form-check form-check-inline">
+                                            @Html.CheckBoxFor(x => x.DisableUpdate, new { @class = "form-check-input" })
+                                            @Html.LabelFor(x => x.DisableUpdate, new { @class = "form-check-label" })
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="form-row">

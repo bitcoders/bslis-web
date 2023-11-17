@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            @*@Html.Partial("_PartialAnalysisDefaultValues")*@
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        @*@Html.ActionLink("Add New", "add", new { }, new { @class = "btn btn-success float-right" })*@
+                        <h4 class="card-title">
+                            @*@ViewBag.Title*@
+                            <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+                                <div class="collapse navbar-collapse" id="navbar-rainfall">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item active">
+                                            @Html.ActionLink("Add New", "add", new { }, new { @class = "nav-link" })
+                                        </li>
+                                        <li class="nav-item">
+                                            @Html.ActionLink("Reports", "MontlyRainFallReport", new { }, new { @class = "nav-link" })
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </h4>
+                        <p class="card-description">
+                            Details
+                        </p>
+                        <div class="form-sample">
+                            <div class="form-group row">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="UnitCode" id="UnitCode" value="@Session["BaseUnitCode"]" />
+                                <label for="dateFrom" class="col-sm-2 col-form-label">From</label>
+                                <div class="col-sm-3">
+                                    <input type="date" id="FromDate" name="FromDate" class="form-control datepicker" />
+                                </div>
+                                <label for="dateTo" class="col-sm-2 col-form-label"> To </label>
+                                <div class="col-sm-3">
+                                    <input type="date" id="ToDate" name="ToDate" class="form-control datepicker" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="btnSearch" name="btnSearch" class="btn btn-warning">Search</button>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between">
+                                <div class="col-auto">
+                                    <table id="table_id" name="table_id" class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <td rowspan="2">ID</td>
+                                                <td rowspan="2">Record Date</td>
+                                                <td colspan="2">Temperature</td>
+                                                <td rowspan="2">Humidity</td>
+                                                <td rowspan="2">Wind Speed</td>
+                                                <td rowspan="2">Rain Fall(mm)</td>
+                                                <td rowspan="2">Uv Index</td>
+                                                <td rowspan="2">Weather Type</td>
+                                                <td rowspan="2">AllWeather Condition(s)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Min</td>
+                                                <td>Max</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/Ajax/WeatherRecordsAjax.js"></script>
+    

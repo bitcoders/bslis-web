@@ -126,6 +126,9 @@ namespace LitmusWeb.Controllers
                     NewMillCapacity = entity.NewMillCapacity,
                     OldMillCapacity = entity.OldMillCapacity,
                     ReportStartHourMinute = entity.ReportStartHourMinute,
+                    DisableDailyProcess = entity.DisableDailyProcess,
+                    DisableUpdate = entity.DisableUpdate,
+                    DisableAdd  = entity.DisableAdd,
                     CreatedAt = entity.CreatedAt,
                     CreatedBy = entity.CreatedBy
                 };
@@ -176,8 +179,11 @@ namespace LitmusWeb.Controllers
                     NewMillCapacity = formData.NewMillCapacity,
                     OldMillCapacity = formData.OldMillCapacity,
                     ReportStartHourMinute = formData.ReportStartHourMinute,
-                    CreatedAt = formData.CreatedAt,
-                    CreatedBy = formData.CreatedBy
+                    DisableDailyProcess = formData.DisableDailyProcess,
+                    DisableAdd = formData.DisableAdd,
+                    DisableUpdate = formData.DisableUpdate
+                    //CreatedAt = formData.CreatedAt,
+                    //CreatedBy = formData.CreatedBy
                 };
                 unitSeasonsRepository.EditUnitSeason(unitSeason);
 

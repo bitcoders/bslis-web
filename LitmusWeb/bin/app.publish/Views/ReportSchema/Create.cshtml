@@ -1,0 +1,97 @@
+﻿@model LitmusWeb.Models.ReportSchemaModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            Define Report Schema/Properties<small> (Set the Stored Proc or Sql Logical Unit for the report. )</small>
+                            @Html.ActionLink("Back", "Index", new { }, new { @class = "btn btn-sm btn-inverse-primary float-right", title = "Back to List" })
+                        </div>
+                        @using (Html.BeginForm("Create", "ReportSchema", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken();
+                            @Html.ValidationSummary();
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(modal => modal.Code, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Code" } })
+                                        @Html.LabelFor(modal => modal.Code)
+                                        @Html.ValidationMessageFor(modal => modal.Code, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(x => x.SchemaType, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Object Name" } })
+                                        @Html.LabelFor(x => x.SchemaType)
+                                        @Html.ValidationMessageFor(x => x.SchemaType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(x => x.SysObjectName, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Code" } })
+                                        @Html.LabelFor(x => x.SysObjectName)
+                                        @Html.ValidationMessageFor(x => x.SysObjectName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            @*@Html.CheckBoxFor(@x => x.IsActive, new { htmlAttributes = new { @class = "form-check-input" } })*@
+                                            <input type="checkbox" id="IsActive" name="IsActive" value="true" class="form-check-input" />
+                                            IsActive
+                                        </label>
+                                        @Html.ValidationMessageFor(x => x.IsActive, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(x => x.SysObjectDescripton, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Code" } })
+                                        @Html.LabelFor(x => x.SysObjectDescripton)
+                                        @Html.ValidationMessageFor(@x => x.SysObjectDescripton, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-label-group">
+                                        @Html.EditorFor(x => x.SearchKeywords, new { htmlAttributes = new { @class = "form-control ", @placeholder = "Object Name" } })
+                                        @Html.LabelFor(x => x.SearchKeywords)
+                                        @Html.ValidationMessageFor(x => x.SearchKeywords, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="submit" class="btn btn-inverse-success float-right" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+    <script src="~/Scripts/js/select2.js" type="text/javascript"></script>
+

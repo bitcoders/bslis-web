@@ -1,0 +1,59 @@
+/*----------  Select2  ----------*/
+
+.select2
+{
+	*
+	{
+		display: block;
+	}
+
+	/* .selection
+	{
+		.select2-selection
+		{
+			position: relative;
+			border: 0;
+			height: auto;
+			padding: 10px;
+			border: 1px solid $black-color;
+	
+			@include border-radius(0);
+	
+			&:before
+			{
+				content: "\f107";
+				position: absolute;
+				top: 50%;
+				right: 10px;
+				z-index: 5;
+	
+				@include transform(translateY(-50%));
+				@include font-fa($font-md, $weight-regular, 1, $black-color);
+			}
+		}
+	
+		.select2-selection__rendered
+		{
+			padding: 0;
+			
+			@include font-p($font-base, $weight-regular, 1.2, $black-color);
+		}
+	
+		.select2-selection__arrow
+		{
+			display: none !important;
+		}
+	} */
+}
+
+/* .select2-dropdown
+{
+	border-color: $black-color;
+
+	.select2-results__option
+	{
+		display: block;
+	}
+
+	@include border-radius(0 !important);
+} */

@@ -1,0 +1,42 @@
+{
+  "name": "immobilier-admin",
+  "version": "1.0.7",
+  "homepage": "",
+  "authors": [
+    ""
+  ],
+  "description": "Immobilier app admin panel.",
+  "keywords": [
+    "bootstrap",
+    "admin"
+  ],
+  "license": "Apache",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "pages",
+    "index.html",
+    "/js"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "*",
+    "datatables": "*",
+    "holderjs": "*",
+    "jquery-validation": "*",
+    "underscore": "*",
+    "slimscroll": "*",
+    "fastclick": "*",
+    "font-awesome": "fontawesome#^4.6.1",
+    "jquery": ">=1.11.0 <3.0",
+    "jquery-ui": ">=1.11.0 <3.0",
+    "select2": "^4.0.3",
+    "matchHeight": "^0.7.0",
+    "bootstrap-datepicker": "^1.6.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.44",
+    "moment": "^2.17.1",
+    "twix": "https://github.com/icambron/twix.js.git#^1.1.3"
+  }
+}

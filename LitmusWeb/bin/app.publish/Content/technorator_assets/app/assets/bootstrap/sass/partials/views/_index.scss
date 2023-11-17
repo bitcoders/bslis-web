@@ -1,0 +1,88 @@
+/*----------  Welcome  ----------*/
+
+.welcome-container
+{
+	position: relative;
+	z-index: 111;
+	min-height: 100%;
+
+	@include background-defaults;
+
+	-webkit-background-position: top center;
+	-moz-background-position: top center;
+	-ms-background-position: top center;
+	-o-background-position: top center;
+	background-position: top center;
+
+	.welcome-content
+	{
+		padding: 50px 0;
+
+		/* @media (min-height: 800px) and (min-width: 1199px)
+		{
+			width: 100%;
+		
+			@include absolute-center(y);
+		} */
+
+		@include media-breakpoint-down(sm)
+		{
+			@include faded-background($white-color, 0.85);
+		}
+
+		@include media-breakpoint-down(xs)
+		{
+			padding: 35px 0px;
+		}
+	}
+
+	.welcome-title-container
+	{
+		text-align: center;
+		margin-bottom: 30px;
+
+		.welcome-title-inner
+		{
+			padding: 0 15px;
+			@include media-breakpoint-down(sm)
+			{
+				padding: 0 5px;
+			}
+		}
+
+		h1
+		{
+			@include heading-h4($color-01);
+
+			span
+			{
+				display: block;
+			}
+
+			@include media-breakpoint-down(sm)
+			{
+				font-size: $font-base;
+			}
+		}
+	}
+
+	.search-container
+	{
+		.search-inner
+		{
+			padding: 30px 20px;
+			background: $white-color;
+
+			@include media-breakpoint-down(sm)
+			{
+				padding: 0 5px;
+				background: none;
+			}
+		}
+
+		.location-toggler
+		{
+			margin-bottom: 15px;
+		}
+	}
+}

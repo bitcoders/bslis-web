@@ -1,0 +1,257 @@
+﻿@model LitmusWeb.Models.DailyAnalysisModel
+<div class="tab-pane fade show" id="Tab10" role="tabpanel" aria-labelledby="Tab-10(Other Data)">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row">
+                    <p class="card-description">Other Data</p><hr />
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.OverTimeEnggReplacement, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.OverTimeEnggReplacement)
+                                    @Html.ValidationMessageFor(x => x.OverTimeEnggReplacement, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.OverTimeEnggExtra, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.OverTimeEnggExtra)
+                                    @Html.ValidationMessageFor(x => x.OverTimeEnggExtra, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.OverTimeMfgReplacement, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.OverTimeMfgReplacement)
+                                    @Html.ValidationMessageFor(x => x.OverTimeMfgReplacement, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.OverTimeMfgExtra, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.OverTimeMfgExtra)
+                                    @Html.ValidationMessageFor(x => x.OverTimeMfgExtra, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreProcessChemicalQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreProcessChemicalQuantity)
+                                    @Html.ValidationMessageFor(x => x.StoreProcessChemicalQuantity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreProcessChemicalAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreProcessChemicalAmount)
+                                    @Html.ValidationMessageFor(x => x.StoreProcessChemicalAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreProcessChemicalPerBagRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreProcessChemicalPerBagRate)
+                                    @Html.ValidationMessageFor(x => x.StoreProcessChemicalPerBagRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreProcessChemicalPerTonCaneRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreProcessChemicalPerTonCaneRate)
+                                    @Html.ValidationMessageFor(x => x.StoreProcessChemicalPerTonCaneRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreBoilerChemicalQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreBoilerChemicalQuantity)
+                                    @Html.ValidationMessageFor(x => x.StoreBoilerChemicalQuantity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreBoilerChemicalAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreBoilerChemicalAmount)
+                                    @Html.ValidationMessageFor(x => x.StoreBoilerChemicalAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreBoilerChemicalPerBagRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreBoilerChemicalPerBagRate)
+                                    @Html.ValidationMessageFor(x => x.StoreBoilerChemicalPerBagRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreBoilerChemicalPerTonCaneRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreBoilerChemicalPerTonCaneRate)
+                                    @Html.ValidationMessageFor(x => x.StoreBoilerChemicalPerTonCaneRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreGreaseOilQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreGreaseOilQuantity)
+                                    @Html.ValidationMessageFor(x => x.StoreGreaseOilQuantity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreGreaseOilAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreGreaseOilAmount)
+                                    @Html.ValidationMessageFor(x => x.StoreGreaseOilAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreGreaseOilPerBagRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreGreaseOilPerBagRate)
+                                    @Html.ValidationMessageFor(x => x.StoreGreaseOilPerBagRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.StoreGreaseOilPerTonCaneRate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.StoreGreaseOilPerTonCaneRate)
+                                    @Html.ValidationMessageFor(x => x.StoreGreaseOilPerTonCaneRate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                @*<div class="form-label-group">
+
+                                        @Html.EditorFor(model => model.mill_house_trace, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.LabelFor(model => model.mill_house_trace)
+                                        @Html.ValidationMessageFor(x => x.mill_house_trace, "", new { @class = "text-danger" })
+
+                                    </div>*@
+                                <div class="floating-label">
+                                    <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" name="mill_house_trace" id="mill_house_trace">
+                                        @if (Model.mill_house_trace == false)
+                                        {
+                                            <option value="false" selected>No</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="false">No</option>
+                                        }
+                                        @if (Model.mill_house_trace == true)
+                                        {
+                                            <option value="true" selected>Yes</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="true">Yes</option>
+                                        }
+
+                                    </select>
+                                    <span class="highlight"></span>
+                                    @Html.LabelFor(m => m.mill_house_trace)
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.mill_house_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.mill_house_ph)
+                                    @Html.ValidationMessageFor(x => x.mill_house_ph, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.mill_house_pol, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.mill_house_pol)
+                                    @Html.ValidationMessageFor(x => x.mill_house_pol, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                @*<div class="form-label-group">*@
+                                @*@Html.LabelFor(model => model.under_oliver_filter_trace)
+                                    @Html.EditorFor(model => model.under_oliver_filter_trace, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.ValidationMessageFor(x => x.under_oliver_filter_trace, "", new { @class = "text-danger" })*@
+                                @*</div>*@
+
+                                <div class="floating-label">
+                                    <select class="floating-select" onclick="this.setAttribute('value', this.value);" value="" name="under_oliver_filter_trace" id="under_oliver_filter_trace">
+                                        @if (Model.under_oliver_filter_trace == false)
+                                        {
+                                            <option value="false" selected>No</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="false">No</option>
+                                        }
+                                        @if (Model.under_oliver_filter_trace == true)
+                                        {
+                                            <option value="true" selected>Yes</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="true">Yes</option>
+                                        }
+
+                                    </select>
+                                    <span class="highlight"></span>
+                                    @Html.LabelFor(m => m.under_oliver_filter_trace)
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.under_oliver_filter_ph, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.under_oliver_filter_ph)
+                                    @Html.ValidationMessageFor(x => x.under_oliver_filter_ph, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-label-group">
+                                    @Html.EditorFor(model => model.under_oliver_filter_pol, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.LabelFor(model => model.under_oliver_filter_pol)
+                                    @Html.ValidationMessageFor(x => x.under_oliver_filter_pol, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
