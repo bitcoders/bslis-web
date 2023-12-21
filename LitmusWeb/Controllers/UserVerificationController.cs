@@ -125,21 +125,23 @@ namespace LitmusWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult VerifyUser(FormCollection verificationForm)
+        [ActionName("VerifyUser")]
+        public ActionResult VerifyUserPost()
         {
             //UserVerification userVerification = new UserVerification();
             //MasterUser masterUser = new MasterUser();
-            bool result = AvRepository.VerifyUser(verificationForm["UserCode"], verificationForm["ActivationCode"]);
-            if (!result)
-            {
-                return View("Error");
-            }
-            else
-            {
-                Response.Write("Account verified");
-                ViewBag.userCode = verificationForm["UserCode"];
-                return RedirectToAction("Index", "Home");
-            }
+            //bool result = AvRepository.VerifyUser(verificationForm["UserCode"], verificationForm["ActivationCode"]);
+            //if (!result)
+            //{
+            //    return View("Error");
+            //}
+            //else
+            //{
+            //    Response.Write("Account verified");
+            //    ViewBag.userCode = verificationForm["UserCode"];
+            //    return RedirectToAction("Index", "Home");
+            //}
+            return RedirectToAction("Index", "Home");
         }
 
         [NonAction]

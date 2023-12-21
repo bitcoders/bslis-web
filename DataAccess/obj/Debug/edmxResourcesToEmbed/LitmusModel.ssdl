@@ -417,7 +417,7 @@
     <Property Name="ExceptionSolvedBy" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'SugarLab.dbo.FirebaseNotificationRights' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'uat_SugarLab.dbo.FirebaseNotificationRights' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="FirebaseNotificationRights">
     <Key>
       <PropertyRef Name="id" />
@@ -1107,7 +1107,7 @@ warning 6002: The table/view 'SugarLab.dbo.FirebaseNotificationRights' does not 
     <Property Name="mo_icumsa_unit" Type="numeric" Precision="10" Scale="2" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'SugarLab.dbo.NotificationsTickers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'uat_SugarLab.dbo.NotificationsTickers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="NotificationsTickers">
     <Key>
       <PropertyRef Name="id" />
@@ -3759,6 +3759,58 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
     <Parameter Name="unit_code" Type="int" Mode="In" />
     <Parameter Name="season_code" Type="int" Mode="In" />
     <Parameter Name="trans_date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="usp_dashboard_select_hourlyData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="company_code" Type="int" Mode="In" />
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="entry_date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="usp_dashboard_select_processedData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="company_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="history_days" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="user_code" Type="nvarchar" Mode="In" />
+    <Parameter Name="line_id" Type="int" Mode="In" />
+    <Parameter Name="rowCount" Type="int" Mode="InOut" />
+    <Parameter Name="message" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="usp_delete_twoHourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="line_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_select_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="entry_date" Type="date" Mode="In" />
+  </Function>
+  <Function Name="usp_update_unitSeasons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="crushing_start_datetime" Type="datetime" Mode="In" />
+    <Parameter Name="crushing_end_datetime" Type="datetime" Mode="In" />
+    <Parameter Name="new_mill_capacity" Type="numeric" Mode="In" />
+    <Parameter Name="old_mill_capacity" Type="numeric" Mode="In" />
+    <Parameter Name="report_start_hourMinuete" Type="time" Mode="In" />
+    <Parameter Name="disableDailyProcess" Type="bit" Mode="In" />
+    <Parameter Name="disableAdd" Type="bit" Mode="In" />
+    <Parameter Name="disableUpdate" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_update_unitSesasons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="crushing_start_datetime" Type="datetime" Mode="In" />
+    <Parameter Name="crushing_end_datetime" Type="datetime" Mode="In" />
+    <Parameter Name="new_mill_capacity" Type="numeric" Mode="In" />
+    <Parameter Name="old_mill_capacity" Type="numeric" Mode="In" />
+    <Parameter Name="report_start_hourMinuete" Type="time" Mode="In" />
+    <Parameter Name="disableDailyProcess" Type="bit" Mode="In" />
+    <Parameter Name="disableAdd" Type="bit" Mode="In" />
+    <Parameter Name="disableUpdate" Type="bit" Mode="In" />
   </Function>
   <EntityContainer Name="SugarLabModelStoreContainer">
     <EntitySet Name="AndroidMenues" EntityType="Self.AndroidMenues" Schema="dbo" store:Type="Tables" />

@@ -7,9 +7,16 @@
     <div class="content-wrapper">
         <div class="row">
             @Html.Partial("_PartialAnalysisDefaultValues")
+            
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
+                        @if (Model.Count() > 0)
+                        {
+                            @Html.Hidden("unit_code", Model.FirstOrDefault().unit_code)
+                            @Html.Hidden("user_code", Session["UserCode"].ToString())
+                        }
+
                         @if (!ViewBag.DayCompleted)
                         {
                             @Html.ActionLink("Add New", "Create", new { }, new { @class = "btn btn-success float-right" })
@@ -68,33 +75,46 @@
                                     <tbody>
                                         @foreach (var i in Model)
                                         {
-                                        <tr>
-                                            <td>@Html.ActionLink("Edit", "Edit", new { @id = i.id }, new { @class = "btn btn-sm btn-inverse-warning" }) </td>
-                                            <td>@i.entry_time</td>
-                                            <td>@i.new_mill_juice</td>
-                                            <td>@i.old_mill_juice</td>
-                                            <td>@i.juice_total</td>
-                                            <td>@i.new_mill_water</td>
-                                            <td>@i.old_mill_water</td>
-                                            <td>@i.water_total</td>
-                                            <td>@i.sugar_bags_L31</td>
-                                            <td>@i.sugar_bags_L30</td>
-                                            <td>@i.sugar_bags_M31</td>
-                                            <td>@i.sugar_bags_M30</td>
-                                            <td>@i.sugar_bags_S31</td>
-                                            <td>@i.sugar_bags_S30</td>
-                                            <td>@i.sugar_Biss</td>
-                                            <td>@i.sugar_bags_total</td>
-                                            <td>@i.export_sugar</td>
-                                            <td>@i.sugar_raw</td>
-                                            <td>@i.standing_truck</td>
-                                            <td>@i.standing_trippler</td>
-                                            <td>@i.standing_trolley</td>
-                                            <td>@i.standing_cart</td>
-                                            <td>@i.un_crushed_cane</td>
-                                            <td>@i.crushed_cane</td>
-                                            <td>@i.diverted_syrup_quantity</td>
-                                        </tr>
+                                            <tr>
+                                                @*<td>@Html.ActionLink("Edit", "Edit", new { @id = i.id }, new { @class = "btn btn-sm btn-inverse-warning" }) </td>*@
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="ddlAnalysesModification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Actions
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="ddlAnalysesModification">
+                                                            <h6 class="dropdown-header">Actions</h6>
+                                                            @Html.ActionLink("Edit", "Edit", new { @id = i.id }, new { @class = " dropdown-item btn-inverse-warning" })
+                                                            @*@Html.ActionLink("Delete", "DeleteStoppage", new { id = i.id }, new { @class = " dropdown-item btn-inverse-danger" })*@
+                                                            <input type="button" class="delete-button dropdown-item btn-inverse-danger" id="delete-@i.id" data-id="@i.id" value="Delete" />
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>@i.entry_time</td>
+                                                <td>@i.new_mill_juice</td>
+                                                <td>@i.old_mill_juice</td>
+                                                <td>@i.juice_total</td>
+                                                <td>@i.new_mill_water</td>
+                                                <td>@i.old_mill_water</td>
+                                                <td>@i.water_total</td>
+                                                <td>@i.sugar_bags_L31</td>
+                                                <td>@i.sugar_bags_L30</td>
+                                                <td>@i.sugar_bags_M31</td>
+                                                <td>@i.sugar_bags_M30</td>
+                                                <td>@i.sugar_bags_S31</td>
+                                                <td>@i.sugar_bags_S30</td>
+                                                <td>@i.sugar_Biss</td>
+                                                <td>@i.sugar_bags_total</td>
+                                                <td>@i.export_sugar</td>
+                                                <td>@i.sugar_raw</td>
+                                                <td>@i.standing_truck</td>
+                                                <td>@i.standing_trippler</td>
+                                                <td>@i.standing_trolley</td>
+                                                <td>@i.standing_cart</td>
+                                                <td>@i.un_crushed_cane</td>
+                                                <td>@i.crushed_cane</td>
+                                                <td>@i.diverted_syrup_quantity</td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -107,10 +127,12 @@
             </div>
         </div>
     </div>
-   
-                            
-@section scripts
+
+
+    @section scripts
     {
-    <script src="~/Scripts/Ajax/HourlyAnalysesAjax.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="~/Scripts/Ajax/HourlyAnalysesAjax.js"></script>
     }
+
 

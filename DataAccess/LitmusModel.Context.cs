@@ -1026,5 +1026,184 @@ namespace DataAccess
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
         }
+    
+        public virtual int usp_delete_hourlyAnalyses(Nullable<int> unit_code, string user_code, Nullable<int> line_id, ObjectParameter rowCount, ObjectParameter message)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var user_codeParameter = user_code != null ?
+                new ObjectParameter("user_code", user_code) :
+                new ObjectParameter("user_code", typeof(string));
+    
+            var line_idParameter = line_id.HasValue ?
+                new ObjectParameter("line_id", line_id) :
+                new ObjectParameter("line_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_delete_hourlyAnalyses", unit_codeParameter, user_codeParameter, line_idParameter, rowCount, message);
+        }
+    
+        public virtual int usp_delete_twoHourlyAnalyses(Nullable<int> line_id)
+        {
+            var line_idParameter = line_id.HasValue ?
+                new ObjectParameter("line_id", line_id) :
+                new ObjectParameter("line_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_delete_twoHourlyAnalyses", line_idParameter);
+        }
+    
+        public virtual int usp_update_unitSeasons(Nullable<System.Guid> id, Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> crushing_start_datetime, Nullable<System.DateTime> crushing_end_datetime, Nullable<decimal> new_mill_capacity, Nullable<decimal> old_mill_capacity, Nullable<System.TimeSpan> report_start_hourMinuete, Nullable<bool> disableDailyProcess, Nullable<bool> disableAdd, Nullable<bool> disableUpdate)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(System.Guid));
+    
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var crushing_start_datetimeParameter = crushing_start_datetime.HasValue ?
+                new ObjectParameter("crushing_start_datetime", crushing_start_datetime) :
+                new ObjectParameter("crushing_start_datetime", typeof(System.DateTime));
+    
+            var crushing_end_datetimeParameter = crushing_end_datetime.HasValue ?
+                new ObjectParameter("crushing_end_datetime", crushing_end_datetime) :
+                new ObjectParameter("crushing_end_datetime", typeof(System.DateTime));
+    
+            var new_mill_capacityParameter = new_mill_capacity.HasValue ?
+                new ObjectParameter("new_mill_capacity", new_mill_capacity) :
+                new ObjectParameter("new_mill_capacity", typeof(decimal));
+    
+            var old_mill_capacityParameter = old_mill_capacity.HasValue ?
+                new ObjectParameter("old_mill_capacity", old_mill_capacity) :
+                new ObjectParameter("old_mill_capacity", typeof(decimal));
+    
+            var report_start_hourMinueteParameter = report_start_hourMinuete.HasValue ?
+                new ObjectParameter("report_start_hourMinuete", report_start_hourMinuete) :
+                new ObjectParameter("report_start_hourMinuete", typeof(System.TimeSpan));
+    
+            var disableDailyProcessParameter = disableDailyProcess.HasValue ?
+                new ObjectParameter("disableDailyProcess", disableDailyProcess) :
+                new ObjectParameter("disableDailyProcess", typeof(bool));
+    
+            var disableAddParameter = disableAdd.HasValue ?
+                new ObjectParameter("disableAdd", disableAdd) :
+                new ObjectParameter("disableAdd", typeof(bool));
+    
+            var disableUpdateParameter = disableUpdate.HasValue ?
+                new ObjectParameter("disableUpdate", disableUpdate) :
+                new ObjectParameter("disableUpdate", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_unitSeasons", idParameter, unit_codeParameter, season_codeParameter, crushing_start_datetimeParameter, crushing_end_datetimeParameter, new_mill_capacityParameter, old_mill_capacityParameter, report_start_hourMinueteParameter, disableDailyProcessParameter, disableAddParameter, disableUpdateParameter);
+        }
+    
+        public virtual int usp_update_unitSesasons(Nullable<System.Guid> id, Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> crushing_start_datetime, Nullable<System.DateTime> crushing_end_datetime, Nullable<decimal> new_mill_capacity, Nullable<decimal> old_mill_capacity, Nullable<System.TimeSpan> report_start_hourMinuete, Nullable<bool> disableDailyProcess, Nullable<bool> disableAdd, Nullable<bool> disableUpdate)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(System.Guid));
+    
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var crushing_start_datetimeParameter = crushing_start_datetime.HasValue ?
+                new ObjectParameter("crushing_start_datetime", crushing_start_datetime) :
+                new ObjectParameter("crushing_start_datetime", typeof(System.DateTime));
+    
+            var crushing_end_datetimeParameter = crushing_end_datetime.HasValue ?
+                new ObjectParameter("crushing_end_datetime", crushing_end_datetime) :
+                new ObjectParameter("crushing_end_datetime", typeof(System.DateTime));
+    
+            var new_mill_capacityParameter = new_mill_capacity.HasValue ?
+                new ObjectParameter("new_mill_capacity", new_mill_capacity) :
+                new ObjectParameter("new_mill_capacity", typeof(decimal));
+    
+            var old_mill_capacityParameter = old_mill_capacity.HasValue ?
+                new ObjectParameter("old_mill_capacity", old_mill_capacity) :
+                new ObjectParameter("old_mill_capacity", typeof(decimal));
+    
+            var report_start_hourMinueteParameter = report_start_hourMinuete.HasValue ?
+                new ObjectParameter("report_start_hourMinuete", report_start_hourMinuete) :
+                new ObjectParameter("report_start_hourMinuete", typeof(System.TimeSpan));
+    
+            var disableDailyProcessParameter = disableDailyProcess.HasValue ?
+                new ObjectParameter("disableDailyProcess", disableDailyProcess) :
+                new ObjectParameter("disableDailyProcess", typeof(bool));
+    
+            var disableAddParameter = disableAdd.HasValue ?
+                new ObjectParameter("disableAdd", disableAdd) :
+                new ObjectParameter("disableAdd", typeof(bool));
+    
+            var disableUpdateParameter = disableUpdate.HasValue ?
+                new ObjectParameter("disableUpdate", disableUpdate) :
+                new ObjectParameter("disableUpdate", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_unitSesasons", idParameter, unit_codeParameter, season_codeParameter, crushing_start_datetimeParameter, crushing_end_datetimeParameter, new_mill_capacityParameter, old_mill_capacityParameter, report_start_hourMinueteParameter, disableDailyProcessParameter, disableAddParameter, disableUpdateParameter);
+        }
+    
+        public virtual ObjectResult<usp_select_hourlyAnalyses_Result> usp_select_hourlyAnalyses(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalyses_Result>("usp_select_hourlyAnalyses", unit_codeParameter, season_codeParameter, entry_dateParameter);
+        }
+    
+        public virtual ObjectResult<usp_dashboard_select_hourlyData_Result> usp_dashboard_select_hourlyData(Nullable<int> company_code, Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date)
+        {
+            var company_codeParameter = company_code.HasValue ?
+                new ObjectParameter("company_code", company_code) :
+                new ObjectParameter("company_code", typeof(int));
+    
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_dashboard_select_hourlyData_Result>("usp_dashboard_select_hourlyData", company_codeParameter, unit_codeParameter, season_codeParameter, entry_dateParameter);
+        }
+    
+        public virtual int usp_dashboard_select_processedData(Nullable<int> company_code, Nullable<int> season_code, Nullable<int> history_days)
+        {
+            var company_codeParameter = company_code.HasValue ?
+                new ObjectParameter("company_code", company_code) :
+                new ObjectParameter("company_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var history_daysParameter = history_days.HasValue ?
+                new ObjectParameter("history_days", history_days) :
+                new ObjectParameter("history_days", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_dashboard_select_processedData", company_codeParameter, season_codeParameter, history_daysParameter);
+        }
     }
 }

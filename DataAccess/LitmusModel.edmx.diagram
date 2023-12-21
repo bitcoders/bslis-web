@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="86f488a6a9b346bd82b8f046c50f4f97" Name="Diagram1" ZoomLevel="35">
+      <Diagram DiagramId="86f488a6a9b346bd82b8f046c50f4f97" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="SugarLabModel.AndroidMenue" Width="1.5" PointX="7.75" PointY="4.75" />
         <EntityTypeShape EntityType="SugarLabModel.ExceptionLog" Width="1.5" PointX="5.75" PointY="8.75" />
         <EntityTypeShape EntityType="SugarLabModel.KeySampleAnalys" Width="1.5" PointX="8.25" PointY="57.875" />
         <EntityTypeShape EntityType="SugarLabModel.MasterCompany" Width="1.5" PointX="0.75" PointY="53.625" />
         <EntityTypeShape EntityType="SugarLabModel.MasterDepartment" Width="1.5" PointX="0.75" PointY="6" />
         <EntityTypeShape EntityType="SugarLabModel.MasterDesignation" Width="1.5" PointX="3" PointY="4.875" />
-        <EntityTypeShape EntityType="SugarLabModel.MasterMenu" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SugarLabModel.MasterMenu" Width="1.5" PointX="0.75" PointY="0.5" />
         <EntityTypeShape EntityType="SugarLabModel.MasterParameterCategory" Width="1.5" PointX="3.75" PointY="71.625" />
         <EntityTypeShape EntityType="SugarLabModel.MasterParameterSubCategory" Width="1.5" PointX="6" PointY="71.125" />
         <EntityTypeShape EntityType="SugarLabModel.MasterSeason" Width="1.5" PointX="0.75" PointY="9.75" />

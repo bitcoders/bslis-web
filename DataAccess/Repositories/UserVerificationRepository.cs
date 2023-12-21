@@ -154,12 +154,34 @@ namespace DataAccess.Repositories
                         {
                             RegisteredDevice user = new RegisteredDevice();
                             user = entity.RegisteredDevices.Where(x => x.UserCode == uv.UserCode).FirstOrDefault();
-                            user.IsActive = true;
-                            entity.SaveChanges();
+                            if(user != null)
+                            {
+                                user.IsActive = true;
+                                entity.SaveChanges();
 
-                            entity.UserVerifications.Remove(uv);
-                            entity.SaveChanges();
-                            status = true;
+                                entity.UserVerifications.Remove(uv);
+                                entity.SaveChanges();
+                                status = true;
+                            }
+                            else
+                            {
+                                // check for user in masterusers table i.e. user is registered for web application
+                                MasterUser webUsers = new MasterUser();
+                                webUsers = entity.MasterUsers.Where(x=> x.Code == uv.UserCode).FirstOrDefault();
+                                {
+                                    if(webUsers != null)
+                                    {
+                                        webUsers.IsActive = true;
+                                        webUsers.EmailVerified = true;
+                                        entity.SaveChanges();
+                                        entity.UserVerifications.Remove(uv);
+                                        entity.SaveChanges();
+                                        status = true;
+                                       
+                                    }
+                                }
+                            }
+                            
                         }
                         else
                         {

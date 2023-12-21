@@ -5,6 +5,7 @@ using DataAccess.Interfaces;
 using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 using System.Web;
+using System.Data.Entity.Core.Objects;
 
 namespace DataAccess.Repositories.AnalysisRepositories
 {
@@ -47,9 +48,23 @@ namespace DataAccess.Repositories.AnalysisRepositories
             }
         }
 
-        public bool DeleteHourlyAnalysis(int UnitCode, int SeasonCode, string AnalysisDate, int AnalysisHour)
+        public (bool success, string message) DeleteHourlyAnalysis(int unit_code, string user_code, int lineId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ObjectParameter rowCount = new ObjectParameter("rowCount", typeof(Int32));
+                ObjectParameter message = new ObjectParameter("message", typeof(string));  
+                Db.usp_delete_hourlyAnalyses(unit_code, user_code, lineId, rowCount, message);
+                int rowCountValue = (int)rowCount.Value;
+                string messageValue = (string)message.Value;
+                
+                return (rowCountValue > 0, messageValue);
+            }
+            catch (Exception ex)
+            {
+                new Exception(ex.Message);
+                return (false,  ex.ToString());
+            }
         }
 
         public bool EditHourlyAnalysis(HourlyAnalys hourlyAnalysis)

@@ -5,6 +5,7 @@ using LitmusWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace LitmusWeb.Controllers
@@ -66,7 +67,7 @@ namespace LitmusWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorizationFilter("Super Admin")]
-        public ActionResult Create(Models.MasterUserModel masterUserModel)
+        public async Task<ActionResult> Create(Models.MasterUserModel masterUserModel)
         {
             if (Session["UserCode"] == null)
             {
@@ -102,19 +103,26 @@ namespace LitmusWeb.Controllers
                     UnitRights = masterUserModel.UnitRights,
                     BaseUnit = masterUserModel.BaseUnit,
                     Role = masterUserModel.Role,
-                    DashboardUnits = masterUserModel.DashboardUnits
+                    DashboardUnits = masterUserModel.DashboardUnits,
+                    EntryAllowedSeasons = masterUserModel.EntryAllowedSeasons,
+                    ModificationAllowedForSeasons = masterUserModel.ModificationAllowedForSeasons,
+                    ViewAllowedForSeasons = masterUserModel.ViewAllowedForSeasons
                 };
 
                 string randomUrlCode = crypto.GenerateSalt(5, 6);
+                Guid randomString = Guid.NewGuid();
                 DataAccess.UserVerification VerificationModel = new UserVerification()
                 {
                     UnitCode = masterUserModel.UnitCode,
                     UserCode = masterUserModel.Code,
                     ActivationCode = crypto.GenerateSalt(2, 4),
-                    ActivationLink = Request.Url.GetLeftPart(UriPartial.Authority) + "/UserVerification/verifyUser/" + masterUserModel.Code + "/" + randomUrlCode,
+                    Token = randomString.ToString(),
+                    //ActivationLink = Request.Url.GetLeftPart(UriPartial.Authority) + "/UserVerification/verifyUser/" + masterUserModel.Code + "/" + randomUrlCode,
+                    ActivationLink = Request.Url.GetLeftPart(UriPartial.Authority) + "/UserVerification/verifyUser/" + randomString.ToString(),
                     ActivationValidity = DateTime.Now.AddMinutes(60),
                     ActivatedAt = DateTime.Now,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    
                 };
                 bool result = MasterUserRepository.addMasterUser(masterUser);
                 bool resultVerification = UserVerificationRepository.AddUserVerification(VerificationModel);
@@ -126,9 +134,9 @@ namespace LitmusWeb.Controllers
                 }
                 // send varification email and then return to index page
                 EmailRepository emailRepository = new EmailRepository();
-                string emailResult = emailRepository.SendVerificationMail(masterUserModel.Email
+                string emailResult = await emailRepository.SendVerificationMail(masterUserModel.Email
                     , masterUserModel.FirstName, VerificationModel.ActivationLink
-                    , VerificationModel.ActivationCode, masterUserModel.Code, masterUserModel.Password).Result;
+                    , VerificationModel.ActivationCode, masterUserModel.Code, masterUserModel.Password);
                 return RedirectToAction("Index");
             }
             return View();
@@ -169,7 +177,10 @@ namespace LitmusWeb.Controllers
                 UnitRights = masterUser.UnitRights,
                 BaseUnit = masterUser.BaseUnit,
                 Role = masterUser.Role,
-                DashboardUnits = masterUser.DashboardUnits
+                DashboardUnits = masterUser.DashboardUnits,
+                ViewAllowedForSeasons = masterUser.ViewAllowedForSeasons,
+                ModificationAllowedForSeasons = masterUser.ModificationAllowedForSeasons,
+                EntryAllowedSeasons = masterUser.EntryAllowedSeasons,
             };
             return View(masterUserModel);
 
@@ -219,6 +230,9 @@ namespace LitmusWeb.Controllers
                 Role = mum.Role,
                 BaseUnit = mum.BaseUnit,
                 DashboardUnits = mum.DashboardUnits,
+                EntryAllowedSeasons = mum.EntryAllowedSeasons,
+                ViewAllowedForSeasons = mum.ViewAllowedForSeasons,
+                ModificationAllowedForSeasons = mum.ModificationAllowedForSeasons
 
             };
 

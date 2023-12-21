@@ -50,5 +50,27 @@ namespace DataAccess.Repositories
             }
             return config;
         }
+
+        /// <summary>
+        /// get Email configuration by its priority sequence
+        /// </summary>
+        /// <param name="prioritySequence"></param>
+        /// <returns></returns>
+        public EmailConfiguration GetEmailConfigrationByEmailAddress(string emailAddress)
+        {
+            EmailConfiguration config = new EmailConfiguration();
+            using (SugarLabEntities Db = new SugarLabEntities())
+            {
+                try
+                {
+                    config = Db.EmailConfigurations.Where(@x => x.EmailAddress == emailAddress).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    new Exception(ex.Message);
+                }
+            }
+            return config;
+        }
     }
 }

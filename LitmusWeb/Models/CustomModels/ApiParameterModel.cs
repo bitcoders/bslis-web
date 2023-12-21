@@ -98,4 +98,21 @@ namespace LitmusWeb.Models.CustomModels
         public int seasonCode { get; set; }
         public DateTime reportate { get; set; }
     }
+
+    public class DashboardApiParam
+    {
+        public string user_code { get; set; }
+        public int company_code { get; set; }
+        public int unit_code { get; set; }
+        public int season_code { get; set; }
+        public DateTime entry_date { get; set; }
+    }
+
+    public class DashboardProcessedDataApiParam
+    {
+        public string user_code { get; set; }
+        public int company_code { get; set; }
+        public int season_code { get; set; }
+        public int history_days { get; set; }
+    }
 }

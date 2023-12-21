@@ -3,6 +3,16 @@
     "appInsights1": {
       "type": "appInsights.sdk",
       "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "",
+      "secretStore": null,
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:SugarLab",
+      "dynamicId": null
     }
   }
 }

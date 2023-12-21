@@ -1,13 +1,19 @@
 ﻿using DataAccess;
+using DataAccess.CustomModels.Reports;
 using DataAccess.Repositories;
 using DataAccess.Repositories.AnalysisRepositories;
+using iText.Layout.Element;
 using LitmusWeb.Models;
 using LitmusWeb.Models.CustomModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.WebSockets;
+
 namespace LitmusWeb.ApiControllers
 {
     public class DashBoardApiController : ApiController
@@ -85,5 +91,147 @@ namespace LitmusWeb.ApiControllers
             return Request.CreateResponse(HttpStatusCode.OK, x);
         }
 
+
+        [HttpPost]
+        [ActionName(name: "GetHourlyData")]
+        [Route("api/DashBoardApi/GetHourlyData")]
+        public HttpResponseMessage GetHourlyData([FromBody] DashboardApiParam param )
+        {
+            List<DashboardModel> modelList = new List<DashboardModel>();
+            try
+            {
+                DashboardRepository dRepo = new DashboardRepository();
+                var data = dRepo.GetHourlyDataSummary(param.user_code, param.company_code, param.unit_code, param.season_code, param.entry_date);
+                if(data != null)
+                {
+                    foreach(var d in data)
+                    {
+                        DashboardModel m = new DashboardModel()
+                        {
+                            UnitCode = d.UnitCode,
+                            Id = d.Id,
+                            EntryDate = d.EntryDate,
+                            EntryTime = d.EntryTime,
+                            UnitName = d.UnitName,
+                            CompanyCode = d.CompanyCode,
+                            CompanyName = d.CompanyName,
+                            CaneCrushed = d.CaneCrushed,
+                            SugarBagsTotal = d.SugarBagsTotal,
+                            WaterTotal = d.WaterTotal,
+                            JuiceTotal = d.JuiceTotal,
+                            CaneDiverted = d.CaneDiverted,
+                            DivertedSyrup = d.DivertedSyrup
+                        };
+                        modelList.Add(m);
+                    }
+                }
+                var unitList = modelList.Select(x=> new { x.UnitCode, x.UnitName}).Distinct().ToList();
+                List<UnitWiseHourlDataResult> resultList = new List<UnitWiseHourlDataResult>();
+               // List<HourlyData> hourlyData = new List<HourlyData>();
+                foreach( var x in unitList)
+                {
+                    List<HourlyData> hourlyData = data.Where(w => w.UnitCode == x.UnitCode).Select(d => new HourlyData
+                    {
+                        hour = d.EntryTime.ToString(),
+                        value = d.CaneCrushed.ToString()
+                    }).ToList();
+
+                    UnitWiseHourlDataResult temp = new UnitWiseHourlDataResult()
+                    {
+                        unitName = x.UnitName,
+                        hourlyValues = hourlyData
+                    };
+                    resultList.Add(temp);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, resultList);
+            }
+            catch(Exception ex) {
+                new Exception(ex.Message);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,$"Error {ex.Message}");
+            }
+        }
+
+        [HttpPost]
+        [ActionName(name: "GetDashboardDaysummary")]
+        [Route("api/DashBoardApi/GetDashboardDaysummary")]
+        public HttpResponseMessage GetDashboardDaysummary([FromBody] DashboardProcessedDataApiParam param)
+        {
+            DashboardRepository dRepo = new DashboardRepository();
+            List<DashboardProcessedData> modelList = new List<DashboardProcessedData>();
+            try
+            {
+                var data = dRepo.GetProcessedDataSummary(param.user_code, param.company_code, param.season_code, param.history_days);
+                if (data != null)
+                {
+                    foreach (var d in data)
+                    {
+                        DashboardProcessedData temp = new DashboardProcessedData()
+                        {
+                            id = d.id,
+                            entry_date = d.entry_date,
+                            unit_code = d.unit_code,
+                            unit_name = d.unit_name,
+                            company_code = d.company_code,
+                            company_name = d.company_name,
+                            cane_crushed = d.cane_crushed,
+                            estimated_sugar_percent_cane = d.estimated_sugar_percent_cane,
+                            estimated_recovery_on_syrup = d.estimated_recovery_on_syrup,
+                            estimated_sugar_percent_on_b_heavy = d.estimated_sugar_percent_on_b_heavy,
+                            estimated_sugar_percent_on_c_heavy = d.estimated_sugar_percent_on_c_heavy,
+                            estimated_sugar_percent_on_raw_sugar = d.estimated_sugar_percent_on_raw_sugar,
+                            total_losses_percent_cane = d.total_losses_percent_cane,
+                            unknwon_loss_percent_cane = d.unknwon_loss_percent_cane,
+                            steam_percent_cane = d.steam_percent_cane,
+                            total_bagasse_percent_cane = d.total_bagasse_percent_cane,
+                            estimated_molasses_percent_cane = d.estimated_molasses_percent_cane,
+                            total_sugar_bagged = d.total_sugar_bagged,
+                            fiber_percent_cane = d.fiber_percent_cane,
+                            pol_in_cane = d.pol_in_cane,
+                        };
+                        modelList.Add(temp);
+                    }
+                    var unitList = modelList.Select(x => new { x.unit_code, x.unit_name }).Distinct().ToList();
+                    List<UnitWiseResult> resultList = new List<UnitWiseResult>();
+                    foreach (var x in unitList)
+                    {
+                        List<Result> result = data.Where(w => w.unit_code == x.unit_code).Select(d => new Result
+                        {
+                            entry_date = d.entry_date,
+                            value = d.cane_crushed.ToString(),
+                            cane_crushed = d.cane_crushed,
+                            estimated_sugar_percent_cane = d.estimated_sugar_percent_cane,
+                            estimated_sugar_percent_on_b_heavy = d.estimated_sugar_percent_on_b_heavy,
+                            esimated_recovery_on_syrup = d.estimated_recovery_on_syrup,
+                            total_losses_percent = d.total_losses_percent_cane,
+                            unknwown_loss = d.unknwon_loss_percent_cane,
+                            steam_percent_cane = d.steam_percent_cane,
+                            total_bagasse_percent_cane = d.total_bagasse_percent_cane,
+                            estimated_molasses_percent_cane = d.estimated_molasses_percent_cane,
+                            total_sugar_bagged = d.total_sugar_bagged,
+                            fiber_percent_cane = d.fiber_percent_cane,
+                            pol_in_cane = d.pol_in_cane,
+                        }).ToList();
+
+                        UnitWiseResult temp = new UnitWiseResult()
+                        {
+                            unit_name = x.unit_name,
+                            results = result
+                        };
+                        resultList.Add(temp);
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK, resultList);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NoContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                new Exception(ex.Message);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, $"Error {ex.Message}");
+            }
+            
+        }
     }
 }

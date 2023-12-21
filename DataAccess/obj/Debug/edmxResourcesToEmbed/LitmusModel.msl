@@ -6234,5 +6234,74 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_delete_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_delete_hourlyAnalyses" />
+    <FunctionImportMapping FunctionImportName="usp_delete_twoHourlyAnalyses" FunctionName="SugarLabModel.Store.usp_delete_twoHourlyAnalyses" />
+    <FunctionImportMapping FunctionImportName="usp_update_unitSeasons" FunctionName="SugarLabModel.Store.usp_update_unitSeasons" />
+    <FunctionImportMapping FunctionImportName="usp_update_unitSesasons" FunctionName="SugarLabModel.Store.usp_update_unitSesasons" />
+    <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalyses">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalyses_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+          <ScalarProperty Name="season_code" ColumnName="season_code" />
+          <ScalarProperty Name="entry_Date" ColumnName="entry_Date" />
+          <ScalarProperty Name="entry_time" ColumnName="entry_time" />
+          <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
+          <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
+          <ScalarProperty Name="juice_total" ColumnName="juice_total" />
+          <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
+          <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
+          <ScalarProperty Name="water_total" ColumnName="water_total" />
+          <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
+          <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
+          <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
+          <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
+          <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
+          <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
+          <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
+          <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
+          <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
+          <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
+          <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
+          <ScalarProperty Name="sugar_bags_total" ColumnName="sugar_bags_total" />
+          <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
+          <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
+          <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
+          <ScalarProperty Name="crtd_dt" ColumnName="crtd_dt" />
+          <ScalarProperty Name="crtd_by" ColumnName="crtd_by" />
+          <ScalarProperty Name="updt_dt" ColumnName="updt_dt" />
+          <ScalarProperty Name="updt_by" ColumnName="updt_by" />
+          <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
+          <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
+          <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
+          <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
+          <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
+          <ScalarProperty Name="crushed_cane" ColumnName="crushed_cane" />
+          <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
+          <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
+          <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_dashboard_select_hourlyData" FunctionName="SugarLabModel.Store.usp_dashboard_select_hourlyData">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SugarLabModel.usp_dashboard_select_hourlyData_Result">
+          <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="EntryTime" ColumnName="EntryTime" />
+          <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CaneCrushed" ColumnName="CaneCrushed" />
+          <ScalarProperty Name="SugarBagsTotal" ColumnName="SugarBagsTotal" />
+          <ScalarProperty Name="WaterTotal" ColumnName="WaterTotal" />
+          <ScalarProperty Name="JuiceTotal" ColumnName="JuiceTotal" />
+          <ScalarProperty Name="CaneDiverted" ColumnName="CaneDiverted" />
+          <ScalarProperty Name="DivertedSyrup" ColumnName="DivertedSyrup" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_dashboard_select_processedData" FunctionName="SugarLabModel.Store.usp_dashboard_select_processedData" />
   </EntityContainerMapping>
 </Mapping>

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net.Configuration;
+using System.Web.Configuration;
+using System.Net;
 
 namespace DataAccess.Repositories
 {
@@ -13,39 +17,35 @@ namespace DataAccess.Repositories
         {
             cryptoRepository = new CryptographyRepository();
         }
-        public async Task<string> SendVerificationMail(string EmailTo, string EmailToName, string VarficationToken, string verificationOTP, string userCode, string userPassword, string subject= "Birla Sugar Lab Information System Account Verification!")
+        public  async Task<string> SendVerificationMail(string EmailTo, string EmailToName, string VarficationToken, string verificationOTP, string userCode, string userPassword, string subject= "Birla Sugar Lab Information System Account Verification!")
         {
-            //string randomString = cryptoRepository.GenerateSalt();
             string verificationLink = VarficationToken;
-            //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
-            //var apiKey = Environment.GetEnvironmentVariable("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");
-            string apiKey = @"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";
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("bitcodesindia@gmail.com", "B.S.L.I.S Admin");
-            var to = new EmailAddress(EmailTo, EmailToName);
-            var plainTextContent = "";
+            
             var htmlContent = ConfirmEmailTemplate(verificationLink, verificationOTP, EmailToName, userCode, userPassword);
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            //var response = await client.SendEmailAsync(msg);
-            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
-            return response.StatusCode.ToString(); 
+            
+            if( await SendEmailAsync(EmailTo, htmlContent, subject, true))
+            {
+                return "Email send sucessfully";
+            }             
+           else
+            {
+                return "Failed to send email";
+            }
 
         }
         public async Task<string> SendDeviceRegistrationMail(string EmailTo, string EmailToName, string userCode, string userPassword, string subject = "Registration Successful on BSLIS Android App")
         {
-            //string randomString = cryptoRepository.GenerateSalt();
-            //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
-            //var apiKey = Environment.GetEnvironmentVariable("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");
-            string apiKey = @"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";
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("bitcodesindia@outlook.com", "B.S.L.I.S Admin");
-            var to = new EmailAddress(EmailTo, EmailToName);
-            var plainTextContent = "";
+            
             var htmlContent = DeviceRegistrationEmailTemplate(userCode, userPassword);
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            //var response = await client.SendEmailAsync(msg);
-            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
-            return response.StatusCode.ToString();
+            bool result = await SendEmailAsync(EmailTo,htmlContent,subject,true);
+            if(result)
+            {
+                return "Email sent sucessfully";
+            }
+            else
+            {
+                return "Failed to send email.";
+            }
 
         }
         private string ConfirmEmailTemplate(string verificationUrl, string OTP, string Name, string UserCode, string UserPassword)
@@ -532,6 +532,39 @@ namespace DataAccess.Repositories
         /// <param name="subject"></param>
         /// <returns></returns>
         
+
+        public async  Task<bool> SendEmailAsync(string to, string body, string subject = null,  bool isBodyHtml = false  )
+        {
+            EmailConfigurationRepository emailConfigRepo = new EmailConfigurationRepository();
+            var emailConfig = emailConfigRepo.GetEmailConfigrationByEmailAddress("admin@bslis.com");
+            try
+            {
+                using(MailMessage message = new MailMessage(emailConfig.EmailAddress, to)) 
+                {
+                    message.Subject = subject;
+                    message.Body = body;
+                    message.IsBodyHtml = isBodyHtml;
+                    using(SmtpClient smtpclient = new SmtpClient(emailConfig.SmtpHost, emailConfig.SmtpPort))
+
+                    {
+                        smtpclient.Credentials = new NetworkCredential(emailConfig.EmailAddress, emailConfig.Password);
+                        smtpclient.EnableSsl = emailConfig.EnabledSSL;
+                        await smtpclient.SendMailAsync(message);
+                    }
+                    //SmtpClient smtpClient = new SmtpClient();
+                    //smtpClient.Host = emailConfig.SmtpHost;
+                    //smtpClient.EnableSsl = emailConfig.EnabledSSL;
+                    //NetworkCredential credential = new NetworkCredential(emailConfig.EmailAddress, emailConfig.Password);
+                    //smtpClient.Port = emailConfig.SmtpPort;
+                    //smtpClient.Send(message);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
                 

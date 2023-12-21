@@ -100,23 +100,23 @@
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\lib\net452\Microsoft.AI.DependencyCollector.dll</HintPath>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.22.0.997, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.22.0\lib\net452\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.21.0\lib\net452\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.22.0.997, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.22.0\lib\net452\Microsoft.AI.PerfCounterCollector.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\lib\net452\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.22.0.997, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.22.0\lib\net452\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.21.0\lib\net452\Microsoft.AI.Web.dll</HintPath>
+    <Reference Include="Microsoft.AI.Web, Version=2.22.0.997, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.22.0\lib\net452\Microsoft.AI.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\lib\net452\Microsoft.AI.WindowsServer.dll</HintPath>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.22.0.997, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.22.0\lib\net452\Microsoft.AI.WindowsServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.21.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.22.0.997, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.22.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights.TraceListener, Version=2.21.0.429, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.TraceListener.2.21.0\lib\net452\Microsoft.ApplicationInsights.TraceListener.dll</HintPath>
@@ -264,7 +264,9 @@
     <Content Include="Content\MainContent\css\vertical-layout-dark\style.css" />
     <Content Include="Content\MainContent\css\vertical-layout-light\style.css" />
     <Content Include="Content\MainContent\css\vertical-layout-light\style.min.css" />
+    <Content Include="Content\MainContent\images\animated\loading.gif" />
     <Content Include="Content\MainContent\images\auth\lockscreen-bg.jpg" />
+    <Content Include="Content\MainContent\images\auth\login-bg-old.jpg" />
     <Content Include="Content\MainContent\images\auth\login-bg.jpg" />
     <Content Include="Content\MainContent\images\auth\register-bg.jpg" />
     <Content Include="Content\MainContent\images\birla-favicon.ico" />
@@ -390,6 +392,7 @@
     <Content Include="Content\MainContent\images\sprites\jsgrid-icons.png" />
     <Content Include="Content\MainContent\images\sprites\red.png" />
     <Content Include="Content\MainContent\images\sprites\yellow.png" />
+    <Content Include="Content\MainContent\img\birla-favicon.ico" />
     <Content Include="Content\MainContent\img\blog-details\1.jpg" />
     <Content Include="Content\MainContent\img\clear.png" />
     <Content Include="Content\MainContent\img\contact\1.jpg" />
@@ -405,6 +408,8 @@
     <Content Include="Content\MainContent\img\green1.png" />
     <Content Include="Content\MainContent\img\loading.gif" />
     <Content Include="Content\MainContent\img\logo\Avadh-mini-Logo.png" />
+    <Content Include="Content\MainContent\img\logo\birla-sugar.jpg" />
+    <Content Include="Content\MainContent\img\logo\birlasn.jpg" />
     <Content Include="Content\MainContent\img\logo\logo.png" />
     <Content Include="Content\MainContent\img\logo\logosn.png" />
     <Content Include="Content\MainContent\img\logo\Magadh-mini-Logo.png" />
@@ -424,6 +429,7 @@
     <Content Include="Content\MainContent\img\profile\1.jpg" />
     <Content Include="Content\MainContent\img\profile\cb-patodia-1.jpg" />
     <Content Include="Content\MainContent\img\profile\DK Sharma.jpg" />
+    <Content Include="Content\MainContent\img\profile\karansingh.jpg" />
     <Content Include="Content\MainContent\img\profile\pankaj-01.jpg" />
     <Content Include="Content\MainContent\img\profile\ravi-01.jpeg" />
     <Content Include="Content\MainContent\img\profile\sukhbir-singh.jpg" />
@@ -1752,6 +1758,8 @@
     <Content Include="Content\MainContent\vendors\typeahead.js\typeahead.bundle.min.js" />
     <Content Include="Content\MainContent\vendors\x-editable\bootstrap-editable.css" />
     <Content Include="Content\MainContent\vendors\x-editable\bootstrap-editable.min.js" />
+    <Content Include="Content\technorator_assets\app\assets\.gitignore" />
+    <Content Include="Content\technorator_assets\app\assets\bootstrap\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\bootstrap\index.html" />
     <Content Include="Content\technorator_assets\app\assets\bootstrap\javascripts\bootstrap-sprockets.js" />
     <Content Include="Content\technorator_assets\app\assets\bootstrap\javascripts\bootstrap.js" />
@@ -2026,10 +2034,13 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\Flex-Slider\respond.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\Flex-Slider\theme.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\Flex-Slider\wow.min.js" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.gitattributes" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\gulpfile.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\holder.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\holder.min.js" />
@@ -2050,18 +2061,21 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\src\lib\vendor\querystring.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\src\meteor\package.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\src\meteor\shim.js" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\detach.html" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\holder.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\image.jpg" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\index.html" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\index.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\phantom.js" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\fps.html" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\index.html" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\releases\holder-master\holder.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\testcase.html" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\runner.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\index.html" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\jquery-ui.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\jquery-ui.min.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\themes\base\accordion.css" />
@@ -2800,6 +2814,8 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\matchHeight\gulpfile.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\matchHeight\jquery.matchHeight-min.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\matchHeight\jquery.matchHeight.js" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.gitattributes" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\feature-detects\ambientlight.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\feature-detects\applicationcache.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\feature-detects\audio.js" />
@@ -3066,6 +3082,7 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\lib\generate-banner.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\lib\metadata.js" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\lib\options.js" />
+    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\.gitattributes" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\Modernizr 2 Logo.png" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\Modernizr 2 Logo.svg" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\Modernizr-2-Logo-vertical-big.png" />
@@ -3219,6 +3236,8 @@
     <Content Include="Content\technorator_assets\app\listing.php" />
     <Content Include="Content\technorator_assets\defaults\css\app.css" />
     <Content Include="Content\technorator_assets\defaults\js\app.js" />
+    <Content Include="Content\technorator_assets\panel\.gitignore" />
+    <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker.standalone.css" />
@@ -3295,7 +3314,6 @@
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\locales\bootstrap-datepicker.zh-TW.min.js" />
-    <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\conf.py" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\requirements.txt" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\_screenshots\demo_head.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\_screenshots\markup_component.html" />
@@ -3528,10 +3546,13 @@
     <Content Include="Content\technorator_assets\panel\bower_components\eonasdan-bootstrap-datetimepicker\src\nuget\NuGet.exe" />
     <Content Include="Content\technorator_assets\panel\bower_components\eonasdan-bootstrap-datetimepicker\tasks\bump_version.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\fastclick\lib\fastclick.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.gitattributes" />
+    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\gulpfile.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\holder.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\holder.min.js" />
@@ -3552,17 +3573,20 @@
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\src\lib\vendor\querystring.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\src\meteor\package.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\src\meteor\shim.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\detach.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\holder.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\image.jpg" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\index.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\index.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\phantom.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\fps.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\index.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\releases\holder-master\holder.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\testcase.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\runner.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\jquery-ui.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\jquery-ui.min.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\themes\base\accordion.css" />
@@ -4744,6 +4768,7 @@
     <Content Include="Content\technorator_assets\panel\bower_components\moment\templates\default.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\moment\templates\locale-header.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\moment\templates\test-header.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\select2\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\dist\css\select2.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\dist\css\select2.min.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\dist\js\i18n\ar.js" />
@@ -4797,6 +4822,7 @@
     <Content Include="Content\technorator_assets\panel\bower_components\select2\dist\js\select2.full.min.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\dist\js\select2.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\dist\js\select2.min.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\announcements-4.0.html" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\browserconfig.xml" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\community.html" />
@@ -5095,6 +5121,8 @@
     <Content Include="Content\technorator_assets\panel\bower_components\slimscroll\examples\style.css" />
     <Content Include="Content\technorator_assets\panel\bower_components\slimscroll\jquery.slimscroll.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Content\technorator_assets\panel\bower_components\twix\.gitattributes" />
+    <Content Include="Content\technorator_assets\panel\bower_components\twix\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\dist\twix.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\dist\twix.min.js" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\package.js" />
@@ -5605,10 +5633,12 @@
     <Content Include="Content\technorator_assets\panel\plugins\uploader\js\vendor\jquery.ui.widget.js" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-go\static\favicon.ico" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-go\static\robots.txt" />
-    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-python\main.py" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-python\static\favicon.ico" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-python\static\robots.txt" />
+    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\.gitignore" />
+    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\public\files\thumbnail\.gitignore" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\server.js" />
+    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\tmp\.gitignore" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\php\index.php" />
     <Content Include="Content\technorator_assets\panel\stylesheets\admin.css" />
     <Content Include="Content\technorator_assets\panel\stylesheets\bootstrap.css" />
@@ -5621,53 +5651,62 @@
     <Content Include="Content\technorator_assets\util\js\util-uploader.js" />
     <Content Include="Content\technorator_assets\util\js\util.js" />
     <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config" />
+    <Content Include="ReportDownload\RT-8\RtEight.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\New Periodical.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\RtSeven.xlsx" />
+    <Content Include="Scripts\Ajax\CaneAnalysisAjax.js" />
+    <Content Include="Scripts\Ajax\dailyReportAjax1.0.js" />
+    <Content Include="Scripts\Ajax\ExcelReportTempate-1.2.js" />
+    <Content Include="Scripts\Ajax\HourlyAnalysesAjax.js" />
+    <Content Include="Scripts\Ajax\OtherRecovery.1.1.js" />
+    <Content Include="Scripts\Ajax\ReportDetailsAjax.js" />
+    <Content Include="Scripts\Ajax\ReportSchemaAjax-1.1.js" />
+    <Content Include="Scripts\Ajax\UserVerification.js" />
+    <Content Include="Scripts\Ajax\ValidationBeforeProcess.js" />
+    <Content Include="Scripts\Ajax\WeatherRecordsAjax.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CustomScripts\dateTimePicker.js" />
+    <Content Include="Scripts\CustomScripts\landingPage.js" />
+    <Content Include="Scripts\CustomScripts\MasterUnits.js" />
+    <Content Include="Scripts\CustomScripts\MasterUsers.js" />
+    <Content Include="Scripts\CustomScripts\Weather.js" />
+    <Content Include="Scripts\Dashboard\Dashboard-Gages-ajax-1.0.5-obsolete.js" />
+    <Content Include="Scripts\Dashboard\Dashboard-Gages-ajax-1.1.3.js" />
+    <Content Include="Scripts\Dashboard\Dashboard-gages-ajax-1.1.1.min.js" />
+    <Content Include="Scripts\Dashboard\dashboardThree.js" />
+    <Content Include="Scripts\Dashboard\NotificationsTicker.min.js" />
+    <Content Include="Scripts\Dashboard\NotificationsTickers.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\LandingPageContent\fonts\codropsicons\codropsicons.eot" />
+    <Content Include="Content\LandingPageContent\fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="Content\LandingPageContent\fonts\codropsicons\codropsicons.woff" />
+    <Content Include="Content\MainContent\css\maps\horizontal-layout-dark\style.css.map" />
+    <Content Include="Content\MainContent\css\maps\horizontal-layout-light\style.css.map" />
+    <Content Include="Content\MainContent\css\maps\horizontal-layout\style.css.map" />
     <Content Include="Content\MainContent\css\maps\style.css.map" />
-    <Content Include="Content\MainContent\images\.DS_Store" />
-    <Content Include="Content\MainContent\images\auth\.DS_Store" />
-    <Content Include="Content\MainContent\images\faces\.DS_Store" />
-    <Content Include="Content\MainContent\vendors\.DS_Store" />
-    <Content Include="Content\MainContent\vendors\base\bootstrap.min.js.map" />
-    <Content Include="Content\MainContent\vendors\mdi\css\materialdesignicons.min.css.map" />
-    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.eot" />
-    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
-    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
-    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
-    <Content Include="Content\MainContent\scss\.DS_Store" />
-    <Content Include="Content\MainContent\scss\components\.DS_Store" />
-    <Content Include="Content\MainContent\scss\components\plugin-overrides\_data-tables.scss" />
-    <Content Include="Content\MainContent\scss\components\_badges.scss" />
-    <Content Include="Content\MainContent\scss\components\_bootstrap-progress.scss" />
-    <Content Include="Content\MainContent\scss\components\_buttons.scss" />
-    <Content Include="Content\MainContent\scss\components\_cards.scss" />
-    <Content Include="Content\MainContent\scss\components\_checkbox-radio.scss" />
-    <Content Include="Content\MainContent\scss\components\_dropdown.scss" />
-    <Content Include="Content\MainContent\scss\components\_forms.scss" />
-    <Content Include="Content\MainContent\scss\components\_icons.scss" />
-    <Content Include="Content\MainContent\scss\components\_lists.scss" />
-    <Content Include="Content\MainContent\scss\components\_tables.scss" />
-    <Content Include="Content\MainContent\scss\landing-screens\_auth.scss" />
-    <Content Include="Content\MainContent\scss\mixins\.DS_Store" />
-    <Content Include="Content\MainContent\scss\mixins\_animation.scss" />
-    <Content Include="Content\MainContent\scss\mixins\_badges.scss" />
-    <Content Include="Content\MainContent\scss\mixins\_blockqoute.scss" />
-    <Content Include="Content\MainContent\scss\mixins\_buttons.scss" />
-    <Content Include="Content\MainContent\scss\mixins\_cards.scss" />
-    <Content Include="Content\MainContent\scss\mixins\_misc.scss" />
-    <Content Include="Content\MainContent\scss\style.scss" />
-    <Content Include="Content\MainContent\scss\_background.scss" />
-    <Content Include="Content\MainContent\scss\_demo.scss" />
-    <Content Include="Content\MainContent\scss\_fonts.scss" />
-    <Content Include="Content\MainContent\scss\_footer.scss" />
-    <Content Include="Content\MainContent\scss\_functions.scss" />
-    <Content Include="Content\MainContent\scss\_layouts.scss" />
-    <Content Include="Content\MainContent\scss\_misc.scss" />
-    <Content Include="Content\MainContent\scss\_navbar.scss" />
-    <Content Include="Content\MainContent\scss\_reset.scss" />
-    <Content Include="Content\MainContent\scss\_sidebar.scss" />
-    <Content Include="Content\MainContent\scss\_typography.scss" />
-    <Content Include="Content\MainContent\scss\_utilities.scss" />
-    <Content Include="Content\MainContent\scss\_variables.scss" />
-    <Content Include="Content\MainContent\scss\_vertical-wrapper.scss" />
+    <Content Include="Content\MainContent\css\maps\vertical-layout-dark\style.css.map" />
+    <Content Include="Content\MainContent\css\maps\vertical-layout-light\style.css.map" />
     <Content Include="Content\MainContent\fonts\.DS_Store" />
     <Content Include="Content\MainContent\fonts\Roboto\.DS_Store" />
     <Content Include="Content\MainContent\fonts\Roboto\Roboto-Black.eot" />
@@ -5690,18 +5729,16 @@
     <Content Include="Content\MainContent\fonts\Roboto\Roboto-Regular.ttf" />
     <Content Include="Content\MainContent\fonts\Roboto\Roboto-Regular.woff" />
     <Content Include="Content\MainContent\fonts\Roboto\Roboto-Regular.woff2" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\MainContent\images\.DS_Store" />
+    <Content Include="Content\MainContent\images\auth\.DS_Store" />
+    <Content Include="Content\MainContent\images\faces\.DS_Store" />
     <Content Include="Content\MainContent\images\file-icons\.DS_Store" />
     <Content Include="Content\MainContent\images\file-icons\128\.DS_Store" />
     <Content Include="Content\MainContent\images\file-icons\256\.DS_Store" />
     <Content Include="Content\MainContent\images\file-icons\512\.DS_Store" />
     <Content Include="Content\MainContent\images\file-icons\64\.DS_Store" />
     <Content Include="Content\MainContent\images\samples\.DS_Store" />
+    <Content Include="Content\MainContent\scss\.DS_Store" />
     <Content Include="Content\MainContent\scss\common\dark\common.scss" />
     <Content Include="Content\MainContent\scss\common\dark\components\loaders\_bar-loader.scss" />
     <Content Include="Content\MainContent\scss\common\dark\components\loaders\_circle-loader.scss" />
@@ -5906,6 +5943,18 @@
     <Content Include="Content\MainContent\scss\common\light\_typography.scss" />
     <Content Include="Content\MainContent\scss\common\light\_utilities.scss" />
     <Content Include="Content\MainContent\scss\common\light\_variables.scss" />
+    <Content Include="Content\MainContent\scss\components\.DS_Store" />
+    <Content Include="Content\MainContent\scss\components\plugin-overrides\_data-tables.scss" />
+    <Content Include="Content\MainContent\scss\components\_badges.scss" />
+    <Content Include="Content\MainContent\scss\components\_bootstrap-progress.scss" />
+    <Content Include="Content\MainContent\scss\components\_buttons.scss" />
+    <Content Include="Content\MainContent\scss\components\_cards.scss" />
+    <Content Include="Content\MainContent\scss\components\_checkbox-radio.scss" />
+    <Content Include="Content\MainContent\scss\components\_dropdown.scss" />
+    <Content Include="Content\MainContent\scss\components\_forms.scss" />
+    <Content Include="Content\MainContent\scss\components\_icons.scss" />
+    <Content Include="Content\MainContent\scss\components\_lists.scss" />
+    <Content Include="Content\MainContent\scss\components\_tables.scss" />
     <Content Include="Content\MainContent\scss\horizontal-layout-dark\mixins\_menu.scss" />
     <Content Include="Content\MainContent\scss\horizontal-layout-dark\style.scss" />
     <Content Include="Content\MainContent\scss\horizontal-layout-dark\_horizontal-menu.scss" />
@@ -5916,6 +5965,15 @@
     <Content Include="Content\MainContent\scss\horizontal-layout-light\_horizontal-menu.scss" />
     <Content Include="Content\MainContent\scss\horizontal-layout-light\_horizontal-wrappers.scss" />
     <Content Include="Content\MainContent\scss\horizontal-layout-light\_variables.scss" />
+    <Content Include="Content\MainContent\scss\landing-screens\_auth.scss" />
+    <Content Include="Content\MainContent\scss\mixins\.DS_Store" />
+    <Content Include="Content\MainContent\scss\mixins\_animation.scss" />
+    <Content Include="Content\MainContent\scss\mixins\_badges.scss" />
+    <Content Include="Content\MainContent\scss\mixins\_blockqoute.scss" />
+    <Content Include="Content\MainContent\scss\mixins\_buttons.scss" />
+    <Content Include="Content\MainContent\scss\mixins\_cards.scss" />
+    <Content Include="Content\MainContent\scss\mixins\_misc.scss" />
+    <Content Include="Content\MainContent\scss\style.scss" />
     <Content Include="Content\MainContent\scss\vertical-layout-dark\style.scss" />
     <Content Include="Content\MainContent\scss\vertical-layout-dark\_layouts.scss" />
     <Content Include="Content\MainContent\scss\vertical-layout-dark\_navbar.scss" />
@@ -5930,11 +5988,22 @@
     <Content Include="Content\MainContent\scss\vertical-layout-light\_sidebar.scss" />
     <Content Include="Content\MainContent\scss\vertical-layout-light\_variables.scss" />
     <Content Include="Content\MainContent\scss\vertical-layout-light\_vertical-wrapper.scss" />
-    <Content Include="Content\MainContent\css\maps\horizontal-layout-dark\style.css.map" />
-    <Content Include="Content\MainContent\css\maps\horizontal-layout-light\style.css.map" />
-    <Content Include="Content\MainContent\css\maps\horizontal-layout\style.css.map" />
-    <Content Include="Content\MainContent\css\maps\vertical-layout-dark\style.css.map" />
-    <Content Include="Content\MainContent\css\maps\vertical-layout-light\style.css.map" />
+    <Content Include="Content\MainContent\scss\_background.scss" />
+    <Content Include="Content\MainContent\scss\_demo.scss" />
+    <Content Include="Content\MainContent\scss\_fonts.scss" />
+    <Content Include="Content\MainContent\scss\_footer.scss" />
+    <Content Include="Content\MainContent\scss\_functions.scss" />
+    <Content Include="Content\MainContent\scss\_layouts.scss" />
+    <Content Include="Content\MainContent\scss\_misc.scss" />
+    <Content Include="Content\MainContent\scss\_navbar.scss" />
+    <Content Include="Content\MainContent\scss\_reset.scss" />
+    <Content Include="Content\MainContent\scss\_sidebar.scss" />
+    <Content Include="Content\MainContent\scss\_typography.scss" />
+    <Content Include="Content\MainContent\scss\_utilities.scss" />
+    <Content Include="Content\MainContent\scss\_variables.scss" />
+    <Content Include="Content\MainContent\scss\_vertical-wrapper.scss" />
+    <Content Include="Content\MainContent\vendors\.DS_Store" />
+    <Content Include="Content\MainContent\vendors\base\bootstrap.min.js.map" />
     <Content Include="Content\MainContent\vendors\chartist\chartist.min.js.map" />
     <Content Include="Content\MainContent\vendors\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\MainContent\vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -5953,6 +6022,11 @@
     <Content Include="Content\MainContent\vendors\lightgallery\fonts\lg.ttf" />
     <Content Include="Content\MainContent\vendors\lightgallery\fonts\lg.woff" />
     <Content Include="Content\MainContent\vendors\lightgallery\lightgallery.css.map" />
+    <Content Include="Content\MainContent\vendors\mdi\css\materialdesignicons.min.css.map" />
+    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.eot" />
+    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
+    <Content Include="Content\MainContent\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Content\MainContent\vendors\quill\quill.min.js.map" />
     <Content Include="Content\MainContent\vendors\simple-line-icons\fonts\Simple-Line-Icons.eot" />
     <Content Include="Content\MainContent\vendors\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
@@ -5973,11 +6047,6 @@
     <Content Include="Content\MainContent\vendors\tinymce\package.json" />
     <Content Include="Content\MainContent\vendors\tinymce\readme.md" />
     <Content Include="Content\MainContent\vendors\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
-    <Content Include="Content\LandingPageContent\fonts\codropsicons\codropsicons.eot" />
-    <Content Include="Content\LandingPageContent\fonts\codropsicons\codropsicons.ttf" />
-    <Content Include="Content\LandingPageContent\fonts\codropsicons\codropsicons.woff" />
-    <Content Include="Content\technorator_assets\app\assets\.gitignore" />
-    <Content Include="Content\technorator_assets\app\assets\bootstrap\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\bootstrap\compile.bat" />
     <Content Include="Content\technorator_assets\app\assets\bootstrap\config.rb" />
     <Content Include="Content\technorator_assets\app\assets\bootstrap\sass\app.scss" />
@@ -6042,7 +6111,6 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\animate.css\LICENSE" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\animate.css\package.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\.bower.json" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\.npmignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\bower.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\css\font-awesome.css.map" />
@@ -6080,8 +6148,6 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\font-awesome\scss\_variables.scss" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.bower.json" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.gitattributes" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.jshintrc" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\.travis.yml" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\bower.json" />
@@ -6089,11 +6155,8 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\LICENSE" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\package.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\README.md" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\.gitignore" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\holderjs\test\renderperf\setup.sh" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\.bower.json" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\bower.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\component.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\jquery-ui\composer.json" />
@@ -6116,8 +6179,6 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.bower.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.coveralls.yml" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.editorconfig" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.gitattributes" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.gitignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.jscsrc" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.jshintignore" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\.jshintrc" />
@@ -6129,7 +6190,6 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\lib\config-all.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\lib\polyfills.json" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\LICENSE" />
-    <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\.gitattributes" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\Modernizr 2 Logo vertical big.ai" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\Modernizr 2 Logo vertical medium.ai" />
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\modernizr\media\Modernizr 2 Logo vertical small.ai" />
@@ -6170,11 +6230,9 @@
     <Content Include="Content\technorator_assets\app\assets\plugins\bower_components\wow\src\wow.coffee" />
     <Content Include="Content\technorator_assets\app\README.md" />
     <Content Include="Content\technorator_assets\app\Typography.md" />
-    <Content Include="Content\technorator_assets\panel\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\.bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\.editorconfig" />
-    <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\.npmignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\.travis.yml" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\bower.json" />
@@ -6193,6 +6251,7 @@
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker3.min.css.map" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\dist\css\bootstrap-datepicker3.standalone.min.css.map" />
+    <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\conf.py" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\events.rst" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\i18n.rst" />
     <Content Include="Content\technorator_assets\panel\bower_components\bootstrap-datepicker\docs\index.rst" />
@@ -6339,7 +6398,6 @@
     <Content Include="Content\technorator_assets\panel\bower_components\fastclick\LICENSE" />
     <Content Include="Content\technorator_assets\panel\bower_components\fastclick\README.md" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\.bower.json" />
-    <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\.npmignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\css\font-awesome.css.map" />
@@ -6377,8 +6435,6 @@
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\technorator_assets\panel\bower_components\font-awesome\scss\_variables.scss" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.bower.json" />
-    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.gitattributes" />
-    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.jshintrc" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\.travis.yml" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\bower.json" />
@@ -6386,11 +6442,8 @@
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\LICENSE" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\package.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\README.md" />
-    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\.gitignore" />
-    <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\holderjs\test\renderperf\setup.sh" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\.bower.json" />
-    <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\component.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\jquery-ui\composer.json" />
@@ -6425,7 +6478,6 @@
     <Content Include="Content\technorator_assets\panel\bower_components\moment\README.md" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\.bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\.editorconfig" />
-    <Content Include="Content\technorator_assets\panel\bower_components\select2\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\.jshintignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\.jshintrc" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\.travis.yml" />
@@ -6433,7 +6485,6 @@
     <Content Include="Content\technorator_assets\panel\bower_components\select2\component.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\composer.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\CONTRIBUTING.md" />
-    <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\css\bootstrap.scss" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\css\font-awesome.scss" />
     <Content Include="Content\technorator_assets\panel\bower_components\select2\docs\css\s2-docs.scss" />
@@ -6569,8 +6620,6 @@
     <Content Include="Content\technorator_assets\panel\bower_components\slimscroll\README.md" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\.bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\.codeclimate.yml" />
-    <Content Include="Content\technorator_assets\panel\bower_components\twix\.gitattributes" />
-    <Content Include="Content\technorator_assets\panel\bower_components\twix\.gitignore" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\.travis.yml" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\bower.json" />
     <Content Include="Content\technorator_assets\panel\bower_components\twix\CHANGELOG.md" />
@@ -6615,10 +6664,8 @@
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-go\app.yaml" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-go\app\main.go" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-python\app.yaml" />
-    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\.gitignore" />
+    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\gae-python\main.py" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\package.json" />
-    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\public\files\thumbnail\.gitignore" />
-    <Content Include="Content\technorator_assets\panel\plugins\uploader\server\node\tmp\.gitignore" />
     <Content Include="Content\technorator_assets\panel\plugins\uploader\server\php\files\.htaccess" />
     <Content Include="Content\technorator_assets\panel\sass\admin.scss" />
     <Content Include="Content\technorator_assets\panel\sass\bootstrap.scss" />
@@ -6658,55 +6705,30 @@
     <Content Include="Content\technorator_assets\panel\sass\_functions.scss" />
     <Content Include="Content\technorator_assets\util\js\locations.json" />
     <Content Include="Content\technorator_assets\util\less\util.less" />
-    <Content Include="ApplicationInsights.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Scripts\Ajax\CaneAnalysisAjax.js" />
-    <Content Include="Scripts\Ajax\dailyReportAjax1.0.js" />
-    <Content Include="Scripts\Ajax\ExcelReportTempate-1.2.js" />
-    <Content Include="Scripts\Ajax\HourlyAnalysesAjax.js" />
-    <Content Include="Scripts\Ajax\OtherRecovery.1.1.js" />
-    <Content Include="Scripts\Ajax\ReportDetailsAjax.js" />
-    <Content Include="Scripts\Ajax\ReportSchemaAjax-1.1.js" />
-    <Content Include="Scripts\Ajax\UserVerification.js" />
-    <Content Include="Scripts\Ajax\ValidationBeforeProcess.js" />
-    <Content Include="Scripts\Ajax\WeatherRecordsAjax.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\CustomScripts\dateTimePicker.js" />
-    <Content Include="Scripts\CustomScripts\landingPage.js" />
-    <Content Include="Scripts\CustomScripts\MasterUnits.js" />
-    <Content Include="Scripts\CustomScripts\MasterUsers.js" />
-    <Content Include="Scripts\CustomScripts\Weather.js" />
-    <Content Include="Scripts\Dashboard\Dashboard-Gages-ajax-1.0.5-obsolete.js" />
-    <Content Include="Scripts\Dashboard\Dashboard-Gages-ajax-1.1.3.js" />
-    <Content Include="Scripts\Dashboard\Dashboard-gages-ajax-1.1.1.min.js" />
-    <Content Include="Scripts\Dashboard\NotificationsTicker.min.js" />
-    <Content Include="Scripts\Dashboard\NotificationsTickers.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
-    <None Include="Properties\PublishProfiles\GoDaddy.pubxml" />
-    <Content Include="ReportTemplates\ExcelReportTemplates\RtSeven.xlsx" />
-    <Content Include="ReportTemplates\ExcelReportTemplates\New Periodical.xlsx" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Properties\PublishProfiles\uat-bslis - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\uat-bslis - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\uat-bslis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\uat-bslis - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\uat-bslis - Web Deploy1.pubxml" />
-    <None Include="Properties\PublishProfiles\uat-bslis-web - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\uat-bslis-web - ReadOnly - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\uat-bslis-web - Web Deploy.pubxml" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\cms.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Crushing Report - HO.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Daily Comparative - template.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Daily Comparitive Unit - Template.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Daily Crush Report - Template - old.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Daily Crush Report - Template.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\DailyCrushReport HARGAON-Template.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\DailyManufacturingReport.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\DCR.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\GroupComparitive - template.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\new perodical_pankaj sir.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\new perodical_working.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Obsolete Templates\DailyManufacturingReport.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\Production-template.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\rainfall bslis.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\RtEight.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\RtSevenTemplate.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\salary comp.xlsx" />
+    <Content Include="ReportTemplates\ExcelReportTemplates\WestUpTest.xlsx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\FirebaseMessages\HourlyFirebaseNotification-1.1.js" />
     <Content Include="Scripts\FirebaseMessages\HourlyFirebaseNotification-1.1.min.js" />
@@ -6833,7 +6855,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Settings\ConnectionStrings.config" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -6852,6 +6873,7 @@
     <Compile Include="ApiControllers\FireBaseNotificationController.cs" />
     <Compile Include="ApiControllers\FlexApiController.cs" />
     <Compile Include="ApiControllers\GrowerApiController.cs" />
+    <Compile Include="ApiControllers\HourlyAnalysesAPIController.cs" />
     <Compile Include="ApiControllers\HourlySummaryController.cs" />
     <Compile Include="ApiControllers\LedgerDataApiController.cs" />
     <Compile Include="ApiControllers\NotificationTickerApiController.cs" />
@@ -6952,6 +6974,7 @@
     <Compile Include="Models\CustomModels\ApiResponseModel.cs" />
     <Compile Include="Models\CustomModels\CaneAnalysisViewModel.cs" />
     <Compile Include="Models\CustomModels\DailyReportViewModel.cs" />
+    <Compile Include="Models\CustomModels\DashboardModel.cs" />
     <Compile Include="Models\CustomModels\FirebaseCustomModel.cs" />
     <Compile Include="Models\CustomModels\LedgerPrintingModel.cs" />
     <Compile Include="Models\CustomModels\MasterStoppageSubStoppageModel.cs" />
@@ -7031,7 +7054,6 @@
     <Content Include="Views\Company\Delete.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
     <Content Include="Views\Unit\Create.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <Content Include="Scripts\js\.DS_Store" />
     <Content Include="Views\Shared\_PartialPageLeftMenu.cshtml" />
     <Content Include="Views\Shared\_PartialPageNavBar.cshtml" />
@@ -7212,6 +7234,8 @@
     <Content Include="Views\DailyAnalysis\_PartialTabEleven.cshtml" />
     <Content Include="Views\DailyAnalysis\_PartialTabNine.cshtml" />
     <Content Include="Views\DashboardOne\Management.cshtml" />
+    <Content Include="Views\DashboardOne\DashboardTwo.cshtml" />
+    <Content Include="Views\DashboardOne\DashboardThree.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -7221,7 +7245,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ReportDownloads\" />
+    <Folder Include="ReportDownloads4\" />
+    <Folder Include="ReportDownloads\DMR\" />
+    <Folder Include="Settings\" />
     <Folder Include="Views\DailyReport\" />
     <Folder Include="Views\FireBaseAlers\" />
     <Folder Include="Views\SessionHandler\" />
@@ -7272,21 +7298,21 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.1\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.3.1.1\build\Microsoft.TypeScript.MSBuild.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.1\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.3.1.1\build\Microsoft.TypeScript.MSBuild.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.21.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.21.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.22.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.22.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.22.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.22.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.22.0\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.22.0\build\Microsoft.ApplicationInsights.Web.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.TypeScript.MSBuild.3.1.1\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.3.1.1\build\Microsoft.TypeScript.MSBuild.targets')" />
-  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
-  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.21.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
-  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.21.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.21.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
-  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.21.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
-  <Import Project="..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.Web.2.21.0\build\Microsoft.ApplicationInsights.Web.targets')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.22.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.22.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.22.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.22.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.22.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.Web.2.22.0\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.Web.2.22.0\build\Microsoft.ApplicationInsights.Web.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

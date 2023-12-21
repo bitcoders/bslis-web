@@ -92,9 +92,10 @@ label {
 }
 .floating-select:focus ~ label,
 .floating-select:not([value=""]):valid ~ label {
-    top: 0px;
+    top: -20px;
     font-size: 14px;
     color: #5264AE;
+    left:5px;
 }
 .floating-select:focus ~ .bar:before,
 .floating-select:focus ~ .bar:after {

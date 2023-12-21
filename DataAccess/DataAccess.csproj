@@ -164,10 +164,13 @@
     <Compile Include="CaneVarietyGroup.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomModels\ApiResponse.cs" />
     <Compile Include="CustomModels\CaneAnalysisViewModel.cs" />
+    <Compile Include="CustomModels\DashboardModel.cs" />
     <Compile Include="CustomModels\PasswordResetModel.cs" />
     <Compile Include="CustomModels\ProcessCalculationModel.cs" />
     <Compile Include="CustomModels\Reports\DailyCrushReportHoModel.cs" />
+    <Compile Include="CustomModels\Reports\DashboardProcessedData.cs" />
     <Compile Include="CustomModels\Reports\ReportParameterModel.cs" />
     <Compile Include="CustomModels\ValidationModel.cs" />
     <Compile Include="CustomModels\WeatherRecordsViewModel.cs" />
@@ -481,6 +484,7 @@
     <Compile Include="Repositories\CaneAnalysisRepository.cs" />
     <Compile Include="Repositories\CaneVarietyRepository.cs" />
     <Compile Include="Repositories\CaneTypeRepository.cs" />
+    <Compile Include="Repositories\DashboardRepository.cs" />
     <Compile Include="Repositories\EmailConfigurationRepository.cs" />
     <Compile Include="Repositories\ExcelReportDataTypeRepository.cs" />
     <Compile Include="Repositories\ExcelReportTemplateRepository.cs" />
@@ -572,6 +576,12 @@
     <Compile Include="usp_cane_diversion_factor_Result.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_dashboard_select_hourlyData_Result.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_select_hourlyAnalyses_Result.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ValidationParameter.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
@@ -599,7 +609,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LitmusModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ConnectionString.config" />
     <None Include="LitmusModel.edmx.diagram">
       <DependentUpon>LitmusModel.edmx</DependentUpon>
     </None>

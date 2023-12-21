@@ -3,6 +3,14 @@
     "appInsights1": {
       "type": "appInsights",
       "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:SugarLab",
+      "dynamicId": null
     }
   }
 }

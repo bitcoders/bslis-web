@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Chart.js Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Chart.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <!-- Custom CSS -->
+
+    <style>
+        body {
+            padding-top: 56px;
+        }
+
+        .chart-container {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    
+
+    <!-- Content -->
+    <div class="container-fluid mt-4">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">Birla Sugar Plant Performance</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Historical Data Days
+                        </a>
+                        <select class="form-control" id="historyDays">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+
+                        </select>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <!-- Chart 1 -->
+            <div class="col-sm-12 col-md-6">
+                <div class="chart-container p-3">
+                    <canvas id="chart1"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div class="col-sm-12 col-md-6">
+                <div class="chart-container p-3">
+                    <canvas id="chart2"></canvas>
+                </div>
+            </div>
+
+        </div>
+        <!-- row two for chart-->
+        <div class="row">
+            <!-- Chart 1 -->
+            <div class="col-sm-12 col-md-6">
+                <div class="chart-container p-3">
+                    <canvas id="chart3"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2 -->
+            <div class="col-sm-12 col-md-6">
+                <div class="chart-container p-3">
+                    <canvas id="chart4"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap and Chart.js JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @Html.Raw("<script src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js'></script>")
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Your custom JS to initialize and populate Chart.js charts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="~/Scripts/Dashboard/dashboardThree.js"></script>
+    <script>
+         //Example Chart.js initialization
+        //var ctx3 = document.getElementById('chart3').getContext('2d');
+        //var myChart1 = new Chart(ctx3, {
+        //    type: 'bar',
+        //    data: {
+        //        labels: ['January', 'February', 'March', 'April', 'May'],
+        //        datasets: [{
+        //            label: 'Chart 1',
+        //            data: [10, 20, 30, 40, 50],
+        //            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        //            borderColor: 'rgba(75, 192, 192, 1)',
+        //            borderWidth: 1
+        //        }]
+        //    },
+        //    options: {
+        //        scales: {
+        //            y: {
+        //                beginAtZero: true
+        //            }
+        //        }
+        //    }
+        //});
+
+
+        // Repeat similar code for other charts (chart2, chart3, etc.)
+    </script>
+
+</body>
+</html>

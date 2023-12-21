@@ -243,21 +243,32 @@ namespace DataAccess.Repositories
             {
                 verificationLink = string.Concat(verificationLink, token);
             }
-            var emailConfig = emailConfigRepo.GetEmailConfigrationByPrioritySequence(1);
-            var apiKey = emailConfig.ApiKey; // @"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";
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                //From = new EmailAddress("ugsil.ravibhushan@birla-sugar.com", "BSLIS Admin"),
-                From = new EmailAddress(emailConfig.EmailAddress, "BSLIS Admin"),
-                Subject = "BSLIS | Reset Password",
-                PlainTextContent = "",
-                HtmlContent = PasswordResetEmailTemplate(verificationLink, EmailToName)
-            };
-            msg.AddTo(new EmailAddress(EmailTo, EmailToName));
+            var emailConfig = emailConfigRepo.GetEmailConfigrationByEmailAddress("admin@bslis.com");
+            EmailRepository emailRepo = new EmailRepository();
+            //var apiKey = emailConfig.ApiKey; // @"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";
+            //var client = new SendGridClient(apiKey);
+            //var msg = new SendGridMessage()
+            //{
+            //    //From = new EmailAddress("ugsil.ravibhushan@birla-sugar.com", "BSLIS Admin"),
+            //    From = new EmailAddress(emailConfig.EmailAddress, "BSLIS Admin"),
+            //    Subject = "BSLIS | Reset Password",
+            //    PlainTextContent = "",
+            //    HtmlContent = PasswordResetEmailTemplate(verificationLink, EmailToName)
+            //};
+            //msg.AddTo(new EmailAddress(EmailTo, EmailToName));
 
-            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
-            return response.Body.ToString();
+            //var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
+            //return response.Body.ToString();
+
+            if( await emailRepo.SendEmailAsync(EmailTo, verificationLink, "BSLIS | Reset passord", true))
+            {
+                return "Email sent!!";
+            }
+            else
+            {
+                return "Failed to send email!!";
+
+            }
 
         }
 

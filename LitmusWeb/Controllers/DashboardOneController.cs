@@ -13,5 +13,14 @@ namespace LitmusWeb.Controllers
         {
             return View("Management");
         }
+        public ActionResult DashboardTwo()
+        {
+            return View("DashboardTwo");
+        }
+
+        public ActionResult DashboardThree()
+        {
+            return View("DashboardThree");
+        }
     }
 }

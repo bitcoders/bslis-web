@@ -3,6 +3,10 @@
     ViewBag.Title = "Edit- User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section styles{
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+}
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -39,7 +43,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <div class="form-label-group">
@@ -58,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <div class="form-label-group">
@@ -77,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <div class="form-group row">
                                 <div class="col-md-6">
                                     <div class="form-label-group">
@@ -129,51 +133,53 @@
                                         @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="col-sm-12">
-                                        <label class="badge badge-outline-info" style="top:-29px; left:3px;">Units Rights</label>
-                                    </div>
-                                </div>
-                            <div class="col-md-12">
-                                <div class="form-label-group row">
-                                    <div class="col-sm-12">
-                                        
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="col-sm-12">
+                                    <label class="badge badge-outline-info">Unit Rights</label>
+
+                                    <div class="d-flex flex-wrap">
                                         @foreach (var x in ViewBag.UnitList)
                                         {
-                                            <div class="form-check-inline">
-                                                @*If unit code exists in user's unitrights column then mark it checked other wise let it remain unchecked*@
-                                                @if (Model.UnitRights != null && Model.UnitRights.Contains(x.Code.ToString()))
-                                                {
-                                                    <input type="checkbox" id="@x.Name" name="UnitCheckBoxes" class="checkbox-inline" value="@x.Code" checked />
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="@x.Name" name="UnitCheckBoxes" class="checkbox-inline" value="@x.Code" />
-                                                }
-                                                @x.Name
+                                            <div class="mb-2 mr-1 custom-checkbox">
+                                                <input type="checkbox" id="@x.Name" name="UnitCheckBoxes" value="@x.Code" class="checkbox-inline"
+                                                       @(Model.UnitRights != null && Model.UnitRights.Contains(x.Code.ToString()) ? "checked" : "") />
                                             </div>
+                                            <label class="mr-1" for="@x.Name">@x.Name</label>
+
+
+
                                         }
+
                                     </div>
                                 </div>
-                                @Html.HiddenFor(model => model.UnitRights)
+                                @Html.HiddenFor(model => model.Role)
                             </div>
+
+
+
+
                             <hr />
                             <div class="form-row">
                                 <div class="col-sm-12">
-                                    <div class="form-check-inline">
+                                    <label class="badge badge-outline-info">Dashboard Unit Rights</label>
+                                    <div class="d-flex flex-wrap">
                                         @foreach (var x in ViewBag.UnitList)
                                         {
-                                            if (Model.DashboardUnits != null && Model.DashboardUnits.Contains(x.Code.ToString()))
-                                            {
-                                                <input type="checkbox" id="dash-@x.Name" name="DashBoardUnitCheckBoxes" class="checkbox-inline" value="@x.Code" checked />
-                                            }
-                                            else
-                                            {
-                                                <input type="checkbox" id="dash-@x.Name" name="DashBoardUnitCheckBoxes" class="checkbox-inline" value="@x.Code" />
-                                            }
-                                            @x.Name
+                                            @*if (Model.DashboardUnits != null && Model.DashboardUnits.Contains(x.Code.ToString()))
+                            {
+                                <input type="checkbox" id="dash-@x.Name" name="DashBoardUnitCheckBoxes" class="checkbox-inline" value="@x.Code" checked />
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="dash-@x.Name" name="DashBoardUnitCheckBoxes" class="checkbox-inline" value="@x.Code" />
+                            }*@
 
+                                            <input type="checkbox" id="dash-@x.Name" name="DashBoardUnitCheckBoxes" class="checkbox-inline" value="@x.Code"
+                                                   @(Model.DashboardUnits != null && Model.DashboardUnits.Contains(x.Code.ToString()) ? "Checked" : "") />
+                                            <label class="mr-1" for="@x.Name">@x.Name</label>
                                         }
                                     </div>
                                 </div>
@@ -206,6 +212,34 @@
                                     @Html.HiddenFor(model => model.Role)
                                 </div>
                             </div>
+
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="form-label-group row">
+                                        <div class="col-sm-4">
+                                            @Html.LabelFor(model => model.EntryAllowedSeasons, new { @class = "badge badge-outline-info" })
+                                            @Html.EditorFor(m => m.EntryAllowedSeasons, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-label-group row">
+                                        <div class="col-sm-4">
+                                            @Html.LabelFor(m => m.ModificationAllowedForSeasons, new { @class = "badge badge-outline-info" })
+                                            @Html.EditorFor(m => m.ModificationAllowedForSeasons, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-label-group row">
+                                        <div class="col-sm-4">
+                                            @Html.LabelFor(m => m.ViewAllowedForSeasons, new { @class = "badge badge-outline-info" })
+                                            @Html.EditorFor(m => m.ViewAllowedForSeasons, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
                             @Html.ValidationSummary(false, "", new { @class = "text-danger" });
                             <button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-inverse-danger">Save Changes</button>
                         }
@@ -216,4 +250,4 @@
     </div>
     @*MasterUsers js performs operation on unit rights check box*@
     <script src="~/Scripts/CustomScripts/MasterUsers.js"></script>
-    <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
+    @*<link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />*@

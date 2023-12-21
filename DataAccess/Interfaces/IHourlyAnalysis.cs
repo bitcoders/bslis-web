@@ -8,7 +8,7 @@ namespace DataAccess.Interfaces
     {
         bool CreateHourlyAnalysis(HourlyAnalys hourlyAnalysis);
         bool EditHourlyAnalysis(HourlyAnalys hourlyAnalysis);
-        bool DeleteHourlyAnalysis(int UnitCode, int SeasonCode, string AnalysisDate, int AnalysisHour);
+        (bool success, string message) DeleteHourlyAnalysis(int unit_code, string user_code, int lineId);
         List<HourlyAnalys> GetHourlyAnalysisList(int UnitCode, int SeasonCode, DateTime AnalysisDate);
         List<HourlyAnalys> GetHourlyAnalysisDateWiseList(int UnitCode, int SeasonCode, DateTime FromDate, DateTime ToDate);
         Task<List<HourlyAnalys>> GetHourlyAnalysAllList(int UnitCode, int SeasonCode);
