@@ -522,6 +522,40 @@ warning 6002: The table/view 'uat_SugarLab.dbo.FirebaseNotificationRights' does 
     <Property Name="diverted_syrup_quantity" Type="numeric" Precision="10" Scale="2" Nullable="false" />
     <Property Name="export_sugar" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="HourlyAnalysesMillControlData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HourlyAnalysesNo" Type="bigint" Nullable="false" />
+    <Property Name="unit_code" Type="int" Nullable="false" />
+    <Property Name="season_code" Type="int" Nullable="false" />
+    <Property Name="entry_date" Type="datetime" />
+    <Property Name="entry_time" Type="int" />
+    <Property Name="imbibition_water_temp" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="exhaust_steam_temp" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_biocide_dosing" Type="bit" />
+    <Property Name="mill_washing" Type="bit" />
+    <Property Name="mill_steaming" Type="bit" />
+    <Property Name="sugar_bags_temp" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="molasses_inlet_temp" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="molasses_outlet_temp" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_one" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_two" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_three" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_four" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_five" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_load_one" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_load_two" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_load_three" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_load_four" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_load_five" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_one" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_two" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_three" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_four" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_five" Type="numeric" Precision="10" Scale="2" />
+  </EntityType>
   <EntityType Name="KeySampleAnalyses">
     <Key>
       <PropertyRef Name="id" />
@@ -3760,12 +3794,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
     <Parameter Name="season_code" Type="int" Mode="In" />
     <Parameter Name="trans_date" Type="date" Mode="In" />
   </Function>
-  <Function Name="usp_dashboard_select_hourlyData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="company_code" Type="int" Mode="In" />
-    <Parameter Name="unit_code" Type="int" Mode="In" />
-    <Parameter Name="season_code" Type="int" Mode="In" />
-    <Parameter Name="entry_date" Type="date" Mode="In" />
-  </Function>
   <Function Name="usp_dashboard_select_processedData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="company_code" Type="int" Mode="In" />
     <Parameter Name="season_code" Type="int" Mode="In" />
@@ -3781,10 +3809,137 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
   <Function Name="usp_delete_twoHourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="line_id" Type="int" Mode="In" />
   </Function>
-  <Function Name="usp_select_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="usp_insert_hourly_millControlData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HourlyAnalysesNo" Type="int" Mode="In" />
     <Parameter Name="unit_code" Type="int" Mode="In" />
     <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="entry_date" Type="datetime" Mode="In" />
+    <Parameter Name="entry_time" Type="int" Mode="In" />
+    <Parameter Name="imbibition_water_temp" Type="numeric" Mode="In" />
+    <Parameter Name="exhaust_steam_temp" Type="numeric" Mode="In" />
+    <Parameter Name="mill_biocide_dosing" Type="bit" Mode="In" />
+    <Parameter Name="mill_washing" Type="bit" Mode="In" />
+    <Parameter Name="mill_steaming" Type="bit" Mode="In" />
+    <Parameter Name="sugar_bags_temp" Type="numeric" Mode="In" />
+    <Parameter Name="molasses_inlet_temp" Type="numeric" Mode="In" />
+    <Parameter Name="molasses_outlet_temp" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_five" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_five" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_five" Type="numeric" Mode="In" />
+    <Parameter Name="inserted_rows" Type="int" Mode="InOut" />
+    <Parameter Name="error_message" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_insert_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="entry_date" Type="datetime" Mode="In" />
+    <Parameter Name="entry_time" Type="int" Mode="In" />
+    <Parameter Name="new_mill_juice" Type="int" Mode="In" />
+    <Parameter Name="old_mill_juice" Type="int" Mode="In" />
+    <Parameter Name="new_mill_water" Type="int" Mode="In" />
+    <Parameter Name="old_mill_water" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_L31" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_L30" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_M31" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_M30" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_S31" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_S30" Type="int" Mode="In" />
+    <Parameter Name="sugar_bags_Biss" Type="int" Mode="In" />
+    <Parameter Name="sugar_raw" Type="int" Mode="In" />
+    <Parameter Name="cooling_trace" Type="nvarchar" Mode="In" />
+    <Parameter Name="cooling_pol" Type="numeric" Mode="In" />
+    <Parameter Name="cooling_ph" Type="numeric" Mode="In" />
+    <Parameter Name="standing_trucks" Type="int" Mode="In" />
+    <Parameter Name="standing_trolley" Type="int" Mode="In" />
+    <Parameter Name="standing_trippler" Type="int" Mode="In" />
+    <Parameter Name="standing_cart" Type="int" Mode="In" />
+    <Parameter Name="uncrushed_cane" Type="numeric" Mode="In" />
+    <Parameter Name="crushed_cane" Type="numeric" Mode="In" />
+    <Parameter Name="cane_diverted_for_syrup" Type="numeric" Mode="In" />
+    <Parameter Name="diverted_syrup_quantity" Type="numeric" Mode="In" />
+    <Parameter Name="export_sugar" Type="int" Mode="In" />
+    <Parameter Name="current_user" Type="nvarchar" Mode="In" />
+    <Parameter Name="imbibition_water_temp" Type="numeric" Mode="In" />
+    <Parameter Name="exhaust_steam_temp" Type="numeric" Mode="In" />
+    <Parameter Name="mill_biocide_dosing" Type="bit" Mode="In" />
+    <Parameter Name="mill_washing" Type="bit" Mode="In" />
+    <Parameter Name="mill_steaming" Type="bit" Mode="In" />
+    <Parameter Name="sugar_bags_temp" Type="numeric" Mode="In" />
+    <Parameter Name="molasses_inlet_temp" Type="numeric" Mode="In" />
+    <Parameter Name="molasses_outlet_temp" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_five" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_five" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_five" Type="numeric" Mode="In" />
+    <Parameter Name="inserted_rows" Type="int" Mode="InOut" />
+    <Parameter Name="error_message" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="usp_select_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="entry_date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usp_select_hourlyAnalysesMillControlData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_selectAll_hourlyAnalysesMillControlData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="unit_code" Type="int" Mode="In" />
     <Parameter Name="entry_date" Type="date" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_mill_control_data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="unit_code" Type="int" Mode="In" />
+    <Parameter Name="season_code" Type="int" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="imbibition_water_temp" Type="numeric" Mode="In" />
+    <Parameter Name="exhaust_steam_temp" Type="numeric" Mode="In" />
+    <Parameter Name="mill_biocide_dosing" Type="bit" Mode="In" />
+    <Parameter Name="mill_washing" Type="bit" Mode="In" />
+    <Parameter Name="mill_steaming" Type="bit" Mode="In" />
+    <Parameter Name="sugar_bags_temp" Type="numeric" Mode="In" />
+    <Parameter Name="molasses_inlet_temp" Type="numeric" Mode="In" />
+    <Parameter Name="molasses_outlet_temp" Type="numeric" Mode="In" />
+    <Parameter Name="cooling_trace" Type="nvarchar" Mode="In" />
+    <Parameter Name="cooling_pol" Type="numeric" Mode="In" />
+    <Parameter Name="cooling_ph" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_hydraulic_pressure_five" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_load_five" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_one" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_two" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_three" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_four" Type="numeric" Mode="In" />
+    <Parameter Name="mill_rpm_five" Type="numeric" Mode="In" />
   </Function>
   <Function Name="usp_update_unitSeasons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
@@ -3830,6 +3985,7 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
     <EntitySet Name="FlexSubMaster" EntityType="Self.FlexSubMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Growers" EntityType="Self.Growers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HourlyAnalyses" EntityType="Self.HourlyAnalyses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HourlyAnalysesMillControlData" EntityType="Self.HourlyAnalysesMillControlData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeySampleAnalyses" EntityType="Self.KeySampleAnalyses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ledger_data" EntityType="Self.ledger_data" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LedgerLog" EntityType="Self.LedgerLog" Schema="dbo" store:Type="Tables" />

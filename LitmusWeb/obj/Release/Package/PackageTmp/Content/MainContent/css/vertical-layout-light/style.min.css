@@ -22067,12 +22067,12 @@ code {
     select.form-control, select.asColorPicker-input, .dataTables_wrapper select, .jsgrid .jsgrid-table .jsgrid-filter-row select, .select2-container--default select.select2-selection--single, .select2-container--default .select2-selection--single select.select2-search__field, select.typeahead, select.tt-query, select.tt-hint {
         padding: .4375rem .75rem;
         border: 0;
-        outline: 1px solid #f3f3f3;
+        outline: 1px solid #8e44ad;
         color: #c9c8c8;
     }
 
         select.form-control:focus, select.asColorPicker-input:focus, .dataTables_wrapper select:focus, .jsgrid .jsgrid-table .jsgrid-filter-row select:focus, .select2-container--default select.select2-selection--single:focus, .select2-container--default .select2-selection--single select.select2-search__field:focus, select.typeahead:focus, select.tt-query:focus, select.tt-hint:focus {
-            outline: 1px solid #f3f3f3;
+            outline: 1px solid #8e44ad;
         }
 
         select.form-control.border-primary, select.border-primary.asColorPicker-input, .dataTables_wrapper select.border-primary, .jsgrid .jsgrid-table .jsgrid-filter-row select.border-primary, .select2-container--default select.border-primary.select2-selection--single, .select2-container--default .select2-selection--single select.border-primary.select2-search__field, select.border-primary.typeahead, select.border-primary.tt-query, select.border-primary.tt-hint {

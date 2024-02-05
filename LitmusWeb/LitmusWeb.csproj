@@ -6976,6 +6976,7 @@
     <Compile Include="Models\CustomModels\DailyReportViewModel.cs" />
     <Compile Include="Models\CustomModels\DashboardModel.cs" />
     <Compile Include="Models\CustomModels\FirebaseCustomModel.cs" />
+    <Compile Include="Models\CustomModels\HourlyAnalysesViewModel.cs" />
     <Compile Include="Models\CustomModels\LedgerPrintingModel.cs" />
     <Compile Include="Models\CustomModels\MasterStoppageSubStoppageModel.cs" />
     <Compile Include="Models\CustomModels\PasswordResetViewModel.cs" />
@@ -6989,6 +6990,7 @@
     <Compile Include="Models\FlexMasterModel.cs" />
     <Compile Include="Models\FlexSubMasterModel.cs" />
     <Compile Include="Models\GrowerModel.cs" />
+    <Compile Include="Models\HourlyAnalysesMillControlDataModel.cs" />
     <Compile Include="Models\HourlyAnalysisModel.cs" />
     <Compile Include="Models\KeySampleAnalysisModel.cs" />
     <Compile Include="Models\LedgerDataModel.cs" />
@@ -7236,6 +7238,11 @@
     <Content Include="Views\DashboardOne\Management.cshtml" />
     <Content Include="Views\DashboardOne\DashboardTwo.cshtml" />
     <Content Include="Views\DashboardOne\DashboardThree.cshtml" />
+    <Content Include="Views\HourlyAnalysis\_PartialTabTwoCreate.cshtml" />
+    <Content Include="Views\HourlyAnalysis\_PartialTabOneCreate.cshtml" />
+    <Content Include="Views\HourlyAnalysis\_PartialTabOneIndex.cshtml" />
+    <Content Include="Views\HourlyAnalysis\_PartialTabTwoIndex.cshtml" />
+    <Content Include="Views\HourlyAnalysis\EditMillControlData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

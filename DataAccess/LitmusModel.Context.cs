@@ -85,9 +85,10 @@ namespace DataAccess
         public virtual DbSet<OtherRecovery> OtherRecoveries { get; set; }
         public virtual DbSet<PasswordReset> PasswordResets { get; set; }
         public virtual DbSet<EmailConfiguration> EmailConfigurations { get; set; }
-        public virtual DbSet<DataAdjustment> DataAdjustments { get; set; }
         public virtual DbSet<MasterUser> MasterUsers { get; set; }
         public virtual DbSet<HourlyAnalys> HourlyAnalyses { get; set; }
+        public virtual DbSet<HourlyAnalysesMillControlData> HourlyAnalysesMillControlDatas { get; set; }
+        public virtual DbSet<DataAdjustment> DataAdjustments { get; set; }
         public virtual DbSet<DailyAnalys> DailyAnalyses { get; set; }
     
         public virtual int Proc_Get_MassecuiteAnalyses(Nullable<int> unit_code, Nullable<int> season_code, Nullable<int> param_type_code, string transaction_date, string transaction_time)
@@ -1006,27 +1007,6 @@ namespace DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<func_hourly_data_summary_for_period_Result>("[SugarLabEntities].[func_hourly_data_summary_for_period](@unit_code, @season_code, @from_date, @to_date)", unit_codeParameter, season_codeParameter, from_dateParameter, to_dateParameter);
         }
     
-        public virtual ObjectResult<proc_summarized_report_Result> proc_summarized_report(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> report_date, Nullable<bool> last_season_data)
-        {
-            var unit_codeParameter = unit_code.HasValue ?
-                new ObjectParameter("unit_code", unit_code) :
-                new ObjectParameter("unit_code", typeof(int));
-    
-            var season_codeParameter = season_code.HasValue ?
-                new ObjectParameter("season_code", season_code) :
-                new ObjectParameter("season_code", typeof(int));
-    
-            var report_dateParameter = report_date.HasValue ?
-                new ObjectParameter("report_date", report_date) :
-                new ObjectParameter("report_date", typeof(System.DateTime));
-    
-            var last_season_dataParameter = last_season_data.HasValue ?
-                new ObjectParameter("last_season_data", last_season_data) :
-                new ObjectParameter("last_season_data", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
-        }
-    
         public virtual int usp_delete_hourlyAnalyses(Nullable<int> unit_code, string user_code, Nullable<int> line_id, ObjectParameter rowCount, ObjectParameter message)
         {
             var unit_codeParameter = unit_code.HasValue ?
@@ -1151,23 +1131,6 @@ namespace DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_unitSesasons", idParameter, unit_codeParameter, season_codeParameter, crushing_start_datetimeParameter, crushing_end_datetimeParameter, new_mill_capacityParameter, old_mill_capacityParameter, report_start_hourMinueteParameter, disableDailyProcessParameter, disableAddParameter, disableUpdateParameter);
         }
     
-        public virtual ObjectResult<usp_select_hourlyAnalyses_Result> usp_select_hourlyAnalyses(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date)
-        {
-            var unit_codeParameter = unit_code.HasValue ?
-                new ObjectParameter("unit_code", unit_code) :
-                new ObjectParameter("unit_code", typeof(int));
-    
-            var season_codeParameter = season_code.HasValue ?
-                new ObjectParameter("season_code", season_code) :
-                new ObjectParameter("season_code", typeof(int));
-    
-            var entry_dateParameter = entry_date.HasValue ?
-                new ObjectParameter("entry_date", entry_date) :
-                new ObjectParameter("entry_date", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalyses_Result>("usp_select_hourlyAnalyses", unit_codeParameter, season_codeParameter, entry_dateParameter);
-        }
-    
         public virtual ObjectResult<usp_dashboard_select_hourlyData_Result> usp_dashboard_select_hourlyData(Nullable<int> company_code, Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date)
         {
             var company_codeParameter = company_code.HasValue ?
@@ -1204,6 +1167,521 @@ namespace DataAccess
                 new ObjectParameter("history_days", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_dashboard_select_processedData", company_codeParameter, season_codeParameter, history_daysParameter);
+        }
+    
+        public virtual ObjectResult<proc_summarized_report_Result> proc_summarized_report(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> report_date, Nullable<bool> last_season_data)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var report_dateParameter = report_date.HasValue ?
+                new ObjectParameter("report_date", report_date) :
+                new ObjectParameter("report_date", typeof(System.DateTime));
+    
+            var last_season_dataParameter = last_season_data.HasValue ?
+                new ObjectParameter("last_season_data", last_season_data) :
+                new ObjectParameter("last_season_data", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
+        }
+    
+        public virtual int usp_insert_hourly_millControlData(Nullable<int> hourlyAnalysesNo, Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date, Nullable<int> entry_time, Nullable<decimal> imbibition_water_temp, Nullable<decimal> exhaust_steam_temp, Nullable<bool> mill_biocide_dosing, Nullable<bool> mill_washing, Nullable<bool> mill_steaming, Nullable<decimal> sugar_bags_temp, Nullable<decimal> molasses_inlet_temp, Nullable<decimal> molasses_outlet_temp, Nullable<decimal> mill_hydraulic_pressure_one, Nullable<decimal> mill_hydraulic_pressure_two, Nullable<decimal> mill_hydraulic_pressure_three, Nullable<decimal> mill_hydraulic_pressure_four, Nullable<decimal> mill_hydraulic_pressure_five, Nullable<decimal> mill_load_one, Nullable<decimal> mill_load_two, Nullable<decimal> mill_load_three, Nullable<decimal> mill_load_four, Nullable<decimal> mill_load_five, Nullable<decimal> mill_rpm_one, Nullable<decimal> mill_rpm_two, Nullable<decimal> mill_rpm_three, Nullable<decimal> mill_rpm_four, Nullable<decimal> mill_rpm_five, ObjectParameter inserted_rows, ObjectParameter error_message)
+        {
+            var hourlyAnalysesNoParameter = hourlyAnalysesNo.HasValue ?
+                new ObjectParameter("HourlyAnalysesNo", hourlyAnalysesNo) :
+                new ObjectParameter("HourlyAnalysesNo", typeof(int));
+    
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            var entry_timeParameter = entry_time.HasValue ?
+                new ObjectParameter("entry_time", entry_time) :
+                new ObjectParameter("entry_time", typeof(int));
+    
+            var imbibition_water_tempParameter = imbibition_water_temp.HasValue ?
+                new ObjectParameter("imbibition_water_temp", imbibition_water_temp) :
+                new ObjectParameter("imbibition_water_temp", typeof(decimal));
+    
+            var exhaust_steam_tempParameter = exhaust_steam_temp.HasValue ?
+                new ObjectParameter("exhaust_steam_temp", exhaust_steam_temp) :
+                new ObjectParameter("exhaust_steam_temp", typeof(decimal));
+    
+            var mill_biocide_dosingParameter = mill_biocide_dosing.HasValue ?
+                new ObjectParameter("mill_biocide_dosing", mill_biocide_dosing) :
+                new ObjectParameter("mill_biocide_dosing", typeof(bool));
+    
+            var mill_washingParameter = mill_washing.HasValue ?
+                new ObjectParameter("mill_washing", mill_washing) :
+                new ObjectParameter("mill_washing", typeof(bool));
+    
+            var mill_steamingParameter = mill_steaming.HasValue ?
+                new ObjectParameter("mill_steaming", mill_steaming) :
+                new ObjectParameter("mill_steaming", typeof(bool));
+    
+            var sugar_bags_tempParameter = sugar_bags_temp.HasValue ?
+                new ObjectParameter("sugar_bags_temp", sugar_bags_temp) :
+                new ObjectParameter("sugar_bags_temp", typeof(decimal));
+    
+            var molasses_inlet_tempParameter = molasses_inlet_temp.HasValue ?
+                new ObjectParameter("molasses_inlet_temp", molasses_inlet_temp) :
+                new ObjectParameter("molasses_inlet_temp", typeof(decimal));
+    
+            var molasses_outlet_tempParameter = molasses_outlet_temp.HasValue ?
+                new ObjectParameter("molasses_outlet_temp", molasses_outlet_temp) :
+                new ObjectParameter("molasses_outlet_temp", typeof(decimal));
+    
+            var mill_hydraulic_pressure_oneParameter = mill_hydraulic_pressure_one.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_one", mill_hydraulic_pressure_one) :
+                new ObjectParameter("mill_hydraulic_pressure_one", typeof(decimal));
+    
+            var mill_hydraulic_pressure_twoParameter = mill_hydraulic_pressure_two.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_two", mill_hydraulic_pressure_two) :
+                new ObjectParameter("mill_hydraulic_pressure_two", typeof(decimal));
+    
+            var mill_hydraulic_pressure_threeParameter = mill_hydraulic_pressure_three.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_three", mill_hydraulic_pressure_three) :
+                new ObjectParameter("mill_hydraulic_pressure_three", typeof(decimal));
+    
+            var mill_hydraulic_pressure_fourParameter = mill_hydraulic_pressure_four.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_four", mill_hydraulic_pressure_four) :
+                new ObjectParameter("mill_hydraulic_pressure_four", typeof(decimal));
+    
+            var mill_hydraulic_pressure_fiveParameter = mill_hydraulic_pressure_five.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_five", mill_hydraulic_pressure_five) :
+                new ObjectParameter("mill_hydraulic_pressure_five", typeof(decimal));
+    
+            var mill_load_oneParameter = mill_load_one.HasValue ?
+                new ObjectParameter("mill_load_one", mill_load_one) :
+                new ObjectParameter("mill_load_one", typeof(decimal));
+    
+            var mill_load_twoParameter = mill_load_two.HasValue ?
+                new ObjectParameter("mill_load_two", mill_load_two) :
+                new ObjectParameter("mill_load_two", typeof(decimal));
+    
+            var mill_load_threeParameter = mill_load_three.HasValue ?
+                new ObjectParameter("mill_load_three", mill_load_three) :
+                new ObjectParameter("mill_load_three", typeof(decimal));
+    
+            var mill_load_fourParameter = mill_load_four.HasValue ?
+                new ObjectParameter("mill_load_four", mill_load_four) :
+                new ObjectParameter("mill_load_four", typeof(decimal));
+    
+            var mill_load_fiveParameter = mill_load_five.HasValue ?
+                new ObjectParameter("mill_load_five", mill_load_five) :
+                new ObjectParameter("mill_load_five", typeof(decimal));
+    
+            var mill_rpm_oneParameter = mill_rpm_one.HasValue ?
+                new ObjectParameter("mill_rpm_one", mill_rpm_one) :
+                new ObjectParameter("mill_rpm_one", typeof(decimal));
+    
+            var mill_rpm_twoParameter = mill_rpm_two.HasValue ?
+                new ObjectParameter("mill_rpm_two", mill_rpm_two) :
+                new ObjectParameter("mill_rpm_two", typeof(decimal));
+    
+            var mill_rpm_threeParameter = mill_rpm_three.HasValue ?
+                new ObjectParameter("mill_rpm_three", mill_rpm_three) :
+                new ObjectParameter("mill_rpm_three", typeof(decimal));
+    
+            var mill_rpm_fourParameter = mill_rpm_four.HasValue ?
+                new ObjectParameter("mill_rpm_four", mill_rpm_four) :
+                new ObjectParameter("mill_rpm_four", typeof(decimal));
+    
+            var mill_rpm_fiveParameter = mill_rpm_five.HasValue ?
+                new ObjectParameter("mill_rpm_five", mill_rpm_five) :
+                new ObjectParameter("mill_rpm_five", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_insert_hourly_millControlData", hourlyAnalysesNoParameter, unit_codeParameter, season_codeParameter, entry_dateParameter, entry_timeParameter, imbibition_water_tempParameter, exhaust_steam_tempParameter, mill_biocide_dosingParameter, mill_washingParameter, mill_steamingParameter, sugar_bags_tempParameter, molasses_inlet_tempParameter, molasses_outlet_tempParameter, mill_hydraulic_pressure_oneParameter, mill_hydraulic_pressure_twoParameter, mill_hydraulic_pressure_threeParameter, mill_hydraulic_pressure_fourParameter, mill_hydraulic_pressure_fiveParameter, mill_load_oneParameter, mill_load_twoParameter, mill_load_threeParameter, mill_load_fourParameter, mill_load_fiveParameter, mill_rpm_oneParameter, mill_rpm_twoParameter, mill_rpm_threeParameter, mill_rpm_fourParameter, mill_rpm_fiveParameter, inserted_rows, error_message);
+        }
+    
+        public virtual int usp_insert_hourlyAnalyses(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date, Nullable<int> entry_time, Nullable<int> new_mill_juice, Nullable<int> old_mill_juice, Nullable<int> new_mill_water, Nullable<int> old_mill_water, Nullable<int> sugar_bags_L31, Nullable<int> sugar_bags_L30, Nullable<int> sugar_bags_M31, Nullable<int> sugar_bags_M30, Nullable<int> sugar_bags_S31, Nullable<int> sugar_bags_S30, Nullable<int> sugar_bags_Biss, Nullable<int> sugar_raw, string cooling_trace, Nullable<decimal> cooling_pol, Nullable<decimal> cooling_ph, Nullable<int> standing_trucks, Nullable<int> standing_trolley, Nullable<int> standing_trippler, Nullable<int> standing_cart, Nullable<decimal> uncrushed_cane, Nullable<decimal> crushed_cane, Nullable<decimal> cane_diverted_for_syrup, Nullable<decimal> diverted_syrup_quantity, Nullable<int> export_sugar, string current_user, Nullable<decimal> imbibition_water_temp, Nullable<decimal> exhaust_steam_temp, Nullable<bool> mill_biocide_dosing, Nullable<bool> mill_washing, Nullable<bool> mill_steaming, Nullable<decimal> sugar_bags_temp, Nullable<decimal> molasses_inlet_temp, Nullable<decimal> molasses_outlet_temp, Nullable<decimal> mill_hydraulic_pressure_one, Nullable<decimal> mill_hydraulic_pressure_two, Nullable<decimal> mill_hydraulic_pressure_three, Nullable<decimal> mill_hydraulic_pressure_four, Nullable<decimal> mill_hydraulic_pressure_five, Nullable<decimal> mill_load_one, Nullable<decimal> mill_load_two, Nullable<decimal> mill_load_three, Nullable<decimal> mill_load_four, Nullable<decimal> mill_load_five, Nullable<decimal> mill_rpm_one, Nullable<decimal> mill_rpm_two, Nullable<decimal> mill_rpm_three, Nullable<decimal> mill_rpm_four, Nullable<decimal> mill_rpm_five, ObjectParameter inserted_rows, ObjectParameter error_message)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            var entry_timeParameter = entry_time.HasValue ?
+                new ObjectParameter("entry_time", entry_time) :
+                new ObjectParameter("entry_time", typeof(int));
+    
+            var new_mill_juiceParameter = new_mill_juice.HasValue ?
+                new ObjectParameter("new_mill_juice", new_mill_juice) :
+                new ObjectParameter("new_mill_juice", typeof(int));
+    
+            var old_mill_juiceParameter = old_mill_juice.HasValue ?
+                new ObjectParameter("old_mill_juice", old_mill_juice) :
+                new ObjectParameter("old_mill_juice", typeof(int));
+    
+            var new_mill_waterParameter = new_mill_water.HasValue ?
+                new ObjectParameter("new_mill_water", new_mill_water) :
+                new ObjectParameter("new_mill_water", typeof(int));
+    
+            var old_mill_waterParameter = old_mill_water.HasValue ?
+                new ObjectParameter("old_mill_water", old_mill_water) :
+                new ObjectParameter("old_mill_water", typeof(int));
+    
+            var sugar_bags_L31Parameter = sugar_bags_L31.HasValue ?
+                new ObjectParameter("sugar_bags_L31", sugar_bags_L31) :
+                new ObjectParameter("sugar_bags_L31", typeof(int));
+    
+            var sugar_bags_L30Parameter = sugar_bags_L30.HasValue ?
+                new ObjectParameter("sugar_bags_L30", sugar_bags_L30) :
+                new ObjectParameter("sugar_bags_L30", typeof(int));
+    
+            var sugar_bags_M31Parameter = sugar_bags_M31.HasValue ?
+                new ObjectParameter("sugar_bags_M31", sugar_bags_M31) :
+                new ObjectParameter("sugar_bags_M31", typeof(int));
+    
+            var sugar_bags_M30Parameter = sugar_bags_M30.HasValue ?
+                new ObjectParameter("sugar_bags_M30", sugar_bags_M30) :
+                new ObjectParameter("sugar_bags_M30", typeof(int));
+    
+            var sugar_bags_S31Parameter = sugar_bags_S31.HasValue ?
+                new ObjectParameter("sugar_bags_S31", sugar_bags_S31) :
+                new ObjectParameter("sugar_bags_S31", typeof(int));
+    
+            var sugar_bags_S30Parameter = sugar_bags_S30.HasValue ?
+                new ObjectParameter("sugar_bags_S30", sugar_bags_S30) :
+                new ObjectParameter("sugar_bags_S30", typeof(int));
+    
+            var sugar_bags_BissParameter = sugar_bags_Biss.HasValue ?
+                new ObjectParameter("sugar_bags_Biss", sugar_bags_Biss) :
+                new ObjectParameter("sugar_bags_Biss", typeof(int));
+    
+            var sugar_rawParameter = sugar_raw.HasValue ?
+                new ObjectParameter("sugar_raw", sugar_raw) :
+                new ObjectParameter("sugar_raw", typeof(int));
+    
+            var cooling_traceParameter = cooling_trace != null ?
+                new ObjectParameter("cooling_trace", cooling_trace) :
+                new ObjectParameter("cooling_trace", typeof(string));
+    
+            var cooling_polParameter = cooling_pol.HasValue ?
+                new ObjectParameter("cooling_pol", cooling_pol) :
+                new ObjectParameter("cooling_pol", typeof(decimal));
+    
+            var cooling_phParameter = cooling_ph.HasValue ?
+                new ObjectParameter("cooling_ph", cooling_ph) :
+                new ObjectParameter("cooling_ph", typeof(decimal));
+    
+            var standing_trucksParameter = standing_trucks.HasValue ?
+                new ObjectParameter("standing_trucks", standing_trucks) :
+                new ObjectParameter("standing_trucks", typeof(int));
+    
+            var standing_trolleyParameter = standing_trolley.HasValue ?
+                new ObjectParameter("standing_trolley", standing_trolley) :
+                new ObjectParameter("standing_trolley", typeof(int));
+    
+            var standing_tripplerParameter = standing_trippler.HasValue ?
+                new ObjectParameter("standing_trippler", standing_trippler) :
+                new ObjectParameter("standing_trippler", typeof(int));
+    
+            var standing_cartParameter = standing_cart.HasValue ?
+                new ObjectParameter("standing_cart", standing_cart) :
+                new ObjectParameter("standing_cart", typeof(int));
+    
+            var uncrushed_caneParameter = uncrushed_cane.HasValue ?
+                new ObjectParameter("uncrushed_cane", uncrushed_cane) :
+                new ObjectParameter("uncrushed_cane", typeof(decimal));
+    
+            var crushed_caneParameter = crushed_cane.HasValue ?
+                new ObjectParameter("crushed_cane", crushed_cane) :
+                new ObjectParameter("crushed_cane", typeof(decimal));
+    
+            var cane_diverted_for_syrupParameter = cane_diverted_for_syrup.HasValue ?
+                new ObjectParameter("cane_diverted_for_syrup", cane_diverted_for_syrup) :
+                new ObjectParameter("cane_diverted_for_syrup", typeof(decimal));
+    
+            var diverted_syrup_quantityParameter = diverted_syrup_quantity.HasValue ?
+                new ObjectParameter("diverted_syrup_quantity", diverted_syrup_quantity) :
+                new ObjectParameter("diverted_syrup_quantity", typeof(decimal));
+    
+            var export_sugarParameter = export_sugar.HasValue ?
+                new ObjectParameter("export_sugar", export_sugar) :
+                new ObjectParameter("export_sugar", typeof(int));
+    
+            var current_userParameter = current_user != null ?
+                new ObjectParameter("current_user", current_user) :
+                new ObjectParameter("current_user", typeof(string));
+    
+            var imbibition_water_tempParameter = imbibition_water_temp.HasValue ?
+                new ObjectParameter("imbibition_water_temp", imbibition_water_temp) :
+                new ObjectParameter("imbibition_water_temp", typeof(decimal));
+    
+            var exhaust_steam_tempParameter = exhaust_steam_temp.HasValue ?
+                new ObjectParameter("exhaust_steam_temp", exhaust_steam_temp) :
+                new ObjectParameter("exhaust_steam_temp", typeof(decimal));
+    
+            var mill_biocide_dosingParameter = mill_biocide_dosing.HasValue ?
+                new ObjectParameter("mill_biocide_dosing", mill_biocide_dosing) :
+                new ObjectParameter("mill_biocide_dosing", typeof(bool));
+    
+            var mill_washingParameter = mill_washing.HasValue ?
+                new ObjectParameter("mill_washing", mill_washing) :
+                new ObjectParameter("mill_washing", typeof(bool));
+    
+            var mill_steamingParameter = mill_steaming.HasValue ?
+                new ObjectParameter("mill_steaming", mill_steaming) :
+                new ObjectParameter("mill_steaming", typeof(bool));
+    
+            var sugar_bags_tempParameter = sugar_bags_temp.HasValue ?
+                new ObjectParameter("sugar_bags_temp", sugar_bags_temp) :
+                new ObjectParameter("sugar_bags_temp", typeof(decimal));
+    
+            var molasses_inlet_tempParameter = molasses_inlet_temp.HasValue ?
+                new ObjectParameter("molasses_inlet_temp", molasses_inlet_temp) :
+                new ObjectParameter("molasses_inlet_temp", typeof(decimal));
+    
+            var molasses_outlet_tempParameter = molasses_outlet_temp.HasValue ?
+                new ObjectParameter("molasses_outlet_temp", molasses_outlet_temp) :
+                new ObjectParameter("molasses_outlet_temp", typeof(decimal));
+    
+            var mill_hydraulic_pressure_oneParameter = mill_hydraulic_pressure_one.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_one", mill_hydraulic_pressure_one) :
+                new ObjectParameter("mill_hydraulic_pressure_one", typeof(decimal));
+    
+            var mill_hydraulic_pressure_twoParameter = mill_hydraulic_pressure_two.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_two", mill_hydraulic_pressure_two) :
+                new ObjectParameter("mill_hydraulic_pressure_two", typeof(decimal));
+    
+            var mill_hydraulic_pressure_threeParameter = mill_hydraulic_pressure_three.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_three", mill_hydraulic_pressure_three) :
+                new ObjectParameter("mill_hydraulic_pressure_three", typeof(decimal));
+    
+            var mill_hydraulic_pressure_fourParameter = mill_hydraulic_pressure_four.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_four", mill_hydraulic_pressure_four) :
+                new ObjectParameter("mill_hydraulic_pressure_four", typeof(decimal));
+    
+            var mill_hydraulic_pressure_fiveParameter = mill_hydraulic_pressure_five.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_five", mill_hydraulic_pressure_five) :
+                new ObjectParameter("mill_hydraulic_pressure_five", typeof(decimal));
+    
+            var mill_load_oneParameter = mill_load_one.HasValue ?
+                new ObjectParameter("mill_load_one", mill_load_one) :
+                new ObjectParameter("mill_load_one", typeof(decimal));
+    
+            var mill_load_twoParameter = mill_load_two.HasValue ?
+                new ObjectParameter("mill_load_two", mill_load_two) :
+                new ObjectParameter("mill_load_two", typeof(decimal));
+    
+            var mill_load_threeParameter = mill_load_three.HasValue ?
+                new ObjectParameter("mill_load_three", mill_load_three) :
+                new ObjectParameter("mill_load_three", typeof(decimal));
+    
+            var mill_load_fourParameter = mill_load_four.HasValue ?
+                new ObjectParameter("mill_load_four", mill_load_four) :
+                new ObjectParameter("mill_load_four", typeof(decimal));
+    
+            var mill_load_fiveParameter = mill_load_five.HasValue ?
+                new ObjectParameter("mill_load_five", mill_load_five) :
+                new ObjectParameter("mill_load_five", typeof(decimal));
+    
+            var mill_rpm_oneParameter = mill_rpm_one.HasValue ?
+                new ObjectParameter("mill_rpm_one", mill_rpm_one) :
+                new ObjectParameter("mill_rpm_one", typeof(decimal));
+    
+            var mill_rpm_twoParameter = mill_rpm_two.HasValue ?
+                new ObjectParameter("mill_rpm_two", mill_rpm_two) :
+                new ObjectParameter("mill_rpm_two", typeof(decimal));
+    
+            var mill_rpm_threeParameter = mill_rpm_three.HasValue ?
+                new ObjectParameter("mill_rpm_three", mill_rpm_three) :
+                new ObjectParameter("mill_rpm_three", typeof(decimal));
+    
+            var mill_rpm_fourParameter = mill_rpm_four.HasValue ?
+                new ObjectParameter("mill_rpm_four", mill_rpm_four) :
+                new ObjectParameter("mill_rpm_four", typeof(decimal));
+    
+            var mill_rpm_fiveParameter = mill_rpm_five.HasValue ?
+                new ObjectParameter("mill_rpm_five", mill_rpm_five) :
+                new ObjectParameter("mill_rpm_five", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_insert_hourlyAnalyses", unit_codeParameter, season_codeParameter, entry_dateParameter, entry_timeParameter, new_mill_juiceParameter, old_mill_juiceParameter, new_mill_waterParameter, old_mill_waterParameter, sugar_bags_L31Parameter, sugar_bags_L30Parameter, sugar_bags_M31Parameter, sugar_bags_M30Parameter, sugar_bags_S31Parameter, sugar_bags_S30Parameter, sugar_bags_BissParameter, sugar_rawParameter, cooling_traceParameter, cooling_polParameter, cooling_phParameter, standing_trucksParameter, standing_trolleyParameter, standing_tripplerParameter, standing_cartParameter, uncrushed_caneParameter, crushed_caneParameter, cane_diverted_for_syrupParameter, diverted_syrup_quantityParameter, export_sugarParameter, current_userParameter, imbibition_water_tempParameter, exhaust_steam_tempParameter, mill_biocide_dosingParameter, mill_washingParameter, mill_steamingParameter, sugar_bags_tempParameter, molasses_inlet_tempParameter, molasses_outlet_tempParameter, mill_hydraulic_pressure_oneParameter, mill_hydraulic_pressure_twoParameter, mill_hydraulic_pressure_threeParameter, mill_hydraulic_pressure_fourParameter, mill_hydraulic_pressure_fiveParameter, mill_load_oneParameter, mill_load_twoParameter, mill_load_threeParameter, mill_load_fourParameter, mill_load_fiveParameter, mill_rpm_oneParameter, mill_rpm_twoParameter, mill_rpm_threeParameter, mill_rpm_fourParameter, mill_rpm_fiveParameter, inserted_rows, error_message);
+        }
+    
+        public virtual ObjectResult<usp_select_hourlyAnalyses_Result> usp_select_hourlyAnalyses(Nullable<int> unit_code, Nullable<System.DateTime> entry_date)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalyses_Result>("usp_select_hourlyAnalyses", unit_codeParameter, entry_dateParameter);
+        }
+    
+        public virtual ObjectResult<usp_select_hourlyAnalysesMillControlData_Result> usp_select_hourlyAnalysesMillControlData(Nullable<int> id, Nullable<int> unit_code)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalysesMillControlData_Result>("usp_select_hourlyAnalysesMillControlData", idParameter, unit_codeParameter);
+        }
+    
+        public virtual ObjectResult<usp_selectAll_hourlyAnalysesMillControlData_Result> usp_selectAll_hourlyAnalysesMillControlData(Nullable<int> unit_code, Nullable<System.DateTime> entry_date, Nullable<int> season_code)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_selectAll_hourlyAnalysesMillControlData_Result>("usp_selectAll_hourlyAnalysesMillControlData", unit_codeParameter, entry_dateParameter, season_codeParameter);
+        }
+    
+        public virtual int usp_update_mill_control_data(Nullable<int> unit_code, Nullable<int> season_code, Nullable<int> id, Nullable<decimal> imbibition_water_temp, Nullable<decimal> exhaust_steam_temp, Nullable<bool> mill_biocide_dosing, Nullable<bool> mill_washing, Nullable<bool> mill_steaming, Nullable<decimal> sugar_bags_temp, Nullable<decimal> molasses_inlet_temp, Nullable<decimal> molasses_outlet_temp, string cooling_trace, Nullable<decimal> cooling_pol, Nullable<decimal> cooling_ph, Nullable<decimal> mill_hydraulic_pressure_one, Nullable<decimal> mill_hydraulic_pressure_two, Nullable<decimal> mill_hydraulic_pressure_three, Nullable<decimal> mill_hydraulic_pressure_four, Nullable<decimal> mill_hydraulic_pressure_five, Nullable<decimal> mill_load_one, Nullable<decimal> mill_load_two, Nullable<decimal> mill_load_three, Nullable<decimal> mill_load_four, Nullable<decimal> mill_load_five, Nullable<decimal> mill_rpm_one, Nullable<decimal> mill_rpm_two, Nullable<decimal> mill_rpm_three, Nullable<decimal> mill_rpm_four, Nullable<decimal> mill_rpm_five)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var imbibition_water_tempParameter = imbibition_water_temp.HasValue ?
+                new ObjectParameter("imbibition_water_temp", imbibition_water_temp) :
+                new ObjectParameter("imbibition_water_temp", typeof(decimal));
+    
+            var exhaust_steam_tempParameter = exhaust_steam_temp.HasValue ?
+                new ObjectParameter("exhaust_steam_temp", exhaust_steam_temp) :
+                new ObjectParameter("exhaust_steam_temp", typeof(decimal));
+    
+            var mill_biocide_dosingParameter = mill_biocide_dosing.HasValue ?
+                new ObjectParameter("mill_biocide_dosing", mill_biocide_dosing) :
+                new ObjectParameter("mill_biocide_dosing", typeof(bool));
+    
+            var mill_washingParameter = mill_washing.HasValue ?
+                new ObjectParameter("mill_washing", mill_washing) :
+                new ObjectParameter("mill_washing", typeof(bool));
+    
+            var mill_steamingParameter = mill_steaming.HasValue ?
+                new ObjectParameter("mill_steaming", mill_steaming) :
+                new ObjectParameter("mill_steaming", typeof(bool));
+    
+            var sugar_bags_tempParameter = sugar_bags_temp.HasValue ?
+                new ObjectParameter("sugar_bags_temp", sugar_bags_temp) :
+                new ObjectParameter("sugar_bags_temp", typeof(decimal));
+    
+            var molasses_inlet_tempParameter = molasses_inlet_temp.HasValue ?
+                new ObjectParameter("molasses_inlet_temp", molasses_inlet_temp) :
+                new ObjectParameter("molasses_inlet_temp", typeof(decimal));
+    
+            var molasses_outlet_tempParameter = molasses_outlet_temp.HasValue ?
+                new ObjectParameter("molasses_outlet_temp", molasses_outlet_temp) :
+                new ObjectParameter("molasses_outlet_temp", typeof(decimal));
+    
+            var cooling_traceParameter = cooling_trace != null ?
+                new ObjectParameter("cooling_trace", cooling_trace) :
+                new ObjectParameter("cooling_trace", typeof(string));
+    
+            var cooling_polParameter = cooling_pol.HasValue ?
+                new ObjectParameter("cooling_pol", cooling_pol) :
+                new ObjectParameter("cooling_pol", typeof(decimal));
+    
+            var cooling_phParameter = cooling_ph.HasValue ?
+                new ObjectParameter("cooling_ph", cooling_ph) :
+                new ObjectParameter("cooling_ph", typeof(decimal));
+    
+            var mill_hydraulic_pressure_oneParameter = mill_hydraulic_pressure_one.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_one", mill_hydraulic_pressure_one) :
+                new ObjectParameter("mill_hydraulic_pressure_one", typeof(decimal));
+    
+            var mill_hydraulic_pressure_twoParameter = mill_hydraulic_pressure_two.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_two", mill_hydraulic_pressure_two) :
+                new ObjectParameter("mill_hydraulic_pressure_two", typeof(decimal));
+    
+            var mill_hydraulic_pressure_threeParameter = mill_hydraulic_pressure_three.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_three", mill_hydraulic_pressure_three) :
+                new ObjectParameter("mill_hydraulic_pressure_three", typeof(decimal));
+    
+            var mill_hydraulic_pressure_fourParameter = mill_hydraulic_pressure_four.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_four", mill_hydraulic_pressure_four) :
+                new ObjectParameter("mill_hydraulic_pressure_four", typeof(decimal));
+    
+            var mill_hydraulic_pressure_fiveParameter = mill_hydraulic_pressure_five.HasValue ?
+                new ObjectParameter("mill_hydraulic_pressure_five", mill_hydraulic_pressure_five) :
+                new ObjectParameter("mill_hydraulic_pressure_five", typeof(decimal));
+    
+            var mill_load_oneParameter = mill_load_one.HasValue ?
+                new ObjectParameter("mill_load_one", mill_load_one) :
+                new ObjectParameter("mill_load_one", typeof(decimal));
+    
+            var mill_load_twoParameter = mill_load_two.HasValue ?
+                new ObjectParameter("mill_load_two", mill_load_two) :
+                new ObjectParameter("mill_load_two", typeof(decimal));
+    
+            var mill_load_threeParameter = mill_load_three.HasValue ?
+                new ObjectParameter("mill_load_three", mill_load_three) :
+                new ObjectParameter("mill_load_three", typeof(decimal));
+    
+            var mill_load_fourParameter = mill_load_four.HasValue ?
+                new ObjectParameter("mill_load_four", mill_load_four) :
+                new ObjectParameter("mill_load_four", typeof(decimal));
+    
+            var mill_load_fiveParameter = mill_load_five.HasValue ?
+                new ObjectParameter("mill_load_five", mill_load_five) :
+                new ObjectParameter("mill_load_five", typeof(decimal));
+    
+            var mill_rpm_oneParameter = mill_rpm_one.HasValue ?
+                new ObjectParameter("mill_rpm_one", mill_rpm_one) :
+                new ObjectParameter("mill_rpm_one", typeof(decimal));
+    
+            var mill_rpm_twoParameter = mill_rpm_two.HasValue ?
+                new ObjectParameter("mill_rpm_two", mill_rpm_two) :
+                new ObjectParameter("mill_rpm_two", typeof(decimal));
+    
+            var mill_rpm_threeParameter = mill_rpm_three.HasValue ?
+                new ObjectParameter("mill_rpm_three", mill_rpm_three) :
+                new ObjectParameter("mill_rpm_three", typeof(decimal));
+    
+            var mill_rpm_fourParameter = mill_rpm_four.HasValue ?
+                new ObjectParameter("mill_rpm_four", mill_rpm_four) :
+                new ObjectParameter("mill_rpm_four", typeof(decimal));
+    
+            var mill_rpm_fiveParameter = mill_rpm_five.HasValue ?
+                new ObjectParameter("mill_rpm_five", mill_rpm_five) :
+                new ObjectParameter("mill_rpm_five", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_mill_control_data", unit_codeParameter, season_codeParameter, idParameter, imbibition_water_tempParameter, exhaust_steam_tempParameter, mill_biocide_dosingParameter, mill_washingParameter, mill_steamingParameter, sugar_bags_tempParameter, molasses_inlet_tempParameter, molasses_outlet_tempParameter, cooling_traceParameter, cooling_polParameter, cooling_phParameter, mill_hydraulic_pressure_oneParameter, mill_hydraulic_pressure_twoParameter, mill_hydraulic_pressure_threeParameter, mill_hydraulic_pressure_fourParameter, mill_hydraulic_pressure_fiveParameter, mill_load_oneParameter, mill_load_twoParameter, mill_load_threeParameter, mill_load_fourParameter, mill_load_fiveParameter, mill_rpm_oneParameter, mill_rpm_twoParameter, mill_rpm_threeParameter, mill_rpm_fourParameter, mill_rpm_fiveParameter);
         }
     }
 }

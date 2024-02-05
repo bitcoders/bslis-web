@@ -20336,15 +20336,15 @@ code {
 }
 
 select.form-control, .dataTables_wrapper select {
-  padding: .4375rem .75rem;
-  border: 0;
-  outline: 1px solid #f3f3f3;
-  color: #c9c8c8;
+    padding: .4375rem .75rem;
+    border: 1px;
+    outline: 1px solid #8e44ad;
+    color: #c9c8c8;
 }
 
-select.form-control:focus, .dataTables_wrapper select:focus {
-  outline: 1px solid #f3f3f3;
-}
+    select.form-control:focus, .dataTables_wrapper select:focus {
+        outline: 1px solid #8e44ad;
+    }
 
 select.form-control.border-primary, .dataTables_wrapper select.border-primary {
   outline: 1px solid #4d83ff;

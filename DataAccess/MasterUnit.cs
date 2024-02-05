@@ -28,9 +28,8 @@ namespace DataAccess
             this.PeriodicalStocks = new HashSet<PeriodicalStock>();
             this.Villages = new HashSet<Village>();
             this.Zones = new HashSet<Zone>();
-            this.DataAdjustments = new HashSet<DataAdjustment>();
-            this.DataAdjustments1 = new HashSet<DataAdjustment>();
             this.MasterUsers = new HashSet<MasterUser>();
+            this.DataAdjustments = new HashSet<DataAdjustment>();
             this.DailyAnalyses = new HashSet<DailyAnalys>();
         }
     
@@ -84,11 +83,9 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zone> Zones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DataAdjustment> DataAdjustments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DataAdjustment> DataAdjustments1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MasterUser> MasterUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DataAdjustment> DataAdjustments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DailyAnalys> DailyAnalyses { get; set; }
     }

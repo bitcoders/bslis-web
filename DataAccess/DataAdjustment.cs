@@ -44,6 +44,5 @@ namespace DataAccess
         public Nullable<decimal> EstimatedCaneForSyrupDiversion { get; set; }
     
         public virtual MasterUnit MasterUnit { get; set; }
-        public virtual MasterUnit MasterUnit1 { get; set; }
     }
 }

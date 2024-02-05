@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\Projects\Technorator\Birla Sugar Sugar lab\LitmusWeb\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2023-12-21T03:55:52.2125782Z;True|2023-11-18T17:14:37.0347371+05:30;</History>
+    <History>True|2024-02-05T07:27:20.1599878Z;True|2024-02-01T23:22:27.6745812+05:30;True|2024-02-01T23:00:06.2703075+05:30;True|2023-12-21T09:25:52.2125782+05:30;True|2023-11-18T17:14:37.0347371+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -49,13 +49,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/16/2017 06:51:42</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>12/21/2023 08:14:22</publishTime>
+      <publishTime>02/05/2024 12:55:17</publishTime>
     </File>
     <File Include="bin/DataAccess.dll.config">
-      <publishTime>12/20/2023 09:29:45</publishTime>
+      <publishTime>12/31/2023 13:58:30</publishTime>
     </File>
     <File Include="bin/DataAccess.pdb">
-      <publishTime>12/21/2023 08:14:22</publishTime>
+      <publishTime>02/05/2024 12:55:17</publishTime>
     </File>
     <File Include="bin/DocumentFormat.OpenXml.dll">
       <publishTime>06/06/2017 22:59:22</publishTime>
@@ -106,10 +106,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/21/2019 10:07:34</publishTime>
     </File>
     <File Include="bin/LitmusWeb.dll">
-      <publishTime>12/21/2023 09:25:23</publishTime>
+      <publishTime>02/05/2024 12:55:20</publishTime>
     </File>
     <File Include="bin/LitmusWeb.pdb">
-      <publishTime>12/21/2023 09:25:23</publishTime>
+      <publishTime>02/05/2024 12:55:20</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>06/27/2017 18:29:34</publishTime>
@@ -355,7 +355,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/11/2019 01:25:00</publishTime>
     </File>
     <File Include="Content/MainContent/css/horizontal-layout/style.css">
-      <publishTime>08/11/2019 01:25:00</publishTime>
+      <publishTime>01/03/2024 08:32:28</publishTime>
     </File>
     <File Include="Content/MainContent/css/maps/horizontal-layout-dark/style.css.map">
       <publishTime>08/11/2019 01:25:06</publishTime>
@@ -376,7 +376,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/11/2019 01:25:06</publishTime>
     </File>
     <File Include="Content/MainContent/css/style.css">
-      <publishTime>12/04/2022 20:04:07</publishTime>
+      <publishTime>01/03/2024 08:31:29</publishTime>
     </File>
     <File Include="Content/MainContent/css/TechnoratorStyle.css">
       <publishTime>12/04/2022 20:26:06</publishTime>
@@ -391,7 +391,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/11/2019 01:25:06</publishTime>
     </File>
     <File Include="Content/MainContent/css/vertical-layout-light/style.min.css">
-      <publishTime>02/24/2023 07:46:47</publishTime>
+      <publishTime>01/03/2024 08:32:48</publishTime>
     </File>
     <File Include="Content/MainContent/fonts/.DS_Store">
       <publishTime>07/18/2019 21:55:36</publishTime>
@@ -3073,7 +3073,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/11/2019 01:25:38</publishTime>
     </File>
     <File Include="Content/MainContent/vendors/datatables.net/jquery.dataTables.min.js">
-      <publishTime>04/10/2020 12:41:38</publishTime>
+      <publishTime>01/21/2024 23:54:47</publishTime>
     </File>
     <File Include="Content/MainContent/vendors/dragula/dragula.min.css">
       <publishTime>08/11/2019 01:25:38</publishTime>
@@ -19828,10 +19828,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/10/2020 12:08:24</publishTime>
     </File>
     <File Include="Scripts/js/data-table.js">
-      <publishTime>08/27/2019 01:54:30</publishTime>
+      <publishTime>01/22/2024 00:04:58</publishTime>
     </File>
     <File Include="Scripts/js/data-table.min.js">
-      <publishTime>04/10/2020 12:09:32</publishTime>
+      <publishTime>01/22/2024 00:22:17</publishTime>
     </File>
     <File Include="Scripts/js/dataTables.bootstrap4.js">
       <publishTime>07/18/2019 20:44:18</publishTime>
@@ -20176,7 +20176,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/14/2023 23:46:53</publishTime>
     </File>
     <File Include="Views/DailyAnalysis/_PartialTabEight.cshtml">
-      <publishTime>01/14/2023 23:46:53</publishTime>
+      <publishTime>02/05/2024 10:16:00</publishTime>
     </File>
     <File Include="Views/DailyAnalysis/_PartialTabEleven.cshtml">
       <publishTime>02/24/2023 07:41:46</publishTime>
@@ -20215,7 +20215,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/20/2022 11:33:05</publishTime>
     </File>
     <File Include="Views/DashboardOne/DashboardThree.cshtml">
-      <publishTime>12/20/2023 10:49:35</publishTime>
+      <publishTime>12/21/2023 10:42:14</publishTime>
     </File>
     <File Include="Views/DashboardOne/DashboardTwo.cshtml">
       <publishTime>12/19/2023 01:25:55</publishTime>
@@ -20224,13 +20224,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/08/2023 10:06:08</publishTime>
     </File>
     <File Include="Views/DataAdjustment/Add.cshtml">
-      <publishTime>02/08/2022 11:04:08</publishTime>
+      <publishTime>02/05/2024 10:08:05</publishTime>
     </File>
     <File Include="Views/DataAdjustment/Edit.cshtml">
-      <publishTime>02/08/2022 11:05:08</publishTime>
+      <publishTime>02/05/2024 10:08:05</publishTime>
     </File>
     <File Include="Views/DataAdjustment/Index.cshtml">
-      <publishTime>02/08/2022 10:58:33</publishTime>
+      <publishTime>02/05/2024 10:08:05</publishTime>
     </File>
     <File Include="Views/Department/Create.cshtml">
       <publishTime>08/11/2019 19:50:34</publishTime>
@@ -20317,7 +20317,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2019 02:04:44</publishTime>
     </File>
     <File Include="Views/HourlyAnalysis/Create.cshtml">
-      <publishTime>01/14/2023 23:33:15</publishTime>
+      <publishTime>01/22/2024 00:27:09</publishTime>
     </File>
     <File Include="Views/HourlyAnalysis/Details.cshtml">
       <publishTime>11/22/2022 12:33:09</publishTime>
@@ -20325,8 +20325,23 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/HourlyAnalysis/Edit.cshtml">
       <publishTime>01/14/2023 23:37:02</publishTime>
     </File>
+    <File Include="Views/HourlyAnalysis/EditMillControlData.cshtml">
+      <publishTime>02/05/2024 12:09:48</publishTime>
+    </File>
     <File Include="Views/HourlyAnalysis/Index.cshtml">
-      <publishTime>12/13/2023 09:47:10</publishTime>
+      <publishTime>01/21/2024 23:10:31</publishTime>
+    </File>
+    <File Include="Views/HourlyAnalysis/_PartialTabOneCreate.cshtml">
+      <publishTime>01/22/2024 00:31:14</publishTime>
+    </File>
+    <File Include="Views/HourlyAnalysis/_PartialTabOneIndex.cshtml">
+      <publishTime>01/22/2024 00:09:14</publishTime>
+    </File>
+    <File Include="Views/HourlyAnalysis/_PartialTabTwoCreate.cshtml">
+      <publishTime>02/05/2024 12:28:31</publishTime>
+    </File>
+    <File Include="Views/HourlyAnalysis/_PartialTabTwoIndex.cshtml">
+      <publishTime>02/04/2024 22:32:29</publishTime>
     </File>
     <File Include="Views/HourlyAnalysisReport/Index.cshtml">
       <publishTime>10/13/2019 19:45:26</publishTime>
@@ -20680,7 +20695,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/25/2019 10:20:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/21/2023 09:25:29</publishTime>
+      <publishTime>02/05/2024 12:56:03</publishTime>
     </File>
     <File Include="Web.sitemap">
       <publishTime>12/05/2019 18:24:46</publishTime>

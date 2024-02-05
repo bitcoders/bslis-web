@@ -872,5 +872,13 @@ namespace DataAccess
         public decimal rs_mixed_juice { get; set; }
         public Nullable<decimal> rs_mixed_juice_percent { get; set; }
         public int refinery_water_consumption { get; set; }
+        public decimal od_cane_crushed_on_unknown { get; set; }
+        public decimal od_cane_crushed_on_syrup { get; set; }
+        public decimal cane_crushed_b_heavy { get; set; }
+        public decimal cane_crushed_c_heavy { get; set; }
+        public decimal td_cane_crushed_on_unknown { get; set; }
+        public decimal td_cane_crushed_on_syrup { get; set; }
+        public decimal td_cane_crushed_b_heavy { get; set; }
+        public decimal td_cane_crushed_c_heavy { get; set; }
     }
 }

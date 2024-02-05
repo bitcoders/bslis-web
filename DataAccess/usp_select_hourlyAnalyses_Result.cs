@@ -39,18 +39,40 @@ namespace DataAccess
         public string cooling_trace { get; set; }
         public decimal cooling_pol { get; set; }
         public decimal cooling_ph { get; set; }
-        public Nullable<System.DateTime> crtd_dt { get; set; }
-        public string crtd_by { get; set; }
-        public Nullable<System.DateTime> updt_dt { get; set; }
-        public string updt_by { get; set; }
         public short standing_truck { get; set; }
         public short standing_trippler { get; set; }
         public short standing_trolley { get; set; }
         public short standing_cart { get; set; }
         public Nullable<decimal> un_crushed_cane { get; set; }
-        public Nullable<decimal> crushed_cane { get; set; }
         public decimal cane_diverted_for_syrup { get; set; }
         public decimal diverted_syrup_quantity { get; set; }
         public int export_sugar { get; set; }
+        public int MillDataID { get; set; }
+        public long HourlyAnalysesNo { get; set; }
+        public System.DateTime mill_data_entry_date { get; set; }
+        public int mill_data_entry_time { get; set; }
+        public decimal imbibition_water_temp { get; set; }
+        public decimal exhaust_steam_temp { get; set; }
+        public bool mill_biocide_dosing { get; set; }
+        public bool mill_washing { get; set; }
+        public bool mill_steaming { get; set; }
+        public decimal sugar_bags_temp { get; set; }
+        public decimal molasses_inlet_temp { get; set; }
+        public decimal molasses_outlet_temp { get; set; }
+        public decimal mill_hydraulic_pressure_one { get; set; }
+        public decimal mill_hydraulic_pressure_two { get; set; }
+        public decimal mill_hydraulic_pressure_three { get; set; }
+        public decimal mill_hydraulic_pressure_four { get; set; }
+        public decimal mill_hydraulic_pressure_five { get; set; }
+        public decimal mill_load_one { get; set; }
+        public decimal mill_load_two { get; set; }
+        public decimal mill_load_three { get; set; }
+        public decimal mill_load_four { get; set; }
+        public decimal mill_load_five { get; set; }
+        public decimal mill_rpm_one { get; set; }
+        public decimal mill_rpm_two { get; set; }
+        public decimal mill_rpm_three { get; set; }
+        public decimal mill_rpm_four { get; set; }
+        public decimal mill_rpm_five { get; set; }
     }
 }

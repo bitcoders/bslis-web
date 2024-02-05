@@ -2,11 +2,13 @@
 using DataAccess;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccess.CustomModels;
+
 namespace DataAccess.Interfaces
 {
     interface IHourlyAnalysis
     {
-        bool CreateHourlyAnalysis(HourlyAnalys hourlyAnalysis);
+        bool CreateHourlyAnalysis(HourlyAnalysesViewModel m);
         bool EditHourlyAnalysis(HourlyAnalys hourlyAnalysis);
         (bool success, string message) DeleteHourlyAnalysis(int unit_code, string user_code, int lineId);
         List<HourlyAnalys> GetHourlyAnalysisList(int UnitCode, int SeasonCode, DateTime AnalysisDate);

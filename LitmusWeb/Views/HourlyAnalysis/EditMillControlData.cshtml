@@ -1,0 +1,253 @@
+﻿@model LitmusWeb.Models.CustomModels.HourlyAnalysesViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        @using (Html.BeginForm("EditMillControlData", "HourlyAnalysis", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            bool coolingTrace = Model.hourlyAnalysesModel.cooling_trace == "Yes" ? true : false;
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body shadow">
+                        <div class="card-title">
+                            Mill Hydraulic Pressure
+                            @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(temp => temp.MillControlModel.mill_hydraulic_pressure_one, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.mill_hydraulic_pressure_one, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_hydraulic_pressure_one, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(temp => temp.MillControlModel.mill_hydraulic_pressure_two, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.mill_hydraulic_pressure_two, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_hydraulic_pressure_two, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(temp => temp.MillControlModel.mill_hydraulic_pressure_three, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.mill_hydraulic_pressure_three, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_hydraulic_pressure_three, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(temp => temp.MillControlModel.mill_hydraulic_pressure_four, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.mill_hydraulic_pressure_four, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_hydraulic_pressure_four, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(temp => temp.MillControlModel.mill_hydraulic_pressure_five, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.mill_hydraulic_pressure_five, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_hydraulic_pressure_five, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <input type="submit" class="btn btn-inverse-success pull-right" name="btnSuccess" id="btnSuccess" value="Save" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body shadow">
+                        <div class="card-title">
+                            Mill Load
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_load_one, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_load_one, new { htmlAttributes = new { @class = "form-control ", @autofocus = "true" } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_load_one, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4 ">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_load_two, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_load_two, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_load_two, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_load_three, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_load_three, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_load_three, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 ">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_load_four, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_load_four, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_load_four, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_load_five, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_load_five, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_load_five, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body shadow">
+                        <div class="card-title">
+                            Mill RPM
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_rpm_one, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_rpm_one, new { htmlAttributes = new { @class = "form-control ", @autofocus = "true" } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_rpm_one, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4 ">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_rpm_two, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_rpm_two, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_rpm_two, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_rpm_three, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_rpm_three, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_rpm_three, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 ">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_rpm_four, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_rpm_four, new { htmlAttributes = new { @class = "form-control " } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_rpm_four, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.LabelFor(temp => temp.MillControlModel.mill_rpm_five, htmlAttributes: new { @class = "col-form-label" })
+                                @Html.EditorFor(temp => temp.MillControlModel.mill_rpm_five, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_rpm_five, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 grid-margin">
+                <div class="card">
+                    <div class="card-body shadow">
+                        <div class="card-title">
+                            <h3>
+                                Other Data
+                            </h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        @Html.LabelFor(temp => temp.MillControlModel.imbibition_water_temp, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.imbibition_water_temp, new { htmlAttributes = new { @class = "form-control ", @autofocus = "true" } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.imbibition_water_temp, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-4 ">
+                                        @Html.LabelFor(temp => temp.MillControlModel.exhaust_steam_temp, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.MillControlModel.exhaust_steam_temp, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.exhaust_steam_temp, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @*@Html.LabelFor(temp => temp.MillControlModel.mill_biocide_dosing, htmlAttributes: new { @class = "col-form-label" })
+        @Html.EditorFor(temp => temp.MillControlModel.mill_biocide_dosing, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_biocide_dosing, "", new { @class = "text-danger" })*@
+
+                                        @Html.LabelFor(temp => temp.MillControlModel.mill_biocide_dosing, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(temp => temp.MillControlModel.mill_biocide_dosing, ViewBag.millBiocideDosingYesNoList as SelectList,  new { @class = "form-control" } )
+                                        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_biocide_dosing, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.MillControlModel.mill_washing, htmlAttributes: new { @class = "col-form-label" })
+                                                @*@Html.EditorFor(temp => temp.MillControlModel.mill_washing, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                @Html.DropDownListFor(temp => temp.MillControlModel.mill_washing, ViewBag.millWashingYesNoList as SelectList, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_washing, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.MillControlModel.mill_steaming, htmlAttributes: new { @class = "col-form-label" })
+                                                @*@Html.EditorFor(temp => temp.MillControlModel.mill_steaming, new { htmlAttributes = new { @class = "form-control " } })*@
+                                                @Html.DropDownListFor(temp => temp.MillControlModel.mill_steaming, ViewBag.millSteamingYesNoList as SelectList, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_steaming, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.MillControlModel.sugar_bags_temp, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.EditorFor(temp => temp.MillControlModel.sugar_bags_temp, new { htmlAttributes = new { @class = "form-control " } })
+                                                @Html.ValidationMessageFor(temp => temp.MillControlModel.sugar_bags_temp, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.MillControlModel.molasses_inlet_temp, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.EditorFor(temp => temp.MillControlModel.molasses_inlet_temp, new { htmlAttributes = new { @class = "form-control " } })
+                                                @Html.ValidationMessageFor(temp => temp.MillControlModel.molasses_inlet_temp, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.MillControlModel.molasses_outlet_temp, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.EditorFor(temp => temp.MillControlModel.molasses_outlet_temp, new { htmlAttributes = new { @class = "form-control " } })
+                                                @Html.ValidationMessageFor(temp => temp.MillControlModel.molasses_outlet_temp, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.hourlyAnalysesModel.cooling_trace, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.DropDownListFor(temp => temp.hourlyAnalysesModel.cooling_trace, new List<SelectListItem>
+                                                {
+                                                    new SelectListItem { Text = "No", Value = "No", Selected = !coolingTrace },
+                                                    new SelectListItem { Text = "Yes", Value = "Yes",  Selected = coolingTrace}
+                                                }, "Select an option", new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.cooling_trace, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.hourlyAnalysesModel.cooling_pol, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.EditorFor(temp => temp.hourlyAnalysesModel.cooling_pol, new { htmlAttributes = new { @class = "form-control " } })
+                                                @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.cooling_pol, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-4">
+                                                @Html.LabelFor(temp => temp.hourlyAnalysesModel.cooling_ph, htmlAttributes: new { @class = "col-form-label" })
+                                                @Html.EditorFor(temp => temp.hourlyAnalysesModel.cooling_ph, new { htmlAttributes = new { @class = "form-control " } })
+                                                @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.cooling_ph, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="submit" class="btn btn-inverse-success pull-right" name="btnSuccess" id="btnSuccess" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+

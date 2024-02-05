@@ -167,6 +167,7 @@
     <Compile Include="CustomModels\ApiResponse.cs" />
     <Compile Include="CustomModels\CaneAnalysisViewModel.cs" />
     <Compile Include="CustomModels\DashboardModel.cs" />
+    <Compile Include="CustomModels\HourlyAnalysesViewModel.cs" />
     <Compile Include="CustomModels\PasswordResetModel.cs" />
     <Compile Include="CustomModels\ProcessCalculationModel.cs" />
     <Compile Include="CustomModels\Reports\DailyCrushReportHoModel.cs" />
@@ -263,6 +264,9 @@
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HourlyAnalys.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HourlyAnalysesMillControlData.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICaneAnalyses.cs" />
@@ -577,6 +581,12 @@
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_dashboard_select_hourlyData_Result.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_selectAll_hourlyAnalysesMillControlData_Result.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_select_hourlyAnalysesMillControlData_Result.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_select_hourlyAnalyses_Result.cs">

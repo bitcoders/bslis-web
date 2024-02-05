@@ -6,6 +6,12 @@ using System.Data.Entity.Validation;
 using System.Threading.Tasks;
 using System.Web;
 using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
+using System.Data;
+using DataAccess.CustomModels;
+using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Office.CoverPageProps;
+using System.Web.UI.WebControls;
 
 namespace DataAccess.Repositories.AnalysisRepositories
 {
@@ -18,32 +24,49 @@ namespace DataAccess.Repositories.AnalysisRepositories
         {
             Db = new SugarLabEntities();
         }
-        public bool CreateHourlyAnalysis(HourlyAnalys hourlyAnalysis)
+        public bool CreateHourlyAnalysis(HourlyAnalysesViewModel m)
         {
-            if(hourlyAnalysis == null)
+            if (m == null)
             {
                 return false;
             }
             try
             {
-                Db.HourlyAnalyses.Add(hourlyAnalysis);
-                Db.SaveChanges();
-                return true;
-            }
-            catch(Exception ex)
-            {
-                ExceptionLog exceptionLog = new ExceptionLog()
+                ObjectParameter insertedRowsParam = new ObjectParameter("inserted_rows", System.Data.SqlDbType.Int);
+                ObjectParameter errorMessageParam = new ObjectParameter("error_message", System.Data.SqlDbType.NVarChar);
+
+                Db.usp_insert_hourlyAnalyses(m.hourlyAnalysesModel.unit_code, m.hourlyAnalysesModel.season_code, m.hourlyAnalysesModel.entry_Date, m.hourlyAnalysesModel.entry_time, m.hourlyAnalysesModel.new_mill_juice, m.hourlyAnalysesModel.old_mill_juice
+                    , m.hourlyAnalysesModel.new_mill_water, m.hourlyAnalysesModel.old_mill_water, m.hourlyAnalysesModel.sugar_bags_L31, m.hourlyAnalysesModel.sugar_bags_L30
+                    , m.hourlyAnalysesModel.sugar_bags_M31, m.hourlyAnalysesModel.sugar_bags_M30
+                    , m.hourlyAnalysesModel.sugar_bags_S31, m.hourlyAnalysesModel.sugar_bags_S30, m.hourlyAnalysesModel.sugar_Biss, m.hourlyAnalysesModel.sugar_raw
+                    , m.hourlyAnalysesModel.cooling_trace, m.hourlyAnalysesModel.cooling_pol, m.hourlyAnalysesModel.cooling_ph, m.hourlyAnalysesModel.standing_truck, m.hourlyAnalysesModel.standing_trolley, m.hourlyAnalysesModel.standing_trippler
+                    , m.hourlyAnalysesModel.standing_cart, m.hourlyAnalysesModel.un_crushed_cane, m.hourlyAnalysesModel.crushed_cane, m.hourlyAnalysesModel.cane_diverted_for_syrup, m.hourlyAnalysesModel.diverted_syrup_quantity
+                    , m.hourlyAnalysesModel.export_sugar, m.hourlyAnalysesModel.crtd_by, m.MillControlModel.imbibition_water_temp, m.MillControlModel.exhaust_steam_temp, m.MillControlModel.mill_biocide_dosing, m.MillControlModel.mill_washing, m.MillControlModel.mill_steaming, m.MillControlModel.sugar_bags_temp, m.MillControlModel.molasses_inlet_temp, m.MillControlModel.molasses_outlet_temp, m.MillControlModel.mill_hydraulic_pressure_one, m.MillControlModel.mill_hydraulic_pressure_two, m.MillControlModel.mill_hydraulic_pressure_three, m.MillControlModel.mill_hydraulic_pressure_four
+                     , m.MillControlModel.mill_hydraulic_pressure_five
+                     , m.MillControlModel.mill_load_one
+                     , m.MillControlModel.mill_load_two
+                     , m.MillControlModel.mill_load_three
+                     , m.MillControlModel.mill_load_four
+                     , m.MillControlModel.mill_load_five
+                     , m.MillControlModel.mill_rpm_one
+                     , m.MillControlModel.mill_rpm_two
+                     , m.MillControlModel.mill_rpm_three
+                     , m.MillControlModel.mill_rpm_four
+                     , m.MillControlModel.mill_rpm_five
+                    , insertedRowsParam, errorMessageParam);
+
+                int insertedRows = (int)insertedRowsParam.Value;
+                string errorMessage = errorMessageParam.Value.ToString();
+
+                if (insertedRows > 0)
                 {
-                    Code = ex.HResult.GetTypeCode().ToString(),
-                    FileName = ex.Source + ex.TargetSite.ToString(),
-                    StackTrace = ex.StackTrace,
-                    ErrorCode = ex.HResult.GetTypeCode().ToString(),
-                    InnerException = ex.InnerException.ToString(),
-                    IPAddress = null,
-                    ExceptionOccuredAt = DateTime.Now,
-                    ExceptionSolved = false,
-                };
-                Db.ExceptionLogs.Add(exceptionLog);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                new Exception(ex.Message);
                 return false;
             }
         }
@@ -53,17 +76,17 @@ namespace DataAccess.Repositories.AnalysisRepositories
             try
             {
                 ObjectParameter rowCount = new ObjectParameter("rowCount", typeof(Int32));
-                ObjectParameter message = new ObjectParameter("message", typeof(string));  
+                ObjectParameter message = new ObjectParameter("message", typeof(string));
                 Db.usp_delete_hourlyAnalyses(unit_code, user_code, lineId, rowCount, message);
                 int rowCountValue = (int)rowCount.Value;
                 string messageValue = (string)message.Value;
-                
+
                 return (rowCountValue > 0, messageValue);
             }
             catch (Exception ex)
             {
                 new Exception(ex.Message);
-                return (false,  ex.ToString());
+                return (false, ex.ToString());
             }
         }
 
@@ -77,13 +100,20 @@ namespace DataAccess.Repositories.AnalysisRepositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Get list of data from 'HourlyAnalyses' table only
+        /// </summary>
+        /// <param name="UnitCode"></param>
+        /// <param name="SeasonCode"></param>
+        /// <param name="AnalysisDate"></param>
+        /// <returns></returns>
         public List<HourlyAnalys> GetHourlyAnalysisList(int UnitCode, int SeasonCode, DateTime AnalysisDate)
         {
             List<HourlyAnalys> hourlyAnalyses = null;
             try
             {
                 hourlyAnalyses = new List<HourlyAnalys>();
-                hourlyAnalyses = Db.HourlyAnalyses.Where(temp => temp.unit_code == UnitCode && temp.season_code == SeasonCode && temp.entry_Date == AnalysisDate).OrderBy(x=>x.id).ToList();
+                hourlyAnalyses = Db.HourlyAnalyses.Where(temp => temp.unit_code == UnitCode && temp.season_code == SeasonCode && temp.entry_Date == AnalysisDate).OrderBy(x => x.id).ToList();
                 return hourlyAnalyses;
             }
             catch (Exception ex)
@@ -91,8 +121,110 @@ namespace DataAccess.Repositories.AnalysisRepositories
                 new Exception(ex.Message);
                 return hourlyAnalyses;
             }
-            
+        }
 
+        /// <summary>
+        /// Get List of hourly Analyses data along with Mill Control Data for the date
+        /// </summary>
+        /// <param name="unit_code"></param>
+        /// <param name="entry_date"></param>
+        /// <returns></returns>
+        public List<HourlyAnalysesViewModel> GetHourlyAnalysesWithMillControlDataList(int unit_code, DateTime entry_date)
+        {
+            List<HourlyAnalysesViewModel> list = new List<HourlyAnalysesViewModel>();
+
+            try
+            {
+                var data = Db.usp_select_hourlyAnalyses(unit_code, entry_date).ToList();
+
+                if (data != null)
+                {
+                    foreach (var d in data)
+                    {
+
+                        HourlyAnalysesViewModel temp = new HourlyAnalysesViewModel();
+
+                        HourlyAnalys h = new HourlyAnalys()
+                        {
+                            id = d.id,
+                            unit_code = d.unit_code,
+                            season_code = d.season_code,
+                            entry_Date = d.entry_Date,
+                            entry_time = d.entry_time,
+                            new_mill_juice = d.new_mill_juice,
+                            old_mill_juice = d.old_mill_juice,
+                            juice_total = d.juice_total,
+                            new_mill_water = d.new_mill_water,
+                            old_mill_water = d.old_mill_water,
+                            water_total = d.water_total,
+                            sugar_bags_L31 = d.sugar_bags_L31,
+                            sugar_bags_L30 = d.sugar_bags_L30,
+                            sugar_bags_L_total = d.sugar_bags_L_total,
+                            sugar_bags_M31 = d.sugar_bags_M31,
+                            sugar_bags_M30 = d.sugar_bags_M30,
+                            sugar_bags_M_total = d.sugar_bags_M_total,
+                            sugar_bags_S31 = d.sugar_bags_S31,
+                            sugar_bags_S30 = d.sugar_bags_S30,
+                            sugar_bags_S_total = d.sugar_bags_L30,
+                            sugar_Biss = d.sugar_Biss,
+                            sugar_raw = d.sugar_raw,
+                            sugar_bags_total = d.sugar_bags_total,
+                            cooling_trace = d.cooling_trace,
+                            cooling_pol = d.cooling_pol,
+                            cooling_ph = d.cooling_ph,
+                            standing_truck = d.standing_truck,
+                            standing_trippler = d.standing_trippler,
+                            standing_trolley = d.standing_trolley,
+                            standing_cart = d.standing_cart,
+                            un_crushed_cane = d.un_crushed_cane,
+                            cane_diverted_for_syrup = d.cane_diverted_for_syrup,
+                            diverted_syrup_quantity = d.diverted_syrup_quantity,
+                            export_sugar = d.export_sugar
+                        };
+
+                        HourlyAnalysesMillControlData mc = new HourlyAnalysesMillControlData()
+                        {
+                            Id = (int)d.MillDataID,
+                            HourlyAnalysesNo = (long)d.HourlyAnalysesNo,
+                            entry_date = d.mill_data_entry_date,
+                            entry_time = d.mill_data_entry_time,
+                            imbibition_water_temp = d.imbibition_water_temp,
+                            exhaust_steam_temp = d.exhaust_steam_temp,
+                            mill_biocide_dosing = d.mill_biocide_dosing,
+                            mill_washing = d.mill_washing,
+                            mill_steaming = d.mill_steaming,
+                            sugar_bags_temp = d.sugar_bags_temp,
+                            molasses_inlet_temp = d.molasses_inlet_temp,
+                            molasses_outlet_temp = d.molasses_outlet_temp,
+                            mill_hydraulic_pressure_one = d.mill_hydraulic_pressure_one,
+                            mill_hydraulic_pressure_two = d.mill_hydraulic_pressure_two,
+                            mill_hydraulic_pressure_three = d.mill_hydraulic_pressure_three,
+                            mill_hydraulic_pressure_four = d.mill_hydraulic_pressure_four
+                            ,mill_hydraulic_pressure_five = d.mill_hydraulic_pressure_five
+                            , mill_load_one = d.mill_load_one
+                            , mill_load_two = d.mill_load_two
+                            , mill_load_three = d.mill_load_three
+                            , mill_load_four = d.mill_load_four
+                            , mill_load_five = d.mill_load_five
+                            , mill_rpm_one = d.mill_rpm_one
+                            , mill_rpm_two = d.mill_rpm_two
+                            , mill_rpm_three = d.mill_rpm_three
+                            , mill_rpm_four = d.mill_rpm_four
+                            , mill_rpm_five = d.mill_rpm_five
+                        };
+
+                        temp.hourlyAnalysesModel = h;
+                        temp.MillControlModel = mc;
+                        list.Add(temp);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                new Exception(e.Message);
+            }
+
+            return list;
         }
 
         /// <summary>
@@ -125,19 +257,19 @@ namespace DataAccess.Repositories.AnalysisRepositories
         /// <param name="UnitCode"></param>
         /// <param name="SeasonCode"></param>
         /// <returns></returns>
-        public async Task<HourlyAnalys> GetLatestHourlyAnalysesDetails(int UnitCode, int SeasonCode )
+        public async Task<HourlyAnalys> GetLatestHourlyAnalysesDetails(int UnitCode, int SeasonCode)
         {
             HourlyAnalys hourlyAnalys = new HourlyAnalys();
             try
             {
                 hourlyAnalys = await Task.FromResult(Db.HourlyAnalyses.Where
-                    (x => x.unit_code == UnitCode && x.season_code == SeasonCode).OrderByDescending(x=>x.id).FirstOrDefault());
+                    (x => x.unit_code == UnitCode && x.season_code == SeasonCode).OrderByDescending(x => x.id).FirstOrDefault());
                 return hourlyAnalys;
             }
-            catch(DbEntityValidationException ex)
+            catch (DbEntityValidationException ex)
             {
                 SaveEntityExceptionLog(ex);
-                
+
             }
             catch (Exception ex)
             {
@@ -147,7 +279,7 @@ namespace DataAccess.Repositories.AnalysisRepositories
         }
         public bool UpdateHourlyAnalysis(HourlyAnalys hourlyAnalysis)
         {
-            if(hourlyAnalysis == null)
+            if (hourlyAnalysis == null)
             {
                 return false;
             }
@@ -238,9 +370,16 @@ namespace DataAccess.Repositories.AnalysisRepositories
                 temp.updt_by = hourlyAnalysis.updt_by;
                 temp.updt_dt = hourlyAnalysis.updt_dt;
                 temp.export_sugar = hourlyAnalysis.export_sugar;
+
+                try
+                {
+                    Db.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    new Exception(ex.Message);
+                }
                 
-               
-                Db.SaveChanges();
                 AuditRepo.CreateAuditTrail(AuditActionType.Update, temp.id.ToString(), OldHourly, temp);
                 return true;
             }
@@ -251,7 +390,7 @@ namespace DataAccess.Repositories.AnalysisRepositories
             }
             //Db.SaveChanges();
             //return true;
-            
+
         }
 
 
@@ -267,9 +406,9 @@ namespace DataAccess.Repositories.AnalysisRepositories
         /// <param name="SeasonCode"></param>
         /// <param name="EntryDate"></param>
         /// <returns></returns>
-        public  HourlyAnalys GetLastAnalysisDetailsForEntryDate(int UnitCode, int SeasonCode, DateTime EntryDate)
+        public HourlyAnalys GetLastAnalysisDetailsForEntryDate(int UnitCode, int SeasonCode, DateTime EntryDate)
         {
-             HourlyAnalys hourlyAnalysis = new HourlyAnalys();
+            HourlyAnalys hourlyAnalysis = new HourlyAnalys();
             //hourlyAnalysis = Db.HourlyAnalyses.OrderByDescending
             //    (temp => temp.unit_code == UnitCode
             //    && temp.season_code == SeasonCode
@@ -277,7 +416,7 @@ namespace DataAccess.Repositories.AnalysisRepositories
             //    ).FirstOrDefault();
 
             //.Where(temp=> temp.unit_code == UnitCode && temp.season_code == SeasonCode && temp.entry_Date == EntryDate).FirstOrDefault();
-            hourlyAnalysis =   Db.HourlyAnalyses.Where
+            hourlyAnalysis = Db.HourlyAnalyses.Where
                 (temp => temp.unit_code == UnitCode
                 && temp.season_code == SeasonCode
                 && temp.entry_Date == EntryDate
@@ -295,25 +434,29 @@ namespace DataAccess.Repositories.AnalysisRepositories
         public HourlyAnalys GetHourlyAnalysisById(int id, int unitCode)
         {
             HourlyAnalys hourlyAnalysis = new HourlyAnalys();
-            hourlyAnalysis = Db.HourlyAnalyses.Where(temp => temp.id == id && temp.unit_code == unitCode).FirstOrDefault();
+            using(Db)
+            {
+                hourlyAnalysis = Db.HourlyAnalyses.Where(temp => temp.id == id && temp.unit_code == unitCode).FirstOrDefault();
+            }
+            
             return hourlyAnalysis;
         }
-        
+
         public List<func_hourly_data_for_period_Result> GetHourlyAnalysisSummaryForPeriod(int UnitCode, int SeasonCode)
         {
             List<func_hourly_data_for_period_Result> Result = new List<func_hourly_data_for_period_Result>();
-            
+
             try
             {
                 Result = Db.func_hourly_data_for_period(UnitCode, SeasonCode).ToList();
                 return Result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new Exception(ex.Message);
                 return Result;
             }
-            
+
         }
 
         public func_hourly_data_for_period_Result GetHourlyAnalysisSummaryForDate(int unitCode, int seasonCode, DateTime reportDate)
@@ -350,7 +493,7 @@ namespace DataAccess.Repositories.AnalysisRepositories
             {
                 result = Db.usp_cane_diversion_factor(unit_code, season_code, entry_date).FirstOrDefault();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new Exception(ex.Message);
             }
@@ -415,5 +558,184 @@ namespace DataAccess.Repositories.AnalysisRepositories
 
             }
         }
+
+        public HourlyAnalysesViewModel GetMillControlDataById(int id, int unit_code)
+        {
+            try
+            {
+                HourlyAnalysesMillControlData d = new HourlyAnalysesMillControlData();
+                using (Db)
+                {
+                    var r = Db.usp_select_hourlyAnalysesMillControlData(id, unit_code).FirstOrDefault();
+                    if (r != null)
+                    {
+                        d.Id = r.mill_data_id;
+                        d.HourlyAnalysesNo = Convert.ToInt32(r.HourlyAnalysesNo);
+                        d.unit_code = r.mill_data_unit_code;
+                        d.season_code = r.mill_data_season_code;
+                        d.entry_date = r.mill_data_entry_date;
+                        d.entry_time = r.mill_data_entry_time;
+                        d.imbibition_water_temp = r.imbibition_water_temp;
+                        d.exhaust_steam_temp = r.exhaust_steam_temp;
+                        d.mill_biocide_dosing = r.mill_biocide_dosing;
+                        d.mill_washing = r.mill_washing;
+                        d.mill_steaming = r.mill_steaming;
+                        d.sugar_bags_temp = r.sugar_bags_temp;
+                        d.molasses_inlet_temp = r.molasses_outlet_temp;
+                        d.molasses_outlet_temp = r.molasses_outlet_temp;
+                        d.mill_hydraulic_pressure_one = r.mill_hydraulic_pressure_one;
+                        d.mill_hydraulic_pressure_two = r.mill_hydraulic_pressure_two;
+                        d.mill_hydraulic_pressure_three = r.mill_hydraulic_pressure_three;
+                        d.mill_hydraulic_pressure_four = r.mill_hydraulic_pressure_four;
+                        d.mill_hydraulic_pressure_five = r.mill_hydraulic_pressure_five;
+                        d.mill_load_one = r.mill_load_one;
+                        d.mill_load_two = r.mill_load_two;
+                        d.mill_load_three = r.mill_load_three;
+                        d.mill_load_four = r.mill_load_four;
+                        d.mill_load_five = r.mill_load_five;
+
+                        d.mill_rpm_one = r.mill_rpm_one;
+                        d.mill_rpm_two = r.mill_rpm_two;
+                        d.mill_rpm_three = r.mill_rpm_three;
+                        d.mill_rpm_four = r.mill_rpm_four;
+                        d.mill_rpm_five = r.mill_rpm_five;
+                    }
+                    HourlyAnalys h = new HourlyAnalys()
+                    {
+                        cooling_trace = r.cooling_trace,
+                        cooling_ph = r.cooling_ph,
+                        cooling_pol = r.cooling_pol
+                    };
+                    HourlyAnalysesViewModel model = new HourlyAnalysesViewModel()
+                    {
+                        MillControlModel = d,
+                        hourlyAnalysesModel = h
+                    };
+                    return model;
+                }
+            }
+            catch (Exception e)
+            {
+                new Exception(e.Message);
+                return null;
+            }
+
+        }
+
+        /// <summary>
+        /// Get list of Mill control data fromm  only 'HourlyAnalysesMillControlData' table.
+        /// </summary>
+        /// <param name="unit_code"></param>
+        /// <param name="season_code"></param>
+        /// <param name="entry_date"></param>
+        /// <returns></returns>
+        public List<HourlyAnalysesMillControlData> GetMillControlDataByUnit(int unit_code, int season_code, DateTime entry_date)
+        {
+            List<HourlyAnalysesMillControlData> list = new List<HourlyAnalysesMillControlData>();
+            try
+            {
+                using (Db)
+                {
+                    List<usp_selectAll_hourlyAnalysesMillControlData_Result> result = Db.usp_selectAll_hourlyAnalysesMillControlData(unit_code, entry_date, season_code).ToList();
+                    if (result.Count > 0)
+                    {
+
+                        foreach (var r in result)
+                        {
+                            try
+                            {
+                                HourlyAnalysesMillControlData d = new HourlyAnalysesMillControlData
+                                {
+                                    Id = r.Id,
+                                    HourlyAnalysesNo = Convert.ToInt32(r.HourlyAnalysesNo),
+                                    unit_code = r.unit_code,
+                                    season_code = r.season_code,
+                                    entry_date = r.entry_date,
+                                    entry_time = r.entry_time,
+                                    imbibition_water_temp = r.imbibition_water_temp,
+                                    exhaust_steam_temp = r.exhaust_steam_temp,
+                                    mill_biocide_dosing = r.mill_biocide_dosing,
+                                    mill_washing = r.mill_washing,
+                                    mill_steaming = r.mill_steaming,
+                                    sugar_bags_temp = r.sugar_bags_temp,
+                                    molasses_inlet_temp = r.molasses_outlet_temp,
+                                    molasses_outlet_temp = r.molasses_outlet_temp,
+                                    mill_hydraulic_pressure_one = r.mill_hydraulic_pressure_one,
+                                    mill_hydraulic_pressure_two = r.mill_hydraulic_pressure_two,
+                                    mill_hydraulic_pressure_three = r.mill_hydraulic_pressure_three,
+                                    mill_hydraulic_pressure_four = r.mill_hydraulic_pressure_four
+                                };
+                                list.Add(d);
+                            }
+                            catch
+                            {
+                                continue;
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                new Exception(e.Message);
+            }
+            return list;
+        }
+
+
+        public bool UpdateMillcontrolData(HourlyAnalysesViewModel model)
+        {
+            if(model == null) { return false; }
+            else 
+            {
+                try
+                {
+                    using(Db)
+                    {
+                        Db.usp_update_mill_control_data(model.MillControlModel.unit_code
+                            , model.MillControlModel.season_code
+                            , model.MillControlModel.Id
+                            , model.MillControlModel.imbibition_water_temp
+                            , model.MillControlModel.exhaust_steam_temp
+                            , model.MillControlModel.mill_biocide_dosing
+                            , model.MillControlModel.mill_washing
+                            , model.MillControlModel.mill_steaming
+                            , model.MillControlModel.sugar_bags_temp
+                            , model.MillControlModel.molasses_inlet_temp
+                            , model.MillControlModel.molasses_outlet_temp
+                            , model.hourlyAnalysesModel.cooling_trace
+                            , model.hourlyAnalysesModel.cooling_pol
+                            , model.hourlyAnalysesModel.cooling_ph
+                            , model.MillControlModel.mill_hydraulic_pressure_one
+                            , model.MillControlModel.mill_hydraulic_pressure_two
+                            , model.MillControlModel.mill_hydraulic_pressure_three
+                            , model.MillControlModel.mill_hydraulic_pressure_four
+                            , model.MillControlModel.mill_hydraulic_pressure_five
+                            , model.MillControlModel.mill_load_one
+                            , model.MillControlModel.mill_load_two
+                            , model.MillControlModel.mill_load_three
+                            , model.MillControlModel.mill_load_four
+                            , model.MillControlModel.mill_load_five
+                            , model.MillControlModel.mill_rpm_one
+                            , model.MillControlModel.mill_rpm_two
+                            , model.MillControlModel.mill_rpm_three
+                            , model.MillControlModel.mill_rpm_four
+                            , model.MillControlModel.mill_rpm_five
+                            );
+                    }
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    new Exception(ex.Message);
+                    return false;
+                }
+                
+            }
+
+        }
+
+
     }
 }

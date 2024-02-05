@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace LitmusWeb.Models
+{
+    public class HourlyAnalysesMillControlDataModel
+    {
+        public int Id { get; set; }
+        public long HourlyAnalysesNo { get; set; }
+        public int unit_code { get; set; }
+        public int season_code { get; set; }
+        public Nullable<System.DateTime> entry_date { get; set; }
+        public Nullable<int> entry_time { get; set; }
+        public Nullable<decimal> imbibition_water_temp { get; set; }
+        public Nullable<decimal> exhaust_steam_temp { get; set; }
+        public Nullable<bool> mill_biocide_dosing { get; set; }
+        public Nullable<bool> mill_washing { get; set; }
+        public Nullable<bool> mill_steaming { get; set; }
+        public Nullable<decimal> sugar_bags_temp { get; set; }
+        public Nullable<decimal> molasses_inlet_temp { get; set; }
+        public Nullable<decimal> molasses_outlet_temp { get; set; }
+        public Nullable<decimal> mill_hydraulic_pressure_one { get; set; }
+        public Nullable<decimal> mill_hydraulic_pressure_two { get; set; }
+        public Nullable<decimal> mill_hydraulic_pressure_three { get; set; }
+        public Nullable<decimal> mill_hydraulic_pressure_four { get; set; }
+        public Nullable<decimal> mill_hydraulic_pressure_five { get; set; }
+        public Nullable<decimal> mill_load_one { get; set; }
+        public Nullable<decimal> mill_load_two { get; set; }
+        public Nullable<decimal> mill_load_three { get; set; }
+        public Nullable<decimal> mill_load_four { get; set; }
+        public Nullable<decimal> mill_load_five { get; set; }
+        public Nullable<decimal> mill_rpm_one { get; set; }
+        public Nullable<decimal> mill_rpm_two { get; set; }
+        public Nullable<decimal> mill_rpm_three { get; set; }
+        public Nullable<decimal> mill_rpm_four { get; set; }
+        public Nullable<decimal> mill_rpm_five { get; set; }
+    }
+}
