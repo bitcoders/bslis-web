@@ -880,5 +880,11 @@ namespace DataAccess
         public decimal td_cane_crushed_on_syrup { get; set; }
         public decimal td_cane_crushed_b_heavy { get; set; }
         public decimal td_cane_crushed_c_heavy { get; set; }
+        public decimal od_b_heavy_final_molasses_trs { get; set; }
+        public decimal od_c_heavy_final_molasses_trs { get; set; }
+        public decimal od_syrup_trs { get; set; }
+        public decimal od_b_heavy_final_molasses_rs { get; set; }
+        public decimal od_c_heavy_final_molasses_rs { get; set; }
+        public decimal od_syrup_rs { get; set; }
     }
 }

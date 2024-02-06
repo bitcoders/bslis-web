@@ -514,12 +514,6 @@
       <Parameter Name="season_code" Mode="In" Type="Int32" />
       <Parameter Name="history_days" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="proc_summarized_report" ReturnType="Collection(SugarLabModel.proc_summarized_report_Result)">
-      <Parameter Name="unit_code" Mode="In" Type="Int32" />
-      <Parameter Name="season_code" Mode="In" Type="Int32" />
-      <Parameter Name="report_date" Mode="In" Type="DateTime" />
-      <Parameter Name="last_season_data" Mode="In" Type="Boolean" />
-    </FunctionImport>
     <FunctionImport Name="usp_insert_hourly_millControlData">
       <Parameter Name="HourlyAnalysesNo" Mode="In" Type="Int32" />
       <Parameter Name="unit_code" Mode="In" Type="Int32" />
@@ -663,6 +657,12 @@
       <End Role="MasterUnit" EntitySet="MasterUnits" />
       <End Role="DailyAnalys" EntitySet="DailyAnalyses" />
     </AssociationSet>
+    <FunctionImport Name="proc_summarized_report" ReturnType="Collection(SugarLabModel.proc_summarized_report_Result)">
+      <Parameter Name="unit_code" Mode="In" Type="Int32" />
+      <Parameter Name="season_code" Mode="In" Type="Int32" />
+      <Parameter Name="report_date" Mode="In" Type="DateTime" />
+      <Parameter Name="last_season_data" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="proc_ledger_page_one_Result">
     <Property Type="String" Name="text" Nullable="true" />
@@ -6087,6 +6087,491 @@
     <Property Type="Decimal" Name="CaneDiverted" Nullable="false" Precision="10" Scale="2" />
     <Property Type="Decimal" Name="DivertedSyrup" Nullable="false" Precision="10" Scale="2" />
   </ComplexType>
+  <ComplexType Name="usp_select_hourlyAnalyses_Result">
+    <Property Type="Int64" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="unit_code" Nullable="false" />
+    <Property Type="Int32" Name="season_code" Nullable="false" />
+    <Property Type="DateTime" Name="entry_Date" Nullable="false" />
+    <Property Type="Int32" Name="entry_time" Nullable="false" />
+    <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
+    <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
+    <Property Type="Int32" Name="juice_total" Nullable="true" />
+    <Property Type="Int32" Name="new_mill_water" Nullable="true" />
+    <Property Type="Int32" Name="old_mill_water" Nullable="true" />
+    <Property Type="Int32" Name="water_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
+    <Property Type="Int32" Name="sugar_raw" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_total" Nullable="true" />
+    <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Int16" Name="standing_truck" Nullable="false" />
+    <Property Type="Int16" Name="standing_trippler" Nullable="false" />
+    <Property Type="Int16" Name="standing_trolley" Nullable="false" />
+    <Property Type="Int16" Name="standing_cart" Nullable="false" />
+    <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
+    <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Int32" Name="export_sugar" Nullable="false" />
+    <Property Type="Int32" Name="MillDataID" Nullable="false" />
+    <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+    <Property Type="DateTime" Name="mill_data_entry_date" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="mill_data_entry_time" Nullable="false" />
+    <Property Type="Decimal" Name="imbibition_water_temp" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="false" />
+    <Property Type="Boolean" Name="mill_washing" Nullable="false" />
+    <Property Type="Boolean" Name="mill_steaming" Nullable="false" />
+    <Property Type="Decimal" Name="sugar_bags_temp" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_one" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_two" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_three" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_four" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_five" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_one" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_two" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="usp_select_hourlyAnalysesMillControlData_Result">
+    <Property Type="Int64" Name="hourly_id" Nullable="true" />
+    <Property Type="Int32" Name="hourly_unit_code" Nullable="true" />
+    <Property Type="Int32" Name="hourly_season_code" Nullable="true" />
+    <Property Type="DateTime" Name="hourly_entry_date" Nullable="true" />
+    <Property Type="Int32" Name="hourly_entry_time" Nullable="true" />
+    <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
+    <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
+    <Property Type="Int32" Name="juice_total" Nullable="true" />
+    <Property Type="Int32" Name="new_mill_water" Nullable="true" />
+    <Property Type="Int32" Name="old_mill_water" Nullable="true" />
+    <Property Type="Int32" Name="water_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
+    <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
+    <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
+    <Property Type="Int32" Name="sugar_raw" Nullable="true" />
+    <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Int16" Name="standing_truck" Nullable="true" />
+    <Property Type="Int16" Name="standing_trippler" Nullable="true" />
+    <Property Type="Int16" Name="standing_trolley" Nullable="true" />
+    <Property Type="Int16" Name="standing_cart" Nullable="true" />
+    <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
+    <Property Type="Decimal" Name="crushed_cane" Nullable="true" Precision="10" Scale="0" />
+    <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Int32" Name="export_sugar" Nullable="true" />
+    <Property Type="Int32" Name="mill_data_id" Nullable="false" />
+    <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+    <Property Type="Int32" Name="mill_data_unit_code" Nullable="false" />
+    <Property Type="Int32" Name="mill_data_season_code" Nullable="false" />
+    <Property Type="DateTime" Name="mill_data_entry_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="mill_data_entry_time" Nullable="true" />
+    <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
+    <Property Type="Boolean" Name="mill_washing" Nullable="true" />
+    <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
+    <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="usp_selectAll_hourlyAnalysesMillControlData_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+    <Property Type="Int32" Name="unit_code" Nullable="false" />
+    <Property Type="Int32" Name="season_code" Nullable="false" />
+    <Property Type="DateTime" Name="entry_date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="entry_time" Nullable="true" />
+    <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
+    <Property Type="Boolean" Name="mill_washing" Nullable="true" />
+    <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
+    <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <EntityType Name="HourlyAnalysesMillControlData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HourlyAnalysesNo" Type="Int64" Nullable="false" />
+    <Property Name="unit_code" Type="Int32" Nullable="false" />
+    <Property Name="season_code" Type="Int32" Nullable="false" />
+    <Property Name="entry_date" Type="DateTime" Precision="3" />
+    <Property Name="entry_time" Type="Int32" />
+    <Property Name="imbibition_water_temp" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="exhaust_steam_temp" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_biocide_dosing" Type="Boolean" />
+    <Property Name="mill_washing" Type="Boolean" />
+    <Property Name="mill_steaming" Type="Boolean" />
+    <Property Name="sugar_bags_temp" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="molasses_inlet_temp" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="molasses_outlet_temp" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_one" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_two" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_three" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_four" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_hydraulic_pressure_five" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_load_one" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_load_two" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_load_three" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_load_four" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_load_five" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_one" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_two" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_three" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_four" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="mill_rpm_five" Type="Decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="DataAdjustment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="a_unit_code" Type="Int32" />
+    <Property Name="a_season_code" Type="Int32" />
+    <Property Name="a_entry_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="a_sulpher" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_lime" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_phosphoric_acid" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_color_reducer" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_megnafloe" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_lub_oil" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_viscosity_reducer" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_biocide" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_lub_greace" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_boiler_chemical" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_estimated_sugar" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_estimated_molasses" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="a_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="a_hydrolic_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="a_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="a_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="a_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="a_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="a_is_active" Type="Boolean" Nullable="false" />
+    <Property Name="crtd_dt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="updt_dt" Type="DateTime" Precision="3" />
+    <Property Name="crtd_by" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="updt_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="EstimatedCaneForSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" FromRole="DataAdjustment" ToRole="MasterUnit" />
+  </EntityType>
+  <Association Name="FK_AdjustmentData_UnitCode_MasterUnits_Code">
+    <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
+    <End Type="SugarLabModel.DataAdjustment" Role="DataAdjustment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MasterUnit">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="DataAdjustment">
+        <PropertyRef Name="a_unit_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DailyAnalys">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unit_code" Type="Int32" />
+    <Property Name="season_code" Type="Int32" />
+    <Property Name="entry_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="trans_time" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+    <Property Name="cane_early" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="cane_general" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cane_rejected" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cane_burnt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cane_gate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cane_centre" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cane_crushed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="total_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="sp_gravity" Type="Decimal" Precision="10" Scale="5" />
+    <Property Name="total_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="press_cake" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="molasses_sent_out" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="biss_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="biss_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="scrap_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="scrap_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="moist_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="moist_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="raw_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="other_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="other_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_sulpher" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_phosphoric" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_lime" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_viscosity_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_biocide" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_color_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_megnafloe" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_lub_oil" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_lub_grease" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_boiler_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_hydrolic_acid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="store_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="icumsa_l31" Type="Int16" Nullable="false" />
+    <Property Name="icumsa_l30" Type="Int16" Nullable="false" />
+    <Property Name="icumsa_m31" Type="Int16" Nullable="false" />
+    <Property Name="icumsa_m30" Type="Int16" Nullable="false" />
+    <Property Name="icumsa_s31" Type="Int16" Nullable="false" />
+    <Property Name="icumsa_s30" Type="Int16" Nullable="false" />
+    <Property Name="icumsa_raw_sugar" Type="Int32" Nullable="false" />
+    <Property Name="foreign_matter_l31" Type="Int16" Nullable="false" />
+    <Property Name="foreign_matter_l30" Type="Int16" Nullable="false" />
+    <Property Name="foreign_matter_m31" Type="Int16" Nullable="false" />
+    <Property Name="foreign_matter_m30" Type="Int16" Nullable="false" />
+    <Property Name="foreign_matter_s31" Type="Int16" Nullable="false" />
+    <Property Name="foreign_matter_s30" Type="Int16" Nullable="false" />
+    <Property Name="foreign_matter_raw_sguar" Type="Int32" Nullable="false" />
+    <Property Name="retention_l31" Type="Int16" Nullable="false" />
+    <Property Name="retention_l30" Type="Int16" Nullable="false" />
+    <Property Name="retention_m31" Type="Int16" Nullable="false" />
+    <Property Name="retention_m30" Type="Int16" Nullable="false" />
+    <Property Name="retention_s31" Type="Int16" Nullable="false" />
+    <Property Name="retention_s30" Type="Int16" Nullable="false" />
+    <Property Name="retention_raw_sugar" Type="Int32" Nullable="false" />
+    <Property Name="moisture_l31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="moisture_l30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="moisture_m31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="moisture_m30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="moisture_s31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="moisture_s30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="moisture_raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+    <Property Name="etp_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="etp_tss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="etp_cod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="etp_bod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="etp_water_flow" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="etp_water_consumption_at_plant" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="calcium_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="calcium_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="phosphate_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="phosphate_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="rs_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="rs_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="rs_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="unknown_losses" Type="Decimal" Precision="10" Scale="4" />
+    <Property Name="dirt_correction" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="total_operating_tube_well" Type="Int64" />
+    <Property Name="exhaust_condensate_recovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="T_c_massecuite_pan" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="ph_injection_inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="ph_injection_outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Temp_Injection_Water_Inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Temp_Injection_Water_Outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="average_vaccume_pan" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="average_vaccume_evap" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Exhaust_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Exhaust_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="boiler_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="boiler_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="ph_boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Temp_Boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bagasse_baed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="filter_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="pan_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="cf_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bagasse_sold" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bagasse_stock" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bagasse_consumed_qtl" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bagacillo_to_boiling_house" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Steam_Fuel_Ratio" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="nm_p_index" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="nm_pry_ext" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="b_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="b_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="temp_max" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="temp_min" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="humidity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="rain_fall" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="iu_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="iu_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="iu_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="live_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="live_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_turbines" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bleeding_in_process" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="bleeding_acf" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="ata3_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="d_sulpher_heating" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="drain_pipe_loss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="exhaust_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="exhaust_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="steam_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="steam_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_from_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_export_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_dg_set" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_import_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="home_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_generation_from_coGen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="total_power" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="om_p_index" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="om_pry_ext" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="steam_percent_cane" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="cane_farm" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="boiler_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="daily_hour_worked" Type="Byte" />
+    <Property Name="crtd_dt" Type="DateTime" Precision="3" />
+    <Property Name="crtd_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="updt_dt" Type="DateTime" Precision="3" />
+    <Property Name="updt_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="PowerToDitillery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="RectifiedSpirit" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcohol" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Ethanol" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="RectifiedSpiritDayRecover" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="RectifiedSpiritToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="EthanolDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="EthanolToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="gross_biss_sugar" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="gross_scrap_sugar" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="gross_moist_sugar" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="gross_raw_sugar" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="gross_other_sugar" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="water_pan_a" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="water_pan_b" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="water_pan_c" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="OverTimeEnggReplacement" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="OverTimeEnggExtra" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="OverTimeMfgReplacement" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="OverTimeMfgExtra" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="MolassesSentOutBHeavy" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="MolassesSentOutCHeavy" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreProcessChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreProcessChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreProcessChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreProcessChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreBoilerChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreBoilerChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreBoilerChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreBoilerChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreGreaseOilQuantity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreGreaseOilAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreGreaseOilPerBagRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="StoreGreaseOilPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="QuintalSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="SugarPol" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="CHeavyBrix" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="CHeavyPol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="CHeavyPurity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="RawSugarGainDate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="MaterialSentOut" Type="Int32" Nullable="false" />
+    <Property Name="SugarProduced" Type="Int32" Nullable="false" />
+    <Property Name="PowerExportFromDistillery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PowerExportFromCogen" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AlcoholFromCaneSyrup" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="NewMillCrush" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="OldMillCrush" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AshSold" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="AlcoholFromCHeavy" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholCHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholCHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholFromBHeavy" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholBHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholBHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholFromSyrupDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="AbsoluteAlcoholFromSyrupToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="c_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="c_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="syrup_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="syrup_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="mill_house_trace" Type="Boolean" />
+    <Property Name="mill_house_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="mill_house_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="under_oliver_filter_trace" Type="Boolean" />
+    <Property Name="under_oliver_filter_pH" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="under_oliver_filter_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_export_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="power_generate_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="refinery_water_consumption" Type="Int32" Nullable="false" />
+    <Property Name="fiberized_pol_in_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="dextran_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="dextran_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" FromRole="DailyAnalys" ToRole="MasterUnit" />
+  </EntityType>
+  <Association Name="fk_DailyAnalysis_UnitCode_MasterUnits_Code">
+    <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
+    <End Type="SugarLabModel.DailyAnalys" Role="DailyAnalys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MasterUnit">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="DailyAnalys">
+        <PropertyRef Name="unit_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <ComplexType Name="proc_summarized_report_Result">
     <Property Type="DateTime" Name="report_date" Nullable="true" />
     <Property Type="String" Name="company_name" Nullable="false" MaxLength="50" />
@@ -6955,490 +7440,11 @@
     <Property Type="Decimal" Name="td_cane_crushed_on_syrup" Nullable="false" Precision="38" Scale="2" />
     <Property Type="Decimal" Name="td_cane_crushed_b_heavy" Nullable="false" Precision="38" Scale="2" />
     <Property Type="Decimal" Name="td_cane_crushed_c_heavy" Nullable="false" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="od_b_heavy_final_molasses_trs" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="od_c_heavy_final_molasses_trs" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="od_syrup_trs" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="od_b_heavy_final_molasses_rs" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="od_c_heavy_final_molasses_rs" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="od_syrup_rs" Nullable="false" Precision="10" Scale="2" />
   </ComplexType>
-  <ComplexType Name="usp_select_hourlyAnalyses_Result">
-    <Property Type="Int64" Name="id" Nullable="false" />
-    <Property Type="Int32" Name="unit_code" Nullable="false" />
-    <Property Type="Int32" Name="season_code" Nullable="false" />
-    <Property Type="DateTime" Name="entry_Date" Nullable="false" />
-    <Property Type="Int32" Name="entry_time" Nullable="false" />
-    <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
-    <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
-    <Property Type="Int32" Name="juice_total" Nullable="true" />
-    <Property Type="Int32" Name="new_mill_water" Nullable="true" />
-    <Property Type="Int32" Name="old_mill_water" Nullable="true" />
-    <Property Type="Int32" Name="water_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
-    <Property Type="Int32" Name="sugar_raw" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_total" Nullable="true" />
-    <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
-    <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Int16" Name="standing_truck" Nullable="false" />
-    <Property Type="Int16" Name="standing_trippler" Nullable="false" />
-    <Property Type="Int16" Name="standing_trolley" Nullable="false" />
-    <Property Type="Int16" Name="standing_cart" Nullable="false" />
-    <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
-    <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Int32" Name="export_sugar" Nullable="false" />
-    <Property Type="Int32" Name="MillDataID" Nullable="false" />
-    <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-    <Property Type="DateTime" Name="mill_data_entry_date" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="mill_data_entry_time" Nullable="false" />
-    <Property Type="Decimal" Name="imbibition_water_temp" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="false" />
-    <Property Type="Boolean" Name="mill_washing" Nullable="false" />
-    <Property Type="Boolean" Name="mill_steaming" Nullable="false" />
-    <Property Type="Decimal" Name="sugar_bags_temp" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_one" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_two" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_three" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_four" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_five" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_one" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_two" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
-  </ComplexType>
-  <ComplexType Name="usp_select_hourlyAnalysesMillControlData_Result">
-    <Property Type="Int64" Name="hourly_id" Nullable="true" />
-    <Property Type="Int32" Name="hourly_unit_code" Nullable="true" />
-    <Property Type="Int32" Name="hourly_season_code" Nullable="true" />
-    <Property Type="DateTime" Name="hourly_entry_date" Nullable="true" />
-    <Property Type="Int32" Name="hourly_entry_time" Nullable="true" />
-    <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
-    <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
-    <Property Type="Int32" Name="juice_total" Nullable="true" />
-    <Property Type="Int32" Name="new_mill_water" Nullable="true" />
-    <Property Type="Int32" Name="old_mill_water" Nullable="true" />
-    <Property Type="Int32" Name="water_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
-    <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
-    <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
-    <Property Type="Int32" Name="sugar_raw" Nullable="true" />
-    <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
-    <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Int16" Name="standing_truck" Nullable="true" />
-    <Property Type="Int16" Name="standing_trippler" Nullable="true" />
-    <Property Type="Int16" Name="standing_trolley" Nullable="true" />
-    <Property Type="Int16" Name="standing_cart" Nullable="true" />
-    <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
-    <Property Type="Decimal" Name="crushed_cane" Nullable="true" Precision="10" Scale="0" />
-    <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Int32" Name="export_sugar" Nullable="true" />
-    <Property Type="Int32" Name="mill_data_id" Nullable="false" />
-    <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-    <Property Type="Int32" Name="mill_data_unit_code" Nullable="false" />
-    <Property Type="Int32" Name="mill_data_season_code" Nullable="false" />
-    <Property Type="DateTime" Name="mill_data_entry_date" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="mill_data_entry_time" Nullable="true" />
-    <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
-    <Property Type="Boolean" Name="mill_washing" Nullable="true" />
-    <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
-    <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
-  </ComplexType>
-  <ComplexType Name="usp_selectAll_hourlyAnalysesMillControlData_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-    <Property Type="Int32" Name="unit_code" Nullable="false" />
-    <Property Type="Int32" Name="season_code" Nullable="false" />
-    <Property Type="DateTime" Name="entry_date" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="entry_time" Nullable="true" />
-    <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
-    <Property Type="Boolean" Name="mill_washing" Nullable="true" />
-    <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
-    <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
-    <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
-  </ComplexType>
-  <EntityType Name="HourlyAnalysesMillControlData">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="HourlyAnalysesNo" Type="Int64" Nullable="false" />
-    <Property Name="unit_code" Type="Int32" Nullable="false" />
-    <Property Name="season_code" Type="Int32" Nullable="false" />
-    <Property Name="entry_date" Type="DateTime" Precision="3" />
-    <Property Name="entry_time" Type="Int32" />
-    <Property Name="imbibition_water_temp" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="exhaust_steam_temp" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_biocide_dosing" Type="Boolean" />
-    <Property Name="mill_washing" Type="Boolean" />
-    <Property Name="mill_steaming" Type="Boolean" />
-    <Property Name="sugar_bags_temp" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="molasses_inlet_temp" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="molasses_outlet_temp" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_hydraulic_pressure_one" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_hydraulic_pressure_two" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_hydraulic_pressure_three" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_hydraulic_pressure_four" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_hydraulic_pressure_five" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_load_one" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_load_two" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_load_three" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_load_four" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_load_five" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_rpm_one" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_rpm_two" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_rpm_three" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_rpm_four" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="mill_rpm_five" Type="Decimal" Precision="10" Scale="2" />
-  </EntityType>
-  <EntityType Name="DataAdjustment">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="a_unit_code" Type="Int32" />
-    <Property Name="a_season_code" Type="Int32" />
-    <Property Name="a_entry_date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="a_sulpher" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_lime" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_phosphoric_acid" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_color_reducer" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_megnafloe" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_lub_oil" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_viscosity_reducer" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_biocide" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_lub_greace" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_boiler_chemical" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_estimated_sugar" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_estimated_molasses" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="a_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="a_hydrolic_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="a_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="a_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="a_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="a_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="a_is_active" Type="Boolean" Nullable="false" />
-    <Property Name="crtd_dt" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="updt_dt" Type="DateTime" Precision="3" />
-    <Property Name="crtd_by" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="updt_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="EstimatedCaneForSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
-    <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" FromRole="DataAdjustment" ToRole="MasterUnit" />
-  </EntityType>
-  <Association Name="FK_AdjustmentData_UnitCode_MasterUnits_Code">
-    <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
-    <End Type="SugarLabModel.DataAdjustment" Role="DataAdjustment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MasterUnit">
-        <PropertyRef Name="Code" />
-      </Principal>
-      <Dependent Role="DataAdjustment">
-        <PropertyRef Name="a_unit_code" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="DailyAnalys">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="unit_code" Type="Int32" />
-    <Property Name="season_code" Type="Int32" />
-    <Property Name="entry_date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="trans_time" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-    <Property Name="cane_early" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="cane_general" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="cane_rejected" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="cane_burnt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="cane_gate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="cane_centre" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="cane_crushed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="total_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="sp_gravity" Type="Decimal" Precision="10" Scale="5" />
-    <Property Name="total_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="press_cake" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="molasses_sent_out" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="biss_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="biss_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="scrap_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="scrap_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="moist_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="moist_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="raw_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="other_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="other_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_sulpher" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_phosphoric" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_lime" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_viscosity_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_biocide" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_color_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_megnafloe" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_lub_oil" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_lub_grease" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_boiler_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_hydrolic_acid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="store_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="icumsa_l31" Type="Int16" Nullable="false" />
-    <Property Name="icumsa_l30" Type="Int16" Nullable="false" />
-    <Property Name="icumsa_m31" Type="Int16" Nullable="false" />
-    <Property Name="icumsa_m30" Type="Int16" Nullable="false" />
-    <Property Name="icumsa_s31" Type="Int16" Nullable="false" />
-    <Property Name="icumsa_s30" Type="Int16" Nullable="false" />
-    <Property Name="icumsa_raw_sugar" Type="Int32" Nullable="false" />
-    <Property Name="foreign_matter_l31" Type="Int16" Nullable="false" />
-    <Property Name="foreign_matter_l30" Type="Int16" Nullable="false" />
-    <Property Name="foreign_matter_m31" Type="Int16" Nullable="false" />
-    <Property Name="foreign_matter_m30" Type="Int16" Nullable="false" />
-    <Property Name="foreign_matter_s31" Type="Int16" Nullable="false" />
-    <Property Name="foreign_matter_s30" Type="Int16" Nullable="false" />
-    <Property Name="foreign_matter_raw_sguar" Type="Int32" Nullable="false" />
-    <Property Name="retention_l31" Type="Int16" Nullable="false" />
-    <Property Name="retention_l30" Type="Int16" Nullable="false" />
-    <Property Name="retention_m31" Type="Int16" Nullable="false" />
-    <Property Name="retention_m30" Type="Int16" Nullable="false" />
-    <Property Name="retention_s31" Type="Int16" Nullable="false" />
-    <Property Name="retention_s30" Type="Int16" Nullable="false" />
-    <Property Name="retention_raw_sugar" Type="Int32" Nullable="false" />
-    <Property Name="moisture_l31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="moisture_l30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="moisture_m31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="moisture_m30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="moisture_s31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="moisture_s30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="moisture_raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-    <Property Name="etp_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="etp_tss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="etp_cod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="etp_bod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="etp_water_flow" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="etp_water_consumption_at_plant" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="calcium_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="calcium_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="phosphate_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="phosphate_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="rs_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="rs_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="rs_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="unknown_losses" Type="Decimal" Precision="10" Scale="4" />
-    <Property Name="dirt_correction" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="total_operating_tube_well" Type="Int64" />
-    <Property Name="exhaust_condensate_recovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="T_c_massecuite_pan" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="ph_injection_inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="ph_injection_outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Temp_Injection_Water_Inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Temp_Injection_Water_Outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="average_vaccume_pan" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="average_vaccume_evap" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Exhaust_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Exhaust_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="boiler_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="boiler_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="ph_boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Temp_Boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bagasse_baed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="filter_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="pan_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="cf_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bagasse_sold" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bagasse_stock" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bagasse_consumed_qtl" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bagacillo_to_boiling_house" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="Steam_Fuel_Ratio" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="nm_p_index" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="nm_pry_ext" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="b_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="b_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="temp_max" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="temp_min" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="humidity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="rain_fall" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="iu_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="iu_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="iu_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="live_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="live_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_turbines" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bleeding_in_process" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="bleeding_acf" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="ata3_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="d_sulpher_heating" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="drain_pipe_loss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="exhaust_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="exhaust_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="steam_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="steam_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_from_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_export_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_dg_set" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_import_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="home_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_generation_from_coGen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="total_power" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="om_p_index" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="om_pry_ext" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="steam_percent_cane" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="cane_farm" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="boiler_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="daily_hour_worked" Type="Byte" />
-    <Property Name="crtd_dt" Type="DateTime" Precision="3" />
-    <Property Name="crtd_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="updt_dt" Type="DateTime" Precision="3" />
-    <Property Name="updt_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="PowerToDitillery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="RectifiedSpirit" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcohol" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Ethanol" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="RectifiedSpiritDayRecover" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="RectifiedSpiritToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="EthanolDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="EthanolToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="gross_biss_sugar" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="gross_scrap_sugar" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="gross_moist_sugar" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="gross_raw_sugar" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="gross_other_sugar" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="water_pan_a" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="water_pan_b" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="water_pan_c" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="OverTimeEnggReplacement" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="OverTimeEnggExtra" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="OverTimeMfgReplacement" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="OverTimeMfgExtra" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="MolassesSentOutBHeavy" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="MolassesSentOutCHeavy" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreProcessChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreProcessChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreProcessChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreProcessChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreBoilerChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreBoilerChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreBoilerChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreBoilerChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreGreaseOilQuantity" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreGreaseOilAmount" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreGreaseOilPerBagRate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="StoreGreaseOilPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="QuintalSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="SugarPol" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="CHeavyBrix" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="CHeavyPol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="CHeavyPurity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="RawSugarGainDate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="MaterialSentOut" Type="Int32" Nullable="false" />
-    <Property Name="SugarProduced" Type="Int32" Nullable="false" />
-    <Property Name="PowerExportFromDistillery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="PowerExportFromCogen" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AlcoholFromCaneSyrup" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="NewMillCrush" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="OldMillCrush" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AshSold" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="AlcoholFromCHeavy" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholCHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholCHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholFromBHeavy" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholBHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholBHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholFromSyrupDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="AbsoluteAlcoholFromSyrupToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-    <Property Name="c_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="c_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="syrup_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="syrup_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="mill_house_trace" Type="Boolean" />
-    <Property Name="mill_house_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="mill_house_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="under_oliver_filter_trace" Type="Boolean" />
-    <Property Name="under_oliver_filter_pH" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="under_oliver_filter_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_export_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="power_generate_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="refinery_water_consumption" Type="Int32" Nullable="false" />
-    <Property Name="fiberized_pol_in_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="dextran_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="dextran_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" FromRole="DailyAnalys" ToRole="MasterUnit" />
-  </EntityType>
-  <Association Name="fk_DailyAnalysis_UnitCode_MasterUnits_Code">
-    <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
-    <End Type="SugarLabModel.DailyAnalys" Role="DailyAnalys" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MasterUnit">
-        <PropertyRef Name="Code" />
-      </Principal>
-      <Dependent Role="DailyAnalys">
-        <PropertyRef Name="unit_code" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

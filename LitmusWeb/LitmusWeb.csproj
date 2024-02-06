@@ -6831,7 +6831,7 @@
     <Content Include="Scripts\SugarAnalysisJs\DayAnalysis-2.2.js" />
     <Content Include="Scripts\SugarAnalysisJs\ExcelReportTemplates.js" />
     <Content Include="Scripts\SugarAnalysisJs\HourlyAnalysis-1.2.js" />
-    <Content Include="Scripts\SugarAnalysisJs\HourlyAnalysis-1.4.min.js" />
+    <Content Include="Scripts\SugarAnalysisJs\HourlyAnalysis-1.5.min.js" />
     <Content Include="Scripts\SugarAnalysisJs\KeySampleAnalysis-1.1.js" />
     <Content Include="Scripts\SugarAnalysisJs\MassecuiteAnalysis-1.1.js" />
     <Content Include="Scripts\SugarAnalysisJs\MassecuiteAnalysis-1.1.min.js" />

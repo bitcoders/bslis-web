@@ -3,7 +3,7 @@ let syrup_diversion_cane_factor = 0;
 let user_code;
 $(document).ready(function(){
    let season_code = $("#season_code").val();
-   let unit_code = $("#unit_code").val();
+    let unit_code = $("#hiddenUnit").val();
     let entry_date = $("#entry_date").val();
     let user_code = $("#user_code").val();
      param = JSON.stringify({
@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
 });
 function post_syrup_diversion_cane_factor() {
-    
+    debugger;
 
     $.ajax({
         method: "POST",

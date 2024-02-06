@@ -19,7 +19,7 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("FormType", "Edit");
-                            @Html.Hidden("unit_code", Session["BaseUnitCode"]);
+                            @Html.Hidden("hiddenUnit", Session["BaseUnitCode"]);
                             @Html.Hidden("season_code", Session["CrushingSeason"]);
                             @Html.Hidden("entry_date", Session["EntryDate"]);
 
@@ -267,7 +267,7 @@
                                     <div class="form-group-row">
                                         <div class="col-sm-9">
                                             <div class="form-label-group">
-                                                @Html.EditorFor(temp => temp.sugar_bags_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagsTotal", @readonly = "true", @tabindex = "-1" } })
+                                                @Html.EditorFor(temp => temp.sugar_bags_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagTotal", @readonly = "true", @tabindex = "-1" } })
                                                 @Html.LabelFor(temp => temp.sugar_bags_total, htmlAttributes: new { @class = "col-form-label" })
                                                 @Html.ValidationMessageFor(temp => temp.sugar_bags_total, "", new { @class = "text-danger" })
                                             </div>
@@ -414,7 +414,7 @@
         </div>
     </div>
     <link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />
-    <script src="~/Scripts/SugarAnalysisJs/HourlyAnalysis-1.4.min.js"></script>
+    <script src="~/Scripts/SugarAnalysisJs/HourlyAnalysis-1.5.min.js"></script>
     @if (Convert.ToInt16(ViewBag.OldMillCapacity) <= 0)
     {
         <script>

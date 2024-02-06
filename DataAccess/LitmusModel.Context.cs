@@ -1169,27 +1169,6 @@ namespace DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_dashboard_select_processedData", company_codeParameter, season_codeParameter, history_daysParameter);
         }
     
-        public virtual ObjectResult<proc_summarized_report_Result> proc_summarized_report(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> report_date, Nullable<bool> last_season_data)
-        {
-            var unit_codeParameter = unit_code.HasValue ?
-                new ObjectParameter("unit_code", unit_code) :
-                new ObjectParameter("unit_code", typeof(int));
-    
-            var season_codeParameter = season_code.HasValue ?
-                new ObjectParameter("season_code", season_code) :
-                new ObjectParameter("season_code", typeof(int));
-    
-            var report_dateParameter = report_date.HasValue ?
-                new ObjectParameter("report_date", report_date) :
-                new ObjectParameter("report_date", typeof(System.DateTime));
-    
-            var last_season_dataParameter = last_season_data.HasValue ?
-                new ObjectParameter("last_season_data", last_season_data) :
-                new ObjectParameter("last_season_data", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
-        }
-    
         public virtual int usp_insert_hourly_millControlData(Nullable<int> hourlyAnalysesNo, Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> entry_date, Nullable<int> entry_time, Nullable<decimal> imbibition_water_temp, Nullable<decimal> exhaust_steam_temp, Nullable<bool> mill_biocide_dosing, Nullable<bool> mill_washing, Nullable<bool> mill_steaming, Nullable<decimal> sugar_bags_temp, Nullable<decimal> molasses_inlet_temp, Nullable<decimal> molasses_outlet_temp, Nullable<decimal> mill_hydraulic_pressure_one, Nullable<decimal> mill_hydraulic_pressure_two, Nullable<decimal> mill_hydraulic_pressure_three, Nullable<decimal> mill_hydraulic_pressure_four, Nullable<decimal> mill_hydraulic_pressure_five, Nullable<decimal> mill_load_one, Nullable<decimal> mill_load_two, Nullable<decimal> mill_load_three, Nullable<decimal> mill_load_four, Nullable<decimal> mill_load_five, Nullable<decimal> mill_rpm_one, Nullable<decimal> mill_rpm_two, Nullable<decimal> mill_rpm_three, Nullable<decimal> mill_rpm_four, Nullable<decimal> mill_rpm_five, ObjectParameter inserted_rows, ObjectParameter error_message)
         {
             var hourlyAnalysesNoParameter = hourlyAnalysesNo.HasValue ?
@@ -1682,6 +1661,27 @@ namespace DataAccess
                 new ObjectParameter("mill_rpm_five", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_mill_control_data", unit_codeParameter, season_codeParameter, idParameter, imbibition_water_tempParameter, exhaust_steam_tempParameter, mill_biocide_dosingParameter, mill_washingParameter, mill_steamingParameter, sugar_bags_tempParameter, molasses_inlet_tempParameter, molasses_outlet_tempParameter, cooling_traceParameter, cooling_polParameter, cooling_phParameter, mill_hydraulic_pressure_oneParameter, mill_hydraulic_pressure_twoParameter, mill_hydraulic_pressure_threeParameter, mill_hydraulic_pressure_fourParameter, mill_hydraulic_pressure_fiveParameter, mill_load_oneParameter, mill_load_twoParameter, mill_load_threeParameter, mill_load_fourParameter, mill_load_fiveParameter, mill_rpm_oneParameter, mill_rpm_twoParameter, mill_rpm_threeParameter, mill_rpm_fourParameter, mill_rpm_fiveParameter);
+        }
+    
+        public virtual ObjectResult<proc_summarized_report_Result> proc_summarized_report(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> report_date, Nullable<bool> last_season_data)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var report_dateParameter = report_date.HasValue ?
+                new ObjectParameter("report_date", report_date) :
+                new ObjectParameter("report_date", typeof(System.DateTime));
+    
+            var last_season_dataParameter = last_season_data.HasValue ?
+                new ObjectParameter("last_season_data", last_season_data) :
+                new ObjectParameter("last_season_data", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
         }
     }
 }

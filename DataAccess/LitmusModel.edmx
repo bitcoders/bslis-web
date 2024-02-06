@@ -4727,12 +4727,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="season_code" Mode="In" Type="Int32" />
             <Parameter Name="history_days" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="proc_summarized_report" ReturnType="Collection(SugarLabModel.proc_summarized_report_Result)">
-            <Parameter Name="unit_code" Mode="In" Type="Int32" />
-            <Parameter Name="season_code" Mode="In" Type="Int32" />
-            <Parameter Name="report_date" Mode="In" Type="DateTime" />
-            <Parameter Name="last_season_data" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="usp_insert_hourly_millControlData">
             <Parameter Name="HourlyAnalysesNo" Mode="In" Type="Int32" />
             <Parameter Name="unit_code" Mode="In" Type="Int32" />
@@ -4876,6 +4870,12 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <End Role="MasterUnit" EntitySet="MasterUnits" />
             <End Role="DailyAnalys" EntitySet="DailyAnalyses" />
           </AssociationSet>
+          <FunctionImport Name="proc_summarized_report" ReturnType="Collection(SugarLabModel.proc_summarized_report_Result)">
+            <Parameter Name="unit_code" Mode="In" Type="Int32" />
+            <Parameter Name="season_code" Mode="In" Type="Int32" />
+            <Parameter Name="report_date" Mode="In" Type="DateTime" />
+            <Parameter Name="last_season_data" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="proc_ledger_page_one_Result">
           <Property Type="String" Name="text" Nullable="true" />
@@ -10300,6 +10300,491 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="Decimal" Name="CaneDiverted" Nullable="false" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="DivertedSyrup" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
+        <ComplexType Name="usp_select_hourlyAnalyses_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="unit_code" Nullable="false" />
+          <Property Type="Int32" Name="season_code" Nullable="false" />
+          <Property Type="DateTime" Name="entry_Date" Nullable="false" />
+          <Property Type="Int32" Name="entry_time" Nullable="false" />
+          <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
+          <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
+          <Property Type="Int32" Name="juice_total" Nullable="true" />
+          <Property Type="Int32" Name="new_mill_water" Nullable="true" />
+          <Property Type="Int32" Name="old_mill_water" Nullable="true" />
+          <Property Type="Int32" Name="water_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
+          <Property Type="Int32" Name="sugar_raw" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_total" Nullable="true" />
+          <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int16" Name="standing_truck" Nullable="false" />
+          <Property Type="Int16" Name="standing_trippler" Nullable="false" />
+          <Property Type="Int16" Name="standing_trolley" Nullable="false" />
+          <Property Type="Int16" Name="standing_cart" Nullable="false" />
+          <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="export_sugar" Nullable="false" />
+          <Property Type="Int32" Name="MillDataID" Nullable="false" />
+          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+          <Property Type="DateTime" Name="mill_data_entry_date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="mill_data_entry_time" Nullable="false" />
+          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="false" />
+          <Property Type="Boolean" Name="mill_washing" Nullable="false" />
+          <Property Type="Boolean" Name="mill_steaming" Nullable="false" />
+          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_one" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_two" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_three" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_four" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_five" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_one" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_two" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_select_hourlyAnalysesMillControlData_Result">
+          <Property Type="Int64" Name="hourly_id" Nullable="true" />
+          <Property Type="Int32" Name="hourly_unit_code" Nullable="true" />
+          <Property Type="Int32" Name="hourly_season_code" Nullable="true" />
+          <Property Type="DateTime" Name="hourly_entry_date" Nullable="true" />
+          <Property Type="Int32" Name="hourly_entry_time" Nullable="true" />
+          <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
+          <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
+          <Property Type="Int32" Name="juice_total" Nullable="true" />
+          <Property Type="Int32" Name="new_mill_water" Nullable="true" />
+          <Property Type="Int32" Name="old_mill_water" Nullable="true" />
+          <Property Type="Int32" Name="water_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
+          <Property Type="Int32" Name="sugar_raw" Nullable="true" />
+          <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int16" Name="standing_truck" Nullable="true" />
+          <Property Type="Int16" Name="standing_trippler" Nullable="true" />
+          <Property Type="Int16" Name="standing_trolley" Nullable="true" />
+          <Property Type="Int16" Name="standing_cart" Nullable="true" />
+          <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="crushed_cane" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="export_sugar" Nullable="true" />
+          <Property Type="Int32" Name="mill_data_id" Nullable="false" />
+          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+          <Property Type="Int32" Name="mill_data_unit_code" Nullable="false" />
+          <Property Type="Int32" Name="mill_data_season_code" Nullable="false" />
+          <Property Type="DateTime" Name="mill_data_entry_date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="mill_data_entry_time" Nullable="true" />
+          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
+          <Property Type="Boolean" Name="mill_washing" Nullable="true" />
+          <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
+          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_selectAll_hourlyAnalysesMillControlData_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+          <Property Type="Int32" Name="unit_code" Nullable="false" />
+          <Property Type="Int32" Name="season_code" Nullable="false" />
+          <Property Type="DateTime" Name="entry_date" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="entry_time" Nullable="true" />
+          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
+          <Property Type="Boolean" Name="mill_washing" Nullable="true" />
+          <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
+          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <EntityType Name="HourlyAnalysesMillControlData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HourlyAnalysesNo" Type="Int64" Nullable="false" />
+          <Property Name="unit_code" Type="Int32" Nullable="false" />
+          <Property Name="season_code" Type="Int32" Nullable="false" />
+          <Property Name="entry_date" Type="DateTime" Precision="3" />
+          <Property Name="entry_time" Type="Int32" />
+          <Property Name="imbibition_water_temp" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="exhaust_steam_temp" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_biocide_dosing" Type="Boolean" />
+          <Property Name="mill_washing" Type="Boolean" />
+          <Property Name="mill_steaming" Type="Boolean" />
+          <Property Name="sugar_bags_temp" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="molasses_inlet_temp" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="molasses_outlet_temp" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_hydraulic_pressure_one" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_hydraulic_pressure_two" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_hydraulic_pressure_three" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_hydraulic_pressure_four" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_hydraulic_pressure_five" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_load_one" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_load_two" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_load_three" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_load_four" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_load_five" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_rpm_one" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_rpm_two" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_rpm_three" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_rpm_four" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="mill_rpm_five" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="DataAdjustment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="a_unit_code" Type="Int32" />
+          <Property Name="a_season_code" Type="Int32" />
+          <Property Name="a_entry_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="a_sulpher" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_lime" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_phosphoric_acid" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_color_reducer" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_megnafloe" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_lub_oil" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_viscosity_reducer" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_biocide" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_lub_greace" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_boiler_chemical" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_estimated_sugar" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_estimated_molasses" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="a_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="a_hydrolic_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="a_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="a_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="a_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="a_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="a_is_active" Type="Boolean" Nullable="false" />
+          <Property Name="crtd_dt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updt_dt" Type="DateTime" Precision="3" />
+          <Property Name="crtd_by" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="updt_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EstimatedCaneForSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" FromRole="DataAdjustment" ToRole="MasterUnit" />
+        </EntityType>
+        <Association Name="FK_AdjustmentData_UnitCode_MasterUnits_Code">
+          <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
+          <End Type="SugarLabModel.DataAdjustment" Role="DataAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterUnit">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DataAdjustment">
+              <PropertyRef Name="a_unit_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DailyAnalys">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unit_code" Type="Int32" />
+          <Property Name="season_code" Type="Int32" />
+          <Property Name="entry_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="trans_time" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="cane_early" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="cane_general" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="cane_rejected" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="cane_burnt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="cane_gate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="cane_centre" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="cane_crushed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="total_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="sp_gravity" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="total_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="press_cake" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="molasses_sent_out" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="biss_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="biss_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="scrap_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="scrap_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="moist_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="moist_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="raw_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="other_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="other_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_sulpher" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_phosphoric" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_lime" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_viscosity_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_biocide" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_color_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_megnafloe" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_lub_oil" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_lub_grease" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_boiler_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_hydrolic_acid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="store_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="icumsa_l31" Type="Int16" Nullable="false" />
+          <Property Name="icumsa_l30" Type="Int16" Nullable="false" />
+          <Property Name="icumsa_m31" Type="Int16" Nullable="false" />
+          <Property Name="icumsa_m30" Type="Int16" Nullable="false" />
+          <Property Name="icumsa_s31" Type="Int16" Nullable="false" />
+          <Property Name="icumsa_s30" Type="Int16" Nullable="false" />
+          <Property Name="icumsa_raw_sugar" Type="Int32" Nullable="false" />
+          <Property Name="foreign_matter_l31" Type="Int16" Nullable="false" />
+          <Property Name="foreign_matter_l30" Type="Int16" Nullable="false" />
+          <Property Name="foreign_matter_m31" Type="Int16" Nullable="false" />
+          <Property Name="foreign_matter_m30" Type="Int16" Nullable="false" />
+          <Property Name="foreign_matter_s31" Type="Int16" Nullable="false" />
+          <Property Name="foreign_matter_s30" Type="Int16" Nullable="false" />
+          <Property Name="foreign_matter_raw_sguar" Type="Int32" Nullable="false" />
+          <Property Name="retention_l31" Type="Int16" Nullable="false" />
+          <Property Name="retention_l30" Type="Int16" Nullable="false" />
+          <Property Name="retention_m31" Type="Int16" Nullable="false" />
+          <Property Name="retention_m30" Type="Int16" Nullable="false" />
+          <Property Name="retention_s31" Type="Int16" Nullable="false" />
+          <Property Name="retention_s30" Type="Int16" Nullable="false" />
+          <Property Name="retention_raw_sugar" Type="Int32" Nullable="false" />
+          <Property Name="moisture_l31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="moisture_l30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="moisture_m31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="moisture_m30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="moisture_s31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="moisture_s30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="moisture_raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
+          <Property Name="etp_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="etp_tss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="etp_cod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="etp_bod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="etp_water_flow" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="etp_water_consumption_at_plant" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="calcium_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="calcium_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="phosphate_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="phosphate_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="rs_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="rs_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="rs_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="unknown_losses" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="dirt_correction" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="total_operating_tube_well" Type="Int64" />
+          <Property Name="exhaust_condensate_recovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="T_c_massecuite_pan" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ph_injection_inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ph_injection_outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Temp_Injection_Water_Inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Temp_Injection_Water_Outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="average_vaccume_pan" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="average_vaccume_evap" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Exhaust_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Exhaust_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="boiler_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="boiler_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ph_boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Temp_Boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bagasse_baed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="filter_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="pan_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="cf_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bagasse_sold" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bagasse_stock" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bagasse_consumed_qtl" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bagacillo_to_boiling_house" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Steam_Fuel_Ratio" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="nm_p_index" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="nm_pry_ext" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="b_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="b_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="temp_max" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="temp_min" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="humidity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="rain_fall" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="iu_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="iu_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="iu_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="live_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="live_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_turbines" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bleeding_in_process" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="bleeding_acf" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="ata3_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="d_sulpher_heating" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="drain_pipe_loss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="exhaust_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="exhaust_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="steam_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="steam_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_from_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_export_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_dg_set" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_import_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="home_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_generation_from_coGen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="total_power" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="om_p_index" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="om_pry_ext" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="steam_percent_cane" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cane_farm" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="boiler_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="daily_hour_worked" Type="Byte" />
+          <Property Name="crtd_dt" Type="DateTime" Precision="3" />
+          <Property Name="crtd_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="updt_dt" Type="DateTime" Precision="3" />
+          <Property Name="updt_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="PowerToDitillery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RectifiedSpirit" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcohol" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Ethanol" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RectifiedSpiritDayRecover" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RectifiedSpiritToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="EthanolDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="EthanolToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="gross_biss_sugar" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="gross_scrap_sugar" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="gross_moist_sugar" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="gross_raw_sugar" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="gross_other_sugar" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="water_pan_a" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="water_pan_b" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="water_pan_c" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OverTimeEnggReplacement" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OverTimeEnggExtra" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OverTimeMfgReplacement" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OverTimeMfgExtra" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MolassesSentOutBHeavy" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MolassesSentOutCHeavy" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreProcessChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreProcessChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreProcessChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreProcessChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreBoilerChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreBoilerChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreBoilerChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreBoilerChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreGreaseOilQuantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreGreaseOilAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreGreaseOilPerBagRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="StoreGreaseOilPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="QuintalSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SugarPol" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CHeavyBrix" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="CHeavyPol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="CHeavyPurity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="RawSugarGainDate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="MaterialSentOut" Type="Int32" Nullable="false" />
+          <Property Name="SugarProduced" Type="Int32" Nullable="false" />
+          <Property Name="PowerExportFromDistillery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PowerExportFromCogen" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AlcoholFromCaneSyrup" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="NewMillCrush" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OldMillCrush" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AshSold" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AlcoholFromCHeavy" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholCHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholCHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholFromBHeavy" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholBHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholBHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholFromSyrupDayRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AbsoluteAlcoholFromSyrupToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="c_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="c_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="syrup_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="syrup_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="mill_house_trace" Type="Boolean" />
+          <Property Name="mill_house_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="mill_house_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="under_oliver_filter_trace" Type="Boolean" />
+          <Property Name="under_oliver_filter_pH" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="under_oliver_filter_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_export_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="power_generate_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="refinery_water_consumption" Type="Int32" Nullable="false" />
+          <Property Name="fiberized_pol_in_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="dextran_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="dextran_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" FromRole="DailyAnalys" ToRole="MasterUnit" />
+        </EntityType>
+        <Association Name="fk_DailyAnalysis_UnitCode_MasterUnits_Code">
+          <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
+          <End Type="SugarLabModel.DailyAnalys" Role="DailyAnalys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterUnit">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="DailyAnalys">
+              <PropertyRef Name="unit_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <ComplexType Name="proc_summarized_report_Result">
           <Property Type="DateTime" Name="report_date" Nullable="true" />
           <Property Type="String" Name="company_name" Nullable="false" MaxLength="50" />
@@ -11168,492 +11653,13 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="Decimal" Name="td_cane_crushed_on_syrup" Nullable="false" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="td_cane_crushed_b_heavy" Nullable="false" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="td_cane_crushed_c_heavy" Nullable="false" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="od_b_heavy_final_molasses_trs" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="od_c_heavy_final_molasses_trs" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="od_syrup_trs" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="od_b_heavy_final_molasses_rs" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="od_c_heavy_final_molasses_rs" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="od_syrup_rs" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
-        <ComplexType Name="usp_select_hourlyAnalyses_Result">
-          <Property Type="Int64" Name="id" Nullable="false" />
-          <Property Type="Int32" Name="unit_code" Nullable="false" />
-          <Property Type="Int32" Name="season_code" Nullable="false" />
-          <Property Type="DateTime" Name="entry_Date" Nullable="false" />
-          <Property Type="Int32" Name="entry_time" Nullable="false" />
-          <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
-          <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
-          <Property Type="Int32" Name="juice_total" Nullable="true" />
-          <Property Type="Int32" Name="new_mill_water" Nullable="true" />
-          <Property Type="Int32" Name="old_mill_water" Nullable="true" />
-          <Property Type="Int32" Name="water_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
-          <Property Type="Int32" Name="sugar_raw" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_total" Nullable="true" />
-          <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int16" Name="standing_truck" Nullable="false" />
-          <Property Type="Int16" Name="standing_trippler" Nullable="false" />
-          <Property Type="Int16" Name="standing_trolley" Nullable="false" />
-          <Property Type="Int16" Name="standing_cart" Nullable="false" />
-          <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
-          <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="export_sugar" Nullable="false" />
-          <Property Type="Int32" Name="MillDataID" Nullable="false" />
-          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-          <Property Type="DateTime" Name="mill_data_entry_date" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="mill_data_entry_time" Nullable="false" />
-          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="false" />
-          <Property Type="Boolean" Name="mill_washing" Nullable="false" />
-          <Property Type="Boolean" Name="mill_steaming" Nullable="false" />
-          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_one" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_two" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_three" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_four" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_five" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_one" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_two" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
-        </ComplexType>
-        <ComplexType Name="usp_select_hourlyAnalysesMillControlData_Result">
-          <Property Type="Int64" Name="hourly_id" Nullable="true" />
-          <Property Type="Int32" Name="hourly_unit_code" Nullable="true" />
-          <Property Type="Int32" Name="hourly_season_code" Nullable="true" />
-          <Property Type="DateTime" Name="hourly_entry_date" Nullable="true" />
-          <Property Type="Int32" Name="hourly_entry_time" Nullable="true" />
-          <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
-          <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
-          <Property Type="Int32" Name="juice_total" Nullable="true" />
-          <Property Type="Int32" Name="new_mill_water" Nullable="true" />
-          <Property Type="Int32" Name="old_mill_water" Nullable="true" />
-          <Property Type="Int32" Name="water_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
-          <Property Type="Int32" Name="sugar_raw" Nullable="true" />
-          <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int16" Name="standing_truck" Nullable="true" />
-          <Property Type="Int16" Name="standing_trippler" Nullable="true" />
-          <Property Type="Int16" Name="standing_trolley" Nullable="true" />
-          <Property Type="Int16" Name="standing_cart" Nullable="true" />
-          <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
-          <Property Type="Decimal" Name="crushed_cane" Nullable="true" Precision="10" Scale="0" />
-          <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="export_sugar" Nullable="true" />
-          <Property Type="Int32" Name="mill_data_id" Nullable="false" />
-          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-          <Property Type="Int32" Name="mill_data_unit_code" Nullable="false" />
-          <Property Type="Int32" Name="mill_data_season_code" Nullable="false" />
-          <Property Type="DateTime" Name="mill_data_entry_date" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="mill_data_entry_time" Nullable="true" />
-          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
-          <Property Type="Boolean" Name="mill_washing" Nullable="true" />
-          <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
-          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
-        </ComplexType>
-        <ComplexType Name="usp_selectAll_hourlyAnalysesMillControlData_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-          <Property Type="Int32" Name="unit_code" Nullable="false" />
-          <Property Type="Int32" Name="season_code" Nullable="false" />
-          <Property Type="DateTime" Name="entry_date" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="entry_time" Nullable="true" />
-          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="true" />
-          <Property Type="Boolean" Name="mill_washing" Nullable="true" />
-          <Property Type="Boolean" Name="mill_steaming" Nullable="true" />
-          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_one" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_two" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_three" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_four" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_five" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_one" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_two" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_three" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_four" Nullable="true" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_five" Nullable="true" Precision="10" Scale="2" />
-        </ComplexType>
-        <EntityType Name="HourlyAnalysesMillControlData">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HourlyAnalysesNo" Type="Int64" Nullable="false" />
-          <Property Name="unit_code" Type="Int32" Nullable="false" />
-          <Property Name="season_code" Type="Int32" Nullable="false" />
-          <Property Name="entry_date" Type="DateTime" Precision="3" />
-          <Property Name="entry_time" Type="Int32" />
-          <Property Name="imbibition_water_temp" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="exhaust_steam_temp" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_biocide_dosing" Type="Boolean" />
-          <Property Name="mill_washing" Type="Boolean" />
-          <Property Name="mill_steaming" Type="Boolean" />
-          <Property Name="sugar_bags_temp" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="molasses_inlet_temp" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="molasses_outlet_temp" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_hydraulic_pressure_one" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_hydraulic_pressure_two" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_hydraulic_pressure_three" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_hydraulic_pressure_four" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_hydraulic_pressure_five" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_load_one" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_load_two" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_load_three" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_load_four" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_load_five" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_rpm_one" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_rpm_two" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_rpm_three" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_rpm_four" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="mill_rpm_five" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="DataAdjustment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="a_unit_code" Type="Int32" />
-          <Property Name="a_season_code" Type="Int32" />
-          <Property Name="a_entry_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="a_sulpher" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_lime" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_phosphoric_acid" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_color_reducer" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_megnafloe" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_lub_oil" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_viscosity_reducer" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_biocide" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_lub_greace" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_boiler_chemical" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_estimated_sugar" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_estimated_molasses" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="a_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="a_hydrolic_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="a_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="a_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="a_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="a_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="a_is_active" Type="Boolean" Nullable="false" />
-          <Property Name="crtd_dt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="updt_dt" Type="DateTime" Precision="3" />
-          <Property Name="crtd_by" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="updt_by" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="EstimatedCaneForSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" FromRole="DataAdjustment" ToRole="MasterUnit" />
-        </EntityType>
-        <Association Name="FK_AdjustmentData_UnitCode_MasterUnits_Code">
-          <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
-          <End Type="SugarLabModel.DataAdjustment" Role="DataAdjustment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterUnit">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="DataAdjustment">
-              <PropertyRef Name="a_unit_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DailyAnalys">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="unit_code" Type="Int32" />
-          <Property Name="season_code" Type="Int32" />
-          <Property Name="entry_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="trans_time" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="cane_early" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="cane_general" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="cane_rejected" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="cane_burnt" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="cane_gate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="cane_centre" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="cane_crushed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="total_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="sp_gravity" Type="Decimal" Precision="10" Scale="5" />
-          <Property Name="total_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="press_cake" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="molasses_sent_out" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="biss_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="biss_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="scrap_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="scrap_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="moist_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="moist_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="raw_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="other_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="other_molasses" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_sulpher" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_phosphoric" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_lime" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_viscosity_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_biocide" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_color_reducer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_megnafloe" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_lub_oil" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_lub_grease" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_boiler_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_washing_soda" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_hydrolic_acid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_de_scaling_chemical" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_seed_slurry" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_anti_fomer" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="store_chemical_for_brs_cleaning" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="icumsa_l31" Type="Int16" Nullable="false" />
-          <Property Name="icumsa_l30" Type="Int16" Nullable="false" />
-          <Property Name="icumsa_m31" Type="Int16" Nullable="false" />
-          <Property Name="icumsa_m30" Type="Int16" Nullable="false" />
-          <Property Name="icumsa_s31" Type="Int16" Nullable="false" />
-          <Property Name="icumsa_s30" Type="Int16" Nullable="false" />
-          <Property Name="icumsa_raw_sugar" Type="Int32" Nullable="false" />
-          <Property Name="foreign_matter_l31" Type="Int16" Nullable="false" />
-          <Property Name="foreign_matter_l30" Type="Int16" Nullable="false" />
-          <Property Name="foreign_matter_m31" Type="Int16" Nullable="false" />
-          <Property Name="foreign_matter_m30" Type="Int16" Nullable="false" />
-          <Property Name="foreign_matter_s31" Type="Int16" Nullable="false" />
-          <Property Name="foreign_matter_s30" Type="Int16" Nullable="false" />
-          <Property Name="foreign_matter_raw_sguar" Type="Int32" Nullable="false" />
-          <Property Name="retention_l31" Type="Int16" Nullable="false" />
-          <Property Name="retention_l30" Type="Int16" Nullable="false" />
-          <Property Name="retention_m31" Type="Int16" Nullable="false" />
-          <Property Name="retention_m30" Type="Int16" Nullable="false" />
-          <Property Name="retention_s31" Type="Int16" Nullable="false" />
-          <Property Name="retention_s30" Type="Int16" Nullable="false" />
-          <Property Name="retention_raw_sugar" Type="Int32" Nullable="false" />
-          <Property Name="moisture_l31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="moisture_l30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="moisture_m31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="moisture_m30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="moisture_s31" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="moisture_s30" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="moisture_raw_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="etp_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="etp_tss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="etp_cod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="etp_bod" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="etp_water_flow" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="etp_water_consumption_at_plant" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="calcium_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="calcium_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="phosphate_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="phosphate_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="rs_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="rs_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="rs_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="unknown_losses" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="dirt_correction" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="total_operating_tube_well" Type="Int64" />
-          <Property Name="exhaust_condensate_recovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="T_c_massecuite_pan" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="ph_injection_inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="ph_injection_outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Temp_Injection_Water_Inlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Temp_Injection_Water_Outlet" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="average_vaccume_pan" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="average_vaccume_evap" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Exhaust_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Exhaust_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="boiler_steam_press_lp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="boiler_steam_press_hp" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="ph_boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Temp_Boiler_feed_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bagasse_baed" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="filter_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="pan_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="cf_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bagasse_sold" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bagasse_stock" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bagasse_consumed_qtl" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bagacillo_to_boiling_house" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Steam_Fuel_Ratio" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="nm_p_index" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="nm_pry_ext" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="b_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="b_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="temp_max" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="temp_min" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="humidity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="rain_fall" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="iu_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="iu_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="iu_clear_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="live_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="live_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_turbines" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bleeding_in_process" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="bleeding_acf" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="ata3_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="d_sulpher_heating" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="drain_pipe_loss" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="exhaust_steam_generation" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="exhaust_steam_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="steam_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="steam_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_from_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_export_grid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_dg_set" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_import_cogen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="home_consumption" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_generation_from_coGen" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="total_power" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_per_ton_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_per_qtl_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="om_p_index" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="om_pry_ext" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="steam_percent_cane" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="cane_farm" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="boiler_water" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="daily_hour_worked" Type="Byte" />
-          <Property Name="crtd_dt" Type="DateTime" Precision="3" />
-          <Property Name="crtd_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="updt_dt" Type="DateTime" Precision="3" />
-          <Property Name="updt_by" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="PowerToDitillery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="RectifiedSpirit" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcohol" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Ethanol" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="RectifiedSpiritDayRecover" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="RectifiedSpiritToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="EthanolDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="EthanolToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="gross_biss_sugar" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="gross_scrap_sugar" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="gross_moist_sugar" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="gross_raw_sugar" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="gross_other_sugar" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="water_pan_a" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="water_pan_b" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="water_pan_c" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="OverTimeEnggReplacement" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="OverTimeEnggExtra" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="OverTimeMfgReplacement" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="OverTimeMfgExtra" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="MolassesSentOutBHeavy" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="MolassesSentOutCHeavy" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreProcessChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreProcessChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreProcessChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreProcessChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreBoilerChemicalQuantity" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreBoilerChemicalAmount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreBoilerChemicalPerBagRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreBoilerChemicalPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreGreaseOilQuantity" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreGreaseOilAmount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreGreaseOilPerBagRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="StoreGreaseOilPerTonCaneRate" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="QuintalSyrupDiversion" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="SugarPol" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="CHeavyBrix" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="CHeavyPol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="CHeavyPurity" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="RawSugarGainDate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="MaterialSentOut" Type="Int32" Nullable="false" />
-          <Property Name="SugarProduced" Type="Int32" Nullable="false" />
-          <Property Name="PowerExportFromDistillery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="PowerExportFromCogen" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AlcoholFromCaneSyrup" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="NewMillCrush" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="OldMillCrush" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AshSold" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="AlcoholFromCHeavy" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholCHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholCHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholFromBHeavy" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholBHeavyDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholBHeavyToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholFromSyrupDayRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="AbsoluteAlcoholFromSyrupToDateRecovery" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="c_heavy_final_molasses_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="c_heavy_final_molasses_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="syrup_trs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="syrup_rs" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="mill_house_trace" Type="Boolean" />
-          <Property Name="mill_house_ph" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="mill_house_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="under_oliver_filter_trace" Type="Boolean" />
-          <Property Name="under_oliver_filter_pH" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="under_oliver_filter_pol" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_export_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="power_generate_from_sugar" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="refinery_water_consumption" Type="Int32" Nullable="false" />
-          <Property Name="fiberized_pol_in_cane" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="dextran_primary_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="dextran_mixed_juice" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" FromRole="DailyAnalys" ToRole="MasterUnit" />
-        </EntityType>
-        <Association Name="fk_DailyAnalysis_UnitCode_MasterUnits_Code">
-          <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
-          <End Type="SugarLabModel.DailyAnalys" Role="DailyAnalys" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterUnit">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="DailyAnalys">
-              <PropertyRef Name="unit_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -16765,6 +16771,483 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <FunctionImportMapping FunctionImportName="usp_update_unitSeasons" FunctionName="SugarLabModel.Store.usp_update_unitSeasons" />
           <FunctionImportMapping FunctionImportName="usp_update_unitSesasons" FunctionName="SugarLabModel.Store.usp_update_unitSesasons" />
           <FunctionImportMapping FunctionImportName="usp_dashboard_select_processedData" FunctionName="SugarLabModel.Store.usp_dashboard_select_processedData" />
+          <FunctionImportMapping FunctionImportName="usp_insert_hourly_millControlData" FunctionName="SugarLabModel.Store.usp_insert_hourly_millControlData" />
+          <FunctionImportMapping FunctionImportName="usp_insert_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_insert_hourlyAnalyses" />
+          <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalyses">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalyses_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="season_code" ColumnName="season_code" />
+                <ScalarProperty Name="entry_Date" ColumnName="entry_Date" />
+                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
+                <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
+                <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
+                <ScalarProperty Name="juice_total" ColumnName="juice_total" />
+                <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
+                <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
+                <ScalarProperty Name="water_total" ColumnName="water_total" />
+                <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
+                <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
+                <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
+                <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
+                <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
+                <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
+                <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
+                <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
+                <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
+                <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
+                <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
+                <ScalarProperty Name="sugar_bags_total" ColumnName="sugar_bags_total" />
+                <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
+                <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
+                <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
+                <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
+                <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
+                <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
+                <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
+                <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
+                <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
+                <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
+                <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
+                <ScalarProperty Name="MillDataID" ColumnName="MillDataID" />
+                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
+                <ScalarProperty Name="mill_data_entry_date" ColumnName="mill_data_entry_date" />
+                <ScalarProperty Name="mill_data_entry_time" ColumnName="mill_data_entry_time" />
+                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
+                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
+                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
+                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
+                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
+                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
+                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
+                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
+                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
+                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
+                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
+                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
+                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
+                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
+                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
+                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
+                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
+                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
+                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
+                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
+                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
+                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
+                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalysesMillControlData" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalysesMillControlData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalysesMillControlData_Result">
+                <ScalarProperty Name="hourly_id" ColumnName="hourly_id" />
+                <ScalarProperty Name="hourly_unit_code" ColumnName="hourly_unit_code" />
+                <ScalarProperty Name="hourly_season_code" ColumnName="hourly_season_code" />
+                <ScalarProperty Name="hourly_entry_date" ColumnName="hourly_entry_date" />
+                <ScalarProperty Name="hourly_entry_time" ColumnName="hourly_entry_time" />
+                <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
+                <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
+                <ScalarProperty Name="juice_total" ColumnName="juice_total" />
+                <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
+                <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
+                <ScalarProperty Name="water_total" ColumnName="water_total" />
+                <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
+                <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
+                <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
+                <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
+                <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
+                <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
+                <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
+                <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
+                <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
+                <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
+                <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
+                <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
+                <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
+                <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
+                <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
+                <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
+                <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
+                <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
+                <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
+                <ScalarProperty Name="crushed_cane" ColumnName="crushed_cane" />
+                <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
+                <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
+                <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
+                <ScalarProperty Name="mill_data_id" ColumnName="mill_data_id" />
+                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
+                <ScalarProperty Name="mill_data_unit_code" ColumnName="mill_data_unit_code" />
+                <ScalarProperty Name="mill_data_season_code" ColumnName="mill_data_season_code" />
+                <ScalarProperty Name="mill_data_entry_date" ColumnName="mill_data_entry_date" />
+                <ScalarProperty Name="mill_data_entry_time" ColumnName="mill_data_entry_time" />
+                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
+                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
+                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
+                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
+                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
+                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
+                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
+                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
+                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
+                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
+                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
+                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
+                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
+                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
+                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
+                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
+                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
+                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
+                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
+                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
+                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
+                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
+                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_selectAll_hourlyAnalysesMillControlData" FunctionName="SugarLabModel.Store.usp_selectAll_hourlyAnalysesMillControlData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SugarLabModel.usp_selectAll_hourlyAnalysesMillControlData_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="season_code" ColumnName="season_code" />
+                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
+                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
+                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
+                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
+                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
+                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
+                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
+                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
+                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
+                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
+                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
+                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
+                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
+                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
+                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
+                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
+                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
+                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
+                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
+                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
+                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
+                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
+                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
+                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
+                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="HourlyAnalysesMillControlDatas">
+            <EntityTypeMapping TypeName="SugarLabModel.HourlyAnalysesMillControlData">
+              <MappingFragment StoreEntitySet="HourlyAnalysesMillControlData">
+                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
+                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
+                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
+                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
+                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
+                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
+                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
+                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
+                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
+                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
+                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
+                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
+                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
+                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
+                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
+                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
+                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
+                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
+                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
+                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
+                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
+                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
+                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
+                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
+                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
+                <ScalarProperty Name="season_code" ColumnName="season_code" />
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_update_mill_control_data" FunctionName="SugarLabModel.Store.usp_update_mill_control_data" />
+          <EntitySetMapping Name="DataAdjustments">
+            <EntityTypeMapping TypeName="SugarLabModel.DataAdjustment">
+              <MappingFragment StoreEntitySet="DataAdjustments">
+                <ScalarProperty Name="EstimatedCaneForSyrupDiversion" ColumnName="EstimatedCaneForSyrupDiversion" />
+                <ScalarProperty Name="updt_by" ColumnName="updt_by" />
+                <ScalarProperty Name="crtd_by" ColumnName="crtd_by" />
+                <ScalarProperty Name="updt_dt" ColumnName="updt_dt" />
+                <ScalarProperty Name="crtd_dt" ColumnName="crtd_dt" />
+                <ScalarProperty Name="a_is_active" ColumnName="a_is_active" />
+                <ScalarProperty Name="a_chemical_for_brs_cleaning" ColumnName="a_chemical_for_brs_cleaning" />
+                <ScalarProperty Name="a_anti_fomer" ColumnName="a_anti_fomer" />
+                <ScalarProperty Name="a_seed_slurry" ColumnName="a_seed_slurry" />
+                <ScalarProperty Name="a_de_scaling_chemical" ColumnName="a_de_scaling_chemical" />
+                <ScalarProperty Name="a_hydrolic_soda" ColumnName="a_hydrolic_soda" />
+                <ScalarProperty Name="a_washing_soda" ColumnName="a_washing_soda" />
+                <ScalarProperty Name="a_estimated_molasses" ColumnName="a_estimated_molasses" />
+                <ScalarProperty Name="a_estimated_sugar" ColumnName="a_estimated_sugar" />
+                <ScalarProperty Name="a_boiler_chemical" ColumnName="a_boiler_chemical" />
+                <ScalarProperty Name="a_lub_greace" ColumnName="a_lub_greace" />
+                <ScalarProperty Name="a_biocide" ColumnName="a_biocide" />
+                <ScalarProperty Name="a_viscosity_reducer" ColumnName="a_viscosity_reducer" />
+                <ScalarProperty Name="a_lub_oil" ColumnName="a_lub_oil" />
+                <ScalarProperty Name="a_megnafloe" ColumnName="a_megnafloe" />
+                <ScalarProperty Name="a_color_reducer" ColumnName="a_color_reducer" />
+                <ScalarProperty Name="a_phosphoric_acid" ColumnName="a_phosphoric_acid" />
+                <ScalarProperty Name="a_lime" ColumnName="a_lime" />
+                <ScalarProperty Name="a_sulpher" ColumnName="a_sulpher" />
+                <ScalarProperty Name="a_entry_date" ColumnName="a_entry_date" />
+                <ScalarProperty Name="a_season_code" ColumnName="a_season_code" />
+                <ScalarProperty Name="a_unit_code" ColumnName="a_unit_code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyAnalyses">
+            <EntityTypeMapping TypeName="SugarLabModel.DailyAnalys">
+              <MappingFragment StoreEntitySet="DailyAnalyses">
+                <ScalarProperty Name="dextran_mixed_juice" ColumnName="dextran_mixed_juice" />
+                <ScalarProperty Name="dextran_primary_juice" ColumnName="dextran_primary_juice" />
+                <ScalarProperty Name="fiberized_pol_in_cane" ColumnName="fiberized_pol_in_cane" />
+                <ScalarProperty Name="refinery_water_consumption" ColumnName="refinery_water_consumption" />
+                <ScalarProperty Name="power_generate_from_sugar" ColumnName="power_generate_from_sugar" />
+                <ScalarProperty Name="power_export_from_sugar" ColumnName="power_export_from_sugar" />
+                <ScalarProperty Name="under_oliver_filter_pol" ColumnName="under_oliver_filter_pol" />
+                <ScalarProperty Name="under_oliver_filter_pH" ColumnName="under_oliver_filter_pH" />
+                <ScalarProperty Name="under_oliver_filter_trace" ColumnName="under_oliver_filter_trace" />
+                <ScalarProperty Name="mill_house_pol" ColumnName="mill_house_pol" />
+                <ScalarProperty Name="mill_house_ph" ColumnName="mill_house_ph" />
+                <ScalarProperty Name="mill_house_trace" ColumnName="mill_house_trace" />
+                <ScalarProperty Name="syrup_rs" ColumnName="syrup_rs" />
+                <ScalarProperty Name="syrup_trs" ColumnName="syrup_trs" />
+                <ScalarProperty Name="c_heavy_final_molasses_rs" ColumnName="c_heavy_final_molasses_rs" />
+                <ScalarProperty Name="c_heavy_final_molasses_trs" ColumnName="c_heavy_final_molasses_trs" />
+                <ScalarProperty Name="AbsoluteAlcoholFromSyrupToDateRecovery" ColumnName="AbsoluteAlcoholFromSyrupToDateRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholFromSyrupDayRecovery" ColumnName="AbsoluteAlcoholFromSyrupDayRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholBHeavyToDateRecovery" ColumnName="AbsoluteAlcoholBHeavyToDateRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholBHeavyDayRecovery" ColumnName="AbsoluteAlcoholBHeavyDayRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholFromBHeavy" ColumnName="AbsoluteAlcoholFromBHeavy" />
+                <ScalarProperty Name="AbsoluteAlcoholCHeavyToDateRecovery" ColumnName="AbsoluteAlcoholCHeavyToDateRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholCHeavyDayRecovery" ColumnName="AbsoluteAlcoholCHeavyDayRecovery" />
+                <ScalarProperty Name="AlcoholFromCHeavy" ColumnName="AlcoholFromCHeavy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="AshSold" ColumnName="AshSold" />
+                <ScalarProperty Name="OldMillCrush" ColumnName="OldMillCrush" />
+                <ScalarProperty Name="NewMillCrush" ColumnName="NewMillCrush" />
+                <ScalarProperty Name="AlcoholFromCaneSyrup" ColumnName="AlcoholFromCaneSyrup" />
+                <ScalarProperty Name="PowerExportFromCogen" ColumnName="PowerExportFromCogen" />
+                <ScalarProperty Name="PowerExportFromDistillery" ColumnName="PowerExportFromDistillery" />
+                <ScalarProperty Name="SugarProduced" ColumnName="SugarProduced" />
+                <ScalarProperty Name="MaterialSentOut" ColumnName="MaterialSentOut" />
+                <ScalarProperty Name="RawSugarGainDate" ColumnName="RawSugarGainDate" />
+                <ScalarProperty Name="CHeavyPurity" ColumnName="CHeavyPurity" />
+                <ScalarProperty Name="CHeavyPol" ColumnName="CHeavyPol" />
+                <ScalarProperty Name="CHeavyBrix" ColumnName="CHeavyBrix" />
+                <ScalarProperty Name="SugarPol" ColumnName="SugarPol" />
+                <ScalarProperty Name="QuintalSyrupDiversion" ColumnName="QuintalSyrupDiversion" />
+                <ScalarProperty Name="StoreGreaseOilPerTonCaneRate" ColumnName="StoreGreaseOilPerTonCaneRate" />
+                <ScalarProperty Name="StoreGreaseOilPerBagRate" ColumnName="StoreGreaseOilPerBagRate" />
+                <ScalarProperty Name="StoreGreaseOilAmount" ColumnName="StoreGreaseOilAmount" />
+                <ScalarProperty Name="StoreGreaseOilQuantity" ColumnName="StoreGreaseOilQuantity" />
+                <ScalarProperty Name="StoreBoilerChemicalPerTonCaneRate" ColumnName="StoreBoilerChemicalPerTonCaneRate" />
+                <ScalarProperty Name="StoreBoilerChemicalPerBagRate" ColumnName="StoreBoilerChemicalPerBagRate" />
+                <ScalarProperty Name="StoreBoilerChemicalAmount" ColumnName="StoreBoilerChemicalAmount" />
+                <ScalarProperty Name="StoreBoilerChemicalQuantity" ColumnName="StoreBoilerChemicalQuantity" />
+                <ScalarProperty Name="StoreProcessChemicalPerTonCaneRate" ColumnName="StoreProcessChemicalPerTonCaneRate" />
+                <ScalarProperty Name="StoreProcessChemicalPerBagRate" ColumnName="StoreProcessChemicalPerBagRate" />
+                <ScalarProperty Name="StoreProcessChemicalAmount" ColumnName="StoreProcessChemicalAmount" />
+                <ScalarProperty Name="StoreProcessChemicalQuantity" ColumnName="StoreProcessChemicalQuantity" />
+                <ScalarProperty Name="MolassesSentOutCHeavy" ColumnName="MolassesSentOutCHeavy" />
+                <ScalarProperty Name="MolassesSentOutBHeavy" ColumnName="MolassesSentOutBHeavy" />
+                <ScalarProperty Name="OverTimeMfgExtra" ColumnName="OverTimeMfgExtra" />
+                <ScalarProperty Name="OverTimeMfgReplacement" ColumnName="OverTimeMfgReplacement" />
+                <ScalarProperty Name="OverTimeEnggExtra" ColumnName="OverTimeEnggExtra" />
+                <ScalarProperty Name="OverTimeEnggReplacement" ColumnName="OverTimeEnggReplacement" />
+                <ScalarProperty Name="water_pan_c" ColumnName="water_pan_c" />
+                <ScalarProperty Name="water_pan_b" ColumnName="water_pan_b" />
+                <ScalarProperty Name="water_pan_a" ColumnName="water_pan_a" />
+                <ScalarProperty Name="gross_other_sugar" ColumnName="gross_other_sugar" />
+                <ScalarProperty Name="gross_raw_sugar" ColumnName="gross_raw_sugar" />
+                <ScalarProperty Name="gross_moist_sugar" ColumnName="gross_moist_sugar" />
+                <ScalarProperty Name="gross_scrap_sugar" ColumnName="gross_scrap_sugar" />
+                <ScalarProperty Name="gross_biss_sugar" ColumnName="gross_biss_sugar" />
+                <ScalarProperty Name="EthanolToDateRecovery" ColumnName="EthanolToDateRecovery" />
+                <ScalarProperty Name="EthanolDayRecovery" ColumnName="EthanolDayRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholToDateRecovery" ColumnName="AbsoluteAlcoholToDateRecovery" />
+                <ScalarProperty Name="AbsoluteAlcoholDayRecovery" ColumnName="AbsoluteAlcoholDayRecovery" />
+                <ScalarProperty Name="RectifiedSpiritToDateRecovery" ColumnName="RectifiedSpiritToDateRecovery" />
+                <ScalarProperty Name="RectifiedSpiritDayRecover" ColumnName="RectifiedSpiritDayRecover" />
+                <ScalarProperty Name="Ethanol" ColumnName="Ethanol" />
+                <ScalarProperty Name="AbsoluteAlcohol" ColumnName="AbsoluteAlcohol" />
+                <ScalarProperty Name="RectifiedSpirit" ColumnName="RectifiedSpirit" />
+                <ScalarProperty Name="PowerToDitillery" ColumnName="PowerToDitillery" />
+                <ScalarProperty Name="updt_by" ColumnName="updt_by" />
+                <ScalarProperty Name="updt_dt" ColumnName="updt_dt" />
+                <ScalarProperty Name="crtd_by" ColumnName="crtd_by" />
+                <ScalarProperty Name="crtd_dt" ColumnName="crtd_dt" />
+                <ScalarProperty Name="daily_hour_worked" ColumnName="daily_hour_worked" />
+                <ScalarProperty Name="boiler_water" ColumnName="boiler_water" />
+                <ScalarProperty Name="cane_farm" ColumnName="cane_farm" />
+                <ScalarProperty Name="steam_percent_cane" ColumnName="steam_percent_cane" />
+                <ScalarProperty Name="om_pry_ext" ColumnName="om_pry_ext" />
+                <ScalarProperty Name="om_p_index" ColumnName="om_p_index" />
+                <ScalarProperty Name="power_per_qtl_sugar" ColumnName="power_per_qtl_sugar" />
+                <ScalarProperty Name="power_per_ton_cane" ColumnName="power_per_ton_cane" />
+                <ScalarProperty Name="total_power" ColumnName="total_power" />
+                <ScalarProperty Name="power_generation_from_coGen" ColumnName="power_generation_from_coGen" />
+                <ScalarProperty Name="home_consumption" ColumnName="home_consumption" />
+                <ScalarProperty Name="power_import_cogen" ColumnName="power_import_cogen" />
+                <ScalarProperty Name="power_dg_set" ColumnName="power_dg_set" />
+                <ScalarProperty Name="power_export_grid" ColumnName="power_export_grid" />
+                <ScalarProperty Name="power_from_grid" ColumnName="power_from_grid" />
+                <ScalarProperty Name="power_from_sugar" ColumnName="power_from_sugar" />
+                <ScalarProperty Name="steam_per_qtl_sugar" ColumnName="steam_per_qtl_sugar" />
+                <ScalarProperty Name="steam_per_ton_cane" ColumnName="steam_per_ton_cane" />
+                <ScalarProperty Name="exhaust_steam_consumption" ColumnName="exhaust_steam_consumption" />
+                <ScalarProperty Name="exhaust_steam_generation" ColumnName="exhaust_steam_generation" />
+                <ScalarProperty Name="drain_pipe_loss" ColumnName="drain_pipe_loss" />
+                <ScalarProperty Name="d_sulpher_heating" ColumnName="d_sulpher_heating" />
+                <ScalarProperty Name="ata3_cogen" ColumnName="ata3_cogen" />
+                <ScalarProperty Name="bleeding_acf" ColumnName="bleeding_acf" />
+                <ScalarProperty Name="bleeding_in_process" ColumnName="bleeding_in_process" />
+                <ScalarProperty Name="power_turbines" ColumnName="power_turbines" />
+                <ScalarProperty Name="live_steam_consumption" ColumnName="live_steam_consumption" />
+                <ScalarProperty Name="live_steam_generation" ColumnName="live_steam_generation" />
+                <ScalarProperty Name="iu_clear_juice" ColumnName="iu_clear_juice" />
+                <ScalarProperty Name="iu_mixed_juice" ColumnName="iu_mixed_juice" />
+                <ScalarProperty Name="iu_primary_juice" ColumnName="iu_primary_juice" />
+                <ScalarProperty Name="rain_fall" ColumnName="rain_fall" />
+                <ScalarProperty Name="humidity" ColumnName="humidity" />
+                <ScalarProperty Name="temp_min" ColumnName="temp_min" />
+                <ScalarProperty Name="temp_max" ColumnName="temp_max" />
+                <ScalarProperty Name="b_heavy_final_molasses_rs" ColumnName="b_heavy_final_molasses_rs" />
+                <ScalarProperty Name="b_heavy_final_molasses_trs" ColumnName="b_heavy_final_molasses_trs" />
+                <ScalarProperty Name="nm_pry_ext" ColumnName="nm_pry_ext" />
+                <ScalarProperty Name="nm_p_index" ColumnName="nm_p_index" />
+                <ScalarProperty Name="Steam_Fuel_Ratio" ColumnName="Steam_Fuel_Ratio" />
+                <ScalarProperty Name="bagacillo_to_boiling_house" ColumnName="bagacillo_to_boiling_house" />
+                <ScalarProperty Name="bagasse_consumed_qtl" ColumnName="bagasse_consumed_qtl" />
+                <ScalarProperty Name="bagasse_stock" ColumnName="bagasse_stock" />
+                <ScalarProperty Name="bagasse_sold" ColumnName="bagasse_sold" />
+                <ScalarProperty Name="cf_water" ColumnName="cf_water" />
+                <ScalarProperty Name="pan_water" ColumnName="pan_water" />
+                <ScalarProperty Name="filter_water" ColumnName="filter_water" />
+                <ScalarProperty Name="bagasse_baed" ColumnName="bagasse_baed" />
+                <ScalarProperty Name="Temp_Boiler_feed_water" ColumnName="Temp_Boiler_feed_water" />
+                <ScalarProperty Name="ph_boiler_feed_water" ColumnName="ph_boiler_feed_water" />
+                <ScalarProperty Name="boiler_steam_press_hp" ColumnName="boiler_steam_press_hp" />
+                <ScalarProperty Name="boiler_steam_press_lp" ColumnName="boiler_steam_press_lp" />
+                <ScalarProperty Name="Exhaust_steam_press_hp" ColumnName="Exhaust_steam_press_hp" />
+                <ScalarProperty Name="Exhaust_steam_press_lp" ColumnName="Exhaust_steam_press_lp" />
+                <ScalarProperty Name="average_vaccume_evap" ColumnName="average_vaccume_evap" />
+                <ScalarProperty Name="average_vaccume_pan" ColumnName="average_vaccume_pan" />
+                <ScalarProperty Name="Temp_Injection_Water_Outlet" ColumnName="Temp_Injection_Water_Outlet" />
+                <ScalarProperty Name="Temp_Injection_Water_Inlet" ColumnName="Temp_Injection_Water_Inlet" />
+                <ScalarProperty Name="ph_injection_outlet" ColumnName="ph_injection_outlet" />
+                <ScalarProperty Name="ph_injection_inlet" ColumnName="ph_injection_inlet" />
+                <ScalarProperty Name="T_c_massecuite_pan" ColumnName="T_c_massecuite_pan" />
+                <ScalarProperty Name="exhaust_condensate_recovery" ColumnName="exhaust_condensate_recovery" />
+                <ScalarProperty Name="total_operating_tube_well" ColumnName="total_operating_tube_well" />
+                <ScalarProperty Name="dirt_correction" ColumnName="dirt_correction" />
+                <ScalarProperty Name="unknown_losses" ColumnName="unknown_losses" />
+                <ScalarProperty Name="rs_clear_juice" ColumnName="rs_clear_juice" />
+                <ScalarProperty Name="rs_mixed_juice" ColumnName="rs_mixed_juice" />
+                <ScalarProperty Name="rs_primary_juice" ColumnName="rs_primary_juice" />
+                <ScalarProperty Name="phosphate_clear_juice" ColumnName="phosphate_clear_juice" />
+                <ScalarProperty Name="phosphate_mixed_juice" ColumnName="phosphate_mixed_juice" />
+                <ScalarProperty Name="calcium_clear_juice" ColumnName="calcium_clear_juice" />
+                <ScalarProperty Name="calcium_mixed_juice" ColumnName="calcium_mixed_juice" />
+                <ScalarProperty Name="etp_water_consumption_at_plant" ColumnName="etp_water_consumption_at_plant" />
+                <ScalarProperty Name="etp_water_flow" ColumnName="etp_water_flow" />
+                <ScalarProperty Name="etp_bod" ColumnName="etp_bod" />
+                <ScalarProperty Name="etp_cod" ColumnName="etp_cod" />
+                <ScalarProperty Name="etp_tss" ColumnName="etp_tss" />
+                <ScalarProperty Name="etp_ph" ColumnName="etp_ph" />
+                <ScalarProperty Name="moisture_raw_sugar" ColumnName="moisture_raw_sugar" />
+                <ScalarProperty Name="moisture_s30" ColumnName="moisture_s30" />
+                <ScalarProperty Name="moisture_s31" ColumnName="moisture_s31" />
+                <ScalarProperty Name="moisture_m30" ColumnName="moisture_m30" />
+                <ScalarProperty Name="moisture_m31" ColumnName="moisture_m31" />
+                <ScalarProperty Name="moisture_l30" ColumnName="moisture_l30" />
+                <ScalarProperty Name="moisture_l31" ColumnName="moisture_l31" />
+                <ScalarProperty Name="retention_raw_sugar" ColumnName="retention_raw_sugar" />
+                <ScalarProperty Name="retention_s30" ColumnName="retention_s30" />
+                <ScalarProperty Name="retention_s31" ColumnName="retention_s31" />
+                <ScalarProperty Name="retention_m30" ColumnName="retention_m30" />
+                <ScalarProperty Name="retention_m31" ColumnName="retention_m31" />
+                <ScalarProperty Name="retention_l30" ColumnName="retention_l30" />
+                <ScalarProperty Name="retention_l31" ColumnName="retention_l31" />
+                <ScalarProperty Name="foreign_matter_raw_sguar" ColumnName="foreign_matter_raw_sguar" />
+                <ScalarProperty Name="foreign_matter_s30" ColumnName="foreign_matter_s30" />
+                <ScalarProperty Name="foreign_matter_s31" ColumnName="foreign_matter_s31" />
+                <ScalarProperty Name="foreign_matter_m30" ColumnName="foreign_matter_m30" />
+                <ScalarProperty Name="foreign_matter_m31" ColumnName="foreign_matter_m31" />
+                <ScalarProperty Name="foreign_matter_l30" ColumnName="foreign_matter_l30" />
+                <ScalarProperty Name="foreign_matter_l31" ColumnName="foreign_matter_l31" />
+                <ScalarProperty Name="icumsa_raw_sugar" ColumnName="icumsa_raw_sugar" />
+                <ScalarProperty Name="icumsa_s30" ColumnName="icumsa_s30" />
+                <ScalarProperty Name="icumsa_s31" ColumnName="icumsa_s31" />
+                <ScalarProperty Name="icumsa_m30" ColumnName="icumsa_m30" />
+                <ScalarProperty Name="icumsa_m31" ColumnName="icumsa_m31" />
+                <ScalarProperty Name="icumsa_l30" ColumnName="icumsa_l30" />
+                <ScalarProperty Name="icumsa_l31" ColumnName="icumsa_l31" />
+                <ScalarProperty Name="store_chemical_for_brs_cleaning" ColumnName="store_chemical_for_brs_cleaning" />
+                <ScalarProperty Name="store_anti_fomer" ColumnName="store_anti_fomer" />
+                <ScalarProperty Name="store_seed_slurry" ColumnName="store_seed_slurry" />
+                <ScalarProperty Name="store_de_scaling_chemical" ColumnName="store_de_scaling_chemical" />
+                <ScalarProperty Name="store_hydrolic_acid" ColumnName="store_hydrolic_acid" />
+                <ScalarProperty Name="store_washing_soda" ColumnName="store_washing_soda" />
+                <ScalarProperty Name="store_boiler_chemical" ColumnName="store_boiler_chemical" />
+                <ScalarProperty Name="store_lub_grease" ColumnName="store_lub_grease" />
+                <ScalarProperty Name="store_lub_oil" ColumnName="store_lub_oil" />
+                <ScalarProperty Name="store_megnafloe" ColumnName="store_megnafloe" />
+                <ScalarProperty Name="store_color_reducer" ColumnName="store_color_reducer" />
+                <ScalarProperty Name="store_biocide" ColumnName="store_biocide" />
+                <ScalarProperty Name="store_viscosity_reducer" ColumnName="store_viscosity_reducer" />
+                <ScalarProperty Name="store_lime" ColumnName="store_lime" />
+                <ScalarProperty Name="store_phosphoric" ColumnName="store_phosphoric" />
+                <ScalarProperty Name="store_sulpher" ColumnName="store_sulpher" />
+                <ScalarProperty Name="other_molasses" ColumnName="other_molasses" />
+                <ScalarProperty Name="other_sugar" ColumnName="other_sugar" />
+                <ScalarProperty Name="raw_molasses" ColumnName="raw_molasses" />
+                <ScalarProperty Name="raw_sugar" ColumnName="raw_sugar" />
+                <ScalarProperty Name="moist_molasses" ColumnName="moist_molasses" />
+                <ScalarProperty Name="moist_sugar" ColumnName="moist_sugar" />
+                <ScalarProperty Name="scrap_molasses" ColumnName="scrap_molasses" />
+                <ScalarProperty Name="scrap_sugar" ColumnName="scrap_sugar" />
+                <ScalarProperty Name="biss_molasses" ColumnName="biss_molasses" />
+                <ScalarProperty Name="biss_sugar" ColumnName="biss_sugar" />
+                <ScalarProperty Name="molasses_sent_out" ColumnName="molasses_sent_out" />
+                <ScalarProperty Name="press_cake" ColumnName="press_cake" />
+                <ScalarProperty Name="total_water" ColumnName="total_water" />
+                <ScalarProperty Name="sp_gravity" ColumnName="sp_gravity" />
+                <ScalarProperty Name="total_juice" ColumnName="total_juice" />
+                <ScalarProperty Name="cane_crushed" ColumnName="cane_crushed" />
+                <ScalarProperty Name="cane_centre" ColumnName="cane_centre" />
+                <ScalarProperty Name="cane_gate" ColumnName="cane_gate" />
+                <ScalarProperty Name="cane_burnt" ColumnName="cane_burnt" />
+                <ScalarProperty Name="cane_rejected" ColumnName="cane_rejected" />
+                <ScalarProperty Name="cane_general" ColumnName="cane_general" />
+                <ScalarProperty Name="cane_early" ColumnName="cane_early" />
+                <ScalarProperty Name="trans_time" ColumnName="trans_time" />
+                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
+                <ScalarProperty Name="season_code" ColumnName="season_code" />
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="proc_summarized_report" FunctionName="SugarLabModel.Store.proc_summarized_report">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SugarLabModel.proc_summarized_report_Result">
@@ -17635,486 +18118,15 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
                 <ScalarProperty Name="td_cane_crushed_on_syrup" ColumnName="td_cane_crushed_on_syrup" />
                 <ScalarProperty Name="td_cane_crushed_b_heavy" ColumnName="td_cane_crushed_b_heavy" />
                 <ScalarProperty Name="td_cane_crushed_c_heavy" ColumnName="td_cane_crushed_c_heavy" />
+                <ScalarProperty Name="od_b_heavy_final_molasses_trs" ColumnName="od_b_heavy_final_molasses_trs" />
+                <ScalarProperty Name="od_c_heavy_final_molasses_trs" ColumnName="od_c_heavy_final_molasses_trs" />
+                <ScalarProperty Name="od_syrup_trs" ColumnName="od_syrup_trs" />
+                <ScalarProperty Name="od_b_heavy_final_molasses_rs" ColumnName="od_b_heavy_final_molasses_rs" />
+                <ScalarProperty Name="od_c_heavy_final_molasses_rs" ColumnName="od_c_heavy_final_molasses_rs" />
+                <ScalarProperty Name="od_syrup_rs" ColumnName="od_syrup_rs" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_insert_hourly_millControlData" FunctionName="SugarLabModel.Store.usp_insert_hourly_millControlData" />
-          <FunctionImportMapping FunctionImportName="usp_insert_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_insert_hourlyAnalyses" />
-          <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalyses">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalyses_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
-                <ScalarProperty Name="season_code" ColumnName="season_code" />
-                <ScalarProperty Name="entry_Date" ColumnName="entry_Date" />
-                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
-                <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
-                <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
-                <ScalarProperty Name="juice_total" ColumnName="juice_total" />
-                <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
-                <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
-                <ScalarProperty Name="water_total" ColumnName="water_total" />
-                <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
-                <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
-                <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
-                <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
-                <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
-                <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
-                <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
-                <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
-                <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
-                <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
-                <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
-                <ScalarProperty Name="sugar_bags_total" ColumnName="sugar_bags_total" />
-                <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
-                <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
-                <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
-                <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
-                <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
-                <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
-                <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
-                <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
-                <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
-                <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
-                <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
-                <ScalarProperty Name="MillDataID" ColumnName="MillDataID" />
-                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
-                <ScalarProperty Name="mill_data_entry_date" ColumnName="mill_data_entry_date" />
-                <ScalarProperty Name="mill_data_entry_time" ColumnName="mill_data_entry_time" />
-                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
-                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
-                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
-                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
-                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
-                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
-                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
-                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
-                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
-                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
-                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
-                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
-                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
-                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
-                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
-                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
-                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
-                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
-                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
-                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
-                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
-                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
-                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalysesMillControlData" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalysesMillControlData">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalysesMillControlData_Result">
-                <ScalarProperty Name="hourly_id" ColumnName="hourly_id" />
-                <ScalarProperty Name="hourly_unit_code" ColumnName="hourly_unit_code" />
-                <ScalarProperty Name="hourly_season_code" ColumnName="hourly_season_code" />
-                <ScalarProperty Name="hourly_entry_date" ColumnName="hourly_entry_date" />
-                <ScalarProperty Name="hourly_entry_time" ColumnName="hourly_entry_time" />
-                <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
-                <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
-                <ScalarProperty Name="juice_total" ColumnName="juice_total" />
-                <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
-                <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
-                <ScalarProperty Name="water_total" ColumnName="water_total" />
-                <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
-                <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
-                <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
-                <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
-                <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
-                <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
-                <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
-                <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
-                <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
-                <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
-                <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
-                <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
-                <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
-                <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
-                <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
-                <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
-                <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
-                <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
-                <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
-                <ScalarProperty Name="crushed_cane" ColumnName="crushed_cane" />
-                <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
-                <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
-                <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
-                <ScalarProperty Name="mill_data_id" ColumnName="mill_data_id" />
-                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
-                <ScalarProperty Name="mill_data_unit_code" ColumnName="mill_data_unit_code" />
-                <ScalarProperty Name="mill_data_season_code" ColumnName="mill_data_season_code" />
-                <ScalarProperty Name="mill_data_entry_date" ColumnName="mill_data_entry_date" />
-                <ScalarProperty Name="mill_data_entry_time" ColumnName="mill_data_entry_time" />
-                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
-                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
-                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
-                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
-                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
-                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
-                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
-                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
-                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
-                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
-                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
-                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
-                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
-                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
-                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
-                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
-                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
-                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
-                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
-                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
-                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
-                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
-                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_selectAll_hourlyAnalysesMillControlData" FunctionName="SugarLabModel.Store.usp_selectAll_hourlyAnalysesMillControlData">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SugarLabModel.usp_selectAll_hourlyAnalysesMillControlData_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
-                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
-                <ScalarProperty Name="season_code" ColumnName="season_code" />
-                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
-                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
-                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
-                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
-                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
-                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
-                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
-                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
-                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
-                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
-                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
-                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
-                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
-                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
-                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
-                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
-                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
-                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
-                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
-                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
-                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
-                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
-                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
-                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
-                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="HourlyAnalysesMillControlDatas">
-            <EntityTypeMapping TypeName="SugarLabModel.HourlyAnalysesMillControlData">
-              <MappingFragment StoreEntitySet="HourlyAnalysesMillControlData">
-                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
-                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
-                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
-                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
-                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
-                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
-                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
-                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
-                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
-                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
-                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
-                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
-                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
-                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
-                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
-                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
-                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
-                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
-                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
-                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
-                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
-                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
-                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
-                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
-                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
-                <ScalarProperty Name="season_code" ColumnName="season_code" />
-                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
-                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="usp_update_mill_control_data" FunctionName="SugarLabModel.Store.usp_update_mill_control_data" />
-          <EntitySetMapping Name="DataAdjustments">
-            <EntityTypeMapping TypeName="SugarLabModel.DataAdjustment">
-              <MappingFragment StoreEntitySet="DataAdjustments">
-                <ScalarProperty Name="EstimatedCaneForSyrupDiversion" ColumnName="EstimatedCaneForSyrupDiversion" />
-                <ScalarProperty Name="updt_by" ColumnName="updt_by" />
-                <ScalarProperty Name="crtd_by" ColumnName="crtd_by" />
-                <ScalarProperty Name="updt_dt" ColumnName="updt_dt" />
-                <ScalarProperty Name="crtd_dt" ColumnName="crtd_dt" />
-                <ScalarProperty Name="a_is_active" ColumnName="a_is_active" />
-                <ScalarProperty Name="a_chemical_for_brs_cleaning" ColumnName="a_chemical_for_brs_cleaning" />
-                <ScalarProperty Name="a_anti_fomer" ColumnName="a_anti_fomer" />
-                <ScalarProperty Name="a_seed_slurry" ColumnName="a_seed_slurry" />
-                <ScalarProperty Name="a_de_scaling_chemical" ColumnName="a_de_scaling_chemical" />
-                <ScalarProperty Name="a_hydrolic_soda" ColumnName="a_hydrolic_soda" />
-                <ScalarProperty Name="a_washing_soda" ColumnName="a_washing_soda" />
-                <ScalarProperty Name="a_estimated_molasses" ColumnName="a_estimated_molasses" />
-                <ScalarProperty Name="a_estimated_sugar" ColumnName="a_estimated_sugar" />
-                <ScalarProperty Name="a_boiler_chemical" ColumnName="a_boiler_chemical" />
-                <ScalarProperty Name="a_lub_greace" ColumnName="a_lub_greace" />
-                <ScalarProperty Name="a_biocide" ColumnName="a_biocide" />
-                <ScalarProperty Name="a_viscosity_reducer" ColumnName="a_viscosity_reducer" />
-                <ScalarProperty Name="a_lub_oil" ColumnName="a_lub_oil" />
-                <ScalarProperty Name="a_megnafloe" ColumnName="a_megnafloe" />
-                <ScalarProperty Name="a_color_reducer" ColumnName="a_color_reducer" />
-                <ScalarProperty Name="a_phosphoric_acid" ColumnName="a_phosphoric_acid" />
-                <ScalarProperty Name="a_lime" ColumnName="a_lime" />
-                <ScalarProperty Name="a_sulpher" ColumnName="a_sulpher" />
-                <ScalarProperty Name="a_entry_date" ColumnName="a_entry_date" />
-                <ScalarProperty Name="a_season_code" ColumnName="a_season_code" />
-                <ScalarProperty Name="a_unit_code" ColumnName="a_unit_code" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DailyAnalyses">
-            <EntityTypeMapping TypeName="SugarLabModel.DailyAnalys">
-              <MappingFragment StoreEntitySet="DailyAnalyses">
-                <ScalarProperty Name="dextran_mixed_juice" ColumnName="dextran_mixed_juice" />
-                <ScalarProperty Name="dextran_primary_juice" ColumnName="dextran_primary_juice" />
-                <ScalarProperty Name="fiberized_pol_in_cane" ColumnName="fiberized_pol_in_cane" />
-                <ScalarProperty Name="refinery_water_consumption" ColumnName="refinery_water_consumption" />
-                <ScalarProperty Name="power_generate_from_sugar" ColumnName="power_generate_from_sugar" />
-                <ScalarProperty Name="power_export_from_sugar" ColumnName="power_export_from_sugar" />
-                <ScalarProperty Name="under_oliver_filter_pol" ColumnName="under_oliver_filter_pol" />
-                <ScalarProperty Name="under_oliver_filter_pH" ColumnName="under_oliver_filter_pH" />
-                <ScalarProperty Name="under_oliver_filter_trace" ColumnName="under_oliver_filter_trace" />
-                <ScalarProperty Name="mill_house_pol" ColumnName="mill_house_pol" />
-                <ScalarProperty Name="mill_house_ph" ColumnName="mill_house_ph" />
-                <ScalarProperty Name="mill_house_trace" ColumnName="mill_house_trace" />
-                <ScalarProperty Name="syrup_rs" ColumnName="syrup_rs" />
-                <ScalarProperty Name="syrup_trs" ColumnName="syrup_trs" />
-                <ScalarProperty Name="c_heavy_final_molasses_rs" ColumnName="c_heavy_final_molasses_rs" />
-                <ScalarProperty Name="c_heavy_final_molasses_trs" ColumnName="c_heavy_final_molasses_trs" />
-                <ScalarProperty Name="AbsoluteAlcoholFromSyrupToDateRecovery" ColumnName="AbsoluteAlcoholFromSyrupToDateRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholFromSyrupDayRecovery" ColumnName="AbsoluteAlcoholFromSyrupDayRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholBHeavyToDateRecovery" ColumnName="AbsoluteAlcoholBHeavyToDateRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholBHeavyDayRecovery" ColumnName="AbsoluteAlcoholBHeavyDayRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholFromBHeavy" ColumnName="AbsoluteAlcoholFromBHeavy" />
-                <ScalarProperty Name="AbsoluteAlcoholCHeavyToDateRecovery" ColumnName="AbsoluteAlcoholCHeavyToDateRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholCHeavyDayRecovery" ColumnName="AbsoluteAlcoholCHeavyDayRecovery" />
-                <ScalarProperty Name="AlcoholFromCHeavy" ColumnName="AlcoholFromCHeavy" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="AshSold" ColumnName="AshSold" />
-                <ScalarProperty Name="OldMillCrush" ColumnName="OldMillCrush" />
-                <ScalarProperty Name="NewMillCrush" ColumnName="NewMillCrush" />
-                <ScalarProperty Name="AlcoholFromCaneSyrup" ColumnName="AlcoholFromCaneSyrup" />
-                <ScalarProperty Name="PowerExportFromCogen" ColumnName="PowerExportFromCogen" />
-                <ScalarProperty Name="PowerExportFromDistillery" ColumnName="PowerExportFromDistillery" />
-                <ScalarProperty Name="SugarProduced" ColumnName="SugarProduced" />
-                <ScalarProperty Name="MaterialSentOut" ColumnName="MaterialSentOut" />
-                <ScalarProperty Name="RawSugarGainDate" ColumnName="RawSugarGainDate" />
-                <ScalarProperty Name="CHeavyPurity" ColumnName="CHeavyPurity" />
-                <ScalarProperty Name="CHeavyPol" ColumnName="CHeavyPol" />
-                <ScalarProperty Name="CHeavyBrix" ColumnName="CHeavyBrix" />
-                <ScalarProperty Name="SugarPol" ColumnName="SugarPol" />
-                <ScalarProperty Name="QuintalSyrupDiversion" ColumnName="QuintalSyrupDiversion" />
-                <ScalarProperty Name="StoreGreaseOilPerTonCaneRate" ColumnName="StoreGreaseOilPerTonCaneRate" />
-                <ScalarProperty Name="StoreGreaseOilPerBagRate" ColumnName="StoreGreaseOilPerBagRate" />
-                <ScalarProperty Name="StoreGreaseOilAmount" ColumnName="StoreGreaseOilAmount" />
-                <ScalarProperty Name="StoreGreaseOilQuantity" ColumnName="StoreGreaseOilQuantity" />
-                <ScalarProperty Name="StoreBoilerChemicalPerTonCaneRate" ColumnName="StoreBoilerChemicalPerTonCaneRate" />
-                <ScalarProperty Name="StoreBoilerChemicalPerBagRate" ColumnName="StoreBoilerChemicalPerBagRate" />
-                <ScalarProperty Name="StoreBoilerChemicalAmount" ColumnName="StoreBoilerChemicalAmount" />
-                <ScalarProperty Name="StoreBoilerChemicalQuantity" ColumnName="StoreBoilerChemicalQuantity" />
-                <ScalarProperty Name="StoreProcessChemicalPerTonCaneRate" ColumnName="StoreProcessChemicalPerTonCaneRate" />
-                <ScalarProperty Name="StoreProcessChemicalPerBagRate" ColumnName="StoreProcessChemicalPerBagRate" />
-                <ScalarProperty Name="StoreProcessChemicalAmount" ColumnName="StoreProcessChemicalAmount" />
-                <ScalarProperty Name="StoreProcessChemicalQuantity" ColumnName="StoreProcessChemicalQuantity" />
-                <ScalarProperty Name="MolassesSentOutCHeavy" ColumnName="MolassesSentOutCHeavy" />
-                <ScalarProperty Name="MolassesSentOutBHeavy" ColumnName="MolassesSentOutBHeavy" />
-                <ScalarProperty Name="OverTimeMfgExtra" ColumnName="OverTimeMfgExtra" />
-                <ScalarProperty Name="OverTimeMfgReplacement" ColumnName="OverTimeMfgReplacement" />
-                <ScalarProperty Name="OverTimeEnggExtra" ColumnName="OverTimeEnggExtra" />
-                <ScalarProperty Name="OverTimeEnggReplacement" ColumnName="OverTimeEnggReplacement" />
-                <ScalarProperty Name="water_pan_c" ColumnName="water_pan_c" />
-                <ScalarProperty Name="water_pan_b" ColumnName="water_pan_b" />
-                <ScalarProperty Name="water_pan_a" ColumnName="water_pan_a" />
-                <ScalarProperty Name="gross_other_sugar" ColumnName="gross_other_sugar" />
-                <ScalarProperty Name="gross_raw_sugar" ColumnName="gross_raw_sugar" />
-                <ScalarProperty Name="gross_moist_sugar" ColumnName="gross_moist_sugar" />
-                <ScalarProperty Name="gross_scrap_sugar" ColumnName="gross_scrap_sugar" />
-                <ScalarProperty Name="gross_biss_sugar" ColumnName="gross_biss_sugar" />
-                <ScalarProperty Name="EthanolToDateRecovery" ColumnName="EthanolToDateRecovery" />
-                <ScalarProperty Name="EthanolDayRecovery" ColumnName="EthanolDayRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholToDateRecovery" ColumnName="AbsoluteAlcoholToDateRecovery" />
-                <ScalarProperty Name="AbsoluteAlcoholDayRecovery" ColumnName="AbsoluteAlcoholDayRecovery" />
-                <ScalarProperty Name="RectifiedSpiritToDateRecovery" ColumnName="RectifiedSpiritToDateRecovery" />
-                <ScalarProperty Name="RectifiedSpiritDayRecover" ColumnName="RectifiedSpiritDayRecover" />
-                <ScalarProperty Name="Ethanol" ColumnName="Ethanol" />
-                <ScalarProperty Name="AbsoluteAlcohol" ColumnName="AbsoluteAlcohol" />
-                <ScalarProperty Name="RectifiedSpirit" ColumnName="RectifiedSpirit" />
-                <ScalarProperty Name="PowerToDitillery" ColumnName="PowerToDitillery" />
-                <ScalarProperty Name="updt_by" ColumnName="updt_by" />
-                <ScalarProperty Name="updt_dt" ColumnName="updt_dt" />
-                <ScalarProperty Name="crtd_by" ColumnName="crtd_by" />
-                <ScalarProperty Name="crtd_dt" ColumnName="crtd_dt" />
-                <ScalarProperty Name="daily_hour_worked" ColumnName="daily_hour_worked" />
-                <ScalarProperty Name="boiler_water" ColumnName="boiler_water" />
-                <ScalarProperty Name="cane_farm" ColumnName="cane_farm" />
-                <ScalarProperty Name="steam_percent_cane" ColumnName="steam_percent_cane" />
-                <ScalarProperty Name="om_pry_ext" ColumnName="om_pry_ext" />
-                <ScalarProperty Name="om_p_index" ColumnName="om_p_index" />
-                <ScalarProperty Name="power_per_qtl_sugar" ColumnName="power_per_qtl_sugar" />
-                <ScalarProperty Name="power_per_ton_cane" ColumnName="power_per_ton_cane" />
-                <ScalarProperty Name="total_power" ColumnName="total_power" />
-                <ScalarProperty Name="power_generation_from_coGen" ColumnName="power_generation_from_coGen" />
-                <ScalarProperty Name="home_consumption" ColumnName="home_consumption" />
-                <ScalarProperty Name="power_import_cogen" ColumnName="power_import_cogen" />
-                <ScalarProperty Name="power_dg_set" ColumnName="power_dg_set" />
-                <ScalarProperty Name="power_export_grid" ColumnName="power_export_grid" />
-                <ScalarProperty Name="power_from_grid" ColumnName="power_from_grid" />
-                <ScalarProperty Name="power_from_sugar" ColumnName="power_from_sugar" />
-                <ScalarProperty Name="steam_per_qtl_sugar" ColumnName="steam_per_qtl_sugar" />
-                <ScalarProperty Name="steam_per_ton_cane" ColumnName="steam_per_ton_cane" />
-                <ScalarProperty Name="exhaust_steam_consumption" ColumnName="exhaust_steam_consumption" />
-                <ScalarProperty Name="exhaust_steam_generation" ColumnName="exhaust_steam_generation" />
-                <ScalarProperty Name="drain_pipe_loss" ColumnName="drain_pipe_loss" />
-                <ScalarProperty Name="d_sulpher_heating" ColumnName="d_sulpher_heating" />
-                <ScalarProperty Name="ata3_cogen" ColumnName="ata3_cogen" />
-                <ScalarProperty Name="bleeding_acf" ColumnName="bleeding_acf" />
-                <ScalarProperty Name="bleeding_in_process" ColumnName="bleeding_in_process" />
-                <ScalarProperty Name="power_turbines" ColumnName="power_turbines" />
-                <ScalarProperty Name="live_steam_consumption" ColumnName="live_steam_consumption" />
-                <ScalarProperty Name="live_steam_generation" ColumnName="live_steam_generation" />
-                <ScalarProperty Name="iu_clear_juice" ColumnName="iu_clear_juice" />
-                <ScalarProperty Name="iu_mixed_juice" ColumnName="iu_mixed_juice" />
-                <ScalarProperty Name="iu_primary_juice" ColumnName="iu_primary_juice" />
-                <ScalarProperty Name="rain_fall" ColumnName="rain_fall" />
-                <ScalarProperty Name="humidity" ColumnName="humidity" />
-                <ScalarProperty Name="temp_min" ColumnName="temp_min" />
-                <ScalarProperty Name="temp_max" ColumnName="temp_max" />
-                <ScalarProperty Name="b_heavy_final_molasses_rs" ColumnName="b_heavy_final_molasses_rs" />
-                <ScalarProperty Name="b_heavy_final_molasses_trs" ColumnName="b_heavy_final_molasses_trs" />
-                <ScalarProperty Name="nm_pry_ext" ColumnName="nm_pry_ext" />
-                <ScalarProperty Name="nm_p_index" ColumnName="nm_p_index" />
-                <ScalarProperty Name="Steam_Fuel_Ratio" ColumnName="Steam_Fuel_Ratio" />
-                <ScalarProperty Name="bagacillo_to_boiling_house" ColumnName="bagacillo_to_boiling_house" />
-                <ScalarProperty Name="bagasse_consumed_qtl" ColumnName="bagasse_consumed_qtl" />
-                <ScalarProperty Name="bagasse_stock" ColumnName="bagasse_stock" />
-                <ScalarProperty Name="bagasse_sold" ColumnName="bagasse_sold" />
-                <ScalarProperty Name="cf_water" ColumnName="cf_water" />
-                <ScalarProperty Name="pan_water" ColumnName="pan_water" />
-                <ScalarProperty Name="filter_water" ColumnName="filter_water" />
-                <ScalarProperty Name="bagasse_baed" ColumnName="bagasse_baed" />
-                <ScalarProperty Name="Temp_Boiler_feed_water" ColumnName="Temp_Boiler_feed_water" />
-                <ScalarProperty Name="ph_boiler_feed_water" ColumnName="ph_boiler_feed_water" />
-                <ScalarProperty Name="boiler_steam_press_hp" ColumnName="boiler_steam_press_hp" />
-                <ScalarProperty Name="boiler_steam_press_lp" ColumnName="boiler_steam_press_lp" />
-                <ScalarProperty Name="Exhaust_steam_press_hp" ColumnName="Exhaust_steam_press_hp" />
-                <ScalarProperty Name="Exhaust_steam_press_lp" ColumnName="Exhaust_steam_press_lp" />
-                <ScalarProperty Name="average_vaccume_evap" ColumnName="average_vaccume_evap" />
-                <ScalarProperty Name="average_vaccume_pan" ColumnName="average_vaccume_pan" />
-                <ScalarProperty Name="Temp_Injection_Water_Outlet" ColumnName="Temp_Injection_Water_Outlet" />
-                <ScalarProperty Name="Temp_Injection_Water_Inlet" ColumnName="Temp_Injection_Water_Inlet" />
-                <ScalarProperty Name="ph_injection_outlet" ColumnName="ph_injection_outlet" />
-                <ScalarProperty Name="ph_injection_inlet" ColumnName="ph_injection_inlet" />
-                <ScalarProperty Name="T_c_massecuite_pan" ColumnName="T_c_massecuite_pan" />
-                <ScalarProperty Name="exhaust_condensate_recovery" ColumnName="exhaust_condensate_recovery" />
-                <ScalarProperty Name="total_operating_tube_well" ColumnName="total_operating_tube_well" />
-                <ScalarProperty Name="dirt_correction" ColumnName="dirt_correction" />
-                <ScalarProperty Name="unknown_losses" ColumnName="unknown_losses" />
-                <ScalarProperty Name="rs_clear_juice" ColumnName="rs_clear_juice" />
-                <ScalarProperty Name="rs_mixed_juice" ColumnName="rs_mixed_juice" />
-                <ScalarProperty Name="rs_primary_juice" ColumnName="rs_primary_juice" />
-                <ScalarProperty Name="phosphate_clear_juice" ColumnName="phosphate_clear_juice" />
-                <ScalarProperty Name="phosphate_mixed_juice" ColumnName="phosphate_mixed_juice" />
-                <ScalarProperty Name="calcium_clear_juice" ColumnName="calcium_clear_juice" />
-                <ScalarProperty Name="calcium_mixed_juice" ColumnName="calcium_mixed_juice" />
-                <ScalarProperty Name="etp_water_consumption_at_plant" ColumnName="etp_water_consumption_at_plant" />
-                <ScalarProperty Name="etp_water_flow" ColumnName="etp_water_flow" />
-                <ScalarProperty Name="etp_bod" ColumnName="etp_bod" />
-                <ScalarProperty Name="etp_cod" ColumnName="etp_cod" />
-                <ScalarProperty Name="etp_tss" ColumnName="etp_tss" />
-                <ScalarProperty Name="etp_ph" ColumnName="etp_ph" />
-                <ScalarProperty Name="moisture_raw_sugar" ColumnName="moisture_raw_sugar" />
-                <ScalarProperty Name="moisture_s30" ColumnName="moisture_s30" />
-                <ScalarProperty Name="moisture_s31" ColumnName="moisture_s31" />
-                <ScalarProperty Name="moisture_m30" ColumnName="moisture_m30" />
-                <ScalarProperty Name="moisture_m31" ColumnName="moisture_m31" />
-                <ScalarProperty Name="moisture_l30" ColumnName="moisture_l30" />
-                <ScalarProperty Name="moisture_l31" ColumnName="moisture_l31" />
-                <ScalarProperty Name="retention_raw_sugar" ColumnName="retention_raw_sugar" />
-                <ScalarProperty Name="retention_s30" ColumnName="retention_s30" />
-                <ScalarProperty Name="retention_s31" ColumnName="retention_s31" />
-                <ScalarProperty Name="retention_m30" ColumnName="retention_m30" />
-                <ScalarProperty Name="retention_m31" ColumnName="retention_m31" />
-                <ScalarProperty Name="retention_l30" ColumnName="retention_l30" />
-                <ScalarProperty Name="retention_l31" ColumnName="retention_l31" />
-                <ScalarProperty Name="foreign_matter_raw_sguar" ColumnName="foreign_matter_raw_sguar" />
-                <ScalarProperty Name="foreign_matter_s30" ColumnName="foreign_matter_s30" />
-                <ScalarProperty Name="foreign_matter_s31" ColumnName="foreign_matter_s31" />
-                <ScalarProperty Name="foreign_matter_m30" ColumnName="foreign_matter_m30" />
-                <ScalarProperty Name="foreign_matter_m31" ColumnName="foreign_matter_m31" />
-                <ScalarProperty Name="foreign_matter_l30" ColumnName="foreign_matter_l30" />
-                <ScalarProperty Name="foreign_matter_l31" ColumnName="foreign_matter_l31" />
-                <ScalarProperty Name="icumsa_raw_sugar" ColumnName="icumsa_raw_sugar" />
-                <ScalarProperty Name="icumsa_s30" ColumnName="icumsa_s30" />
-                <ScalarProperty Name="icumsa_s31" ColumnName="icumsa_s31" />
-                <ScalarProperty Name="icumsa_m30" ColumnName="icumsa_m30" />
-                <ScalarProperty Name="icumsa_m31" ColumnName="icumsa_m31" />
-                <ScalarProperty Name="icumsa_l30" ColumnName="icumsa_l30" />
-                <ScalarProperty Name="icumsa_l31" ColumnName="icumsa_l31" />
-                <ScalarProperty Name="store_chemical_for_brs_cleaning" ColumnName="store_chemical_for_brs_cleaning" />
-                <ScalarProperty Name="store_anti_fomer" ColumnName="store_anti_fomer" />
-                <ScalarProperty Name="store_seed_slurry" ColumnName="store_seed_slurry" />
-                <ScalarProperty Name="store_de_scaling_chemical" ColumnName="store_de_scaling_chemical" />
-                <ScalarProperty Name="store_hydrolic_acid" ColumnName="store_hydrolic_acid" />
-                <ScalarProperty Name="store_washing_soda" ColumnName="store_washing_soda" />
-                <ScalarProperty Name="store_boiler_chemical" ColumnName="store_boiler_chemical" />
-                <ScalarProperty Name="store_lub_grease" ColumnName="store_lub_grease" />
-                <ScalarProperty Name="store_lub_oil" ColumnName="store_lub_oil" />
-                <ScalarProperty Name="store_megnafloe" ColumnName="store_megnafloe" />
-                <ScalarProperty Name="store_color_reducer" ColumnName="store_color_reducer" />
-                <ScalarProperty Name="store_biocide" ColumnName="store_biocide" />
-                <ScalarProperty Name="store_viscosity_reducer" ColumnName="store_viscosity_reducer" />
-                <ScalarProperty Name="store_lime" ColumnName="store_lime" />
-                <ScalarProperty Name="store_phosphoric" ColumnName="store_phosphoric" />
-                <ScalarProperty Name="store_sulpher" ColumnName="store_sulpher" />
-                <ScalarProperty Name="other_molasses" ColumnName="other_molasses" />
-                <ScalarProperty Name="other_sugar" ColumnName="other_sugar" />
-                <ScalarProperty Name="raw_molasses" ColumnName="raw_molasses" />
-                <ScalarProperty Name="raw_sugar" ColumnName="raw_sugar" />
-                <ScalarProperty Name="moist_molasses" ColumnName="moist_molasses" />
-                <ScalarProperty Name="moist_sugar" ColumnName="moist_sugar" />
-                <ScalarProperty Name="scrap_molasses" ColumnName="scrap_molasses" />
-                <ScalarProperty Name="scrap_sugar" ColumnName="scrap_sugar" />
-                <ScalarProperty Name="biss_molasses" ColumnName="biss_molasses" />
-                <ScalarProperty Name="biss_sugar" ColumnName="biss_sugar" />
-                <ScalarProperty Name="molasses_sent_out" ColumnName="molasses_sent_out" />
-                <ScalarProperty Name="press_cake" ColumnName="press_cake" />
-                <ScalarProperty Name="total_water" ColumnName="total_water" />
-                <ScalarProperty Name="sp_gravity" ColumnName="sp_gravity" />
-                <ScalarProperty Name="total_juice" ColumnName="total_juice" />
-                <ScalarProperty Name="cane_crushed" ColumnName="cane_crushed" />
-                <ScalarProperty Name="cane_centre" ColumnName="cane_centre" />
-                <ScalarProperty Name="cane_gate" ColumnName="cane_gate" />
-                <ScalarProperty Name="cane_burnt" ColumnName="cane_burnt" />
-                <ScalarProperty Name="cane_rejected" ColumnName="cane_rejected" />
-                <ScalarProperty Name="cane_general" ColumnName="cane_general" />
-                <ScalarProperty Name="cane_early" ColumnName="cane_early" />
-                <ScalarProperty Name="trans_time" ColumnName="trans_time" />
-                <ScalarProperty Name="entry_date" ColumnName="entry_date" />
-                <ScalarProperty Name="season_code" ColumnName="season_code" />
-                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

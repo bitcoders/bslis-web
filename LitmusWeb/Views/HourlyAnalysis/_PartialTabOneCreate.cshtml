@@ -183,7 +183,7 @@
                             <div class="col-sm-9">
                                 <div class="form-label-group">
                                     @Html.LabelFor(temp => temp.hourlyAnalysesModel.sugar_raw, htmlAttributes: new { @class = "col-form-label" })
-                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.sugar_raw, new { htmlAttributes = new { @class = "form-control SugarBag" } })
+                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.sugar_raw, new { htmlAttributes = new { @class = "form-control SugarBag", @id= "sugar_raw" } })
                                     @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.sugar_raw, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -245,7 +245,7 @@
                             <div class="col-sm-9">
                                 <div class="form-label-group">
                                     @Html.LabelFor(temp => temp.hourlyAnalysesModel.sugar_bags_total, htmlAttributes: new { @class = "col-form-label" })
-                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.sugar_bags_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagsTotal", @readonly = "true", @tabindex = "-1" } })
+                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.sugar_bags_total, new { htmlAttributes = new { @class = "form-control SugarBag", @id = "txtBagTotal", @readonly = "true", @tabindex = "-1" } })
                                     @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.sugar_bags_total, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -321,7 +321,7 @@
                             <div class="col-sm-3">
                                 <div class="form-label-group">
                                     @Html.LabelFor(temp => temp.hourlyAnalysesModel.diverted_syrup_quantity, htmlAttributes: new { @class = "col-form-label" })
-                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.diverted_syrup_quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.diverted_syrup_quantity, new { htmlAttributes = new { @class = "form-control", @id= "diverted_syrup_quantity" } })
                                     <span id="cane_diversion_factor" class="factor_value"></span>
                                     @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.diverted_syrup_quantity, "", new { @class = "text-danger" })
                                 </div>
@@ -329,7 +329,7 @@
                             <div class="col-sm-3">
                                 <div class="form-label-group">
                                     @Html.LabelFor(temp => temp.hourlyAnalysesModel.cane_diverted_for_syrup, htmlAttributes: new { @class = "col-form-label" })
-                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.cane_diverted_for_syrup, new { htmlAttributes = new { @class = "form-control display-none", @readonly = "readonly" } })
+                                    @Html.EditorFor(temp => temp.hourlyAnalysesModel.cane_diverted_for_syrup, new { htmlAttributes = new { @class = "form-control display-none", @readonly = "readonly", @id= "cane_diverted_for_syrup" } })
                                     @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.cane_diverted_for_syrup, "", new { @class = "text-danger" })
                                 </div>
                             </div>

@@ -30,7 +30,7 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("FormType", "Create");
-                            @Html.Hidden("unit_code", Session["BaseUnitCode"]);
+                            @Html.Hidden("hiddenUnit", Session["BaseUnitCode"]);
                             @Html.Hidden("season_code", Session["CrushingSeason"]);
                             @Html.Hidden("entry_date", Session["EntryDate"]);
                             <div class="tab-content py-0 px-0 border-left-0 border-bottom-0 border-right-0">
@@ -47,7 +47,7 @@
         </div>
     </div>
     @*<link href="~/Content/MainContent/css/floating-labels.css" rel="stylesheet" />*@
-    <script src="~/Scripts/SugarAnalysisJs/HourlyAnalysis-1.4.min.js"></script>
+    <script src="~/Scripts/SugarAnalysisJs/HourlyAnalysis-1.5.min.js"></script>
     <script src="~/Scripts/FirebaseMessages/HourlyFirebaseNotification-1.1.min.js"></script>
 
     @if (Convert.ToInt16(ViewBag.OldMillCapacity) <= 0)

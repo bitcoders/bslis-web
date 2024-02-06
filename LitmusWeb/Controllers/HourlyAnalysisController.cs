@@ -113,8 +113,6 @@ namespace LitmusWeb.Controllers
 
             DateTime EntryDate = DateTime.Parse(ViewBag.EntryDate);
 
-            //List<HourlyAnalys> Entity = new List<HourlyAnalys>();
-            //Entity = Repository.GetHourlyAnalysisList(Convert.ToInt32(BaseUnitcode), SeasonCode, Convert.ToDateTime(EntryDate));
             List<HourlyAnalysesViewModel> Entity = new List<HourlyAnalysesViewModel>();
             var data = Repository.GetHourlyAnalysesWithMillControlDataList(Convert.ToInt32(BaseUnitcode), Convert.ToDateTime(EntryDate));
             if(data.Count > 0)
@@ -122,7 +120,7 @@ namespace LitmusWeb.Controllers
                 foreach(var d in data)
                 {
                     HourlyAnalysesViewModel temp = new HourlyAnalysesViewModel();
-                    HourlyAnalys hm = new HourlyAnalys()
+                    HourlyAnalysisModel hm = new HourlyAnalysisModel()
                     {
                         id = d.hourlyAnalysesModel.id,
                         unit_code = d.hourlyAnalysesModel.unit_code,
@@ -160,7 +158,7 @@ namespace LitmusWeb.Controllers
                         diverted_syrup_quantity = d.hourlyAnalysesModel.diverted_syrup_quantity,
                         export_sugar = d.hourlyAnalysesModel.export_sugar,
                     };
-                    HourlyAnalysesMillControlData mcm = new HourlyAnalysesMillControlData()
+                    HourlyAnalysesMillControlDataModel mcm = new HourlyAnalysesMillControlDataModel()
                     {
                         Id = d.MillControlModel.Id,
                         HourlyAnalysesNo = d.MillControlModel.HourlyAnalysesNo,
@@ -215,14 +213,11 @@ namespace LitmusWeb.Controllers
         [ValidationFilter("Create")]
         public ActionResult Create()
         {
-            //if (Session["UserCode"] == null || Session["BaseUnitCode"] == null)
-            //{
-            //    TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            //HourlyAnalysisModel model = new HourlyAnalysisModel();
-            //HourlyAnalysesViewModel model = new HourlyAnalysesViewModel();
+            if (Session["UserCode"] == null || Session["BaseUnitCode"] == null)
+            {
+                TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
+                return RedirectToAction("Index", "Home");
+            }
             HourlyAnalysesViewModel m = new HourlyAnalysesViewModel();
             List<SelectListItem> yesNoList = new List<SelectListItem>
             {
@@ -356,12 +351,12 @@ namespace LitmusWeb.Controllers
         [ValidationFilter("Update")]
         public ActionResult Edit(int id)
         {
-            //if (Session["UserCode"] == null || Session["BaseUnitCode"] == null)
-            //{
-            //    TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
-            //    return RedirectToAction("Index", "Home");
-            //}
-            
+            if (Session["UserCode"] == null || Session["BaseUnitCode"] == null)
+            {
+                TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
+                return RedirectToAction("Index", "Home");
+            }
+
             HourlyAnalysisModel Model = GetHourlyAnalysis(id);
             TempData["EditUnit"] = Model.unit_code;
             TempData["EditSeason"] = Model.season_code;
@@ -378,11 +373,11 @@ namespace LitmusWeb.Controllers
         [ValidationFilter("Update")]
         public ActionResult EditPost(HourlyAnalysisModel Model)
         {
-            //if (Session["UserCode"] == null)
-            //{
-            //    TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
-            //    return RedirectToAction("Index", "Home");
-            //}
+            if (Session["UserCode"] == null)
+            {
+                TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
+                return RedirectToAction("Index", "Home");
+            }
             if (ModelState.IsValid)
             {
                 HourlyAnalys hourlyAnalysis = new HourlyAnalys()
@@ -501,13 +496,13 @@ namespace LitmusWeb.Controllers
                 {
                     HourlyAnalysesViewModel ham = new HourlyAnalysesViewModel()
                     {
-                        hourlyAnalysesModel = new HourlyAnalys()
+                        hourlyAnalysesModel = new HourlyAnalysisModel()
                         {
                             cooling_trace = result.hourlyAnalysesModel.cooling_trace  ,
                             cooling_pol = result.hourlyAnalysesModel.cooling_pol,
                             cooling_ph = result.hourlyAnalysesModel.cooling_ph,
                         },
-                        MillControlModel = new HourlyAnalysesMillControlData()
+                        MillControlModel = new HourlyAnalysesMillControlDataModel()
                         {
                             imbibition_water_temp = result.MillControlModel.imbibition_water_temp,
                             exhaust_steam_temp = result.MillControlModel.exhaust_steam_temp,
@@ -635,10 +630,12 @@ namespace LitmusWeb.Controllers
         [ActionName("EditMillControlData")]
         public ActionResult PostEditMillControlData(HourlyAnalysesViewModel model)
         {
-            if(!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            // Not validating model state, because from hourlyAnalysis model side it won't validate for now
+            //if(!ModelState.IsValid)
+            //{
+            //    return View(model);
+            //}
+
             try
             {
                 if(TempData["ID"] != null)

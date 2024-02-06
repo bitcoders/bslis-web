@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,28 +14,51 @@ namespace LitmusWeb.Models
         public int season_code { get; set; }
         public Nullable<System.DateTime> entry_date { get; set; }
         public Nullable<int> entry_time { get; set; }
+        [Display(Name = "Imbibition Water Temp.")]
         public Nullable<decimal> imbibition_water_temp { get; set; }
+        [Display(Name = "Exhaust Steam Temp.")]
         public Nullable<decimal> exhaust_steam_temp { get; set; }
+        [Display(Name = "Biocide Dosing")]
         public Nullable<bool> mill_biocide_dosing { get; set; }
+        [Display(Name = "Mill Washing")]
         public Nullable<bool> mill_washing { get; set; }
+        [Display(Name = "Mill Steaming")]
         public Nullable<bool> mill_steaming { get; set; }
+        [Display(Name = "Sugar Bags Temp.")]
         public Nullable<decimal> sugar_bags_temp { get; set; }
+        [Display(Name = "Molasses Inlet Temp.")]
         public Nullable<decimal> molasses_inlet_temp { get; set; }
+        [Display(Name = "Molasses Outlet Temp.")]
         public Nullable<decimal> molasses_outlet_temp { get; set; }
+        [Display(Name = "Mill-1")]
         public Nullable<decimal> mill_hydraulic_pressure_one { get; set; }
+        [Display(Name = "Mill-2")]
         public Nullable<decimal> mill_hydraulic_pressure_two { get; set; }
+        [Display(Name = "Mill-3")]
         public Nullable<decimal> mill_hydraulic_pressure_three { get; set; }
+        [Display(Name = "Mill-4")]
         public Nullable<decimal> mill_hydraulic_pressure_four { get; set; }
+        [Display(Name = "Mill-5")]
         public Nullable<decimal> mill_hydraulic_pressure_five { get; set; }
+        [Display(Name = "Mill-1")]
         public Nullable<decimal> mill_load_one { get; set; }
+        [Display(Name = "Mill-2")]
         public Nullable<decimal> mill_load_two { get; set; }
+        [Display(Name = "Mill-3")]
         public Nullable<decimal> mill_load_three { get; set; }
+        [Display(Name = "Mill-4")]
         public Nullable<decimal> mill_load_four { get; set; }
+        [Display(Name = "Mill-5")]
         public Nullable<decimal> mill_load_five { get; set; }
+        [Display(Name = "Mill-1")]
         public Nullable<decimal> mill_rpm_one { get; set; }
+        [Display(Name = "Mill-2")]
         public Nullable<decimal> mill_rpm_two { get; set; }
+        [Display(Name = "Mill-3")]
         public Nullable<decimal> mill_rpm_three { get; set; }
+        [Display(Name = "Mill-4")]
         public Nullable<decimal> mill_rpm_four { get; set; }
+        [Display(Name = "Mill-5")]
         public Nullable<decimal> mill_rpm_five { get; set; }
     }
 }

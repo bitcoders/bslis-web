@@ -9,16 +9,25 @@
         {
             @Html.AntiForgeryToken()
             bool coolingTrace = Model.hourlyAnalysesModel.cooling_trace == "Yes" ? true : false;
+            bool millWashing = Model.MillControlModel.mill_washing.HasValue ? Model.MillControlModel.mill_washing.Value : false;
+            bool biocideDosing = Model.MillControlModel.mill_biocide_dosing.HasValue ? Model.MillControlModel.mill_biocide_dosing.Value : false;
+            bool millSteaming = Model.MillControlModel.mill_steaming.HasValue ? Model.MillControlModel.mill_steaming.Value : false;
+
 
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body shadow">
                         <div class="card-title">
-                            Mill Hydraulic Pressure
+                            <h4> Mill Hydraulic Pressure</h4>
                             @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right" })
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.ValidationSummary(true,"",new {@class="text-danger"})
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         @Html.LabelFor(temp => temp.MillControlModel.mill_hydraulic_pressure_one, htmlAttributes: new { @class = "col-form-label" })
@@ -54,9 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
-                            <input type="submit" class="btn btn-inverse-success pull-right" name="btnSuccess" id="btnSuccess" value="Save" />
-                        </div>
                     </div>
                 </div>
 
@@ -66,7 +72,7 @@
                 <div class="card">
                     <div class="card-body shadow">
                         <div class="card-title">
-                            Mill Load
+                            <h4>Mill Load</h4>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
@@ -106,7 +112,7 @@
                 <div class="card">
                     <div class="card-body shadow">
                         <div class="card-title">
-                            Mill RPM
+                            <h4> Mill RPM</h4>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
@@ -145,9 +151,9 @@
                 <div class="card">
                     <div class="card-body shadow">
                         <div class="card-title">
-                            <h3>
+                            <h4>
                                 Other Data
-                            </h3>
+                            </h4>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -164,11 +170,17 @@
                                     </div>
                                     <div class="col-sm-4">
                                         @*@Html.LabelFor(temp => temp.MillControlModel.mill_biocide_dosing, htmlAttributes: new { @class = "col-form-label" })
-        @Html.EditorFor(temp => temp.MillControlModel.mill_biocide_dosing, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_biocide_dosing, "", new { @class = "text-danger" })*@
+                                            @Html.EditorFor(temp => temp.MillControlModel.mill_biocide_dosing, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_biocide_dosing, "", new { @class = "text-danger" })*@
 
                                         @Html.LabelFor(temp => temp.MillControlModel.mill_biocide_dosing, htmlAttributes: new { @class = "col-form-label" })
-                                        @Html.DropDownListFor(temp => temp.MillControlModel.mill_biocide_dosing, ViewBag.millBiocideDosingYesNoList as SelectList,  new { @class = "form-control" } )
+                                        @Html.DropDownListFor(temp => temp.MillControlModel.mill_biocide_dosing
+                                                , new List<SelectListItem>
+                                                {
+                                                    new SelectListItem {Text = "Yes", Value = "true", Selected = !biocideDosing},
+                                                    new SelectListItem {Text = "No", Value = "false", Selected = biocideDosing},
+                                                }
+                                            , new { @class = "form-control" })
                                         @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_biocide_dosing, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -178,13 +190,25 @@
                                             <div class="col-sm-4">
                                                 @Html.LabelFor(temp => temp.MillControlModel.mill_washing, htmlAttributes: new { @class = "col-form-label" })
                                                 @*@Html.EditorFor(temp => temp.MillControlModel.mill_washing, new { htmlAttributes = new { @class = "form-control" } })*@
-                                                @Html.DropDownListFor(temp => temp.MillControlModel.mill_washing, ViewBag.millWashingYesNoList as SelectList, new { @class = "form-control" })
+                                                @Html.DropDownListFor(temp => temp.MillControlModel.mill_washing
+                                                    , new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem {Text="Yes", Value= "true", Selected = !millWashing},
+                                                        new SelectListItem{Text = "No", Value = "false", Selected = millWashing }
+                                                    }
+                                                , new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_washing, "", new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-4">
                                                 @Html.LabelFor(temp => temp.MillControlModel.mill_steaming, htmlAttributes: new { @class = "col-form-label" })
                                                 @*@Html.EditorFor(temp => temp.MillControlModel.mill_steaming, new { htmlAttributes = new { @class = "form-control " } })*@
-                                                @Html.DropDownListFor(temp => temp.MillControlModel.mill_steaming, ViewBag.millSteamingYesNoList as SelectList, new { @class = "form-control" })
+                                                @Html.DropDownListFor(temp => temp.MillControlModel.mill_steaming
+    , new List<SelectListItem>
+    {
+        new SelectListItem {Text="Yes", Value= "true", Selected = !millSteaming},
+        new SelectListItem{Text = "No", Value = "false", Selected = millSteaming }
+    }
+, new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(temp => temp.MillControlModel.mill_steaming, "", new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-4">
@@ -245,7 +269,6 @@
                     </div>
                 </div>
             </div>
-
         }
     </div>
 

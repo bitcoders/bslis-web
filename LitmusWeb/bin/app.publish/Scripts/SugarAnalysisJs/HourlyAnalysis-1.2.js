@@ -21,6 +21,7 @@
     //http://localhost:65205/api/Vehicles/1
     
 function ajaxVehicleAvgWeight() {
+    debugger;
     var jsonParam = { 'unit_code': unitCode };
     $.ajax({
         type: "POST",
@@ -58,7 +59,7 @@ function ajaxVehicleAvgWeight() {
     });
 
     // Sugar Bags Input Chage Event
-    $('.SugarBag').change(function () {
+$('.SugarBag').change(function () {
         L31 = $('#txtBagL31').val();
         M31 = $('#txtBagM31').val();
         S31 = $('#txtBagS31').val();
@@ -77,7 +78,7 @@ function ajaxVehicleAvgWeight() {
         $('#txtBagLTotal').val(Total_L);
         $('#txtBagMTotal').val(Total_M);
         $('#txtBagSTotal').val(Total_S);
-        $('#txtBagsTotal').val(TotalSugarBags);
+        $('#txtBagTotal').val(TotalSugarBags);
     });
 
     // Cooling Traces Logic
@@ -93,7 +94,7 @@ function ajaxVehicleAvgWeight() {
     // using web api http://localhost:65205/api/Vehicles/1
     
 $('.YardInput').change(() => {
-        
+    debugger;
         noOfTruck = $("#txtStandingTrucks").val();
         noOfTrippler = $("#txtStandingTrippler").val();
         noOfTrolley = $("#txtStandingTrolley").val();

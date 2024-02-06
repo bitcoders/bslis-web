@@ -11,9 +11,4 @@ namespace DataAccess.CustomModels
         public HourlyAnalys hourlyAnalysesModel { get; set; }
         public HourlyAnalysesMillControlData MillControlModel { get; set; }
     }
-    //public class HourlyAnalysesListViewModel
-    //{
-    //    public List<HourlyAnalys> hourlyAnalysesModel { get; set; }
-    //    public List<HourlyAnalysesMillControlData> MillControlModel { get; set; }
-    //}
 }
