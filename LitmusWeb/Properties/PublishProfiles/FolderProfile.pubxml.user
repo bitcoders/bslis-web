@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\Projects\Technorator\Birla Sugar Sugar lab\LitmusWeb\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2024-02-06T06:37:37.0884801Z;True|2024-02-05T12:57:20.1599878+05:30;True|2024-02-01T23:22:27.6745812+05:30;True|2024-02-01T23:00:06.2703075+05:30;True|2023-12-21T09:25:52.2125782+05:30;True|2023-11-18T17:14:37.0347371+05:30;</History>
+    <History>True|2024-02-07T04:25:44.8652386Z;True|2024-02-06T12:07:37.0884801+05:30;True|2024-02-05T12:57:20.1599878+05:30;True|2024-02-01T23:22:27.6745812+05:30;True|2024-02-01T23:00:06.2703075+05:30;True|2023-12-21T09:25:52.2125782+05:30;True|2023-11-18T17:14:37.0347371+05:30;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -49,13 +49,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/16/2017 06:51:42</publishTime>
     </File>
     <File Include="bin/DataAccess.dll">
-      <publishTime>02/06/2024 12:33:45</publishTime>
+      <publishTime>02/07/2024 12:20:32</publishTime>
     </File>
     <File Include="bin/DataAccess.dll.config">
-      <publishTime>12/31/2023 13:58:30</publishTime>
+      <publishTime>02/07/2024 12:15:03</publishTime>
     </File>
     <File Include="bin/DataAccess.pdb">
-      <publishTime>02/06/2024 12:33:45</publishTime>
+      <publishTime>02/07/2024 12:20:32</publishTime>
     </File>
     <File Include="bin/DocumentFormat.OpenXml.dll">
       <publishTime>06/06/2017 22:59:22</publishTime>
@@ -106,10 +106,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/21/2019 10:07:34</publishTime>
     </File>
     <File Include="bin/LitmusWeb.dll">
-      <publishTime>02/06/2024 12:33:46</publishTime>
+      <publishTime>02/07/2024 12:20:33</publishTime>
     </File>
     <File Include="bin/LitmusWeb.pdb">
-      <publishTime>02/06/2024 12:33:46</publishTime>
+      <publishTime>02/07/2024 12:20:33</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>06/27/2017 18:29:34</publishTime>
@@ -20053,7 +20053,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/04/2022 19:49:55</publishTime>
     </File>
     <File Include="Scripts/SugarAnalysisJs/HourlyAnalysis-1.5.min.js">
-      <publishTime>02/05/2024 18:43:21</publishTime>
+      <publishTime>02/07/2024 10:14:46</publishTime>
+    </File>
+    <File Include="Scripts/SugarAnalysisJs/HourlyAnalysis.debug.js">
+      <publishTime>02/07/2024 12:08:54</publishTime>
     </File>
     <File Include="Scripts/SugarAnalysisJs/KeySampleAnalysis-1.1.js">
       <publishTime>04/05/2020 23:11:04</publishTime>
@@ -20326,7 +20329,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/22/2022 12:33:09</publishTime>
     </File>
     <File Include="Views/HourlyAnalysis/Edit.cshtml">
-      <publishTime>02/06/2024 12:31:23</publishTime>
+      <publishTime>02/07/2024 10:11:28</publishTime>
     </File>
     <File Include="Views/HourlyAnalysis/EditMillControlData.cshtml">
       <publishTime>02/05/2024 18:06:26</publishTime>
@@ -20335,7 +20338,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/21/2024 23:10:31</publishTime>
     </File>
     <File Include="Views/HourlyAnalysis/_PartialTabOneCreate.cshtml">
-      <publishTime>02/05/2024 17:16:57</publishTime>
+      <publishTime>02/07/2024 10:11:35</publishTime>
     </File>
     <File Include="Views/HourlyAnalysis/_PartialTabOneIndex.cshtml">
       <publishTime>01/22/2024 00:09:14</publishTime>
@@ -20698,7 +20701,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/25/2019 10:20:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/06/2024 12:34:24</publishTime>
+      <publishTime>02/07/2024 12:21:12</publishTime>
     </File>
     <File Include="Web.sitemap">
       <publishTime>12/05/2019 18:24:46</publishTime>

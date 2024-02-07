@@ -218,7 +218,7 @@
                                     <div class="form-group-row">
                                         <div class="col-sm-9">
                                             <div class="form-label-group">
-                                                @Html.EditorFor(x=>x.export_sugar, new { htmlAttributes = new {@class="form-control ExportSugar" } })
+                                                @Html.EditorFor(x=>x.export_sugar, new { htmlAttributes = new {@class= "form-control ExportSugar SugarBag", @id= "export_sugar" } })
                                                 @Html.LabelFor(x => x.export_sugar, htmlAttributes: new { @class="col-from-label"})
                                                 @Html.ValidationMessageFor(x=>x.export_sugar,"",new { @class="text-danger"})
                                             </div>

@@ -206,7 +206,7 @@
                                 </select>*@
                                             @Html.DropDownListFor(temp => temp.hourlyAnalysesModel.cooling_trace, new List<SelectListItem>
         {
-            new SelectListItem { Text = "No", Value = "No" },
+            new SelectListItem { Text = "No", Value = "No",Selected = true },
             new SelectListItem { Text = "Yes", Value = "Yes" }
         }, "Select an option", new { @class = "form-control" })
                                             @Html.ValidationMessageFor(temp => temp.hourlyAnalysesModel.cooling_trace, "", new { @class = "text-danger" })
