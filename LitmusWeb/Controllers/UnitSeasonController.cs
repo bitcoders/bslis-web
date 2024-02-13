@@ -6,6 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
+/*
+    Ticket ID       Owner           Date            Remarks
+    [BSLIS-41]      Ravi Bhushan    12-02-2024      Added two columns 'AutoReportStartDate', 'AutoReportEndDate'
+ */
+
 namespace LitmusWeb.Controllers
 {
     public class UnitSeasonController : Controller
@@ -39,7 +44,11 @@ namespace LitmusWeb.Controllers
                     OldMillCapacity = item.OldMillCapacity,
                     ReportStartHourMinute = item.ReportStartHourMinute,
                     CreatedAt = item.CreatedAt,
-                    CreatedBy = item.CreatedBy
+                    CreatedBy = item.CreatedBy,
+                    //[BSLIS-41]
+                    AutoReportStartDate = item.AutoReportStartDate,
+                    AutoReportEndDate = item.AutoReportEndDate
+                    //[BSLIS-41]
                 };
                 model.Add(temp);
             }
@@ -87,6 +96,8 @@ namespace LitmusWeb.Controllers
                 NewMillCapacity = model.NewMillCapacity,
                 OldMillCapacity = model.OldMillCapacity,
                 ReportStartHourMinute = model.ReportStartHourMinute,
+                AutoReportStartDate = model.AutoReportStartDate,
+                AutoReportEndDate = model.AutoReportEndDate,
                 CreatedAt = DateTime.Now,
                 CreatedBy = Session["UserCode"].ToString()
             };
@@ -129,6 +140,8 @@ namespace LitmusWeb.Controllers
                     DisableDailyProcess = entity.DisableDailyProcess,
                     DisableUpdate = entity.DisableUpdate,
                     DisableAdd  = entity.DisableAdd,
+                    AutoReportStartDate = entity.AutoReportStartDate,
+                    AutoReportEndDate = entity.AutoReportEndDate,
                     CreatedAt = entity.CreatedAt,
                     CreatedBy = entity.CreatedBy
                 };
@@ -181,7 +194,9 @@ namespace LitmusWeb.Controllers
                     ReportStartHourMinute = formData.ReportStartHourMinute,
                     DisableDailyProcess = formData.DisableDailyProcess,
                     DisableAdd = formData.DisableAdd,
-                    DisableUpdate = formData.DisableUpdate
+                    DisableUpdate = formData.DisableUpdate,
+                    AutoReportStartDate = formData.AutoReportStartDate,
+                    AutoReportEndDate = formData.AutoReportEndDate
                     //CreatedAt = formData.CreatedAt,
                     //CreatedBy = formData.CreatedBy
                 };

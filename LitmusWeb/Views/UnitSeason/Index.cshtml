@@ -3,7 +3,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@*
+    Ticket ID       Owner           Date            Remarks
+    [BSLIS-41]      Ravi Bhushan    12-02-2024      Added two columns 'AutoReportStartDate', 'AutoReportEndDate'
+ *@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -15,43 +18,51 @@
                             Master data of Unit's <strong>Crushing Seasons</strong>
                             @Html.ActionLink("Add New Season", "Create", new { }, new { @class = " badge badge-pill badge-success mdi mdi-step-backward-2 float-right" })
                         </p>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
+                        <div id="js-grid-sortable"></div>
+                        <table class="table table-bordered display nowrap" id="AnalysisDataTable-Scrollable">
+                            <thead class="text-lg-center">
+                                <tr>
+                                    <th rowspan="2">Unit Code</th>
+                                    <th rowspan="2">Season Code</th>
+                                    <th rowspan="2">Crushing Start</th>
+                                    <th rowspan="2">Crushing End</th>
+                                    <th rowspan="2">New Mill Capacity</th>
+                                    <th rowspan="2">Old Mill Capacity</th>
+                                    <th rowspan="2">Day Start Time</th>
+                                    <th colspan="2">Auto Report Generation</th>
+                                    <th rowspan="2">Actions</th>
+                                </tr>
+                                <tr>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
                                     <tr>
-                                        <th>Unit Code</th>
-                                        <th>Season Code</th>
-                                        <th>Crushing Start</th>
-                                        <th>Crushing End</th>
-                                        <th>New Mill Capacity</th>
-                                        <th>Old Mill Capacity</th>
-                                        <th>Day Start Time</th>
-                                        <th>Actions</th>
+                                        <td>@Html.DisplayFor(model => item.Code)</td>
+                                        <td>@Html.DisplayFor(model => item.Season)</td>
+                                        <td>@Html.DisplayFor(model => item.CrushingStartDateTime)</td>
+                                        <td>@Html.DisplayFor(model => item.CrushingEndDateTime)</td>
+                                        <td>@Html.DisplayFor(model => item.NewMillCapacity)</td>
+                                        <td>@Html.DisplayFor(model => item.OldMillCapacity)</td>
+                                        <td>@Html.DisplayFor(model => item.ReportStartHourMinute)</td>
+                                        @*[BSLIS-41]*@
+                                        <td>@Html.DisplayFor(model => item.AutoReportStartDate)</td>
+                                        <td>@Html.DisplayFor(model => item.AutoReportEndDate)</td>
+                                        @*[BSLIS-41]*@
+                                        <td>@Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-xs btn-info" })</td>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                }
 
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@Html.DisplayFor(model => item.Code)</td>
-                                            <td>@Html.DisplayFor(model => item.Season)</td>
-                                            <td>@Html.DisplayFor(model => item.CrushingStartDateTime)</td>
-                                            <td>@Html.DisplayFor(model => item.CrushingEndDateTime)</td>
-                                            <td>@Html.DisplayFor(model => item.NewMillCapacity)</td>
-                                            <td>@Html.DisplayFor(model => item.OldMillCapacity)</td>
-                                            <td>@Html.DisplayFor(model => item.ReportStartHourMinute)</td>
-                                            <td>@Html.ActionLink("Edit","Edit",new { id = item.id},new { @class= "btn btn-xs btn-info" })</td>
-                                        </tr>
-                                    }
+                            </tbody>
+                        </table>
 
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-        

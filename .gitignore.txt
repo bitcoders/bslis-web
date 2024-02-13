@@ -22,3 +22,8 @@ x64/
 DataAccess/ConnectionString.config
 
 LitmusWeb/Settings/*.config
+*.suo
+*.user
+bin
+obj
+packages
