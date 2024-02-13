@@ -58,11 +58,8 @@
         <AssociationConnector Association="SugarLabModel.fk_ReportSchemaColumns_SchemaCode_ReportSchema_Code" />
         <EntityTypeShape EntityType="SugarLabModel.MassecuiteAnalys" Width="1.5" PointX="8.25" PointY="70.5" />
         <AssociationConnector Association="SugarLabModel.FK_Massecuite_mParamTypeCode_MasterParameterSubCategories_Code" />
-        <EntityTypeShape EntityType="SugarLabModel.UnitSeason" Width="1.5" PointX="5.25" PointY="33.125" />
         <EntityTypeShape EntityType="SugarLabModel.ValidationParameter" Width="1.5" PointX="5.25" PointY="45.125" />
         <EntityTypeShape EntityType="SugarLabModel.ValidationType" Width="1.5" PointX="21.375" PointY="5.75" />
-        <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Season" />
-        <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Code" />
         <AssociationConnector Association="SugarLabModel.fk_ValidationParametersUnitCode_MasterUnitsCode" />
         <EntityTypeShape EntityType="SugarLabModel.AuditTable" Width="1.5" PointX="0.75" PointY="13.75" />
         <EntityTypeShape EntityType="SugarLabModel.Stoppage" Width="1.5" PointX="10.375" PointY="0.75" />
@@ -107,6 +104,9 @@
         <AssociationConnector Association="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" />
         <EntityTypeShape EntityType="SugarLabModel.DailyAnalys" Width="1.5" PointX="5.25" PointY="75.375" />
         <AssociationConnector Association="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.UnitSeason" Width="1.5" PointX="5.25" PointY="32.875" />
+        <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Season" />
+        <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Code" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

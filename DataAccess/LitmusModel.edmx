@@ -422,7 +422,7 @@
           <Property Name="ExceptionSolvedBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'uat_SugarLab.dbo.FirebaseNotificationRights' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'uat-Sugarlab.dbo.FirebaseNotificationRights' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="FirebaseNotificationRights">
           <Key>
             <PropertyRef Name="id" />
@@ -1146,7 +1146,7 @@ warning 6002: The table/view 'uat_SugarLab.dbo.FirebaseNotificationRights' does 
           <Property Name="mo_icumsa_unit" Type="numeric" Precision="10" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'uat_SugarLab.dbo.NotificationsTickers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'uat-Sugarlab.dbo.NotificationsTickers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NotificationsTickers">
           <Key>
             <PropertyRef Name="id" />
@@ -1587,6 +1587,8 @@ warning 6002: The table/view 'uat_SugarLab.dbo.NotificationsTickers' does not ha
           <Property Name="DisableDailyProcess" Type="bit" Nullable="false" />
           <Property Name="DisableAdd" Type="bit" Nullable="false" />
           <Property Name="DisableUpdate" Type="bit" Nullable="false" />
+          <Property Name="AutoReportStartDate" Type="datetime" />
+          <Property Name="AutoReportEndDate" Type="datetime" />
         </EntityType>
         <EntityType Name="UserRights">
           <Key>
@@ -3958,19 +3960,8 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Parameter Name="disableDailyProcess" Type="bit" Mode="In" />
           <Parameter Name="disableAdd" Type="bit" Mode="In" />
           <Parameter Name="disableUpdate" Type="bit" Mode="In" />
-        </Function>
-        <Function Name="usp_update_unitSesasons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="unit_code" Type="int" Mode="In" />
-          <Parameter Name="season_code" Type="int" Mode="In" />
-          <Parameter Name="crushing_start_datetime" Type="datetime" Mode="In" />
-          <Parameter Name="crushing_end_datetime" Type="datetime" Mode="In" />
-          <Parameter Name="new_mill_capacity" Type="numeric" Mode="In" />
-          <Parameter Name="old_mill_capacity" Type="numeric" Mode="In" />
-          <Parameter Name="report_start_hourMinuete" Type="time" Mode="In" />
-          <Parameter Name="disableDailyProcess" Type="bit" Mode="In" />
-          <Parameter Name="disableAdd" Type="bit" Mode="In" />
-          <Parameter Name="disableUpdate" Type="bit" Mode="In" />
+          <Parameter Name="autoReportStartDate" Type="datetime" Mode="In" />
+          <Parameter Name="autoReportEndDate" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="SugarLabModelStoreContainer">
           <EntitySet Name="AndroidMenues" EntityType="Self.AndroidMenues" Schema="dbo" store:Type="Tables" />
@@ -4446,17 +4437,8 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="fromDate" Mode="In" Type="DateTime" />
             <Parameter Name="toDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="UnitSeasons" EntityType="SugarLabModel.UnitSeason" />
           <EntitySet Name="ValidationParameters" EntityType="SugarLabModel.ValidationParameter" />
           <EntitySet Name="ValidationTypes" EntityType="SugarLabModel.ValidationType" />
-          <AssociationSet Name="fk_UnitSeason_Season" Association="SugarLabModel.fk_UnitSeason_Season">
-            <End Role="MasterSeason" EntitySet="MasterSeasons" />
-            <End Role="UnitSeason" EntitySet="UnitSeasons" />
-          </AssociationSet>
-          <AssociationSet Name="fk_UnitSeason_Code" Association="SugarLabModel.fk_UnitSeason_Code">
-            <End Role="MasterUnit" EntitySet="MasterUnits" />
-            <End Role="UnitSeason" EntitySet="UnitSeasons" />
-          </AssociationSet>
           <AssociationSet Name="fk_ValidationParametersUnitCode_MasterUnitsCode" Association="SugarLabModel.fk_ValidationParametersUnitCode_MasterUnitsCode">
             <End Role="MasterUnit" EntitySet="MasterUnits" />
             <End Role="ValidationParameter" EntitySet="ValidationParameters" />
@@ -4702,19 +4684,8 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="disableDailyProcess" Mode="In" Type="Boolean" />
             <Parameter Name="disableAdd" Mode="In" Type="Boolean" />
             <Parameter Name="disableUpdate" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="usp_update_unitSesasons">
-            <Parameter Name="id" Mode="In" Type="Guid" />
-            <Parameter Name="unit_code" Mode="In" Type="Int32" />
-            <Parameter Name="season_code" Mode="In" Type="Int32" />
-            <Parameter Name="crushing_start_datetime" Mode="In" Type="DateTime" />
-            <Parameter Name="crushing_end_datetime" Mode="In" Type="DateTime" />
-            <Parameter Name="new_mill_capacity" Mode="In" Type="Decimal" />
-            <Parameter Name="old_mill_capacity" Mode="In" Type="Decimal" />
-            <Parameter Name="report_start_hourMinuete" Mode="In" Type="Time" />
-            <Parameter Name="disableDailyProcess" Mode="In" Type="Boolean" />
-            <Parameter Name="disableAdd" Mode="In" Type="Boolean" />
-            <Parameter Name="disableUpdate" Mode="In" Type="Boolean" />
+            <Parameter Name="autoReportStartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="autoReportEndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="usp_dashboard_select_hourlyData" ReturnType="Collection(SugarLabModel.usp_dashboard_select_hourlyData_Result)">
             <Parameter Name="company_code" Mode="In" Type="Int32" />
@@ -4876,6 +4847,15 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="report_date" Mode="In" Type="DateTime" />
             <Parameter Name="last_season_data" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <EntitySet Name="UnitSeasons" EntityType="SugarLabModel.UnitSeason" />
+          <AssociationSet Name="fk_UnitSeason_Season" Association="SugarLabModel.fk_UnitSeason_Season">
+            <End Role="MasterSeason" EntitySet="MasterSeasons" />
+            <End Role="UnitSeason" EntitySet="UnitSeasons" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitSeason_Code" Association="SugarLabModel.fk_UnitSeason_Code">
+            <End Role="MasterUnit" EntitySet="MasterUnits" />
+            <End Role="UnitSeason" EntitySet="UnitSeasons" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="proc_ledger_page_one_Result">
           <Property Type="String" Name="text" Nullable="true" />
@@ -5061,8 +5041,8 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UnitSeasons" Relationship="SugarLabModel.fk_UnitSeason_Season" FromRole="MasterSeason" ToRole="UnitSeason" />
           <NavigationProperty Name="PeriodicalStocks" Relationship="SugarLabModel.PeriodicalStocks_SeasonCode" FromRole="MasterSeason" ToRole="PeriodicalStock" />
+          <NavigationProperty Name="UnitSeasons" Relationship="SugarLabModel.fk_UnitSeason_Season" FromRole="MasterSeason" ToRole="UnitSeason" />
         </EntityType>
         <EntityType Name="MasterStoppageType">
           <Key>
@@ -5646,7 +5626,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Name="CrushingStartDateTime" Type="DateTime" Precision="3" />
           <Property Name="CrushingEndDateTime" Type="DateTime" Precision="3" />
           <Property Name="ReportStartHourMinute" Type="Time" Precision="7" />
-          <NavigationProperty Name="UnitSeasons" Relationship="SugarLabModel.fk_UnitSeason_Code" FromRole="MasterUnit" ToRole="UnitSeason" />
           <NavigationProperty Name="ValidationParameters" Relationship="SugarLabModel.fk_ValidationParametersUnitCode_MasterUnitsCode" FromRole="MasterUnit" ToRole="ValidationParameter" />
           <NavigationProperty Name="PeriodicalStocks" Relationship="SugarLabModel.PeriodicalStocks_UnitCode_Fk" FromRole="MasterUnit" ToRole="PeriodicalStock" />
           <NavigationProperty Name="Villages" Relationship="SugarLabModel.fk_village_unitCode_MasterUnits_Code" FromRole="MasterUnit" ToRole="Village" />
@@ -5654,6 +5633,7 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <NavigationProperty Name="MasterUsers" Relationship="SugarLabModel.fk_userMaster_unitCode_unitMaster_uCode" FromRole="MasterUnit" ToRole="MasterUser" />
           <NavigationProperty Name="DataAdjustments" Relationship="SugarLabModel.FK_AdjustmentData_UnitCode_MasterUnits_Code" FromRole="MasterUnit" ToRole="DataAdjustment" />
           <NavigationProperty Name="DailyAnalyses" Relationship="SugarLabModel.fk_DailyAnalysis_UnitCode_MasterUnits_Code" FromRole="MasterUnit" ToRole="DailyAnalys" />
+          <NavigationProperty Name="UnitSeasons" Relationship="SugarLabModel.fk_UnitSeason_Code" FromRole="MasterUnit" ToRole="UnitSeason" />
           </EntityType>
         <Association Name="FK_KeySampleAnalyses_UnitCode_MasterUnits_Code">
           <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="0..1" />
@@ -6071,26 +6051,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="Decimal" Name="td_r2_molasses_pol" Nullable="true" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="td_r2_molasses_purity" Nullable="true" Precision="10" Scale="2" />
         </ComplexType>
-        <EntityType Name="UnitSeason">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Season" Type="Int32" Nullable="false" />
-          <Property Name="CrushingStartDateTime" Type="DateTime" Precision="3" />
-          <Property Name="CrushingEndDateTime" Type="DateTime" Precision="3" />
-          <Property Name="NewMillCapacity" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="OldMillCapacity" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="ReportStartHourMinute" Type="Time" Precision="7" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MasterSeason" Relationship="SugarLabModel.fk_UnitSeason_Season" FromRole="UnitSeason" ToRole="MasterSeason" />
-          <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.fk_UnitSeason_Code" FromRole="UnitSeason" ToRole="MasterUnit" />
-          <Property Name="DisableDailyProcess" Type="Boolean" Nullable="false" />
-          <Property Name="DisableAdd" Type="Boolean" Nullable="false" />
-          <Property Name="DisableUpdate" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="ValidationParameter">
           <Key>
             <PropertyRef Name="id" />
@@ -6117,30 +6077,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="fk_UnitSeason_Season">
-          <End Type="SugarLabModel.MasterSeason" Role="MasterSeason" Multiplicity="1" />
-          <End Type="SugarLabModel.UnitSeason" Role="UnitSeason" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterSeason">
-              <PropertyRef Name="SeasonCode" />
-            </Principal>
-            <Dependent Role="UnitSeason">
-              <PropertyRef Name="Season" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_UnitSeason_Code">
-          <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="1" />
-          <End Type="SugarLabModel.UnitSeason" Role="UnitSeason" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterUnit">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="UnitSeason">
-              <PropertyRef Name="Code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_ValidationParametersUnitCode_MasterUnitsCode">
           <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="1" />
           <End Type="SugarLabModel.ValidationParameter" Role="ValidationParameter" Multiplicity="*" />
@@ -11660,6 +11596,52 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="Decimal" Name="od_c_heavy_final_molasses_rs" Nullable="false" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="od_syrup_rs" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
+        <EntityType Name="UnitSeason">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Season" Type="Int32" Nullable="false" />
+          <Property Name="CrushingStartDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CrushingEndDateTime" Type="DateTime" Precision="3" />
+          <Property Name="NewMillCapacity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OldMillCapacity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ReportStartHourMinute" Type="Time" Precision="7" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DisableDailyProcess" Type="Boolean" Nullable="false" />
+          <Property Name="DisableAdd" Type="Boolean" Nullable="false" />
+          <Property Name="DisableUpdate" Type="Boolean" Nullable="false" />
+          <Property Name="AutoReportStartDate" Type="DateTime" Precision="3" />
+          <Property Name="AutoReportEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MasterSeason" Relationship="SugarLabModel.fk_UnitSeason_Season" FromRole="UnitSeason" ToRole="MasterSeason" />
+          <NavigationProperty Name="MasterUnit" Relationship="SugarLabModel.fk_UnitSeason_Code" FromRole="UnitSeason" ToRole="MasterUnit" />
+        </EntityType>
+        <Association Name="fk_UnitSeason_Season">
+          <End Type="SugarLabModel.MasterSeason" Role="MasterSeason" Multiplicity="1" />
+          <End Type="SugarLabModel.UnitSeason" Role="UnitSeason" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterSeason">
+              <PropertyRef Name="SeasonCode" />
+            </Principal>
+            <Dependent Role="UnitSeason">
+              <PropertyRef Name="Season" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitSeason_Code">
+          <End Type="SugarLabModel.MasterUnit" Role="MasterUnit" Multiplicity="1" />
+          <End Type="SugarLabModel.UnitSeason" Role="UnitSeason" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterUnit">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="UnitSeason">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12652,25 +12634,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="UnitSeasons">
-            <EntityTypeMapping TypeName="SugarLabModel.UnitSeason">
-              <MappingFragment StoreEntitySet="UnitSeasons">
-                <ScalarProperty Name="DisableUpdate" ColumnName="DisableUpdate" />
-                <ScalarProperty Name="DisableAdd" ColumnName="DisableAdd" />
-                <ScalarProperty Name="DisableDailyProcess" ColumnName="DisableDailyProcess" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="ReportStartHourMinute" ColumnName="ReportStartHourMinute" />
-                <ScalarProperty Name="OldMillCapacity" ColumnName="OldMillCapacity" />
-                <ScalarProperty Name="NewMillCapacity" ColumnName="NewMillCapacity" />
-                <ScalarProperty Name="CrushingEndDateTime" ColumnName="CrushingEndDateTime" />
-                <ScalarProperty Name="CrushingStartDateTime" ColumnName="CrushingStartDateTime" />
-                <ScalarProperty Name="Season" ColumnName="Season" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ValidationParameters">
             <EntityTypeMapping TypeName="SugarLabModel.ValidationParameter">
               <MappingFragment StoreEntitySet="ValidationParameters">
@@ -16769,7 +16732,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <FunctionImportMapping FunctionImportName="usp_delete_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_delete_hourlyAnalyses" />
           <FunctionImportMapping FunctionImportName="usp_delete_twoHourlyAnalyses" FunctionName="SugarLabModel.Store.usp_delete_twoHourlyAnalyses" />
           <FunctionImportMapping FunctionImportName="usp_update_unitSeasons" FunctionName="SugarLabModel.Store.usp_update_unitSeasons" />
-          <FunctionImportMapping FunctionImportName="usp_update_unitSesasons" FunctionName="SugarLabModel.Store.usp_update_unitSesasons" />
           <FunctionImportMapping FunctionImportName="usp_dashboard_select_processedData" FunctionName="SugarLabModel.Store.usp_dashboard_select_processedData" />
           <FunctionImportMapping FunctionImportName="usp_insert_hourly_millControlData" FunctionName="SugarLabModel.Store.usp_insert_hourly_millControlData" />
           <FunctionImportMapping FunctionImportName="usp_insert_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_insert_hourlyAnalyses" />
@@ -18127,6 +18089,27 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UnitSeasons">
+            <EntityTypeMapping TypeName="SugarLabModel.UnitSeason">
+              <MappingFragment StoreEntitySet="UnitSeasons">
+                <ScalarProperty Name="AutoReportEndDate" ColumnName="AutoReportEndDate" />
+                <ScalarProperty Name="AutoReportStartDate" ColumnName="AutoReportStartDate" />
+                <ScalarProperty Name="DisableUpdate" ColumnName="DisableUpdate" />
+                <ScalarProperty Name="DisableAdd" ColumnName="DisableAdd" />
+                <ScalarProperty Name="DisableDailyProcess" ColumnName="DisableDailyProcess" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ReportStartHourMinute" ColumnName="ReportStartHourMinute" />
+                <ScalarProperty Name="OldMillCapacity" ColumnName="OldMillCapacity" />
+                <ScalarProperty Name="NewMillCapacity" ColumnName="NewMillCapacity" />
+                <ScalarProperty Name="CrushingEndDateTime" ColumnName="CrushingEndDateTime" />
+                <ScalarProperty Name="CrushingStartDateTime" ColumnName="CrushingStartDateTime" />
+                <ScalarProperty Name="Season" ColumnName="Season" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

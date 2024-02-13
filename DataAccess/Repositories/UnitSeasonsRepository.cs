@@ -188,15 +188,17 @@ namespace DataAccess.Repositories
                     parameters.Add(new SqlParameter("disableDailyProcess",data.DisableDailyProcess));
                     parameters.Add(new SqlParameter("disableAdd", data.DisableAdd));
                     parameters.Add(new SqlParameter("disableUpdate", data.DisableUpdate));
+                    parameters.Add(new SqlParameter("autoReportStartDate", data.AutoReportStartDate));
+                    parameters.Add(new SqlParameter("autoReportEndDate", data.AutoReportEndDate));
 
                     _db.Database.ExecuteSqlCommand("EXEC usp_update_unitSeasons @id, @unit_code, @season_code, @crushing_start_datetime, @crushing_end_datetime" +
-                        ", @new_mill_capacity, @old_mill_capacity, @report_start_hourMinuete, @disableDailyProcess, @disableAdd, @disableUpdate", parameters.ToArray());
+                        ", @new_mill_capacity, @old_mill_capacity, @report_start_hourMinuete, @disableDailyProcess, @disableAdd, @disableUpdate, @autoReportStartDate, @autoReportEndDate", parameters.ToArray());
                     return true;
                 }
             }
             catch(Exception ex)
             {
-              throw new Exception(ex.Message);
+              new Exception(ex.Message);
             }
             return false;
         }

@@ -27,6 +27,8 @@ namespace DataAccess
         public bool DisableDailyProcess { get; set; }
         public bool DisableAdd { get; set; }
         public bool DisableUpdate { get; set; }
+        public Nullable<System.DateTime> AutoReportStartDate { get; set; }
+        public Nullable<System.DateTime> AutoReportEndDate { get; set; }
     
         public virtual MasterSeason MasterSeason { get; set; }
         public virtual MasterUnit MasterUnit { get; set; }

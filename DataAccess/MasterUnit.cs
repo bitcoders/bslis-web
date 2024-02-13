@@ -23,7 +23,6 @@ namespace DataAccess
             this.MeltingAnalyses = new HashSet<MeltingAnalys>();
             this.MolassesAnalyses = new HashSet<MolassesAnalys>();
             this.UserRights = new HashSet<UserRight>();
-            this.UnitSeasons = new HashSet<UnitSeason>();
             this.ValidationParameters = new HashSet<ValidationParameter>();
             this.PeriodicalStocks = new HashSet<PeriodicalStock>();
             this.Villages = new HashSet<Village>();
@@ -31,6 +30,7 @@ namespace DataAccess
             this.MasterUsers = new HashSet<MasterUser>();
             this.DataAdjustments = new HashSet<DataAdjustment>();
             this.DailyAnalyses = new HashSet<DailyAnalys>();
+            this.UnitSeasons = new HashSet<UnitSeason>();
         }
     
         public int Id { get; set; }
@@ -73,8 +73,6 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRight> UserRights { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnitSeason> UnitSeasons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ValidationParameter> ValidationParameters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PeriodicalStock> PeriodicalStocks { get; set; }
@@ -88,5 +86,7 @@ namespace DataAccess
         public virtual ICollection<DataAdjustment> DataAdjustments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DailyAnalys> DailyAnalyses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnitSeason> UnitSeasons { get; set; }
     }
 }

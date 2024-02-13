@@ -17,8 +17,8 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MasterSeason()
         {
-            this.UnitSeasons = new HashSet<UnitSeason>();
             this.PeriodicalStocks = new HashSet<PeriodicalStock>();
+            this.UnitSeasons = new HashSet<UnitSeason>();
         }
     
         public int id { get; set; }
@@ -29,8 +29,8 @@ namespace DataAccess
         public string CreatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UnitSeason> UnitSeasons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PeriodicalStock> PeriodicalStocks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnitSeason> UnitSeasons { get; set; }
     }
 }
