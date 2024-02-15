@@ -151,5 +151,43 @@ namespace LitmusWeb.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ActionName("Add")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPost(ReportDetailsModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                ReportDetail reportDetail = new ReportDetail()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Formats = model.Formats,
+                    IsActive = model.IsActive,
+                    CreatedBy = Session["UserCode"].ToString(),
+                    ReportSchemaCode = model.ReportSchemaCode,
+                    ReportCategory = model.ReportCategory,
+                    IsTemplateBased = model.IsTemplateBased,
+                    TemplatePath = model.TemplatePath,
+                    TemplateFileName = model.TemplateFileName,
+                    NoOfPages = model.NoOfPages,
+                    AdminOnly = model.AdminOnly,
+                    FileGenerationLocation = model.FileGenerationLocation,
+                    AllowAutoGenerate = model.AllowAutoGenerate
+                };
+                bool result = repository.AddReport(reportDetail);
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(model);
+        }
     }
 }

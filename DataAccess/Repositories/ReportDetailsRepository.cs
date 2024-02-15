@@ -132,6 +132,46 @@ namespace DataAccess.Repositories
                 return false;
             }
         }
+
+        /// <summary>
+        /// Add Report Details using Stored Proc which will generate report code it-self
+        /// </summary>
+        /// <param name="rd"></param>
+        /// <returns></returns>
+        public bool AddReport(ReportDetail rd)
+        {
+            if(rd == null) return false;
+            else
+            {
+                var successParam = new SqlParameter("@success", SqlDbType.Bit);
+                successParam.Direction = ParameterDirection.Output;
+
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@name", rd.Name));
+                parameters.Add(new SqlParameter("@description", rd.Description));
+                parameters.Add(new SqlParameter("@format", rd.Formats));
+                parameters.Add(new SqlParameter("@isActive", rd.IsActive));
+                parameters.Add(new SqlParameter("@createdBy", rd.CreatedBy));
+                parameters.Add(new SqlParameter("@reportSchemaCode", rd.ReportSchemaCode));
+                parameters.Add(new SqlParameter("@reportCategory", rd.ReportCategory));
+                parameters.Add(new SqlParameter("@isTemplateBased", rd.IsTemplateBased));
+                parameters.Add(new SqlParameter("@templatePath", rd.TemplatePath ?? (object)DBNull.Value));
+                parameters.Add(new SqlParameter("@templateFileName", rd.TemplateFileName ?? (object)DBNull.Value));
+                parameters.Add(new SqlParameter("@fileGenerationLocation", rd.FileGenerationLocation ?? (object)DBNull.Value));
+                parameters.Add(new SqlParameter("@IsAdminOnly", rd.AdminOnly));
+                parameters.Add(new SqlParameter("@AllowAutoGenerate", rd.AllowAutoGenerate));
+                parameters.Add(successParam);
+                // Execute the stored procedure
+                using(Db)
+                {
+                    Db.Database.ExecuteSqlCommand("EXEC usp_insert_reportDetails @name, @description, @format, @isActive, @createdBy, @reportSchemaCode, @reportCategory, @isTemplateBased, @templatePath, @templateFileName, @fileGenerationLocation, @IsAdminOnly, @AllowAutoGenerate , @success OUTPUT", parameters.ToArray()
+                                    );
+                }
+
+                // Check the output parameter to see if the update was successful
+                return (bool)successParam.Value;
+            }
+        }
         public ReportDetail GetReportDetails(int id)
         {
             ReportDetail entity = new ReportDetail();

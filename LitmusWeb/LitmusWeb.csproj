@@ -7245,6 +7245,7 @@
     <Content Include="Views\HourlyAnalysis\EditMillControlData.cshtml" />
     <Content Include="Views\ReportDetails\Index.cshtml" />
     <Content Include="Views\ReportDetails\Edit.cshtml" />
+    <Content Include="Views\ReportDetails\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,10 +13,9 @@ namespace LitmusWeb.Models
         }
         [DisplayName("Code")]
         public int Code { get; set; }
-
+        
         [DisplayName("Report Name")]
-
-        [Required]
+        [Required(ErrorMessage = "* Required!")]
         public string Name { get; set; }
         [DisplayName("Description")]
         public string Description { get; set; }
@@ -29,6 +28,7 @@ namespace LitmusWeb.Models
         [DisplayName("Report Category")]
         public string ReportCategory { get; set; }
 
+        [Required(ErrorMessage = "* Required!")]
         [DisplayName("Report Schema Code")]
         public Nullable<byte> ReportSchemaCode { get; set; }
 
@@ -50,8 +50,8 @@ namespace LitmusWeb.Models
 
         [DisplayName("For Admin Only")]
         public bool AdminOnly { get; set; }
-
-        [Display(Name = "Report Generation Location")]
+        [Required(ErrorMessage ="* Required!")]
+        [Display(Name = "Report Generation Location/Folder")]
         public string FileGenerationLocation { get; set; }
 
         [Display(Name = "Auto Generate Report")]

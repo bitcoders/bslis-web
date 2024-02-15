@@ -1,0 +1,141 @@
+﻿@model LitmusWeb.Models.ReportDetailsModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        @using (Html.BeginForm("Add", "ReportDetails", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body shadow">
+                        <div class="card-title">
+                            <h4> Report Details</h4>
+                            @Html.ActionLink("Back To List", "Index", new { }, new { @class = "btn btn-primary btn-sm pull-right" })
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.Name, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.Name, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.Name, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.Formats, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(temp => temp.Formats, new List<SelectListItem> {
+                                            new SelectListItem {Text = "Excel",Value="Excel",},
+                                            new SelectListItem{ Text = "PDF", Value = "pdf",},
+                                            new SelectListItem{ Text = "Text", Value = "Text",},
+                                        }, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(temp => temp.Formats, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.ReportSchemaCode, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.ReportSchemaCode, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.ReportSchemaCode, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.ReportCategory, htmlAttributes: new { @class = "col-form-label" })
+                                        @*@Html.EditorFor(temp => temp.ReportCategory, new { htmlAttributes = new { @class = "form-control " } })*@
+                                        @Html.DropDownListFor(temp => temp.ReportCategory, new List<SelectListItem>
+                                   {
+                                       new SelectListItem{Text = "Daily", Value = "Daily" },
+                                       new SelectListItem {Text = "Periodical", Value = "Periodical"}
+                                   }, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(temp => temp.ReportCategory, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.TemplatePath, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.TemplatePath, new { htmlAttributes = new { @class = "form-control ", @autofocus = "true" } })
+                                        @Html.ValidationMessageFor(temp => temp.TemplatePath, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                        @Html.LabelFor(temp => temp.TemplateFileName, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.TemplateFileName, new { htmlAttributes = new { @class = "form-control " } })
+                                        @Html.ValidationMessageFor(temp => temp.TemplateFileName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.FileGenerationLocation, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.EditorFor(temp => temp.FileGenerationLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(temp => temp.FileGenerationLocation, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.IsActive, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(temp => temp.IsActive, new SelectList(new[] {
+                                        new {Value = true, Text = "Yes"},
+                                        new {Value = false, Text = "No"},
+                                        }, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(temp => temp.IsTemplateBased, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                        @Html.LabelFor(temp => temp.IsTemplateBased, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(temp => temp.IsTemplateBased, new SelectList(new[] {
+                                            new {Value = true, Text = "Yes"},
+                                            new {Value = false, Text = "No"},
+                                            }, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(temp => temp.IsTemplateBased, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @Html.LabelFor(temp => temp.AdminOnly, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(temp => temp.AdminOnly, new SelectList(new[] {
+                                                new {Value = true, Text = "Yes"},
+                                                new {Value = false, Text = "No"},
+                                                }, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(temp => temp.AdminOnly, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                        @Html.LabelFor(temp => temp.AllowAutoGenerate, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.DropDownListFor(temp => temp.AllowAutoGenerate, new SelectList(new[] {
+                                        new {Value = true, Text = "Yes"},
+                                        new {Value = false, Text = "No"},
+                                        }, "Value", "Text"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(temp => temp.AllowAutoGenerate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        @Html.LabelFor(temp => temp.Description, htmlAttributes: new { @class = "col-form-label" })
+                                        @Html.TextAreaFor(temp => temp.Description, htmlAttributes: new { rows = "10", cols = "12", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 mt-3 ">
+                                        <button class=" btn btn-success float-right" type="submit"><i class="fa fa-save"></i> Create Report</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <script>
+        $("#Name").on('change focusout keyup', function () {
+            var baseAddress = "~/ReportDownloads/";
+            var sanitizedValue = $(this).val().replace(/[^a-zA-Z0-9]/g, '');
+            $("#FileGenerationLocation").val(baseAddress + sanitizedValue + "/")
+        });
+    </script>
+
+
+
+
