@@ -64,7 +64,6 @@ namespace DataAccess
         public virtual DbSet<AuditTable> AuditTables { get; set; }
         public virtual DbSet<Stoppage> Stoppages { get; set; }
         public virtual DbSet<PeriodicalStock> PeriodicalStocks { get; set; }
-        public virtual DbSet<ReportDetail> ReportDetails { get; set; }
         public virtual DbSet<ProcessedAdditionalData> ProcessedAdditionalDatas { get; set; }
         public virtual DbSet<LedgerLog> LedgerLogs { get; set; }
         public virtual DbSet<StoppageType> StoppageTypes { get; set; }
@@ -90,6 +89,7 @@ namespace DataAccess
         public virtual DbSet<DataAdjustment> DataAdjustments { get; set; }
         public virtual DbSet<DailyAnalys> DailyAnalyses { get; set; }
         public virtual DbSet<UnitSeason> UnitSeasons { get; set; }
+        public virtual DbSet<ReportDetail> ReportDetails { get; set; }
     
         public virtual int Proc_Get_MassecuiteAnalyses(Nullable<int> unit_code, Nullable<int> season_code, Nullable<int> param_type_code, string transaction_date, string transaction_time)
         {
@@ -1641,6 +1641,120 @@ namespace DataAccess
                 new ObjectParameter("last_season_data", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> usp_insert_reportDetails(string name, string description, string format, Nullable<bool> isActive, string createdBy, Nullable<int> reportSchemaCode, string reportCategory, Nullable<bool> isTemplateBased, string templatePath, string templateFileName, string fileGenerationLocation, Nullable<bool> isAdminOnly, Nullable<bool> allowAutoGenerate)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var formatParameter = format != null ?
+                new ObjectParameter("format", format) :
+                new ObjectParameter("format", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("isActive", isActive) :
+                new ObjectParameter("isActive", typeof(bool));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("createdBy", createdBy) :
+                new ObjectParameter("createdBy", typeof(string));
+    
+            var reportSchemaCodeParameter = reportSchemaCode.HasValue ?
+                new ObjectParameter("reportSchemaCode", reportSchemaCode) :
+                new ObjectParameter("reportSchemaCode", typeof(int));
+    
+            var reportCategoryParameter = reportCategory != null ?
+                new ObjectParameter("reportCategory", reportCategory) :
+                new ObjectParameter("reportCategory", typeof(string));
+    
+            var isTemplateBasedParameter = isTemplateBased.HasValue ?
+                new ObjectParameter("isTemplateBased", isTemplateBased) :
+                new ObjectParameter("isTemplateBased", typeof(bool));
+    
+            var templatePathParameter = templatePath != null ?
+                new ObjectParameter("templatePath", templatePath) :
+                new ObjectParameter("templatePath", typeof(string));
+    
+            var templateFileNameParameter = templateFileName != null ?
+                new ObjectParameter("templateFileName", templateFileName) :
+                new ObjectParameter("templateFileName", typeof(string));
+    
+            var fileGenerationLocationParameter = fileGenerationLocation != null ?
+                new ObjectParameter("fileGenerationLocation", fileGenerationLocation) :
+                new ObjectParameter("fileGenerationLocation", typeof(string));
+    
+            var isAdminOnlyParameter = isAdminOnly.HasValue ?
+                new ObjectParameter("IsAdminOnly", isAdminOnly) :
+                new ObjectParameter("IsAdminOnly", typeof(bool));
+    
+            var allowAutoGenerateParameter = allowAutoGenerate.HasValue ?
+                new ObjectParameter("AllowAutoGenerate", allowAutoGenerate) :
+                new ObjectParameter("AllowAutoGenerate", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_insert_reportDetails", nameParameter, descriptionParameter, formatParameter, isActiveParameter, createdByParameter, reportSchemaCodeParameter, reportCategoryParameter, isTemplateBasedParameter, templatePathParameter, templateFileNameParameter, fileGenerationLocationParameter, isAdminOnlyParameter, allowAutoGenerateParameter);
+        }
+    
+        public virtual int usp_update_reportDetails(Nullable<int> report_code, string name, string description, string format, Nullable<bool> isActive, Nullable<int> reportSchemaCode, string reportCategory, Nullable<bool> isTemplateBased, string templatePath, string templateFileName, string fileGenerationLocation, Nullable<bool> isAdminOnly, Nullable<bool> allowAutoGenerate)
+        {
+            var report_codeParameter = report_code.HasValue ?
+                new ObjectParameter("report_code", report_code) :
+                new ObjectParameter("report_code", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var formatParameter = format != null ?
+                new ObjectParameter("format", format) :
+                new ObjectParameter("format", typeof(string));
+    
+            var isActiveParameter = isActive.HasValue ?
+                new ObjectParameter("isActive", isActive) :
+                new ObjectParameter("isActive", typeof(bool));
+    
+            var reportSchemaCodeParameter = reportSchemaCode.HasValue ?
+                new ObjectParameter("reportSchemaCode", reportSchemaCode) :
+                new ObjectParameter("reportSchemaCode", typeof(int));
+    
+            var reportCategoryParameter = reportCategory != null ?
+                new ObjectParameter("reportCategory", reportCategory) :
+                new ObjectParameter("reportCategory", typeof(string));
+    
+            var isTemplateBasedParameter = isTemplateBased.HasValue ?
+                new ObjectParameter("isTemplateBased", isTemplateBased) :
+                new ObjectParameter("isTemplateBased", typeof(bool));
+    
+            var templatePathParameter = templatePath != null ?
+                new ObjectParameter("templatePath", templatePath) :
+                new ObjectParameter("templatePath", typeof(string));
+    
+            var templateFileNameParameter = templateFileName != null ?
+                new ObjectParameter("templateFileName", templateFileName) :
+                new ObjectParameter("templateFileName", typeof(string));
+    
+            var fileGenerationLocationParameter = fileGenerationLocation != null ?
+                new ObjectParameter("fileGenerationLocation", fileGenerationLocation) :
+                new ObjectParameter("fileGenerationLocation", typeof(string));
+    
+            var isAdminOnlyParameter = isAdminOnly.HasValue ?
+                new ObjectParameter("IsAdminOnly", isAdminOnly) :
+                new ObjectParameter("IsAdminOnly", typeof(bool));
+    
+            var allowAutoGenerateParameter = allowAutoGenerate.HasValue ?
+                new ObjectParameter("AllowAutoGenerate", allowAutoGenerate) :
+                new ObjectParameter("AllowAutoGenerate", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_reportDetails", report_codeParameter, nameParameter, descriptionParameter, formatParameter, isActiveParameter, reportSchemaCodeParameter, reportCategoryParameter, isTemplateBasedParameter, templatePathParameter, templateFileNameParameter, fileGenerationLocationParameter, isAdminOnlyParameter, allowAutoGenerateParameter);
         }
     }
 }

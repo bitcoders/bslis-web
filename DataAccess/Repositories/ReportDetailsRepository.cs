@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using DataAccess.Interfaces;
 using System.Data.Entity.Validation;
 using DataAccess.Repositories;
+using System.Data.SqlClient;
+using System.Data;
+using Org.BouncyCastle.Asn1.Crmf;
 
 namespace DataAccess.Repositories
 {
@@ -45,6 +48,11 @@ namespace DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// EditReportDetail method is used by the API controller 
+        /// </summary>
+        /// <param name="reportDetail"></param>
+        /// <returns></returns>
         public bool EditReportDetail(ReportDetail reportDetail)
         {
             var report = Db.ReportDetails.Where(x => x.Code == reportDetail.Code).FirstOrDefault();
@@ -80,6 +88,50 @@ namespace DataAccess.Repositories
             return false;
         }
 
+        /// <summary>
+        /// Edit is used by web form 
+        /// </summary>
+        /// <param name="reportDetails"></param>
+        /// <returns></returns>
+        public bool Edit(ReportDetail rd)
+        {
+            if (rd == null)
+            {
+                return false;
+            }
+            try
+            {
+                var successParam = new SqlParameter("@success", SqlDbType.Bit);
+                successParam.Direction = ParameterDirection.Output;
+
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@report_code", rd.Code));
+                parameters.Add(new SqlParameter("@name", rd.Name));
+                parameters.Add(new SqlParameter("@description", rd.Description));
+                parameters.Add(new SqlParameter("@format", rd.Formats));
+                parameters.Add(new SqlParameter("@isActive", rd.IsActive));
+                parameters.Add(new SqlParameter("@reportSchemaCode", rd.ReportSchemaCode));
+                parameters.Add(new SqlParameter("@reportCategory", rd.ReportCategory));
+                parameters.Add(new SqlParameter("@isTemplateBased", rd.IsTemplateBased));
+                parameters.Add(new SqlParameter("@templatePath", rd.TemplatePath ?? (object)DBNull.Value));
+                parameters.Add(new SqlParameter("@templateFileName", rd.TemplateFileName ?? (object)DBNull.Value));
+                parameters.Add(new SqlParameter("@fileGenerationLocation", rd.FileGenerationLocation ?? (object)DBNull.Value));
+                parameters.Add(new SqlParameter("@IsAdminOnly", rd.AdminOnly));
+            parameters.Add(new SqlParameter("@AllowAutoGenerate", rd.AllowAutoGenerate));
+                parameters.Add(successParam);
+                // Execute the stored procedure
+                Db.Database.ExecuteSqlCommand("EXEC usp_update_reportDetails @report_code, @name, @description, @format, @isActive, @reportSchemaCode, @reportCategory, @isTemplateBased, @templatePath, @templateFileName, @fileGenerationLocation, @IsAdminOnly, @AllowAutoGenerate , @success OUTPUT" , parameters.ToArray()
+                );
+
+                // Check the output parameter to see if the update was successful
+                return (bool)successParam.Value;
+
+            }
+            catch(Exception ex) {
+                new Exception(ex.Message);
+                return false;
+            }
+        }
         public ReportDetail GetReportDetails(int id)
         {
             ReportDetail entity = new ReportDetail();
@@ -103,13 +155,26 @@ namespace DataAccess.Repositories
             List<ReportDetail> reportDetails = null;
             try
             {
-                reportDetails = Db.ReportDetails.Where(x => x.IsActive == true).ToList();
+                reportDetails = Db.ReportDetails.ToList();
                 return  reportDetails;
             }
             catch(Exception ex)
             {
                 SaveExceptionLogs(ex);
                 return reportDetails;
+            }
+        }
+
+        public ReportDetail GetReportDetailById(int id)
+        {
+            try
+            {
+                return Db.ReportDetails.Where(x=>x.Code == id).FirstOrDefault();
+            }
+            catch(Exception ex) 
+            {
+                new Exception(ex.Message);
+                return null;
             }
         }
 

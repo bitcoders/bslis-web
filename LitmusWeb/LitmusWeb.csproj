@@ -7243,6 +7243,8 @@
     <Content Include="Views\HourlyAnalysis\_PartialTabOneIndex.cshtml" />
     <Content Include="Views\HourlyAnalysis\_PartialTabTwoIndex.cshtml" />
     <Content Include="Views\HourlyAnalysis\EditMillControlData.cshtml" />
+    <Content Include="Views\ReportDetails\Index.cshtml" />
+    <Content Include="Views\ReportDetails\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

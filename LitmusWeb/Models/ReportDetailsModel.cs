@@ -47,6 +47,15 @@ namespace LitmusWeb.Models
 
         [DisplayName("No of Pages")]
         public Nullable<int> NoOfPages { get; set; }
+
+        [DisplayName("For Admin Only")]
+        public bool AdminOnly { get; set; }
+
+        [Display(Name = "Report Generation Location")]
+        public string FileGenerationLocation { get; set; }
+
+        [Display(Name = "Auto Generate Report")]
+        public bool AllowAutoGenerate { get; set; }
         public virtual ReportSchemaModel ReportSchemaModel { get; set; }
     }
 }

@@ -1430,6 +1430,7 @@ warning 6002: The table/view 'uat-Sugarlab.dbo.NotificationsTickers' does not ha
           <Property Name="NoOfPages" Type="int" />
           <Property Name="AdminOnly" Type="bit" Nullable="false" />
           <Property Name="FileGenerationLocation" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="AllowAutoGenerate" Type="bit" />
         </EntityType>
         <EntityType Name="ReportSchema">
           <Key>
@@ -3904,6 +3905,21 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Parameter Name="inserted_rows" Type="int" Mode="InOut" />
           <Parameter Name="error_message" Type="nvarchar(max)" Mode="InOut" />
         </Function>
+        <Function Name="usp_insert_reportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="format" Type="nvarchar" Mode="In" />
+          <Parameter Name="isActive" Type="bit" Mode="In" />
+          <Parameter Name="createdBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="reportSchemaCode" Type="int" Mode="In" />
+          <Parameter Name="reportCategory" Type="nvarchar" Mode="In" />
+          <Parameter Name="isTemplateBased" Type="bit" Mode="In" />
+          <Parameter Name="templatePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="templateFileName" Type="nvarchar" Mode="In" />
+          <Parameter Name="fileGenerationLocation" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsAdminOnly" Type="bit" Mode="In" />
+          <Parameter Name="AllowAutoGenerate" Type="bit" Mode="In" />
+        </Function>
         <Function Name="usp_select_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="unit_code" Type="int" Mode="In" />
           <Parameter Name="entry_date" Type="datetime" Mode="In" />
@@ -3947,6 +3963,21 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Parameter Name="mill_rpm_three" Type="numeric" Mode="In" />
           <Parameter Name="mill_rpm_four" Type="numeric" Mode="In" />
           <Parameter Name="mill_rpm_five" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="usp_update_reportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="report_code" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="format" Type="nvarchar" Mode="In" />
+          <Parameter Name="isActive" Type="bit" Mode="In" />
+          <Parameter Name="reportSchemaCode" Type="int" Mode="In" />
+          <Parameter Name="reportCategory" Type="nvarchar" Mode="In" />
+          <Parameter Name="isTemplateBased" Type="bit" Mode="In" />
+          <Parameter Name="templatePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="templateFileName" Type="nvarchar" Mode="In" />
+          <Parameter Name="fileGenerationLocation" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsAdminOnly" Type="bit" Mode="In" />
+          <Parameter Name="AllowAutoGenerate" Type="bit" Mode="In" />
         </Function>
         <Function Name="usp_update_unitSeasons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
@@ -4490,15 +4521,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <End Role="MasterUnit" EntitySet="MasterUnits" />
             <End Role="PeriodicalStock" EntitySet="PeriodicalStocks" />
           </AssociationSet>
-          <EntitySet Name="ReportDetails" EntityType="SugarLabModel.ReportDetail" />
-          <AssociationSet Name="fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" Association="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code">
-            <End Role="ReportDetail" EntitySet="ReportDetails" />
-            <End Role="ExcelReportTemplate" EntitySet="ExcelReportTemplates" />
-          </AssociationSet>
-          <AssociationSet Name="fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" Association="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code">
-            <End Role="ReportSchema" EntitySet="ReportSchemas" />
-            <End Role="ReportDetail" EntitySet="ReportDetails" />
-          </AssociationSet>
           <EntitySet Name="ProcessedAdditionalDatas" EntityType="SugarLabModel.ProcessedAdditionalData" />
           <FunctionImport Name="proc_ProcessedAdditionalData">
             <Parameter Name="unit_code" Mode="In" Type="Int32" />
@@ -4856,6 +4878,45 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <End Role="MasterUnit" EntitySet="MasterUnits" />
             <End Role="UnitSeason" EntitySet="UnitSeasons" />
           </AssociationSet>
+          <EntitySet Name="ReportDetails" EntityType="SugarLabModel.ReportDetail" />
+          <AssociationSet Name="fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" Association="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code">
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+            <End Role="ExcelReportTemplate" EntitySet="ExcelReportTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" Association="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code">
+            <End Role="ReportSchema" EntitySet="ReportSchemas" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+          <FunctionImport Name="usp_insert_reportDetails" ReturnType="Collection(Int32)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="format" Mode="In" Type="String" />
+            <Parameter Name="isActive" Mode="In" Type="Boolean" />
+            <Parameter Name="createdBy" Mode="In" Type="String" />
+            <Parameter Name="reportSchemaCode" Mode="In" Type="Int32" />
+            <Parameter Name="reportCategory" Mode="In" Type="String" />
+            <Parameter Name="isTemplateBased" Mode="In" Type="Boolean" />
+            <Parameter Name="templatePath" Mode="In" Type="String" />
+            <Parameter Name="templateFileName" Mode="In" Type="String" />
+            <Parameter Name="fileGenerationLocation" Mode="In" Type="String" />
+            <Parameter Name="IsAdminOnly" Mode="In" Type="Boolean" />
+            <Parameter Name="AllowAutoGenerate" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_update_reportDetails">
+            <Parameter Name="report_code" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="format" Mode="In" Type="String" />
+            <Parameter Name="isActive" Mode="In" Type="Boolean" />
+            <Parameter Name="reportSchemaCode" Mode="In" Type="Int32" />
+            <Parameter Name="reportCategory" Mode="In" Type="String" />
+            <Parameter Name="isTemplateBased" Mode="In" Type="Boolean" />
+            <Parameter Name="templatePath" Mode="In" Type="String" />
+            <Parameter Name="templateFileName" Mode="In" Type="String" />
+            <Parameter Name="fileGenerationLocation" Mode="In" Type="String" />
+            <Parameter Name="IsAdminOnly" Mode="In" Type="Boolean" />
+            <Parameter Name="AllowAutoGenerate" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="proc_ledger_page_one_Result">
           <Property Type="String" Name="text" Nullable="true" />
@@ -6630,52 +6691,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             </Principal>
             <Dependent Role="PeriodicalStock">
               <PropertyRef Name="UnitCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ReportDetail">
-          <Key>
-            <PropertyRef Name="Code" />
-          </Key>
-          <Property Name="Code" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Formats" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="ReportSchemaCode" Type="Byte" />
-          <Property Name="ReportCategory" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="IsTemplateBased" Type="Boolean" />
-          <Property Name="TemplatePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="TemplateFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NoOfPages" Type="Int32" />
-          <NavigationProperty Name="ExcelReportTemplates" Relationship="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" FromRole="ReportDetail" ToRole="ExcelReportTemplate" />
-          <NavigationProperty Name="ReportSchema" Relationship="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" FromRole="ReportDetail" ToRole="ReportSchema" />
-          <Property Name="AdminOnly" Type="Boolean" Nullable="false" />
-          <Property Name="FileGenerationLocation" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="fk_ExcelReportTemplate_ReportCode_ReportDetails_Code">
-          <End Type="SugarLabModel.ReportDetail" Role="ReportDetail" Multiplicity="1" />
-          <End Type="SugarLabModel.ExcelReportTemplate" Role="ExcelReportTemplate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportDetail">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="ExcelReportTemplate">
-              <PropertyRef Name="ReportCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_ReportDetails_ReportSchemaCode_ReportSchema_Code">
-          <End Type="SugarLabModel.ReportSchema" Role="ReportSchema" Multiplicity="0..1" />
-          <End Type="SugarLabModel.ReportDetail" Role="ReportDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ReportSchema">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="ReportDetail">
-              <PropertyRef Name="ReportSchemaCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11642,6 +11657,53 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Formats" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ReportSchemaCode" Type="Byte" />
+          <Property Name="ReportCategory" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="IsTemplateBased" Type="Boolean" />
+          <Property Name="TemplatePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NoOfPages" Type="Int32" />
+          <Property Name="AdminOnly" Type="Boolean" Nullable="false" />
+          <Property Name="FileGenerationLocation" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AllowAutoGenerate" Type="Boolean" />
+          <NavigationProperty Name="ExcelReportTemplates" Relationship="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" FromRole="ReportDetail" ToRole="ExcelReportTemplate" />
+          <NavigationProperty Name="ReportSchema" Relationship="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" FromRole="ReportDetail" ToRole="ReportSchema" />
+        </EntityType>
+        <Association Name="fk_ExcelReportTemplate_ReportCode_ReportDetails_Code">
+          <End Type="SugarLabModel.ReportDetail" Role="ReportDetail" Multiplicity="1" />
+          <End Type="SugarLabModel.ExcelReportTemplate" Role="ExcelReportTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportDetail">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ExcelReportTemplate">
+              <PropertyRef Name="ReportCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ReportDetails_ReportSchemaCode_ReportSchema_Code">
+          <End Type="SugarLabModel.ReportSchema" Role="ReportSchema" Multiplicity="0..1" />
+          <End Type="SugarLabModel.ReportDetail" Role="ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSchema">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ReportSchemaCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -13199,27 +13261,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
                 <ScalarProperty Name="SeasonCode" ColumnName="SeasonCode" />
                 <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReportDetails">
-            <EntityTypeMapping TypeName="SugarLabModel.ReportDetail">
-              <MappingFragment StoreEntitySet="ReportDetails">
-                <ScalarProperty Name="FileGenerationLocation" ColumnName="FileGenerationLocation" />
-                <ScalarProperty Name="AdminOnly" ColumnName="AdminOnly" />
-                <ScalarProperty Name="NoOfPages" ColumnName="NoOfPages" />
-                <ScalarProperty Name="TemplateFileName" ColumnName="TemplateFileName" />
-                <ScalarProperty Name="TemplatePath" ColumnName="TemplatePath" />
-                <ScalarProperty Name="IsTemplateBased" ColumnName="IsTemplateBased" />
-                <ScalarProperty Name="ReportCategory" ColumnName="ReportCategory" />
-                <ScalarProperty Name="ReportSchemaCode" ColumnName="ReportSchemaCode" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Formats" ColumnName="Formats" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -18110,6 +18151,30 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ReportDetails">
+            <EntityTypeMapping TypeName="SugarLabModel.ReportDetail">
+              <MappingFragment StoreEntitySet="ReportDetails">
+                <ScalarProperty Name="AllowAutoGenerate" ColumnName="AllowAutoGenerate" />
+                <ScalarProperty Name="FileGenerationLocation" ColumnName="FileGenerationLocation" />
+                <ScalarProperty Name="AdminOnly" ColumnName="AdminOnly" />
+                <ScalarProperty Name="NoOfPages" ColumnName="NoOfPages" />
+                <ScalarProperty Name="TemplateFileName" ColumnName="TemplateFileName" />
+                <ScalarProperty Name="TemplatePath" ColumnName="TemplatePath" />
+                <ScalarProperty Name="IsTemplateBased" ColumnName="IsTemplateBased" />
+                <ScalarProperty Name="ReportCategory" ColumnName="ReportCategory" />
+                <ScalarProperty Name="ReportSchemaCode" ColumnName="ReportSchemaCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Formats" ColumnName="Formats" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_insert_reportDetails" FunctionName="SugarLabModel.Store.usp_insert_reportDetails" />
+          <FunctionImportMapping FunctionImportName="usp_update_reportDetails" FunctionName="SugarLabModel.Store.usp_update_reportDetails" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

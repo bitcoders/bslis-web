@@ -66,9 +66,6 @@
         <EntityTypeShape EntityType="SugarLabModel.PeriodicalStock" Width="1.5" PointX="8.25" PointY="19.5" />
         <AssociationConnector Association="SugarLabModel.PeriodicalStocks_SeasonCode" />
         <AssociationConnector Association="SugarLabModel.PeriodicalStocks_UnitCode_Fk" />
-        <EntityTypeShape EntityType="SugarLabModel.ReportDetail" Width="1.5" PointX="23.625" PointY="6.375" />
-        <AssociationConnector Association="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" />
-        <AssociationConnector Association="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" />
         <EntityTypeShape EntityType="SugarLabModel.ProcessedAdditionalData" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="SugarLabModel.LedgerLog" Width="1.5" PointX="16.375" PointY="4.75" />
         <EntityTypeShape EntityType="SugarLabModel.StoppageType" Width="1.5" PointX="0.75" PointY="18" />
@@ -107,6 +104,9 @@
         <EntityTypeShape EntityType="SugarLabModel.UnitSeason" Width="1.5" PointX="5.25" PointY="32.875" />
         <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Season" />
         <AssociationConnector Association="SugarLabModel.fk_UnitSeason_Code" />
+        <EntityTypeShape EntityType="SugarLabModel.ReportDetail" Width="1.5" PointX="23.625" PointY="6.375" />
+        <AssociationConnector Association="SugarLabModel.fk_ExcelReportTemplate_ReportCode_ReportDetails_Code" />
+        <AssociationConnector Association="SugarLabModel.fk_ReportDetails_ReportSchemaCode_ReportSchema_Code" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

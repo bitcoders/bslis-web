@@ -35,6 +35,7 @@ namespace DataAccess
         public Nullable<int> NoOfPages { get; set; }
         public bool AdminOnly { get; set; }
         public string FileGenerationLocation { get; set; }
+        public Nullable<bool> AllowAutoGenerate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExcelReportTemplate> ExcelReportTemplates { get; set; }
