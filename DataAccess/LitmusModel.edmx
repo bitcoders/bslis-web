@@ -1386,6 +1386,24 @@ warning 6002: The table/view 'uat-Sugarlab.dbo.NotificationsTickers' does not ha
           <Property Name="Moisture_S30_Qtl" Type="numeric" Precision="10" Scale="2" />
           <Property Name="Moisture_RawSugar" Type="numeric" Precision="10" Scale="3" />
         </EntityType>
+        <EntityType Name="ProcessedDatesForReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UnitCode" Type="int" Nullable="false" />
+          <Property Name="SeasonCode" Type="int" Nullable="false" />
+          <Property Name="ProcessDate" Type="datetime" Nullable="false" />
+          <Property Name="FirstProcessedAt" Type="datetime" Nullable="false" />
+          <Property Name="FirstProcessedBy" Type="nvarchar" MaxLength="35" />
+          <Property Name="RecentProcessedAt" Type="datetime" Nullable="false" />
+          <Property Name="RecentProcessedBy" Type="nvarchar" MaxLength="35" />
+          <Property Name="ProcessCount" Type="int" />
+          <Property Name="IsFinalizedForReport" Type="bit" />
+          <Property Name="DataFinalizedBy" Type="nvarchar" MaxLength="35" />
+          <Property Name="DataFinalizedAt" Type="datetime" />
+          <Property Name="ReportStatusCode" Type="int" />
+        </EntityType>
         <EntityType Name="RegisteredDevices">
           <Key>
             <PropertyRef Name="Code" />
@@ -1410,6 +1428,20 @@ warning 6002: The table/view 'uat-Sugarlab.dbo.NotificationsTickers' does not ha
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="25" />
           <Property Name="DepartmentCode" Type="int" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ReportAwaiting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UnitCode" Type="int" />
+          <Property Name="SeasonCode" Type="int" />
+          <Property Name="ReportCode" Type="int" />
+          <Property Name="ReportForDate" Type="date" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ReportStatusCode" Type="int" Nullable="false" />
+          <Property Name="HasError" Type="bit" Nullable="false" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ReportDetails">
           <Key>
@@ -3905,6 +3937,13 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Parameter Name="inserted_rows" Type="int" Mode="InOut" />
           <Parameter Name="error_message" Type="nvarchar(max)" Mode="InOut" />
         </Function>
+        <Function Name="usp_insert_report_awaiting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UnitCode" Type="int" Mode="In" />
+          <Parameter Name="SeasonCode" Type="int" Mode="In" />
+          <Parameter Name="ReportForDate" Type="datetime" Mode="In" />
+          <Parameter Name="HasError" Type="int" Mode="In" />
+          <Parameter Name="ErrorMessage" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="usp_insert_reportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="nvarchar" Mode="In" />
           <Parameter Name="description" Type="nvarchar" Mode="In" />
@@ -3919,6 +3958,15 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Parameter Name="fileGenerationLocation" Type="nvarchar" Mode="In" />
           <Parameter Name="IsAdminOnly" Type="bit" Mode="In" />
           <Parameter Name="AllowAutoGenerate" Type="bit" Mode="In" />
+          <Parameter Name="success" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="usp_ProcessedDatesForReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="unit_code" Type="int" Mode="In" />
+          <Parameter Name="season_code" Type="int" Mode="In" />
+          <Parameter Name="process_date" Type="datetime" Mode="In" />
+          <Parameter Name="processed_by" Type="nvarchar" Mode="In" />
+          <Parameter Name="status_code" Type="int" Mode="InOut" />
+          <Parameter Name="status_message" Type="nvarchar" Mode="InOut" />
         </Function>
         <Function Name="usp_select_hourlyAnalyses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="unit_code" Type="int" Mode="In" />
@@ -3978,6 +4026,7 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Parameter Name="fileGenerationLocation" Type="nvarchar" Mode="In" />
           <Parameter Name="IsAdminOnly" Type="bit" Mode="In" />
           <Parameter Name="AllowAutoGenerate" Type="bit" Mode="In" />
+          <Parameter Name="success" Type="bit" Mode="InOut" />
         </Function>
         <Function Name="usp_update_unitSeasons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="uniqueidentifier" Mode="In" />
@@ -4040,7 +4089,9 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <EntitySet Name="PasswordResets" EntityType="Self.PasswordResets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PeriodicalStocks" EntityType="Self.PeriodicalStocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcessedAdditionalData" EntityType="Self.ProcessedAdditionalData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessedDatesForReport" EntityType="Self.ProcessedDatesForReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisteredDevices" EntityType="Self.RegisteredDevices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportAwaiting" EntityType="Self.ReportAwaiting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportDetails" EntityType="Self.ReportDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportSchema" EntityType="Self.ReportSchema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportSchemaColumns" EntityType="Self.ReportSchemaColumns" Schema="dbo" store:Type="Tables" />
@@ -4901,6 +4952,7 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="fileGenerationLocation" Mode="In" Type="String" />
             <Parameter Name="IsAdminOnly" Mode="In" Type="Boolean" />
             <Parameter Name="AllowAutoGenerate" Mode="In" Type="Boolean" />
+            <Parameter Name="success" Mode="InOut" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="usp_update_reportDetails">
             <Parameter Name="report_code" Mode="In" Type="Int32" />
@@ -4916,6 +4968,24 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="fileGenerationLocation" Mode="In" Type="String" />
             <Parameter Name="IsAdminOnly" Mode="In" Type="Boolean" />
             <Parameter Name="AllowAutoGenerate" Mode="In" Type="Boolean" />
+            <Parameter Name="success" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="ReportAwaitings" EntityType="SugarLabModel.ReportAwaiting" />
+          <FunctionImport Name="usp_insert_report_awaiting">
+            <Parameter Name="UnitCode" Mode="In" Type="Int32" />
+            <Parameter Name="SeasonCode" Mode="In" Type="Int32" />
+            <Parameter Name="ReportForDate" Mode="In" Type="DateTime" />
+            <Parameter Name="HasError" Mode="In" Type="Int32" />
+            <Parameter Name="ErrorMessage" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ProcessedDatesForReports" EntityType="SugarLabModel.ProcessedDatesForReport" />
+          <FunctionImport Name="usp_ProcessedDatesForReport">
+            <Parameter Name="unit_code" Mode="In" Type="Int32" />
+            <Parameter Name="season_code" Mode="In" Type="Int32" />
+            <Parameter Name="process_date" Mode="In" Type="DateTime" />
+            <Parameter Name="processed_by" Mode="In" Type="String" />
+            <Parameter Name="status_code" Mode="InOut" Type="Int32" />
+            <Parameter Name="status_message" Mode="InOut" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="proc_ledger_page_one_Result">
@@ -11704,6 +11774,38 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ReportAwaiting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UnitCode" Type="Int32" />
+          <Property Name="SeasonCode" Type="Int32" />
+          <Property Name="ReportCode" Type="Int32" />
+          <Property Name="ReportForDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ReportStatusCode" Type="Int32" Nullable="false" />
+          <Property Name="HasError" Type="Boolean" Nullable="false" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProcessedDatesForReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UnitCode" Type="Int32" Nullable="false" />
+          <Property Name="SeasonCode" Type="Int32" Nullable="false" />
+          <Property Name="ProcessDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FirstProcessedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FirstProcessedBy" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="RecentProcessedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RecentProcessedBy" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessCount" Type="Int32" />
+          <Property Name="IsFinalizedForReport" Type="Boolean" />
+          <Property Name="DataFinalizedBy" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="DataFinalizedAt" Type="DateTime" Precision="3" />
+          <Property Name="ReportStatusCode" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18175,6 +18277,42 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_insert_reportDetails" FunctionName="SugarLabModel.Store.usp_insert_reportDetails" />
           <FunctionImportMapping FunctionImportName="usp_update_reportDetails" FunctionName="SugarLabModel.Store.usp_update_reportDetails" />
+          <EntitySetMapping Name="ReportAwaitings">
+            <EntityTypeMapping TypeName="SugarLabModel.ReportAwaiting">
+              <MappingFragment StoreEntitySet="ReportAwaiting">
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="HasError" ColumnName="HasError" />
+                <ScalarProperty Name="ReportStatusCode" ColumnName="ReportStatusCode" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ReportForDate" ColumnName="ReportForDate" />
+                <ScalarProperty Name="ReportCode" ColumnName="ReportCode" />
+                <ScalarProperty Name="SeasonCode" ColumnName="SeasonCode" />
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_insert_report_awaiting" FunctionName="SugarLabModel.Store.usp_insert_report_awaiting" />
+          <EntitySetMapping Name="ProcessedDatesForReports">
+            <EntityTypeMapping TypeName="SugarLabModel.ProcessedDatesForReport">
+              <MappingFragment StoreEntitySet="ProcessedDatesForReport">
+                <ScalarProperty Name="ReportStatusCode" ColumnName="ReportStatusCode" />
+                <ScalarProperty Name="DataFinalizedAt" ColumnName="DataFinalizedAt" />
+                <ScalarProperty Name="DataFinalizedBy" ColumnName="DataFinalizedBy" />
+                <ScalarProperty Name="IsFinalizedForReport" ColumnName="IsFinalizedForReport" />
+                <ScalarProperty Name="ProcessCount" ColumnName="ProcessCount" />
+                <ScalarProperty Name="RecentProcessedBy" ColumnName="RecentProcessedBy" />
+                <ScalarProperty Name="RecentProcessedAt" ColumnName="RecentProcessedAt" />
+                <ScalarProperty Name="FirstProcessedBy" ColumnName="FirstProcessedBy" />
+                <ScalarProperty Name="FirstProcessedAt" ColumnName="FirstProcessedAt" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+                <ScalarProperty Name="SeasonCode" ColumnName="SeasonCode" />
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_ProcessedDatesForReport" FunctionName="SugarLabModel.Store.usp_ProcessedDatesForReport" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

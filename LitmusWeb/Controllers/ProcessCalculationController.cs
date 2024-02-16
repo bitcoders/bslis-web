@@ -3,10 +3,12 @@ using DataAccess;
 using DataAccess.CustomModels;
 using DataAccess.Repositories;
 using DataAccess.Repositories.ReportsRepository;
+using DataAccess.Repositories.AutoReportGeneration;
 using LitmusWeb.Filters;
 using LitmusWeb.Models;
 using System;
 using System.Web.Mvc;
+using System.Web.Services.Discovery;
 namespace LitmusWeb.Controllers
 {
     [CustomAuthorizationFilter("Super Admin", "Unit Admin")]
@@ -29,7 +31,8 @@ namespace LitmusWeb.Controllers
             ledger_data Entity = new ledger_data();
             int baseUnitcode = Convert.ToInt16(Session["BaseUnitCode"]);
             GetUnitDefaultValues(baseUnitcode);
-            Entity = LedgerDataRepository.GetLedgerDataForTheDate(baseUnitcode, ViewBag.CrushingSeason, Convert.ToDateTime(ViewBag.ProcessDate));
+            int crushingSeason = ViewBag.CrushingSeason;
+            Entity = LedgerDataRepository.GetLedgerDataForTheDate(baseUnitcode, crushingSeason, Convert.ToDateTime(ViewBag.ProcessDate));
             if (Entity == null)
             {
                 return View();
@@ -48,6 +51,9 @@ namespace LitmusWeb.Controllers
         [ValidationFilter("create")]
         public ActionResult IndexPost(FormCollection formData)
         {
+            int baseUnitcode = Convert.ToInt16(Session["BaseUnitCode"]);
+
+            GetUnitDefaultValues(baseUnitcode);
             if (Session["UserCode"] == null)
             {
                 TempData["PreviousUrl"] = System.Web.HttpContext.Current.Request.UrlReferrer;
@@ -55,19 +61,17 @@ namespace LitmusWeb.Controllers
             }
             if (this.IsCaptchaValid("Captcha is valid"))
             {
-
-
                 ViewBag.CaptchaErrorMessage = "Success";
-                int baseUnitcode = Convert.ToInt16(Session["BaseUnitCode"]);
-                GetUnitDefaultValues(baseUnitcode);
+                
+                int crushingSeason = ViewBag.CrushingSeason;
 
-                bool result = Repository.ProcessCalculation(baseUnitcode, ViewBag.CrushingSeason, processDate.ToString());
+                bool result = Repository.ProcessCalculation(baseUnitcode, crushingSeason, processDate.ToString());
                 if (!result)
                 {
                     return View("Error");
                 }
                 ledger_data Entity = new ledger_data();
-                Entity = LedgerDataRepository.GetLedgerDataForTheDate(baseUnitcode, ViewBag.CrushingSeason, processDate);
+                Entity = LedgerDataRepository.GetLedgerDataForTheDate(baseUnitcode, crushingSeason, processDate);
                 if (Entity == null)
                 {
                     return View("Error");
@@ -78,6 +82,29 @@ namespace LitmusWeb.Controllers
                     estimated_molasses_percent_cane = Entity.estimated_molasses_percent_cane,
                     fiber_percent_cane = Entity.fiber_percent_cane
                 };
+                /*================ ## InsertProcessedDates ## for auto generate reports ====================*/
+
+                ProcessedDatesForReportRepository reportRepo = new ProcessedDatesForReportRepository();
+                try
+                {
+                    ProcessedDatesForReportParameterModel param = new ProcessedDatesForReportParameterModel()
+                    {
+                        unit_code = baseUnitcode,
+                        season_code = crushingSeason,
+                        process_date = processDate,
+                        processed_by = Session["UserCode"].ToString()
+                    };
+
+                    ResponseStatusModel response = new ResponseStatusModel();
+
+                    response = reportRepo.InsertProcessedDates(param);
+                    TempData["AutoReportStatus"] = response.status_message; // use this to show message on modal window
+                }
+                catch(Exception ex)
+                {
+                    new Exception(ex.Message.ToString());
+                }
+
                 return View(Model);
             }
             else

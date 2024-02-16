@@ -16,7 +16,6 @@
                         </h4>
                         @using (Html.BeginForm("Index", "ProcessCalculation", FormMethod.Post))
                         {
-
                             @Html.AntiForgeryToken()
                             @Html.MathCaptcha()
                             @Html.Hidden("unit_code", Session["BaseUnitCode"]);
@@ -24,13 +23,20 @@
                             @Html.Hidden("process_date", (String)ViewBag.ProcessDate);
 
                             <span class="text-danger">@ViewBag.CaptchaErrorMessage</span><br />
-                            
-                             <div id="data-validation">
-                                 
-                             </div>
+
+                            <div id="data-validation">
+
+                            </div>
                             <div class="text-center">
                                 <button type="button" id="btnProcess" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal-2">Click to Process<i class="mdi mdi-play-circle ml-1"></i></button>
                             </div>
+                            if (TempData["AutoReportStatus"] != null)
+                            {
+                                <div class="alert-error">
+                                    @TempData["AutoReportStatus"]
+
+                                </div>
+                            }
                             <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -47,8 +53,11 @@
                                             <input type="submit" value="Confirm!" class="btn btn-outline-danger" />
                                             <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
                                         </div>
+
                                     </div>
+
                                 </div>
+
                             </div>
 
                             if (Model != null)
@@ -70,5 +79,5 @@
     <script src="~/Scripts/Ajax/ValidationBeforeProcess.js"></script>
     @*<script src="~/Scripts/SugarAnalysisJs/ProcessCalculation.min.js"></script>*@
     <script src="~/Scripts/SugarAnalysisJs/ProcessCalculation1.1.js"></script>
-    
-    
+
+

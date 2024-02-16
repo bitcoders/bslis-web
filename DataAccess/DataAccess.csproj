@@ -170,9 +170,11 @@
     <Compile Include="CustomModels\HourlyAnalysesViewModel.cs" />
     <Compile Include="CustomModels\PasswordResetModel.cs" />
     <Compile Include="CustomModels\ProcessCalculationModel.cs" />
+    <Compile Include="CustomModels\ProcessedDatesForReportParameterModel.cs" />
     <Compile Include="CustomModels\Reports\DailyCrushReportHoModel.cs" />
     <Compile Include="CustomModels\Reports\DashboardProcessedData.cs" />
     <Compile Include="CustomModels\Reports\ReportParameterModel.cs" />
+    <Compile Include="CustomModels\ResponseStatusModel.cs" />
     <Compile Include="CustomModels\ValidationModel.cs" />
     <Compile Include="CustomModels\WeatherRecordsViewModel.cs" />
     <Compile Include="CustomValidations\CheckDateAttribute.cs" />
@@ -400,6 +402,9 @@
     <Compile Include="ProcessedAdditionalData.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProcessedDatesForReport.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_ledger_page_eight_Result.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
@@ -466,6 +471,9 @@
     <Compile Include="RegisteredDevice.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReportAwaiting.cs">
+      <DependentUpon>LitmusModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ReportDetail.cs">
       <DependentUpon>LitmusModel.tt</DependentUpon>
     </Compile>
@@ -485,6 +493,7 @@
     <Compile Include="Repositories\AnalysisRepositories\TwoHourlyAnalysisRepository.cs" />
     <Compile Include="Repositories\AndroidMenueRepository.cs" />
     <Compile Include="Repositories\AuditRepository.cs" />
+    <Compile Include="Repositories\AutoReportGeneration\ProcessedDatesForReportRepository.cs" />
     <Compile Include="Repositories\CaneAnalysisRepository.cs" />
     <Compile Include="Repositories\CaneVarietyRepository.cs" />
     <Compile Include="Repositories\CaneTypeRepository.cs" />

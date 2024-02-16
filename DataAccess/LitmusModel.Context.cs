@@ -90,6 +90,8 @@ namespace DataAccess
         public virtual DbSet<DailyAnalys> DailyAnalyses { get; set; }
         public virtual DbSet<UnitSeason> UnitSeasons { get; set; }
         public virtual DbSet<ReportDetail> ReportDetails { get; set; }
+        public virtual DbSet<ReportAwaiting> ReportAwaitings { get; set; }
+        public virtual DbSet<ProcessedDatesForReport> ProcessedDatesForReports { get; set; }
     
         public virtual int Proc_Get_MassecuiteAnalyses(Nullable<int> unit_code, Nullable<int> season_code, Nullable<int> param_type_code, string transaction_date, string transaction_time)
         {
@@ -1643,7 +1645,7 @@ namespace DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_summarized_report_Result>("proc_summarized_report", unit_codeParameter, season_codeParameter, report_dateParameter, last_season_dataParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> usp_insert_reportDetails(string name, string description, string format, Nullable<bool> isActive, string createdBy, Nullable<int> reportSchemaCode, string reportCategory, Nullable<bool> isTemplateBased, string templatePath, string templateFileName, string fileGenerationLocation, Nullable<bool> isAdminOnly, Nullable<bool> allowAutoGenerate)
+        public virtual ObjectResult<Nullable<int>> usp_insert_reportDetails(string name, string description, string format, Nullable<bool> isActive, string createdBy, Nullable<int> reportSchemaCode, string reportCategory, Nullable<bool> isTemplateBased, string templatePath, string templateFileName, string fileGenerationLocation, Nullable<bool> isAdminOnly, Nullable<bool> allowAutoGenerate, ObjectParameter success)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
@@ -1697,10 +1699,10 @@ namespace DataAccess
                 new ObjectParameter("AllowAutoGenerate", allowAutoGenerate) :
                 new ObjectParameter("AllowAutoGenerate", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_insert_reportDetails", nameParameter, descriptionParameter, formatParameter, isActiveParameter, createdByParameter, reportSchemaCodeParameter, reportCategoryParameter, isTemplateBasedParameter, templatePathParameter, templateFileNameParameter, fileGenerationLocationParameter, isAdminOnlyParameter, allowAutoGenerateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_insert_reportDetails", nameParameter, descriptionParameter, formatParameter, isActiveParameter, createdByParameter, reportSchemaCodeParameter, reportCategoryParameter, isTemplateBasedParameter, templatePathParameter, templateFileNameParameter, fileGenerationLocationParameter, isAdminOnlyParameter, allowAutoGenerateParameter, success);
         }
     
-        public virtual int usp_update_reportDetails(Nullable<int> report_code, string name, string description, string format, Nullable<bool> isActive, Nullable<int> reportSchemaCode, string reportCategory, Nullable<bool> isTemplateBased, string templatePath, string templateFileName, string fileGenerationLocation, Nullable<bool> isAdminOnly, Nullable<bool> allowAutoGenerate)
+        public virtual int usp_update_reportDetails(Nullable<int> report_code, string name, string description, string format, Nullable<bool> isActive, Nullable<int> reportSchemaCode, string reportCategory, Nullable<bool> isTemplateBased, string templatePath, string templateFileName, string fileGenerationLocation, Nullable<bool> isAdminOnly, Nullable<bool> allowAutoGenerate, ObjectParameter success)
         {
             var report_codeParameter = report_code.HasValue ?
                 new ObjectParameter("report_code", report_code) :
@@ -1754,7 +1756,53 @@ namespace DataAccess
                 new ObjectParameter("AllowAutoGenerate", allowAutoGenerate) :
                 new ObjectParameter("AllowAutoGenerate", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_reportDetails", report_codeParameter, nameParameter, descriptionParameter, formatParameter, isActiveParameter, reportSchemaCodeParameter, reportCategoryParameter, isTemplateBasedParameter, templatePathParameter, templateFileNameParameter, fileGenerationLocationParameter, isAdminOnlyParameter, allowAutoGenerateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_reportDetails", report_codeParameter, nameParameter, descriptionParameter, formatParameter, isActiveParameter, reportSchemaCodeParameter, reportCategoryParameter, isTemplateBasedParameter, templatePathParameter, templateFileNameParameter, fileGenerationLocationParameter, isAdminOnlyParameter, allowAutoGenerateParameter, success);
+        }
+    
+        public virtual int usp_insert_report_awaiting(Nullable<int> unitCode, Nullable<int> seasonCode, Nullable<System.DateTime> reportForDate, Nullable<int> hasError, string errorMessage)
+        {
+            var unitCodeParameter = unitCode.HasValue ?
+                new ObjectParameter("UnitCode", unitCode) :
+                new ObjectParameter("UnitCode", typeof(int));
+    
+            var seasonCodeParameter = seasonCode.HasValue ?
+                new ObjectParameter("SeasonCode", seasonCode) :
+                new ObjectParameter("SeasonCode", typeof(int));
+    
+            var reportForDateParameter = reportForDate.HasValue ?
+                new ObjectParameter("ReportForDate", reportForDate) :
+                new ObjectParameter("ReportForDate", typeof(System.DateTime));
+    
+            var hasErrorParameter = hasError.HasValue ?
+                new ObjectParameter("HasError", hasError) :
+                new ObjectParameter("HasError", typeof(int));
+    
+            var errorMessageParameter = errorMessage != null ?
+                new ObjectParameter("ErrorMessage", errorMessage) :
+                new ObjectParameter("ErrorMessage", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_insert_report_awaiting", unitCodeParameter, seasonCodeParameter, reportForDateParameter, hasErrorParameter, errorMessageParameter);
+        }
+    
+        public virtual int usp_ProcessedDatesForReport(Nullable<int> unit_code, Nullable<int> season_code, Nullable<System.DateTime> process_date, string processed_by, ObjectParameter status_code, ObjectParameter status_message)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var process_dateParameter = process_date.HasValue ?
+                new ObjectParameter("process_date", process_date) :
+                new ObjectParameter("process_date", typeof(System.DateTime));
+    
+            var processed_byParameter = processed_by != null ?
+                new ObjectParameter("processed_by", processed_by) :
+                new ObjectParameter("processed_by", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_ProcessedDatesForReport", unit_codeParameter, season_codeParameter, process_dateParameter, processed_byParameter, status_code, status_message);
         }
     }
 }
