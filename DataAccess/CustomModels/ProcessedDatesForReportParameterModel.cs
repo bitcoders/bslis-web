@@ -12,7 +12,5 @@ namespace DataAccess.CustomModels
         public int season_code { get; set; }
         public DateTime process_date { get; set; }
         public string processed_by { get; set; }
-        public int status_code { get; set; }
-        public string status_message { get; set; }
     }
 }

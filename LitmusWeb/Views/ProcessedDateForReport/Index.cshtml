@@ -1,0 +1,140 @@
+﻿@model IEnumerable<LitmusWeb.Models.ProcessedDatesForReportModel>
+@{
+    ViewBag.Title = "Report Finalization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*
+    Ticket ID       Owner           Date            Remarks
+    [BSLIS-44]      Ravi Bhushan    17-02-2024      Report Finalize by Unit Admin
+*@
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Processed Dates</h4>
+                        <div id="js-grid-sortable"></div>
+                        <table class="table table-bordered display nowrap" id="AnalysisDataTable-Scrollable">
+                            <thead class="text-lg-center">
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Code</th>
+                                    <th>Unit Code</th>
+                                    <th>Process Date</th>
+                                    <th>First Processed At</th>
+                                    <th>First Processed By</th>
+                                    <th>Last Processed At</th>
+                                    <th>Last Processed By</th>
+                                    <th>Process Count(s)</th>
+                                    <th>Is Finalized</th>
+                                    <th>Report Finalized By</th>
+                                    <th>Report Finalized At</th>
+                                    <th>Report Status Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @if (item.IsFinalizedForReport != true)
+                                        {
+                                            <td><button class="btn btn-success btnApprove" data-id="@item.Id" id="btnApprove">Approve</button></td>
+                                        }
+                                        else
+                                        {
+                                            <td><button class="btn btn-warning disabled" id="btnApprove"><i class="fa fa-check text-success"></i>Approved</button></td>
+                                        }
+
+                                        <td>@Html.DisplayFor(model => item.Id)</td>
+                                        <td>@Html.DisplayFor(model => item.UnitCode)</td>
+                                        <td>@Html.DisplayFor(model => item.ProcessDate)</td>
+                                        <td>@Html.DisplayFor(model => item.FirstProcessedAt)</td>
+                                        <td>@Html.DisplayFor(model => item.FirstProcessedBy)</td>
+                                        <td>@Html.DisplayFor(model => item.RecentProcessedAt)</td>
+                                        <td>@Html.DisplayFor(model => item.RecentProcessedBy)</td>
+                                        <td>@Html.DisplayFor(model => item.ProcessCount)</td>
+                                        <td>@Html.DisplayFor(model => item.IsFinalizedForReport)</td>
+                                        <td>@Html.DisplayFor(model => item.DataFinalizedBy)</td>
+                                        <td>@Html.DisplayFor(model => item.DataFinalizedAt)</td>
+                                        <td>@Html.DisplayFor(model => item.ReportStatusCode)</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="confirmModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Please type 'approve' to confirm:</p>
+                    <input type="text" id="confirmationInput" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmButton">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+        $(".btnApprove").click(function () {
+            $("#confirmationInput").val(""); // clear the textbox on load of modal
+            var username = '@Session["UserCode"]'; // Retrieve username from session
+            // Detach previously attached click event handler for the confirm button
+            var id = $(this).data("id"); // Get the Id value from data-id attribute
+            $('#confirmButton').off('click');
+            if (username != null) {
+                $('#confirmModal').modal('show'); // Show the modal dialog
+
+                $('#confirmButton').click(function () {
+                    var approval = $('#confirmationInput').val().trim();
+                    if (approval.toLowerCase() === 'approve') {
+                        
+                        console.log(id);
+                        // Perform AJAX call using the extracted Id and username
+                        $.ajax({
+                            url: 'api/ReportSchedularApi/ApproveReportToSchedule',
+                            type: 'POST',
+                            data: { id: id, user_code: username }, // Pass the Id and username as data
+                            success: function (response) {
+                                alert(response.status_message);
+                            },
+                            error: function (xhr, status, error) {
+                                // Handle error
+                            }
+                        });
+                    } else {
+                        alert("Approval failed. Please type 'approve' to confirm.");
+                    }
+                    $('#confirmModal').modal('hide'); // Hide the modal dialog
+                });
+            }
+            else {
+                alert("Invalid User. Login again!");
+            }
+            
+        });
+    });
+
+        //$(document).ready(function () {
+        //    $(document).on("click", ".btnApprove", function () {
+        //        var id = $(this).data("id"); // Retrieve data-id attribute value
+        //        console.log("Clicked button with ID:", id);
+        //        // Your AJAX call and further logic here
+        //    });
+        //});
+    </script>

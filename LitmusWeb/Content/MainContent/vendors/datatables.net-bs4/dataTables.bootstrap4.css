@@ -27,6 +27,7 @@ div.dataTables_wrapper div.dataTables_length label {
 }
 div.dataTables_wrapper div.dataTables_length select {
   width: auto;
+  min-width : 55px; /*BSLIS-48*/
   display: inline-block;
 }
 div.dataTables_wrapper div.dataTables_filter {
@@ -37,11 +38,12 @@ div.dataTables_wrapper div.dataTables_filter label {
   white-space: nowrap;
   text-align: left;
 }
-div.dataTables_wrapper div.dataTables_filter input {
-  margin-left: 0.5em;
-  display: inline-block;
-  width: auto;
-}
+    div.dataTables_wrapper div.dataTables_filter input {
+        margin-left: 0.5em;
+        display: inline-block;
+        width: auto;
+        border: 1px solid #8e44ad; /*BSLIS-48*/
+    }
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 0.85em;
   white-space: nowrap;

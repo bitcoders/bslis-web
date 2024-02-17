@@ -6880,6 +6880,7 @@
     <Compile Include="ApiControllers\OtherRecoveryApiController.cs" />
     <Compile Include="ApiControllers\RegisterUserApiController.cs" />
     <Compile Include="ApiControllers\ReportDetailsController.cs" />
+    <Compile Include="ApiControllers\ReportScheduler\ReportSchedularApiController.cs" />
     <Compile Include="ApiControllers\ReportSchemaColumnController.cs" />
     <Compile Include="ApiControllers\ReportSchemaController.cs" />
     <Compile Include="ApiControllers\StoppageApiController.cs" />
@@ -6925,6 +6926,7 @@
     <Compile Include="Controllers\ProcessCalculationController.cs" />
     <Compile Include="Controllers\RegisteredDevicesController.cs" />
     <Compile Include="Controllers\ReportDetailsController.cs" />
+    <Compile Include="Controllers\ReportScheduler\ProcessedDateForReportController.cs" />
     <Compile Include="Controllers\ReportSchemaColumnController.cs" />
     <Compile Include="Controllers\ReportSchemaController.cs" />
     <Compile Include="Controllers\Reports\DailyHoReports\GroupReportsController.cs" />
@@ -7024,6 +7026,7 @@
     <Compile Include="Models\OtherRecoveryModel.cs" />
     <Compile Include="Models\PasswordResetModel.cs" />
     <Compile Include="Models\PeriodicalStockModel.cs" />
+    <Compile Include="Models\ProcessedDatesForReportModel.cs" />
     <Compile Include="Models\RegisteredDevicesModel.cs" />
     <Compile Include="Models\ReportDetailsModel.cs" />
     <Compile Include="Models\ReportModel\SummarizedReportModel.cs" />
@@ -7246,6 +7249,7 @@
     <Content Include="Views\ReportDetails\Index.cshtml" />
     <Content Include="Views\ReportDetails\Edit.cshtml" />
     <Content Include="Views\ReportDetails\Add.cshtml" />
+    <Content Include="Views\ProcessedDateForReport\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

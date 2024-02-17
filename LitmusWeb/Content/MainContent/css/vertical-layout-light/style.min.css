@@ -25590,13 +25590,13 @@ body.avgrund-active {
 
         .dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting_asc:before, .dataTables_wrapper .dataTable thead .sorting_desc:before, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before {
             content: "\F05D";
-            right: 2.4em;
+            right: 1.4em;
             bottom: 1.5rem;
         }
 
         .dataTables_wrapper .dataTable thead .sorting:after, .dataTables_wrapper .dataTable thead .sorting_asc:after, .dataTables_wrapper .dataTable thead .sorting_desc:after, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
             content: "\F045";
-            right: 2em;
+            right: 1em;
             bottom: 1.1rem;
         }
 

@@ -74,10 +74,10 @@ namespace LitmusWeb.Controllers
 
         public ActionResult Login()
         {
-            if (Session["UserCode"] != null)
-            {
-                RedirectToAction("Index", "Litmus");
-            }
+            //if (Session["UserCode"] != null)
+            //{
+            //    RedirectToAction("Index", "Litmus");
+            //}
             return View("Login");
         }
         [HttpPost]

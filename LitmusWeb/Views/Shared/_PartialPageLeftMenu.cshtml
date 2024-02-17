@@ -123,8 +123,10 @@
                             </a>
                             <div class="collapse" id="ui-UnitParam">
                                 <ul class="nav flex-column sub-menu">
+                                    <li><span class="nav-item">@Html.ActionLink("Finalize Report", "Index", "ProcessedDateForReport", new { }, new { @class = "nav-link", title = "Finalize report to 'schedule' to publish it." })</span></li>
                                     <li><span class="nav-item">@Html.ActionLink("Unit Parametes", "Index", "UnitDailyParameter", new { }, new { @class = "nav-link", title = "Unit Parameters | For Entry Date and Processing Date." })</span></li>
                                     <li><span class="nav-item">@Html.ActionLink("Vehicle Master", "UnitVehicleMaster", "Vehicle", new { }, new { @class = "nav-link", title = "Change Average weight of Vehicle for Yard Postitons" })</span></li>
+                                    
                                 </ul>
                             </div>
                         </li>

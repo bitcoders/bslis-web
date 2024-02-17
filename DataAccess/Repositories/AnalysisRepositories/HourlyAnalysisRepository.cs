@@ -141,7 +141,6 @@ namespace DataAccess.Repositories.AnalysisRepositories
                 {
                     foreach (var d in data)
                     {
-
                         HourlyAnalysesViewModel temp = new HourlyAnalysesViewModel();
 
                         HourlyAnalys h = new HourlyAnalys()

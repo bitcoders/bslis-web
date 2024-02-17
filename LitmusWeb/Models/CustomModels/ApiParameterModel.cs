@@ -115,4 +115,10 @@ namespace LitmusWeb.Models.CustomModels
         public int season_code { get; set; }
         public int history_days { get; set; }
     }
+
+    public class ApiParamaApproveReport
+    {
+        public int id { get; set; }
+        public string user_code { get; set; }
+    }
 }

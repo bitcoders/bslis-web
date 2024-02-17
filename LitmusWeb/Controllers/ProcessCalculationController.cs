@@ -3,7 +3,7 @@ using DataAccess;
 using DataAccess.CustomModels;
 using DataAccess.Repositories;
 using DataAccess.Repositories.ReportsRepository;
-using DataAccess.Repositories.AutoReportGeneration;
+using DataAccess.Repositories.ReportScheduler;
 using LitmusWeb.Filters;
 using LitmusWeb.Models;
 using System;
