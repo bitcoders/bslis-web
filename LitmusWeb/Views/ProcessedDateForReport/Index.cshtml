@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LitmusWeb.Models.ProcessedDatesForReportModel>
+﻿@model IEnumerable<LitmusWeb.Models.CustomModels.usp_select_ProcessedDatesForReportModel>
 @{
     ViewBag.Title = "Report Finalization";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,7 @@
                                 <tr>
                                     <th>Action</th>
                                     <th>Code</th>
-                                    <th>Unit Code</th>
+                                    <th>Unit Name</th>
                                     <th>Process Date</th>
                                     <th>First Processed At</th>
                                     <th>First Processed By</th>
@@ -32,7 +32,7 @@
                                     <th>Is Finalized</th>
                                     <th>Report Finalized By</th>
                                     <th>Report Finalized At</th>
-                                    <th>Report Status Code</th>
+                                    <th>Report Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,7 +50,7 @@
                                         }
 
                                         <td>@Html.DisplayFor(model => item.Id)</td>
-                                        <td>@Html.DisplayFor(model => item.UnitCode)</td>
+                                        <td>@Html.DisplayFor(model => item.Name)</td>
                                         <td>@Html.DisplayFor(model => item.ProcessDate)</td>
                                         <td>@Html.DisplayFor(model => item.FirstProcessedAt)</td>
                                         <td>@Html.DisplayFor(model => item.FirstProcessedBy)</td>
@@ -60,7 +60,7 @@
                                         <td>@Html.DisplayFor(model => item.IsFinalizedForReport)</td>
                                         <td>@Html.DisplayFor(model => item.DataFinalizedBy)</td>
                                         <td>@Html.DisplayFor(model => item.DataFinalizedAt)</td>
-                                        <td>@Html.DisplayFor(model => item.ReportStatusCode)</td>
+                                        <td> @Html.DisplayFor(model => item.Value) <i class="fa fa-info-circle text-warning info-button" title="@item.Description"></i></td>
                                     </tr>
                                 }
 

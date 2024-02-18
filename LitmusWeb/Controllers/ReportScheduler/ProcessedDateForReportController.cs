@@ -7,6 +7,7 @@ using DataAccess.Repositories.ReportScheduler;
 using DataAccess.CustomModels;
 using DataAccess.Repositories;
 using LitmusWeb.Models;
+using LitmusWeb.Models.CustomModels;
 
 namespace LitmusWeb.Controllers.ReportScheduler
 {
@@ -34,13 +35,14 @@ namespace LitmusWeb.Controllers.ReportScheduler
                 var result = _repo.GetProcessedDatesForreport(unit_code, crushing_season);
                 if(result != null)
                 {
-                    List<ProcessedDatesForReportModel> dataList = new List<ProcessedDatesForReportModel>();
+                    List<usp_select_ProcessedDatesForReportModel> dataList = new List<usp_select_ProcessedDatesForReportModel>();
                     foreach (var r in result)
                     {
-                        ProcessedDatesForReportModel d = new ProcessedDatesForReportModel()
+                        usp_select_ProcessedDatesForReportModel d = new usp_select_ProcessedDatesForReportModel()
                         {
-                            Id = r.Id,
+                            Id = r.ID,
                             UnitCode = r.UnitCode,
+                            Name = r.Name,
                             SeasonCode = r.SeasonCode,
                             ProcessDate = r.ProcessDate,
                             FirstProcessedAt = r.FirstProcessedAt,
@@ -48,10 +50,12 @@ namespace LitmusWeb.Controllers.ReportScheduler
                             RecentProcessedAt = r.RecentProcessedAt,
                             RecentProcessedBy = r.RecentProcessedBy,
                             ProcessCount = r.ProcessCount,
-                            IsFinalizedForReport = r.IsFinalizedForReport == null ? false : (bool)r.IsFinalizedForReport,
+                            IsFinalizedForReport = r.IsFinalizedForReport,
                             DataFinalizedBy = r.DataFinalizedBy,
                             DataFinalizedAt = r.DataFinalizedAt,
-                            ReportStatusCode = r.ReportStatusCode
+                            ReportStatusCode = r.ReportStatusCode,
+                            Value = r.Value,
+                            Description = r.Description,
                         };
                         dataList.Add(d);
                     }

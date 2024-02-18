@@ -64,7 +64,7 @@ namespace DataAccess.Repositories.ReportScheduler
             return response;
         }
 
-        public List<ProcessedDatesForReport> GetProcessedDatesForreport(int unit_code, int season_code, int? report_status_code = null, DateTime? process_date = null , bool?  is_finalized_for_report = null )
+        public List<usp_select_ProcessedDatesForReport_Result> GetProcessedDatesForreport(int unit_code, int season_code, int? report_status_code = null, DateTime? process_date = null , bool?  is_finalized_for_report = null )
         {
             try
             {
@@ -72,32 +72,8 @@ namespace DataAccess.Repositories.ReportScheduler
                 {
                     List<usp_select_ProcessedDatesForReport_Result> result = new List<usp_select_ProcessedDatesForReport_Result> ();
                     result = _db.usp_select_ProcessedDatesForReport(unit_code, season_code, report_status_code, process_date, is_finalized_for_report).ToList();
-                    
-                    if(result.Count > 0 )
-                    {
-                        List<ProcessedDatesForReport> dataList = new List<ProcessedDatesForReport>();
-                        foreach(var x in result)
-                        {
-                            ProcessedDatesForReport data = new ProcessedDatesForReport()
-                            {
-                                Id = x.ID,
-                                UnitCode = x.UnitCode,
-                                SeasonCode = x.SeasonCode,
-                                ProcessDate = x.ProcessDate,
-                                FirstProcessedAt = x.FirstProcessedAt,
-                                FirstProcessedBy = x.FirstProcessedBy,
-                                RecentProcessedAt = x.RecentProcessedAt,
-                                RecentProcessedBy = x.RecentProcessedBy,
-                                ProcessCount = x.ProcessCount,
-                                IsFinalizedForReport = x.IsFinalizedForReport,
-                                DataFinalizedBy = x.DataFinalizedBy,
-                                DataFinalizedAt = x.DataFinalizedAt,
-                                ReportStatusCode = x.ReportStatusCode
-                            };
-                            dataList.Add(data);
-                        }
-                        return dataList;
-                    }
+
+                    return result;
                 }
             }
             catch (Exception ex)
@@ -105,7 +81,6 @@ namespace DataAccess.Repositories.ReportScheduler
                 new Exception(ex.Message);
                 return null;
             }
-            return null;
         }
 
         public ResponseStatusModel FinalizeReportById(int id, string finalized_by)

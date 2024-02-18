@@ -6982,6 +6982,7 @@
     <Compile Include="Models\CustomModels\LedgerPrintingModel.cs" />
     <Compile Include="Models\CustomModels\MasterStoppageSubStoppageModel.cs" />
     <Compile Include="Models\CustomModels\PasswordResetViewModel.cs" />
+    <Compile Include="Models\CustomModels\usp_select_ProcessedDatesForReportModel.cs" />
     <Compile Include="Models\CustomModels\ValidationMessageModel.cs" />
     <Compile Include="Models\CustomModels\WebApiHeader.cs" />
     <Compile Include="Models\DailyAnalysisModel.cs" />

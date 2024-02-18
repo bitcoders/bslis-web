@@ -29143,7 +29143,17 @@ div.tagsinput {
     top: 12px;
     background: transparent;
 }
+.info-button {
+    position: relative;
+}
 
+    .info-button i {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        margin-right: 5px; /* Adjust as needed for spacing */
+    }
 #settings-trigger {
     position: fixed;
     bottom: 40px;

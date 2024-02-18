@@ -1813,31 +1813,6 @@ namespace DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_ProcessedDatesForReport", unit_codeParameter, season_codeParameter, process_dateParameter, processed_byParameter, status_code, status_message);
         }
     
-        public virtual ObjectResult<usp_select_ProcessedDatesForReport_Result> usp_select_ProcessedDatesForReport(Nullable<int> unit_code, Nullable<int> season_code, Nullable<int> report_status_code, Nullable<System.DateTime> process_date, Nullable<bool> isFinalizedForReport)
-        {
-            var unit_codeParameter = unit_code.HasValue ?
-                new ObjectParameter("unit_code", unit_code) :
-                new ObjectParameter("unit_code", typeof(int));
-    
-            var season_codeParameter = season_code.HasValue ?
-                new ObjectParameter("season_code", season_code) :
-                new ObjectParameter("season_code", typeof(int));
-    
-            var report_status_codeParameter = report_status_code.HasValue ?
-                new ObjectParameter("report_status_code", report_status_code) :
-                new ObjectParameter("report_status_code", typeof(int));
-    
-            var process_dateParameter = process_date.HasValue ?
-                new ObjectParameter("process_date", process_date) :
-                new ObjectParameter("process_date", typeof(System.DateTime));
-    
-            var isFinalizedForReportParameter = isFinalizedForReport.HasValue ?
-                new ObjectParameter("IsFinalizedForReport", isFinalizedForReport) :
-                new ObjectParameter("IsFinalizedForReport", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_ProcessedDatesForReport_Result>("usp_select_ProcessedDatesForReport", unit_codeParameter, season_codeParameter, report_status_codeParameter, process_dateParameter, isFinalizedForReportParameter);
-        }
-    
         public virtual int usp_finalize_report(Nullable<int> id, string finalized_by, ObjectParameter status_code, ObjectParameter status_message)
         {
             var idParameter = id.HasValue ?
@@ -1862,6 +1837,31 @@ namespace DataAccess
                 new ObjectParameter("entry_date", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalyses_Result>("usp_select_hourlyAnalyses", unit_codeParameter, entry_dateParameter);
+        }
+    
+        public virtual ObjectResult<usp_select_ProcessedDatesForReport_Result> usp_select_ProcessedDatesForReport(Nullable<int> unit_code, Nullable<int> season_code, Nullable<int> report_status_code, Nullable<System.DateTime> process_date, Nullable<bool> isFinalizedForReport)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var season_codeParameter = season_code.HasValue ?
+                new ObjectParameter("season_code", season_code) :
+                new ObjectParameter("season_code", typeof(int));
+    
+            var report_status_codeParameter = report_status_code.HasValue ?
+                new ObjectParameter("report_status_code", report_status_code) :
+                new ObjectParameter("report_status_code", typeof(int));
+    
+            var process_dateParameter = process_date.HasValue ?
+                new ObjectParameter("process_date", process_date) :
+                new ObjectParameter("process_date", typeof(System.DateTime));
+    
+            var isFinalizedForReportParameter = isFinalizedForReport.HasValue ?
+                new ObjectParameter("IsFinalizedForReport", isFinalizedForReport) :
+                new ObjectParameter("IsFinalizedForReport", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_ProcessedDatesForReport_Result>("usp_select_ProcessedDatesForReport", unit_codeParameter, season_codeParameter, report_status_codeParameter, process_dateParameter, isFinalizedForReportParameter);
         }
     }
 }

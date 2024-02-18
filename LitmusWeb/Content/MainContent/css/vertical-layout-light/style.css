@@ -29721,6 +29721,18 @@ div.tagsinput span.tag a {
   -o-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+.info-button {
+    position: relative;
+}
+.info-button i {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    margin-right: 5px; /* Adjust as needed for spacing */
+}
+
+    
 
 #settings-trigger i {
   color: #ffffff;

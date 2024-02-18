@@ -15,16 +15,19 @@ namespace DataAccess
     {
         public int ID { get; set; }
         public int UnitCode { get; set; }
+        public string Name { get; set; }
         public int SeasonCode { get; set; }
         public System.DateTime ProcessDate { get; set; }
         public System.DateTime FirstProcessedAt { get; set; }
         public string FirstProcessedBy { get; set; }
         public System.DateTime RecentProcessedAt { get; set; }
         public string RecentProcessedBy { get; set; }
-        public Nullable<int> ProcessCount { get; set; }
-        public Nullable<bool> IsFinalizedForReport { get; set; }
+        public int ProcessCount { get; set; }
+        public bool IsFinalizedForReport { get; set; }
         public string DataFinalizedBy { get; set; }
         public Nullable<System.DateTime> DataFinalizedAt { get; set; }
         public Nullable<int> ReportStatusCode { get; set; }
+        public string Value { get; set; }
+        public string Description { get; set; }
     }
 }

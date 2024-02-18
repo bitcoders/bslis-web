@@ -5012,13 +5012,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="status_code" Mode="InOut" Type="Int32" />
             <Parameter Name="status_message" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="usp_select_ProcessedDatesForReport" ReturnType="Collection(SugarLabModel.usp_select_ProcessedDatesForReport_Result)">
-            <Parameter Name="unit_code" Mode="In" Type="Int32" />
-            <Parameter Name="season_code" Mode="In" Type="Int32" />
-            <Parameter Name="report_status_code" Mode="In" Type="Int32" />
-            <Parameter Name="process_date" Mode="In" Type="DateTime" />
-            <Parameter Name="IsFinalizedForReport" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="usp_finalize_report">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="finalized_by" Mode="In" Type="String" />
@@ -5028,6 +5021,13 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <FunctionImport Name="usp_select_hourlyAnalyses" ReturnType="Collection(SugarLabModel.usp_select_hourlyAnalyses_Result)">
             <Parameter Name="unit_code" Mode="In" Type="Int32" />
             <Parameter Name="entry_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_select_ProcessedDatesForReport" ReturnType="Collection(SugarLabModel.usp_select_ProcessedDatesForReport_Result)">
+            <Parameter Name="unit_code" Mode="In" Type="Int32" />
+            <Parameter Name="season_code" Mode="In" Type="Int32" />
+            <Parameter Name="report_status_code" Mode="In" Type="Int32" />
+            <Parameter Name="process_date" Mode="In" Type="DateTime" />
+            <Parameter Name="IsFinalizedForReport" Mode="In" Type="Boolean" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="proc_ledger_page_one_Result">
@@ -11785,21 +11785,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Name="DataFinalizedAt" Type="DateTime" Precision="3" />
           <Property Name="ReportStatusCode" Type="Int32" />
         </EntityType>
-        <ComplexType Name="usp_select_ProcessedDatesForReport_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="Int32" Name="UnitCode" Nullable="false" />
-          <Property Type="Int32" Name="SeasonCode" Nullable="false" />
-          <Property Type="DateTime" Name="ProcessDate" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="FirstProcessedAt" Nullable="false" Precision="23" />
-          <Property Type="String" Name="FirstProcessedBy" Nullable="true" MaxLength="35" />
-          <Property Type="DateTime" Name="RecentProcessedAt" Nullable="false" Precision="23" />
-          <Property Type="String" Name="RecentProcessedBy" Nullable="true" MaxLength="35" />
-          <Property Type="Int32" Name="ProcessCount" Nullable="true" />
-          <Property Type="Boolean" Name="IsFinalizedForReport" Nullable="true" />
-          <Property Type="String" Name="DataFinalizedBy" Nullable="true" MaxLength="35" />
-          <Property Type="DateTime" Name="DataFinalizedAt" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="ReportStatusCode" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="usp_select_hourlyAnalyses_Result">
           <Property Type="Int64" Name="id" Nullable="false" />
           <Property Type="Int32" Name="unit_code" Nullable="false" />
@@ -11863,6 +11848,24 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="usp_select_ProcessedDatesForReport_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="UnitCode" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SeasonCode" Nullable="false" />
+          <Property Type="DateTime" Name="ProcessDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FirstProcessedAt" Nullable="false" Precision="23" />
+          <Property Type="String" Name="FirstProcessedBy" Nullable="true" MaxLength="35" />
+          <Property Type="DateTime" Name="RecentProcessedAt" Nullable="false" Precision="23" />
+          <Property Type="String" Name="RecentProcessedBy" Nullable="true" MaxLength="35" />
+          <Property Type="Int32" Name="ProcessCount" Nullable="false" />
+          <Property Type="Boolean" Name="IsFinalizedForReport" Nullable="false" />
+          <Property Type="String" Name="DataFinalizedBy" Nullable="true" MaxLength="35" />
+          <Property Type="DateTime" Name="DataFinalizedAt" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ReportStatusCode" Nullable="true" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -18305,25 +18308,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="usp_ProcessedDatesForReport" FunctionName="SugarLabModel.Store.usp_ProcessedDatesForReport" />
           <FunctionImportMapping FunctionImportName="usp_update_ProcessedDatesForReport" FunctionName="SugarLabModel.Store.usp_update_ProcessedDatesForReport" />
-          <FunctionImportMapping FunctionImportName="usp_select_ProcessedDatesForReport" FunctionName="SugarLabModel.Store.usp_select_ProcessedDatesForReport">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_ProcessedDatesForReport_Result">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
-                <ScalarProperty Name="SeasonCode" ColumnName="SeasonCode" />
-                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
-                <ScalarProperty Name="FirstProcessedAt" ColumnName="FirstProcessedAt" />
-                <ScalarProperty Name="FirstProcessedBy" ColumnName="FirstProcessedBy" />
-                <ScalarProperty Name="RecentProcessedAt" ColumnName="RecentProcessedAt" />
-                <ScalarProperty Name="RecentProcessedBy" ColumnName="RecentProcessedBy" />
-                <ScalarProperty Name="ProcessCount" ColumnName="ProcessCount" />
-                <ScalarProperty Name="IsFinalizedForReport" ColumnName="IsFinalizedForReport" />
-                <ScalarProperty Name="DataFinalizedBy" ColumnName="DataFinalizedBy" />
-                <ScalarProperty Name="DataFinalizedAt" ColumnName="DataFinalizedAt" />
-                <ScalarProperty Name="ReportStatusCode" ColumnName="ReportStatusCode" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_finalize_report" FunctionName="SugarLabModel.Store.usp_finalize_report" />
           <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalyses">
             <ResultMapping>
@@ -18390,6 +18374,28 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
                 <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
                 <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
                 <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_select_ProcessedDatesForReport" FunctionName="SugarLabModel.Store.usp_select_ProcessedDatesForReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_ProcessedDatesForReport_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SeasonCode" ColumnName="SeasonCode" />
+                <ScalarProperty Name="ProcessDate" ColumnName="ProcessDate" />
+                <ScalarProperty Name="FirstProcessedAt" ColumnName="FirstProcessedAt" />
+                <ScalarProperty Name="FirstProcessedBy" ColumnName="FirstProcessedBy" />
+                <ScalarProperty Name="RecentProcessedAt" ColumnName="RecentProcessedAt" />
+                <ScalarProperty Name="RecentProcessedBy" ColumnName="RecentProcessedBy" />
+                <ScalarProperty Name="ProcessCount" ColumnName="ProcessCount" />
+                <ScalarProperty Name="IsFinalizedForReport" ColumnName="IsFinalizedForReport" />
+                <ScalarProperty Name="DataFinalizedBy" ColumnName="DataFinalizedBy" />
+                <ScalarProperty Name="DataFinalizedAt" ColumnName="DataFinalizedAt" />
+                <ScalarProperty Name="ReportStatusCode" ColumnName="ReportStatusCode" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
