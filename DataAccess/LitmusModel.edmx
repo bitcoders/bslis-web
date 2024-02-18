@@ -4880,10 +4880,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="inserted_rows" Mode="InOut" Type="Int32" />
             <Parameter Name="error_message" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="usp_select_hourlyAnalyses" ReturnType="Collection(SugarLabModel.usp_select_hourlyAnalyses_Result)">
-            <Parameter Name="unit_code" Mode="In" Type="Int32" />
-            <Parameter Name="entry_date" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="usp_select_hourlyAnalysesMillControlData" ReturnType="Collection(SugarLabModel.usp_select_hourlyAnalysesMillControlData_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="unit_code" Mode="In" Type="Int32" />
@@ -5028,6 +5024,10 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             <Parameter Name="finalized_by" Mode="In" Type="String" />
             <Parameter Name="status_code" Mode="InOut" Type="Int32" />
             <Parameter Name="status_message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_select_hourlyAnalyses" ReturnType="Collection(SugarLabModel.usp_select_hourlyAnalyses_Result)">
+            <Parameter Name="unit_code" Mode="In" Type="Int32" />
+            <Parameter Name="entry_date" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="proc_ledger_page_one_Result">
@@ -10363,69 +10363,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="Decimal" Name="CaneDiverted" Nullable="false" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="DivertedSyrup" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
-        <ComplexType Name="usp_select_hourlyAnalyses_Result">
-          <Property Type="Int64" Name="id" Nullable="false" />
-          <Property Type="Int32" Name="unit_code" Nullable="false" />
-          <Property Type="Int32" Name="season_code" Nullable="false" />
-          <Property Type="DateTime" Name="entry_Date" Nullable="false" />
-          <Property Type="Int32" Name="entry_time" Nullable="false" />
-          <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
-          <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
-          <Property Type="Int32" Name="juice_total" Nullable="true" />
-          <Property Type="Int32" Name="new_mill_water" Nullable="true" />
-          <Property Type="Int32" Name="old_mill_water" Nullable="true" />
-          <Property Type="Int32" Name="water_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
-          <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
-          <Property Type="Int32" Name="sugar_raw" Nullable="true" />
-          <Property Type="Int32" Name="sugar_bags_total" Nullable="true" />
-          <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int16" Name="standing_truck" Nullable="false" />
-          <Property Type="Int16" Name="standing_trippler" Nullable="false" />
-          <Property Type="Int16" Name="standing_trolley" Nullable="false" />
-          <Property Type="Int16" Name="standing_cart" Nullable="false" />
-          <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
-          <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="export_sugar" Nullable="false" />
-          <Property Type="Int32" Name="MillDataID" Nullable="false" />
-          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
-          <Property Type="DateTime" Name="mill_data_entry_date" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="mill_data_entry_time" Nullable="false" />
-          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="false" />
-          <Property Type="Boolean" Name="mill_washing" Nullable="false" />
-          <Property Type="Boolean" Name="mill_steaming" Nullable="false" />
-          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_one" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_two" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_three" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_four" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_load_five" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_one" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_two" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
-        </ComplexType>
         <ComplexType Name="usp_select_hourlyAnalysesMillControlData_Result">
           <Property Type="Int64" Name="hourly_id" Nullable="true" />
           <Property Type="Int32" Name="hourly_unit_code" Nullable="true" />
@@ -11862,6 +11799,70 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <Property Type="String" Name="DataFinalizedBy" Nullable="true" MaxLength="35" />
           <Property Type="DateTime" Name="DataFinalizedAt" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="ReportStatusCode" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_select_hourlyAnalyses_Result">
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="unit_code" Nullable="false" />
+          <Property Type="Int32" Name="season_code" Nullable="false" />
+          <Property Type="DateTime" Name="entry_Date" Nullable="false" />
+          <Property Type="Int32" Name="entry_time" Nullable="false" />
+          <Property Type="Int32" Name="new_mill_juice" Nullable="true" />
+          <Property Type="Int32" Name="old_mill_juice" Nullable="true" />
+          <Property Type="Int32" Name="juice_total" Nullable="true" />
+          <Property Type="Int32" Name="new_mill_water" Nullable="true" />
+          <Property Type="Int32" Name="old_mill_water" Nullable="true" />
+          <Property Type="Int32" Name="water_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_L_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_M_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S31" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S30" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_S_total" Nullable="true" />
+          <Property Type="Int32" Name="sugar_Biss" Nullable="true" />
+          <Property Type="Int32" Name="sugar_raw" Nullable="true" />
+          <Property Type="Int32" Name="sugar_bags_total" Nullable="true" />
+          <Property Type="String" Name="cooling_trace" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="cooling_pol" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="cooling_ph" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int16" Name="standing_truck" Nullable="false" />
+          <Property Type="Int16" Name="standing_trippler" Nullable="false" />
+          <Property Type="Int16" Name="standing_trolley" Nullable="false" />
+          <Property Type="Int16" Name="standing_cart" Nullable="false" />
+          <Property Type="Decimal" Name="un_crushed_cane" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="crushed_cane" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="cane_diverted_for_syrup" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="diverted_syrup_quantity" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="export_sugar" Nullable="false" />
+          <Property Type="Int32" Name="MillDataID" Nullable="false" />
+          <Property Type="Int64" Name="HourlyAnalysesNo" Nullable="false" />
+          <Property Type="DateTime" Name="mill_data_entry_date" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="mill_data_entry_time" Nullable="false" />
+          <Property Type="Decimal" Name="imbibition_water_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="exhaust_steam_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Boolean" Name="mill_biocide_dosing" Nullable="false" />
+          <Property Type="Boolean" Name="mill_washing" Nullable="false" />
+          <Property Type="Boolean" Name="mill_steaming" Nullable="false" />
+          <Property Type="Decimal" Name="sugar_bags_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_inlet_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="molasses_outlet_temp" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_one" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_two" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_three" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_four" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_hydraulic_pressure_five" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_one" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_two" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_three" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_four" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_load_five" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_one" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_two" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_three" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_four" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="mill_rpm_five" Nullable="false" Precision="10" Scale="2" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -16935,73 +16936,6 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
           <FunctionImportMapping FunctionImportName="usp_dashboard_select_processedData" FunctionName="SugarLabModel.Store.usp_dashboard_select_processedData" />
           <FunctionImportMapping FunctionImportName="usp_insert_hourly_millControlData" FunctionName="SugarLabModel.Store.usp_insert_hourly_millControlData" />
           <FunctionImportMapping FunctionImportName="usp_insert_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_insert_hourlyAnalyses" />
-          <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalyses">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalyses_Result">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
-                <ScalarProperty Name="season_code" ColumnName="season_code" />
-                <ScalarProperty Name="entry_Date" ColumnName="entry_Date" />
-                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
-                <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
-                <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
-                <ScalarProperty Name="juice_total" ColumnName="juice_total" />
-                <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
-                <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
-                <ScalarProperty Name="water_total" ColumnName="water_total" />
-                <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
-                <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
-                <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
-                <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
-                <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
-                <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
-                <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
-                <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
-                <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
-                <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
-                <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
-                <ScalarProperty Name="sugar_bags_total" ColumnName="sugar_bags_total" />
-                <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
-                <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
-                <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
-                <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
-                <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
-                <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
-                <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
-                <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
-                <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
-                <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
-                <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
-                <ScalarProperty Name="MillDataID" ColumnName="MillDataID" />
-                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
-                <ScalarProperty Name="mill_data_entry_date" ColumnName="mill_data_entry_date" />
-                <ScalarProperty Name="mill_data_entry_time" ColumnName="mill_data_entry_time" />
-                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
-                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
-                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
-                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
-                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
-                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
-                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
-                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
-                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
-                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
-                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
-                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
-                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
-                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
-                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
-                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
-                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
-                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
-                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
-                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
-                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
-                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
-                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalysesMillControlData" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalysesMillControlData">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalysesMillControlData_Result">
@@ -18391,6 +18325,74 @@ warning 6035: The relationship 'fk_ValidationParametersCode_ValidationTypesCode'
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_finalize_report" FunctionName="SugarLabModel.Store.usp_finalize_report" />
+          <FunctionImportMapping FunctionImportName="usp_select_hourlyAnalyses" FunctionName="SugarLabModel.Store.usp_select_hourlyAnalyses">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SugarLabModel.usp_select_hourlyAnalyses_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="season_code" ColumnName="season_code" />
+                <ScalarProperty Name="entry_Date" ColumnName="entry_Date" />
+                <ScalarProperty Name="entry_time" ColumnName="entry_time" />
+                <ScalarProperty Name="new_mill_juice" ColumnName="new_mill_juice" />
+                <ScalarProperty Name="old_mill_juice" ColumnName="old_mill_juice" />
+                <ScalarProperty Name="juice_total" ColumnName="juice_total" />
+                <ScalarProperty Name="new_mill_water" ColumnName="new_mill_water" />
+                <ScalarProperty Name="old_mill_water" ColumnName="old_mill_water" />
+                <ScalarProperty Name="water_total" ColumnName="water_total" />
+                <ScalarProperty Name="sugar_bags_L31" ColumnName="sugar_bags_L31" />
+                <ScalarProperty Name="sugar_bags_L30" ColumnName="sugar_bags_L30" />
+                <ScalarProperty Name="sugar_bags_L_total" ColumnName="sugar_bags_L_total" />
+                <ScalarProperty Name="sugar_bags_M31" ColumnName="sugar_bags_M31" />
+                <ScalarProperty Name="sugar_bags_M30" ColumnName="sugar_bags_M30" />
+                <ScalarProperty Name="sugar_bags_M_total" ColumnName="sugar_bags_M_total" />
+                <ScalarProperty Name="sugar_bags_S31" ColumnName="sugar_bags_S31" />
+                <ScalarProperty Name="sugar_bags_S30" ColumnName="sugar_bags_S30" />
+                <ScalarProperty Name="sugar_bags_S_total" ColumnName="sugar_bags_S_total" />
+                <ScalarProperty Name="sugar_Biss" ColumnName="sugar_Biss" />
+                <ScalarProperty Name="sugar_raw" ColumnName="sugar_raw" />
+                <ScalarProperty Name="sugar_bags_total" ColumnName="sugar_bags_total" />
+                <ScalarProperty Name="cooling_trace" ColumnName="cooling_trace" />
+                <ScalarProperty Name="cooling_pol" ColumnName="cooling_pol" />
+                <ScalarProperty Name="cooling_ph" ColumnName="cooling_ph" />
+                <ScalarProperty Name="standing_truck" ColumnName="standing_truck" />
+                <ScalarProperty Name="standing_trippler" ColumnName="standing_trippler" />
+                <ScalarProperty Name="standing_trolley" ColumnName="standing_trolley" />
+                <ScalarProperty Name="standing_cart" ColumnName="standing_cart" />
+                <ScalarProperty Name="un_crushed_cane" ColumnName="un_crushed_cane" />
+                <ScalarProperty Name="crushed_cane" ColumnName="crushed_cane" />
+                <ScalarProperty Name="cane_diverted_for_syrup" ColumnName="cane_diverted_for_syrup" />
+                <ScalarProperty Name="diverted_syrup_quantity" ColumnName="diverted_syrup_quantity" />
+                <ScalarProperty Name="export_sugar" ColumnName="export_sugar" />
+                <ScalarProperty Name="MillDataID" ColumnName="MillDataID" />
+                <ScalarProperty Name="HourlyAnalysesNo" ColumnName="HourlyAnalysesNo" />
+                <ScalarProperty Name="mill_data_entry_date" ColumnName="mill_data_entry_date" />
+                <ScalarProperty Name="mill_data_entry_time" ColumnName="mill_data_entry_time" />
+                <ScalarProperty Name="imbibition_water_temp" ColumnName="imbibition_water_temp" />
+                <ScalarProperty Name="exhaust_steam_temp" ColumnName="exhaust_steam_temp" />
+                <ScalarProperty Name="mill_biocide_dosing" ColumnName="mill_biocide_dosing" />
+                <ScalarProperty Name="mill_washing" ColumnName="mill_washing" />
+                <ScalarProperty Name="mill_steaming" ColumnName="mill_steaming" />
+                <ScalarProperty Name="sugar_bags_temp" ColumnName="sugar_bags_temp" />
+                <ScalarProperty Name="molasses_inlet_temp" ColumnName="molasses_inlet_temp" />
+                <ScalarProperty Name="molasses_outlet_temp" ColumnName="molasses_outlet_temp" />
+                <ScalarProperty Name="mill_hydraulic_pressure_one" ColumnName="mill_hydraulic_pressure_one" />
+                <ScalarProperty Name="mill_hydraulic_pressure_two" ColumnName="mill_hydraulic_pressure_two" />
+                <ScalarProperty Name="mill_hydraulic_pressure_three" ColumnName="mill_hydraulic_pressure_three" />
+                <ScalarProperty Name="mill_hydraulic_pressure_four" ColumnName="mill_hydraulic_pressure_four" />
+                <ScalarProperty Name="mill_hydraulic_pressure_five" ColumnName="mill_hydraulic_pressure_five" />
+                <ScalarProperty Name="mill_load_one" ColumnName="mill_load_one" />
+                <ScalarProperty Name="mill_load_two" ColumnName="mill_load_two" />
+                <ScalarProperty Name="mill_load_three" ColumnName="mill_load_three" />
+                <ScalarProperty Name="mill_load_four" ColumnName="mill_load_four" />
+                <ScalarProperty Name="mill_load_five" ColumnName="mill_load_five" />
+                <ScalarProperty Name="mill_rpm_one" ColumnName="mill_rpm_one" />
+                <ScalarProperty Name="mill_rpm_two" ColumnName="mill_rpm_two" />
+                <ScalarProperty Name="mill_rpm_three" ColumnName="mill_rpm_three" />
+                <ScalarProperty Name="mill_rpm_four" ColumnName="mill_rpm_four" />
+                <ScalarProperty Name="mill_rpm_five" ColumnName="mill_rpm_five" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

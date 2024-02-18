@@ -79,9 +79,9 @@
 
                                         <td style="background-color: #fdf3e8">@i.MillControlModel.imbibition_water_temp</td>
                                         <td style="background-color: #fdf3e8">@i.MillControlModel.exhaust_steam_temp</td>
-                                        <td style="background-color: #fdf3e8">@i.MillControlModel.mill_biocide_dosing</td>
-                                        <td style="background-color: #fdf3e8">@i.MillControlModel.mill_washing</td>
-                                        <td style="background-color: #fdf3e8">@i.MillControlModel.mill_steaming</td>
+                                        <td style="background-color: #fdf3e8">@(i.MillControlModel.mill_biocide_dosing == true ? "Yes" : "No") </td>
+                                        <td style="background-color: #fdf3e8">@(i.MillControlModel.mill_washing == true ? "Yes" : "No")</td>
+                                        <td style="background-color: #fdf3e8">@(i.MillControlModel.mill_steaming == true ? "Yes" : "No")</td>
                                         <td style="background-color: #fdf3e8">@i.MillControlModel.sugar_bags_temp</td>
                                         <td style="background-color: #fdf3e8">@i.MillControlModel.molasses_inlet_temp</td>
                                         <td style="background-color: #fdf3e8">@i.MillControlModel.molasses_outlet_temp</td>

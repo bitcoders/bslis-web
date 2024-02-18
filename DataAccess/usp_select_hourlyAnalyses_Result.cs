@@ -44,6 +44,7 @@ namespace DataAccess
         public short standing_trolley { get; set; }
         public short standing_cart { get; set; }
         public Nullable<decimal> un_crushed_cane { get; set; }
+        public Nullable<decimal> crushed_cane { get; set; }
         public decimal cane_diverted_for_syrup { get; set; }
         public decimal diverted_syrup_quantity { get; set; }
         public int export_sugar { get; set; }

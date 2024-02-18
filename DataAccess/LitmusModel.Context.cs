@@ -1460,19 +1460,6 @@ namespace DataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_insert_hourlyAnalyses", unit_codeParameter, season_codeParameter, entry_dateParameter, entry_timeParameter, new_mill_juiceParameter, old_mill_juiceParameter, new_mill_waterParameter, old_mill_waterParameter, sugar_bags_L31Parameter, sugar_bags_L30Parameter, sugar_bags_M31Parameter, sugar_bags_M30Parameter, sugar_bags_S31Parameter, sugar_bags_S30Parameter, sugar_bags_BissParameter, sugar_rawParameter, cooling_traceParameter, cooling_polParameter, cooling_phParameter, standing_trucksParameter, standing_trolleyParameter, standing_tripplerParameter, standing_cartParameter, uncrushed_caneParameter, crushed_caneParameter, cane_diverted_for_syrupParameter, diverted_syrup_quantityParameter, export_sugarParameter, current_userParameter, imbibition_water_tempParameter, exhaust_steam_tempParameter, mill_biocide_dosingParameter, mill_washingParameter, mill_steamingParameter, sugar_bags_tempParameter, molasses_inlet_tempParameter, molasses_outlet_tempParameter, mill_hydraulic_pressure_oneParameter, mill_hydraulic_pressure_twoParameter, mill_hydraulic_pressure_threeParameter, mill_hydraulic_pressure_fourParameter, mill_hydraulic_pressure_fiveParameter, mill_load_oneParameter, mill_load_twoParameter, mill_load_threeParameter, mill_load_fourParameter, mill_load_fiveParameter, mill_rpm_oneParameter, mill_rpm_twoParameter, mill_rpm_threeParameter, mill_rpm_fourParameter, mill_rpm_fiveParameter, inserted_rows, error_message);
         }
     
-        public virtual ObjectResult<usp_select_hourlyAnalyses_Result> usp_select_hourlyAnalyses(Nullable<int> unit_code, Nullable<System.DateTime> entry_date)
-        {
-            var unit_codeParameter = unit_code.HasValue ?
-                new ObjectParameter("unit_code", unit_code) :
-                new ObjectParameter("unit_code", typeof(int));
-    
-            var entry_dateParameter = entry_date.HasValue ?
-                new ObjectParameter("entry_date", entry_date) :
-                new ObjectParameter("entry_date", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalyses_Result>("usp_select_hourlyAnalyses", unit_codeParameter, entry_dateParameter);
-        }
-    
         public virtual ObjectResult<usp_select_hourlyAnalysesMillControlData_Result> usp_select_hourlyAnalysesMillControlData(Nullable<int> id, Nullable<int> unit_code)
         {
             var idParameter = id.HasValue ?
@@ -1862,6 +1849,19 @@ namespace DataAccess
                 new ObjectParameter("finalized_by", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_finalize_report", idParameter, finalized_byParameter, status_code, status_message);
+        }
+    
+        public virtual ObjectResult<usp_select_hourlyAnalyses_Result> usp_select_hourlyAnalyses(Nullable<int> unit_code, Nullable<System.DateTime> entry_date)
+        {
+            var unit_codeParameter = unit_code.HasValue ?
+                new ObjectParameter("unit_code", unit_code) :
+                new ObjectParameter("unit_code", typeof(int));
+    
+            var entry_dateParameter = entry_date.HasValue ?
+                new ObjectParameter("entry_date", entry_date) :
+                new ObjectParameter("entry_date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_select_hourlyAnalyses_Result>("usp_select_hourlyAnalyses", unit_codeParameter, entry_dateParameter);
         }
     }
 }

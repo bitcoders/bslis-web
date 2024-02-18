@@ -176,6 +176,7 @@ namespace DataAccess.Repositories.AnalysisRepositories
                             standing_trolley = d.standing_trolley,
                             standing_cart = d.standing_cart,
                             un_crushed_cane = d.un_crushed_cane,
+                            crushed_cane = d.crushed_cane,
                             cane_diverted_for_syrup = d.cane_diverted_for_syrup,
                             diverted_syrup_quantity = d.diverted_syrup_quantity,
                             export_sugar = d.export_sugar
